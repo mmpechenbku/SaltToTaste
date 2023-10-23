@@ -1,0 +1,27 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Добро пожаловать в “Соль по вкусу”!</h1>
+        <div class="one-half">
+            <div class="cont-1">
+                <p>Создайте свою книгу рецептов</p>
+                <p>Делитесь мнением</p>
+                <p>Публикуйте свои рецепты</p>
+            </div>
+            <div class="cont-search">
+                <p>Воспользуйтесь нашим расширенным поиском рецептов!</p>
+                <form class="search-box2">
+                        <span class="icon"><i class="fa fa-search"></i></span>
+                        <input type="search" id="search" placeholder="Поиск">
+                </form>
+            </div>
+        </div>
+        <div class="popular-recept">
+            <h3>Популярно сегодня</h3>
+        </div>
+    </div>
+{% endblock %}

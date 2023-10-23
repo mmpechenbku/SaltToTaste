@@ -4,6 +4,12 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin, messages
 from users.forms import CustomUserCreationForm
+from django.shortcuts import render
+
+
+
+def index(request):
+    return render(request, 'index.html')
 
 
 class SignUpView(CreateView):

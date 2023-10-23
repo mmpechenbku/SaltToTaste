@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Sofia+Sans+Condensed:wght@300;400;700&display=swap');
+* {
+font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    position: relative;
+    font-size: 14px;
+    line-height: 1.4;
+    min-width: 320px;
+    overflow: hidden;
+    background-color: #F6F0E4;
+    margin: 0;
+}
+
+.navbar {
+    width: 100%;
+    height: 70px;
+    background-color: #493F3F;
+    box-shadow: 0 5px 15px 5px rgba(0, 0, 0, .5);
+}
+.navbar .container {
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.navbar-menu {
+    list-style-type: none;
+}
+
+.navbar-menu li{
+    display: inline-block;
+    padding-left: 30px;
+}
+.navbar-menu li a{
+    display: inline-block;
+    color: #FFF;
+    text-decoration: none;
+    opacity: 0.65;
+    transition: all .07s ease-in-out;
+}
+
+.navbar-menu li a:hover{
+    opacity: 1;
+}
+.navbar-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.logo {
+    font-size: 26px;
+    text-decoration: none;
+    color: #FFF;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+
+.search-box {
+vertical-align: middle;
+position: relative;
+width: 300px;
+padding-left: 30px;
+}
+.search-box input#search {
+  width: 300px;
+  vertical-align: middle;
+   border: none;
+   height: 30px;
+    border-radius: 42px;
+    border: 2px solid #324b4e;
+  -webkit-appearance: none;
+  float: left;
+  padding-left: 30px;
+  background: #F9F0DA;
+  outline: none;
+  transition: .3s linear;
+}
+.search-box .icon{
+  position: absolute;
+  top: 20%;
+  margin-left: 10px;
+  z-index: 1;
+  color: #4f5b66;
+}
+
+.profile-menu {
+    list-style-type: none;
+}
+.profile-menu li a{
+    display: inline-block;
+    color: #FFF;
+    text-decoration: none;
+    opacity: 0.65;
+    padding: 10px;
+    transition: all .07s ease-in-out;
+}
+
+.profile-menu li a:hover{
+    opacity: 1;
+}
+.navbar-profile {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}

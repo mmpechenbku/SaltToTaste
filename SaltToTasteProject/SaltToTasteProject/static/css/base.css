@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Sofia+Sans+Condensed:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Sofia+Sans+Condensed:wght@300;400;700&display=swap');
 * {
-font-family: 'Montserrat', sans-serif;
+
+font-family: 'Roboto Condensed', sans-serif;
 }
 
 body {
@@ -40,6 +41,7 @@ body {
     text-decoration: none;
     opacity: 0.65;
     transition: all .07s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .navbar-menu li a:hover{
@@ -55,6 +57,7 @@ body {
     color: #FFF;
     padding-left: 10px;
     font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -105,4 +108,94 @@ padding-left: 30px;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+}
+
+/*Регистрация*/
+.container-1 {
+max-width: 700px;
+padding: 2em;
+background-color: #fff;
+margin-top: 30px;
+margin-left: auto;
+margin-right: auto;
+-webkit-box-shadow: 13px 4px 18px 0px rgba(34, 60, 80, 0.2);
+-moz-box-shadow: 13px 4px 18px 0px rgba(34, 60, 80, 0.2);
+box-shadow: 13px 4px 18px 0px rgba(34, 60, 80, 0.2);
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+.container-1 h1 {
+    position: relative;
+    left: 60px;
+    font-weight: normal;
+    margin: 10px;
+}
+.container-1 h3 {
+    position: relative;
+    left: 60px;
+    font-weight: normal;
+    margin: 10px;
+    padding-bottom: 20px;
+}
+form label.col-one-half {
+display: flex;
+    float: left;
+    width: 38%;
+    padding-left: 8%;
+    font-size: 26px;
+    flex-direction: column;
+    padding-bottom: 1em;
+}
+form label.col-one-whole {
+    display: flex;
+    width: 84%;
+    padding-left: 8%;
+    flex-direction: column;
+    padding-bottom: 2em;
+}
+.checkbox, .radio {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    float: left;
+    padding-left: 50px;
+}
+
+form label input {
+    background: none;
+    border: 1px solid #C7CFD7;
+    height: 3em;
+    line-height: 1em;
+    font-weight: 300;
+    padding: 0.125em 0.25em;
+    position: relative;
+}
+.button-reg input {
+   background: #493F3F;
+   color: #FCF3F3;
+   border-radius: 4px;
+   padding: 10px;
+   width: 300px;
+}
+.button-reg{
+    display: flex;
+    position: relative;
+    right: 55px;
+    top: 10px;
+    margin-bottom: 20px;
+    float: right;
+    flex-direction: column;
+}
+.button-reg a{
+    padding-top: 15px;
+    text-align: center;
+}
+form label span.label-text {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    color: #52565E;
 }

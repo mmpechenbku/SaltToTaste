@@ -3,18 +3,14 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-    surname = models.CharField(max_length=100, verbose_name="Фамилия")
+    avatar = models.ImageField(upload_to='images/avatars/', verbose_name='avatar', blank=True, null=True)
     name = models.CharField(max_length=100, verbose_name="Имя")
-    middlename = models.CharField(max_length=100, verbose_name="Отчество")
-    email = models.EmailField(verbose_name='Почтовый адрес', unique=True)
-    fullname = models.CharField(max_length=100, verbose_name="ФИО")
-    pasport = models.CharField(max_length=100, verbose_name="Серия и номер паспорта", unique=True)
-    phone_number = models.CharField(max_length=100, verbose_name="Номер телефона", unique=True)
-    status = models.BooleanField(default=False, verbose_name='Подтверждение аккаунта')
+    nickname = models.CharField(max_length=100, verbose_name="Никнейм", unique=True)
+    email = models.EmailField(verbose_name='Электронная почта', unique=True)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'nickname'
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return self.fullname
+        return self.nickname
 

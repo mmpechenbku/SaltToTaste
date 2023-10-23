@@ -1,0 +1,29 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+
+<div class="container-1">
+        <h1>СОЛЬ ПО ВКУСУ</h1>
+        <h3>Вход</h3>
+    <form class="registration-form">
+        <label class="col-one-whole">
+            <span class="label-text">ЭЛЕКТРОННАЯ ПОЧТА/ИМЯ ПОЛЬЗОВАТЕЛЯ</span>
+            <input type="text" id="name" placeholder="">
+        </label>
+
+        <label class="col-one-whole">
+            <span class="label-text">ПАРОЛЬ</span>
+            <input type="text" id="password" placeholder="">
+        </label>
+        <div class="button-login">
+            <input type="submit" name="submit" class="submit" disabled="" value="ВОЙТИ" />
+            <a href="#">У ВАС НЕТ УЧЕТНОЙ ЗАПИСИ?</a>
+            <a href="#">ЗАБЫЛИ ПАРОЛЬ?</a>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

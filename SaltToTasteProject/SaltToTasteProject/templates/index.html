@@ -9,16 +9,26 @@
         <div class="one-half">
             <div class="cont-1">
                 <p>Создайте свою книгу рецептов</p>
-                <p>Делитесь мнением</p>
+                <p class="cont-line">Делитесь мнением <img src="{% static 'img/serdce.png' %}" alt="" width="41" height="41"></p>
                 <p>Публикуйте свои рецепты</p>
             </div>
             <div class="cont-search">
-                <div class="content-search-center">
                     <p>Воспользуйтесь нашим расширенным поиском рецептов!</p>
-                    <form class="search-box2">
-                            <span class="icon"><i class="fa fa-search"></i></span>
-                            <input type="search" id="search" placeholder="Поиск">
-                    </form>
+                 <div class="content-search-center">
+                    <div class="content-search-img">
+                        <img class="images-1" src="{% static 'img/strelka.png' %}" alt="" width="136" height="136">
+                    </div>
+                    <div class="one-half-search">
+                            <div class="one-half-search-1">
+                                <p>Что у вас есть?</p>
+                            </div>
+                        <div class="one-half-search-2">
+                             <form class="search-box-index">
+                                    <span class="icon"><i class="fa fa-search"></i></span>
+                                    <input type="search" id="search" placeholder="Поиск">
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

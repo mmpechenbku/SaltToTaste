@@ -32,19 +32,10 @@
             <input type="checkbox" id="politics" onclick="check();" value="" autocomplete="off"/><a href="ссылка на страницу согласия">Cогласие на обработку персональных данных.</a>
         </label>
         <div class="button-reg">
-            <input type="submit" name="submit" class="submit" disabled="" value="ЗАРЕГИСТРИРОВАТЬСЯ" />
+            <a href="{% url 'registrations' %}" class="shine-button">ЗАРЕГИСТРИРОВАТЬСЯ</a>
             <a href="#">У МЕНЯ УЖЕ ЕСТЬ УЧЕТНАЯ ЗАПИСЬ</a>
         </div>
     </form>
-        <script>
-        function check() {
-        var submit = document.getElementsByName('submit')[0];
-        if (document.getElementById('politics').checked)
-        submit.disabled = '';
-        else
-        submit.disabled = 'disabled';
-        }
-        </script>
 </div>
 
 {% endblock %}

@@ -7,33 +7,38 @@
 <div class="container-1">
         <h1>СОЛЬ ПО ВКУСУ</h1>
         <h3>Регистрация</h3>
-    <form class="registration-form">
-        <label class="col-one-half">
-            <span class="label-text">ИМЯ</span>
-            <input type="text" id="name" placeholder="">
-        </label>
-        <label class="col-one-half">
-            <span class="label-text">НИКНЕЙМ</span>
-            <input type="text" id="nickname" placeholder="">
-        </label>
-        <label class="col-one-whole">
-            <span class="label-text">ЭЛЕКТРОННАЯ ПОЧТА</span>
-            <input type="text" id="mail" placeholder="">
-        </label>
-        <label class="col-one-half">
-            <span class="label-text">ПАРОЛЬ</span>
-            <input type="text" id="password" placeholder="">
-        </label>
-        <label class="col-one-half">
-            <span class="label-text">ПОВТОРИТЕ ПАРОЛЬ</span>
-            <input type="text" id="repassword" placeholder="">
-        </label>
-        <label class="checkbox">
+
+    <form class="registration-form" method="post">
+            {% csrf_token %}
+
+            <label class="col-one-half">
+                <span class="label-text">{{ form.name.label }}</span>
+                {{ form.name }}
+            </label>
+            <label class="col-one-half">
+                <span class="label-text">{{ form.nickname.label }}</span>
+                {{ form.nickname }}
+            </label>
+            <label class="col-one-whole">
+                <span class="label-text">{{ form.email.label }}</span>
+                {{ form.email }}
+            </label>
+            <label class="col-one-half">
+                <span class="label-text">ПАРОЛЬ</span>
+                {{ form.password1 }}
+            </label>
+            <label class="col-one-half">
+                <span class="label-text">ПОВТОРИТЕ ПАРОЛЬ</span>
+                {{ form.password2 }}
+            </label>
+
+        <label class="checkbox">x
             <input type="checkbox" id="politics" onclick="check();" value="" autocomplete="off"/><a href="ссылка на страницу согласия">Cогласие на обработку персональных данных.</a>
         </label>
         <div class="button-reg">
-            <a href="{% url 'registrations' %}" class="shine-button">ЗАРЕГИСТРИРОВАТЬСЯ</a>
-            <a href="#">У МЕНЯ УЖЕ ЕСТЬ УЧЕТНАЯ ЗАПИСЬ</a>
+            <button type="submit">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+            <a type="submit" href="{% url 'registration' %}" class="shine-button">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+            <a href="{% url 'login' %}">У МЕНЯ УЖЕ ЕСТЬ УЧЕТНАЯ ЗАПИСЬ</a>
         </div>
     </form>
 </div>

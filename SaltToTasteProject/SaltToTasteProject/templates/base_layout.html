@@ -18,14 +18,15 @@
     <!-- Navigation bar -->
     <header class="header">
     <div class="header-area">
+                <!-- Hamburger icon -->
+        <input class="side-menu" type="checkbox" id="side-menu"/>
+        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
         <!-- Logo -->
         <div class="nav-logo">
             <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt="" width="30" height="40"></a>
             <a href="{% url 'home' %}" class="logo">Соль по вкусу</a>
         </div>
-        <!-- Hamburger icon -->
-        <input class="side-menu" type="checkbox" id="side-menu"/>
-        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
+
         <!-- Menu -->
 
         <nav class="nav-menu">
@@ -36,13 +37,14 @@
                 <li id="menu-auth"><a href="#">Авторизация</a></li>
             </ul>
         </nav>
-        <div class="header-search">
-            <form action="" target="_blank" class="form-search">
-              <input type="hidden" name="searchid" value="808327">
-              <input type="search" name="text" required placeholder="Поиск по сайту">
-            </form>
+        <div class="search-wrap">
+          <form action="" method="get" accept-charset="windows-1251">
+              <input type="text" value="" name="name" placeholder="Поиск">
+              <input type="submit" value="">
+          </form>
         </div>
         <div class="header-profile">
+            <a href="#" class="profile-button"><img src="{% static 'img/ProfileIcon.png' %}" alt="" width="45" height="45"></a>
             <a href="{% url 'login' %}" class="shine-button">Войти</a>
            <a href="{% url 'registrations' %}" class="shine-button">Зарегистрироваться</a>
         </div>

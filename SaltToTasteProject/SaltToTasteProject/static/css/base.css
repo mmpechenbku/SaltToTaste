@@ -33,7 +33,8 @@ ul{
 
 .header-area {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    height: 80px;
 }
 /* Logo */
 .nav-logo{
@@ -44,26 +45,77 @@ ul{
 .nav-logo a {
     color: #FFFFFF;
     font-family: Montserrat;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
     line-height: 37px;
     letter-spacing: 0em;
+    padding: 0px 5px 0px 5px;
 }
 
-/*Search Header*/
-.header-search {
-  display: none;
+/*Search Wrap*/
+.search-wrap {
+    display: none;
+    align-items: center;
+    overflow: hidden;
+    width: auto;
+    text-align: left;
 }
-.form-search {
-  display: inline-block;
-  border-bottom: 1px solid;
+.search-wrap form {
+    position: relative;
+    height: 30px;
+    background: #fff;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
 }
+.search-wrap input[type="text"] {
+    width: 100%;
+    height: 30px;
+    outline:none;
+    color: #606060;
+    font: 16px 'Source Sans Pro';
+    padding: 10px 19px;
+    border: 0;
+    background: transparent;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.search-wrap form input[type="submit"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 0;
+    background: url("{% static 'img/search_icon.png' %}") no-repeat center center;
+    background-size: auto 18px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+.search-wrap form input[type="submit"] {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    margin: -9px 0 0 0;
+}
+
 /*Button Login*/
 .header-profile {
-    display: none;
+    display: inline-flex;
+    align-items: center;
+    margin: 0px 30px 0px 30px;
 }
+.header-profile a {
+    color: #FFF;
+    text-decoration: none;
+    opacity: 0.65;
+    padding: 5px;
+    transition: all .07s ease-in-out;
+}
+
 .shine-button {
-  display: inline-block;
+  display: none;
   margin: 10px 5px;
   position: relative;
   text-decoration: none;
@@ -94,7 +146,7 @@ ul{
 /* Menu Icon */
 .hamb{
     cursor: pointer;
-    float: right;
+    float: left;
     padding: 40px 20px;
 }/* Style label tag */
 
@@ -144,11 +196,11 @@ ul{
 }
 /* Nav menu */
 .nav-menu{
-    width: 100%;
     height: 100%;
     position: fixed;
     overflow: hidden;
     max-height: 0;
+    margin-top: 80px;
     transition: max-height .5s ease-out;
     z-index: 1;
     background-color: #493F3F;
@@ -156,7 +208,6 @@ ul{
 }
 .menu a{
     display: block;
-    padding: 30px;
     color: var(--white);
 }
 .menu a:hover{
@@ -165,17 +216,26 @@ ul{
 .menu li#menu-auth {
         display: inherit;
     }
+.profile-button {
+    display: flex;
+}
 /* Responsiveness */
-@media (min-width: 1030px) {
+
+ @media screen and (min-width: 768px) {
     .nav-menu{
         max-height: none;
         top: 0;
+        margin: 0;
         position: relative;
         width: fit-content;
-
+        margin-left: 30px;
+        margin-right: 15px;
     }
     .menu li{
         float: left;
+    }
+    .menu a {
+        padding: 30px 15px 30px 15px;
     }
     .menu a:hover{
         background-color: transparent;
@@ -185,23 +245,42 @@ ul{
     .menu li#menu-auth {
         display: none;
     }
-
     .hamb{
         display: none;
     }
 
-    .header-search {
-        display: flex;
-        align-items: center;
-    }
-    .header-profile {
-        display: inline-flex;
-        align-items: center;
-    }
     .header-area {
     /* Для выравнивания меню по центру */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-}
+    }
+    .profile-button {
+        display: flex;
+    }
+    .shine-button {
+        display: none;
+    }
+ }
+
+
+     @media screen and (min-width: 1024px) {
+        .search-wrap {
+            display: flex;
+        }
+    }
+    @media screen and (min-width: 1366px) {
+        .search-wrap {
+            display: flex;
+        }
+        .menu a {
+            padding: 28px;
+        }
+
+        .profile-button {
+            display: none;
+        }
+        .shine-button {
+            display: inline-block;
+        }
+    }

@@ -88,13 +88,14 @@ form label span.label-text {
     height: auto;
     border-radius: 52px;
     border: 1px solid #CBC8C8;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 .hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 0.5em;
     row-gap: 05em;
-
 }
 .hero__container {
     padding: 30px;

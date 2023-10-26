@@ -4,11 +4,11 @@
 
 {% block content %}
 
-<div class="container-1">
+<div class="container__login">
         <h1>СОЛЬ ПО ВКУСУ</h1>
         <h3>Регистрация</h3>
-    <form class="registration-form">
-        <form method="post">
+
+    <form class="registration-form" method="post">
             {% csrf_token %}
 
             <label class="col-one-half">
@@ -32,34 +32,11 @@
                 {{ form.password2 }}
             </label>
 
-<!--            {% for f in form %}-->
-<!--            <div>{{f}}</div>-->
-<!--            {% endfor %}-->
-<!--        <label class="col-one-half">-->
-<!--            <span class="label-text">ИМЯ</span>-->
-<!--            <input type="text" id="name" placeholder="">-->
-<!--        </label>-->
-<!--        <label class="col-one-half">-->
-<!--            <span class="label-text">НИКНЕЙМ</span>-->
-<!--            <input type="text" id="nickname" placeholder="">-->
-<!--        </label>-->
-<!--        <label class="col-one-whole">-->
-<!--            <span class="label-text">ЭЛЕКТРОННАЯ ПОЧТА</span>-->
-<!--            <input type="text" id="mail" placeholder="">-->
-<!--        </label>-->
-<!--        <label class="col-one-half">-->
-<!--            <span class="label-text">ПАРОЛЬ</span>-->
-<!--            <input type="text" id="password" placeholder="">-->
-<!--        </label>-->
-<!--        <label class="col-one-half">-->
-<!--            <span class="label-text">ПОВТОРИТЕ ПАРОЛЬ</span>-->
-<!--            <input type="text" id="repassword" placeholder="">-->
-<!--        </label>-->
         <label class="checkbox">
             <input type="checkbox" id="politics" onclick="check();" value="" autocomplete="off"/><a href="ссылка на страницу согласия">Cогласие на обработку персональных данных.</a>
         </label>
-        <div class="button-reg">
-            <a href="{% url 'registrations' %}" class="shine-button">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+        <div class="button-login">
+            <button type="submit">ЗАРЕГИСТРИРОВАТЬСЯ</button>
             <a href="{% url 'login' %}">У МЕНЯ УЖЕ ЕСТЬ УЧЕТНАЯ ЗАПИСЬ</a>
         </div>
     </form>

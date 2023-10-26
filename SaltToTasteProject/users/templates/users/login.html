@@ -1,27 +1,46 @@
 {% extends 'base_layout.html' %}
 
-{% block title %}Главная страница{% endblock %}
+{% block title %}Авторизация{% endblock %}
 
 {% block content %}
 
-<div class="container-1">
+<div class="container__login">
         <h1>СОЛЬ ПО ВКУСУ</h1>
         <h3>Вход</h3>
-    <form class="registrationq-form">
+    <form class="registration-form" method="post">
+        {% csrf_token %}
         <label class="col-one-whole">
-            <span class="label-text">ЭЛЕКТРОННАЯ ПОЧТА/ИМЯ ПОЛЬЗОВАТЕЛЯ</span>
-            <input type="text" id="name" placeholder="">
+            <span class="label-text">ИМЯ ПОЛЬЗОВАТЕЛЯ/ЭЛЕКТРОННАЯ ПОЧТА</span>
+            {{ form.username }}
         </label>
 
         <label class="col-one-whole">
             <span class="label-text">ПАРОЛЬ</span>
-            <input type="text" id="password" placeholder="">
+            {{ form.password }}
         </label>
+
         <div class="button-login">
-            <a href="{% url 'registrations' %}" class="shine-button">ВОЙТИ</a>
-            <a href="#">У ВАС НЕТ УЧЕТНОЙ ЗАПИСИ?</a>
+            <button type="submit">ВОЙТИ</button>
+            <a href="{% url 'registration' %}">У ВАС НЕТ УЧЕТНОЙ ЗАПИСИ?</a>
             <a href="#">ЗАБЫЛИ ПАРОЛЬ?</a>
         </div>
+
+
+                   {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <label>
+                <input type="checkbox" class="alertCheckbox" autocomplete="off"/>
+                <div class="alert error">
+                    <span class="alertClose">X</span>
+                    <span class="alertText">{{message}}
+                    <br class="clear"/></span>
+                </div>
+            </label>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
     </form>
 
 </div>

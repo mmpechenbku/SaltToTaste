@@ -37,19 +37,24 @@ class AddingRecipe(CreateView):
 #         context['search_filter'] =
 
 def search_recipes(request):
-    ingredient_ids = request.GET.getlist('ingredients')
-    ingredients = Ingredient.objects.filter(id__in=ingredient_ids)
-    prefetch = Prefetch('ingredients', queryset=ingredients, to_attr='selected_ingredients')
-    recipes = Recipe.objects.filter(ingredients__in=ingredients).annotate(num_ingredients=Count('ingredients')).prefetch_related(prefetch)
-    filtered_recipes = []
-    for recipe in recipes:
-        hit_percentage = len(set(recipe.selected_ingredients).intersection(ingredients)) / len(ingredients)
-        if hit_percentage >= 0.7:
-            filtered_recipes.append((recipe, hit_percentage))
-    sorted_recipes = sorted(filtered_recipes, key=lambda x: x[1], reverse=True)
-    sorted_recipes = RecipeFilter(request.GET, sorted_recipes)
+
+    sorted_recipes = Recipe.objects.all()
+    if request.method == 'GET':
+        ingredient_ids = request.GET.getlist('ingredients')
+        ingredients = Ingredient.objects.filter(id__in=ingredient_ids)
+        prefetch = Prefetch('ingredients', queryset=ingredients, to_attr='selected_ingredients')
+        recipes = Recipe.objects.filter(ingredients__in=ingredients).annotate(num_ingredients=Count('ingredients')).prefetch_related(prefetch)
+        filtered_recipes = []
+        for recipe in recipes:
+            hit_percentage = len(set(recipe.selected_ingredients).intersection(ingredients)) / len(ingredients)
+            if hit_percentage >= 0.7:
+                filtered_recipes.append((recipe, hit_percentage))
+        sorted_recipes = sorted(filtered_recipes, key=lambda x: x[1], reverse=True)
+        sorted_recipes = RecipeFilter(request.GET, sorted_recipes)
 
     return render(request, 'search_results.html', {'sorted_recipes': sorted_recipes})
+
+
 
 # def search_recipes(request):
 #     matched_recipes = Recipe.objects.all()

@@ -1,0 +1,81 @@
+.container__login {
+	max-width: 700px;
+	height: auto;
+	padding: 2em;
+	background-color: #fff;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	-webkit-box-shadow: 13px 4px 18px 0px rgba(34, 60, 80, 0.2);
+	-moz-box-shadow: 13px 4px 18px 0px rgba(34, 60, 80, 0.2);
+	box-shadow: 13px 4px 18px 0px rgba(34, 60, 80, 0.2);
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+.container__login h1 {
+
+  	font-weight: normal;
+  	padding-left: 30px;
+
+
+}
+.container__login h3 {
+
+    font-weight: normal;
+    padding-left: 30px;
+}
+
+form label.col-one-whole {
+    display: flex;
+    width: 84%;
+    padding-left: 8%;
+    flex-direction: column;
+    padding-bottom: 2em;
+}
+form label.col-one-half {
+    display: flex;
+    float: left;
+    width: 38%;
+    padding-left: 8%;
+    font-size: 26px;
+    flex-direction: column;
+    padding-bottom: 1em;
+}
+
+form label span.label-text {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    color: #52565E;
+}
+
+.button-login a{
+    padding: 10px;
+    text-align: center;
+    width: auto;
+}
+.button-login{
+    display: flex;
+    position: relative;
+    top: 10px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+.button-login button {
+	background: #493F3F;
+    color: #FCF3F3;
+    border-radius: 4px;
+    padding: 10px;
+    width: 40%;
+    min-width: 250px; 
+}
+.checkbox {
+	display: flex;
+	width: 84%;
+    text-align: left;
+    padding-left: 30px;
+}

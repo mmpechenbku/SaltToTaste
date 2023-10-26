@@ -9,9 +9,11 @@
     <title>{% block title %}{% endblock %}</title>
 <!--    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">-->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
 <body>
@@ -45,8 +47,8 @@
         </div>
         <div class="header-profile">
             <a href="#" class="profile-button"><img src="{% static 'img/ProfileIcon.png' %}" alt="" width="45" height="45"></a>
-            <a href="{% url 'login' %}" class="shine-button">Войти</a>
-           <a href="{% url 'registration' %}" class="shine-button">Зарегистрироваться</a>
+            <a href="{% url 'login' %}" data-toggle="modal" class="shine-button">Войти</a>
+            <a href="{% url 'registration' %}" class="shine-button">Зарегистрироваться</a>
         </div>
     </div>
     </header>
@@ -54,26 +56,5 @@
     {% endblock %}
 
 </body>
-</html>
-<!-- <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt="" width="30" height="40"></a>
-                    <a href="{% url 'home' %}" class="logo">Соль по вкусу</a>
-                    <div class="navbar-wrap">
-                        <ul class="navbar-menu">
-                            <li><a href="{% url 'home' %}">Главная</a></li>
-                            <li><a href="#">Рецепты</a></li>
-                            <li><a href="#">Избранное</a></li>
-                        </ul>
-                    </div>
-                    <form class="search-box">
-                        <span class="icon"><i class="fa fa-search"></i></span>
-                        <input type="search" id="search" placeholder="Поиск">
-                    </form>
-                    <div class="navbar-profile">
-                        <ul class="profile-menu">
-                            <li><a href="{% url 'login' %}" class="shine-button">Войти</a></li>
-                            <li><a href="{% url 'registration' %}" class="shine-button">Зарегистрироваться</a></li>
-                        </ul>--!>
-                       <!--
-                            <li><a href="#">Профиль</a></li>
 
-                        <img src="{% static 'img/ProfileIcon.png' %}" alt="" width="45" height="45">-->
+</html>

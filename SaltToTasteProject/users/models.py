@@ -7,10 +7,10 @@ class CustomUser(AbstractUser):
     name = models.CharField(max_length=100, verbose_name="Имя")
     nickname = models.CharField(max_length=100, verbose_name="Никнейм", unique=True)
     email = models.EmailField(verbose_name='Электронная почта', unique=True)
+    # likes =
 
     USERNAME_FIELD = 'nickname'
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.nickname
-

@@ -47,6 +47,8 @@ def search_recipes(request):
         if hit_percentage >= 0.7:
             filtered_recipes.append((recipe, hit_percentage))
     sorted_recipes = sorted(filtered_recipes, key=lambda x: x[1], reverse=True)
+    sorted_recipes = RecipeFilter(request.GET, sorted_recipes)
+
     return render(request, 'search_results.html', {'sorted_recipes': sorted_recipes})
 
 # def search_recipes(request):

@@ -174,3 +174,6 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+SaltToTasteProject/SaltToTasteProject/__pycache__/urls.cpython-312.pyc
+SaltToTasteProject/users/__pycache__/urls.cpython-312.pyc
+SaltToTasteProject/users/__pycache__/views.cpython-312.pyc

@@ -14,8 +14,8 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #F6F0E4;
-    font-family: "Poppins", sans-serif;
+    background-color: rgba(246, 240, 228, 1) !important;
+    font-family: 'Tilda Sans VF';
 }
 a{
     text-decoration: none;

@@ -26,8 +26,8 @@ class Recipe(models.Model):
     difficulty = models.CharField(max_length=50, choices=Difficulty.choices, verbose_name='Сложность')
     # cookingTime = models.IntegerField(verbose_name='Время приготовления')
     cookingTime = models.TimeField(verbose_name="Время приготовления")
-    likesCount = models.IntegerField(verbose_name='Количество лайков')
-    commentsCount = models.IntegerField(verbose_name='Количество комментариев')
+    likesCount = models.IntegerField(default=0, verbose_name='Количество лайков')
+    commentsCount = models.IntegerField(default=0, verbose_name='Количество комментариев')
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название')

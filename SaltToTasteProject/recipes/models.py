@@ -1,6 +1,6 @@
 from django.db import models
 
-from SaltToTasteProject.SaltToTasteProject import settings
+from SaltToTasteProject import settings
 
 # Create your models here.
 
@@ -18,7 +18,7 @@ class Recipe(models.Model):
         MEDIUM = "Средняя"
         EASY = "Легко"
     # picture = models.ManyToManyField('Picture', blank=True)
-    picture = models.ImageField(upload_to='images/recipes_pictures', verbose_name='Фото')
+    picture = models.ImageField(upload_to='images/recipes_pictures', blank=True, null=True, verbose_name='Фото')
     title = models.CharField(max_length=255, verbose_name='Название')
     ingredients = models.ManyToManyField('Ingredient', related_name='ingredients')
     description = models.TextField(verbose_name="Описание приготовления")

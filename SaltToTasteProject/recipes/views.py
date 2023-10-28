@@ -1,7 +1,13 @@
+from datetime import datetime
+
 from django.db.models import Prefetch, Count
 from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic import CreateView, ListView
 from .models import Recipe, Ingredient
+
+from django.http import JsonResponse
+from django.db.models import Q
 from .filters import RecipeFilter
 
 
@@ -22,73 +28,61 @@ def add_recipe(request):
 
 class AddingRecipe(CreateView):
     model = Recipe
-    form_class = AddingRecipeForm
+    # form_class = AddingRecipeForm
     template_name = ''
     success_url = ''
 
-# class RecipesPage(ListView):
-#     model = Recipe
-#     context_object_name = 'recipe'
-#     template_name = ''
-#     paginate_by = 5
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['search_filter'] =
-
 def search_recipes(request):
+    message = 'Всего рецептов: '
+    selected_ingredient_ids = request.POST.get('ingredients', '').split(',')
+    difficulty = request.POST.get('difficulty', '')
+    time = request.POST.get('time', '')
 
-    sorted_recipes = Recipe.objects.all()
-    if request.method == 'GET':
-        ingredient_ids = request.GET.getlist('ingredients')
-        ingredients = Ingredient.objects.filter(id__in=ingredient_ids)
-        prefetch = Prefetch('ingredients', queryset=ingredients, to_attr='selected_ingredients')
-        recipes = Recipe.objects.filter(ingredients__in=ingredients).annotate(num_ingredients=Count('ingredients')).prefetch_related(prefetch)
+    #  selected_ingredient_ids не пуст и не содержит пустых значений
+    selected_ingredient_ids = [id for id in selected_ingredient_ids if id]
+
+    recipes = Recipe.objects.all()
+
+    if difficulty:
+        recipes = recipes.filter(difficulty=difficulty)
+
+    if time:
+        time = int(time)
+        hours = time // 60
+        minutes = time % 60
+        time =  "{:02}:{:02}".format(int(hours), int(minutes))
+        time = datetime.strptime(time, "%H:%M").time()
+
+        recipes = recipes.filter(cookingTime__lte=time)
+
+    if selected_ingredient_ids:
+        recipes = Recipe.objects.filter(ingredients__id__in=selected_ingredient_ids).distinct()
+
+        if difficulty:
+            recipes = recipes.filter(difficulty=difficulty)
+
+        if time:
+            recipes = recipes.filter(cooking_time__lte=time)
+
+        # Фильтрация рецептов по процентному попаданию
         filtered_recipes = []
         for recipe in recipes:
-            hit_percentage = len(set(recipe.selected_ingredients).intersection(ingredients)) / len(ingredients)
-            if hit_percentage >= 0.7:
-                filtered_recipes.append((recipe, hit_percentage))
-        sorted_recipes = sorted(filtered_recipes, key=lambda x: x[0].likesCount if x[1] < 1 else x[1], reverse=True)
-        sorted_recipes = RecipeFilter(request.GET, sorted_recipes)
+            total_ingredients = recipe.ingredients.count()
+            matching_ingredients = recipe.ingredients.filter(id__in=selected_ingredient_ids).count()
+            percentage = (matching_ingredients / total_ingredients) * 100
+            if percentage >= 70:
+                filtered_recipes.append(recipe)
+        recipes = filtered_recipes
+        message = 'Найдено рецептов: '
 
-    return render(request, 'search_results.html', {'sorted_recipes': sorted_recipes})
 
+    ingredients = Ingredient.objects.all()
+    num_recipes = f"{message}{len(recipes)}"
+    return render(request, 'recipes/recipe_search.html', {'recipes': recipes, 'ingredients': ingredients, 'num_recipes': num_recipes})
 
-
-# def search_recipes(request):
-#     matched_recipes = Recipe.objects.all()
-#
-#     if request.method == 'GET':
-#         ingredients = request.GET.get('ingredients').split(',')
-#
-#         recipes = Recipe.objects.filter(ingredients__name__in=ingredients)
-#         total_ingredients = len(ingredients)
-#
-#         matched_recipes = []
-#         for recipe in recipes:
-#             matched_ingredients = recipe.ingredients.filter(name__in=ingredients).count()
-#             if (matched_ingredients / total_ingredients) * 100 >= 70:
-#                 matched_recipes.append(recipe)
-#
-#     return(matched_recipes)
-#
-#     # return render(request, 'search_results.html', {'matched_recipes': matched_recipes})
-#
-#     # return render(request, 'search_recipes.html')
-#
-# class RecipesPage(ListView):
-#     model = Recipe
-#     context_object_name = 'recipe'
-#     template_name = ''
-#     paginate_by = 5
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # context['search_filter'] = RecipeFilter(self.request.GET, queryset=search_recipes(self.request))
-#         context['seatch_filter'] = RecipeFilter(self.request.GET, queryset=Recipe.objects.)
-#         return context
-#
-#     def get_queryset(self):
-#         queryset = search_recipes(self.request)
-#         return RecipeFilter(self.request.GET, queryset=queryset).qs
+class IngredientSearchView(View):
+    def get(self, request):
+        search_query = request.GET.get('search', '')
+        ingredients = Ingredient.objects.filter(name__icontains=search_query)
+        data = [{'id': ingredient.id, 'name': ingredient.name} for ingredient in ingredients]
+        return JsonResponse(data, safe=False)

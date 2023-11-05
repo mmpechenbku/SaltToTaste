@@ -8,11 +8,11 @@ from .models import CustomUser
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('avatar', 'name', 'nickname', 'email')
+        fields = ['avatar', 'name', 'nickname', 'email']
         #
         # widgets = {
         #     "name" : TextInput(attrs={
-        #         'class' :
+        #         'class' : ''
         #     })
         # }
 
@@ -20,4 +20,12 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'email')
+        fields = ['username', 'email']
+        #
+        # widgets = {
+        #     "name" : TextInput(attrs={
+        #         'class' : ''
+        #     })
+        # }
+
+

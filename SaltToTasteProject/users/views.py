@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin, messages
 from .forms import CustomUserCreationForm
 from django.shortcuts import render
 
+
 def index(request):
     return render(request, 'index.html')
 
@@ -41,7 +42,7 @@ class SignUpView(CreateView):
 #     success_url = reverse_lazy('home_page')
 #     template_name = 'users/signup.html'
 
-class LoginUser(SuccessMessageMixin, LoginView):
+class Login(SuccessMessageMixin, LoginView):
     form_class = AuthenticationForm
     template_name = 'users/login.html'
     success_message = 'Успешная авторизация'

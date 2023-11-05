@@ -37,11 +37,21 @@ def search_recipes(request):
     selected_ingredient_ids = request.POST.get('ingredients', '').split(',')
     difficulty = request.POST.get('difficulty', '')
     time = request.POST.get('time', '')
+    fullHit = request.POST.get('coincidence')
+    # if fullHit:
+    #     print("true")
+    # else:
+    #     print("false")
 
     #  selected_ingredient_ids не пуст и не содержит пустых значений
     selected_ingredient_ids = [id for id in selected_ingredient_ids if id]
 
     recipes = Recipe.objects.all()
+    percentsDict = []
+
+    # for index, value in enumerate(recipes):
+    #     recipes[index] = {'recipe' : value, 'percentage' : 100}
+
 
     if difficulty:
         recipes = recipes.filter(difficulty=difficulty)
@@ -66,19 +76,38 @@ def search_recipes(request):
 
         # Фильтрация рецептов по процентному попаданию
         filtered_recipes = []
+        percentsDict = []
         for recipe in recipes:
-            total_ingredients = recipe.ingredients.count()
+            # total_ingredients = recipe.ingredients.count()
+            total_ingredients = selected_ingredient_ids.__len__()
+            ingredients_in_recipe = recipe.ingredients.count()
             matching_ingredients = recipe.ingredients.filter(id__in=selected_ingredient_ids).count()
-            percentage = (matching_ingredients / total_ingredients) * 100
-            if percentage >= 70:
+            # print(f"matching {recipe.title} - {matching_ingredients}")
+            # print(f"total {recipe.title} - {total_ingredients}")
+            # print(f"ingredients {recipe.title} - {ingredients_in_recipe}")
+            percentage = (matching_ingredients / ingredients_in_recipe) * 100
+            comparisonPercents = 100 if fullHit else 70
+            if percentage >= comparisonPercents:
+                # filtered_recipes.append({ 'recipe' : recipe, 'percentage' : percentage })
                 filtered_recipes.append(recipe)
+                percents = f"{int(percentage)}%"
+                percentsDict.append({ recipe : percents })
+                # print(percentsDict[0])
         recipes = filtered_recipes
         message = 'Найдено рецептов: '
 
-
+    # print(percentsDict)
     ingredients = Ingredient.objects.all()
     num_recipes = f"{message}{len(recipes)}"
-    return render(request, 'recipes/recipe_search.html', {'recipes': recipes, 'ingredients': ingredients, 'num_recipes': num_recipes})
+
+    data = {
+        'recipes' : recipes,
+        'ingredients' : ingredients,
+        'num_recipes' : num_recipes,
+        'percentsDict' : percentsDict,
+    }
+
+    return render(request, 'recipes/recipe_search.html', data)
 
 class IngredientSearchView(View):
     def get(self, request):

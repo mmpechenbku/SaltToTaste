@@ -1,0 +1,148 @@
+/*Page recept*/
+.page__recept {
+	margin-left: auto;
+	margin-right: auto;
+    width: 90%;
+    height: auto;
+    background-color: rgba(253, 245, 245, 1);
+    border-radius: 52px;
+    border: 1px solid #CBC8C8;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    column-gap: 0.5em;
+    row-gap: 0.5em;
+}
+.hero__container {
+    padding: 30px 50px 30px 30px;
+}
+.ingredients {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.5em;
+    row-gap: 0.5em;
+}
+.hero__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 52px;
+
+}
+.hero__text {
+    font-family: 'Tilda Sans VF';
+    font-size: 18px;
+    line-height: 20px;
+    color: #000000;
+}
+.hero__title {
+    font-family: 'Tilda Sans VF';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 28px;
+    color: #000000;
+}
+.ingredients__title {
+    font-family: 'Tilda Sans VF';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 28px;
+    color: #000000;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.ingredients-list {
+
+}
+.sections__list-item {
+    font-family: 'Tilda Sans VF';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 35px;
+    color: #000000;
+    padding: 0px 0px 0px 50px;
+}
+.ingredients {
+}
+.instruction-title {
+    font-family: 'Tilda Sans VF';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 28px;
+    color: #000000;
+    padding-left: 15%;
+    padding-bottom: 20px;
+}
+.instructions {
+    padding: 0px 50px 50px 30px;
+}
+
+.btn__back {
+    display: flex;
+    margin-top: 50px;
+    padding-left: 5%;
+}
+.btn-back__text{
+    font-family: 'Tilda Sans VF';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 43px;
+    padding: 10px 10px 10px 30px;
+    color: #000000;
+}
+.hero__list {
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    column-gap: 2em;
+    row-gap: 2em;
+}
+.hero_item_ingredients {
+    font-family: 'Tilda Sans VF';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+.hero_item-favorites {
+    font-family: 'Tilda Sans VF';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #000000;
+}
+.favorites_values {
+    font-family: 'Tilda Sans VF';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+.btn__favorites-items {
+    padding-left: 20px;
+}
+.btn__favorites-list {
+    margin-bottom: 70px;
+    padding-left: 15%;
+    display: flex;
+}
+.hr-line {
+	margin: 20px 0;
+	padding: 0;
+	height: 0;
+	border: none;
+	border-top: 1px solid rgba(203, 200, 200, 1);
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+}

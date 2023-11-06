@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
+from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, FormView
 from django.contrib.messages.views import SuccessMessageMixin, messages
 from .forms import CustomUserCreationForm
 from django.shortcuts import render
@@ -37,27 +38,30 @@ class SignUpView(CreateView):
         return super().form_invalid(form)
 
 
-# class SignUp(CreateView):
-#     form_class = CustomUserCreationForm
-#     success_url = reverse_lazy('home_page')
-#     template_name = 'users/signup.html'
-
 class Login(SuccessMessageMixin, LoginView):
     form_class = AuthenticationForm
     template_name = 'users/login.html'
     success_message = 'Успешная авторизация'
+    # print('in views')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Авторизация'
+        context['form'] = self.get_form()
+        # print('in get')
         return context
 
     def form_invalid(self, form):
         # Сохраняем сообщение об ошибке в сессию
         messages.error(self.request, ('Ошибка аутентификации'))
+
+        return HttpResponseRedirect('/search')
+
         # Возвращаем HTTP-ответ с кодом ошибки
+        # print('invalid')
         return super().form_invalid(form)
 
     def get_success_url(self):
         print(self.request.user)
+        # print('success')
         return reverse_lazy('home')

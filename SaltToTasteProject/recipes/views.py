@@ -4,9 +4,10 @@ from django.db.models import Prefetch, Count
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import CreateView, ListView
-from .models import Recipe, Ingredient
+from .models import Recipe, Ingredient, SaveRecipe
 
 from django.http import JsonResponse
+
 from django.db.models import Q
 from .filters import RecipeFilter
 
@@ -115,3 +116,22 @@ class IngredientSearchView(View):
         ingredients = Ingredient.objects.filter(name__icontains=search_query)
         data = [{'id': ingredient.id, 'name': ingredient.name} for ingredient in ingredients]
         return JsonResponse(data, safe=False)
+
+class SaveRecipeCreateView(View):
+    model = SaveRecipe
+
+    def post(self, request, *args, **kwargs):
+        recipe_id = request.POST.get('recipe_id')
+        # ip_address = get_client_ip(request)
+        user = request.user if request.user.is_autentificated else None
+
+        save, created = self.model.objects.get_of_create(
+            recipe_id = recipe_id,
+            user = user
+        )
+
+        if not created:
+            save.delete()
+            return JsonResponse({'status': 'deleted', 'save_sum': save.recipe.get_sum_save()})
+
+        return JsonResponse({'status': 'created', 'save_sum': save.recipe.get_sum_save()})

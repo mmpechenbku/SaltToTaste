@@ -12,11 +12,24 @@ from SaltToTasteProject import settings
 #     ('Овощи', 'Овощи'),
 # )
 
+User = get_user_model()
+
+
 class Recipe(models.Model):
+    class RecipeManager(models.Manager):
+        def all(self):
+            return self.get_queryset().select_related('autor').prefetch_related('saveCount')
+
+        def detail(self):
+            return self.get_queryset() \
+                .select_related('autor') \
+                .prefetch_related('ingredients', 'saves_count')
+
     class Difficulty(models.TextChoices):
         HARD = "Сложно"
         MEDIUM = "Средняя"
         EASY = "Легко"
+
     # picture = models.ManyToManyField('Picture', blank=True)
     picture = models.ImageField(upload_to='images/recipes_pictures', blank=True, null=True, verbose_name='Фото')
     title = models.CharField(max_length=255, verbose_name='Название')
@@ -26,16 +39,41 @@ class Recipe(models.Model):
     difficulty = models.CharField(max_length=50, choices=Difficulty.choices, verbose_name='Сложность')
     # cookingTime = models.IntegerField(verbose_name='Время приготовления')
     cookingTime = models.TimeField(verbose_name="Время приготовления")
-    likesCount = models.IntegerField(default=0, verbose_name='Количество лайков')
+    # saveCount = models.IntegerField(default=0, verbose_name='Количество лайков')
     commentsCount = models.IntegerField(default=0, verbose_name='Количество комментариев')
+
+    def get_sum_save(self):
+        # return sum([1 for save in self.saving.all()])
+        return self.saving.count()
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название')
+
     class Category(models.TextChoices):
         FRUITS = "Фрукт"
         VEGETABLES = "Овощи"
         MEAT = "Мясо"
+
     category = models.CharField(max_length=150, choices=Category.choices, verbose_name='Категория')
+
+
+class SaveRecipe(models.Model):
+    recipe = models.ForeignKey(to=Recipe, verbose_name='Рецепт', on_delete=models.CASCADE, related_name='saving')
+    user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True, null=True)
+    time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
+
+    # ip_address = models.GenericIPAddressField(verbose_name='IP Адрес')
+
+    class Meta:
+        unique_together = ('recipe', 'user')
+        ordering = ('-time_create',)
+        indexes = [models.Index(fields=['-time_create', 'value'])]
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранное'
+
+    def __str__(self):
+        return self.recipe.title
+
 
 # class RecipeIngredients(models.Model):
 #     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')

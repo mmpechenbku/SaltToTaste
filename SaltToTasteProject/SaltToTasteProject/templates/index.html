@@ -2,38 +2,285 @@
 {% load static %}
 
 {% block title %}Главная страница{% endblock %}
-
-{% block content %}
-    <div class="container-2">
-        <h1>Добро пожаловать в “Соль по вкусу”!</h1>
-        <div class="one-half">
-            <div class="cont-1">
-                <p>Создайте свою книгу рецептов</p>
-                <p class="cont-line">Делитесь мнением <img src="{% static 'img/serdce.png' %}" alt="" width="41" height="41"></p>
-                <p>Публикуйте свои рецепты</p>
-            </div>
-            <div class="cont-search">
-                    <p>Воспользуйтесь нашим расширенным поиском рецептов!</p>
-                 <div class="content-search-center">
-                    <div class="content-search-img">
-                        <img class="images-1" src="{% static 'img/strelka.png' %}" alt="" width="136" height="136">
-                    </div>
-                    <div class="one-half-search">
-                            <div class="one-half-search-1">
-                                <p>Что у вас есть?</p>
-                            </div>
-                        <div class="one-half-search-2">
-                             <form class="search-box-index">
-                                    <span class="icon"><i class="fa fa-search"></i></span>
-                                    <input type="search" id="search" placeholder="Поиск">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="popular-recept">
-            <h3>Популярно сегодня</h3>
-        </div>
-    </div>
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
+{% block content %}
+
+    <main class="page_index">
+        <section class="header-index">
+        <section class="header-index__section">
+            <h1 class="header__index-title">Добро пожаловать<br>в <q>Соль по вкусу</q>!</h1>
+            <p class="header__index-text">Упростите выбор блюда для приготовления</p>
+            <h3 class="header__index-title--h3">Расширенный поиск рецепта по ингредиентам</h3>
+            <input class="header__index-link" type="button" src="#" value="Введите название ингредиентов, а мы найдем совпадение до 100%"/>
+            <ul class="header__index-list">
+                <li class="header__index-item">
+                    <img src="{%static 'img/svg_image/favorites2.svg'%}" alt="" width="55" height="55">
+
+                    <p class="header__index-item-text">Добавляйте понравившиеся<br>рецепты в подборки</p>
+                </li>
+                <li class="header__index-item">
+                     <img src="{%static 'img/svg_image/comment.svg'%}" alt="" width="55" height="55">
+                    <p class="header__index-item-text">Делитесь впечатлениями</p>
+                </li>
+                <li class="header__index-item">
+                     <img src="{%static 'img/svg_image/addreciept.svg'%}" alt="" width="55" height="55">
+                    <p class="header__index-item-text">Записывайте свои рецепты и/или<br>делитесь ими с другими</p>
+                </li>
+            </ul>
+        </section>
+        <section class="header-image-section" >
+            <img class="header-image-item" src="{% static 'img/hamburger.png' %}" alt="">
+        </section>
+            </section>
+        <section class="index-article">
+            <h1 class="header__index-title">Что у нас сегодня вкусненького?</h1>
+            <div class="index-article__img">
+                <img class="article-image-background" src="{% static 'img/chicken.png' %}" alt="">
+                <img class="article-image-svg" src="{%static 'img/svg_image/image22.svg'%}" alt="" width="66" height="44">
+            </div>
+            <article class="index__article-content">
+                    <div class="index-article__img">
+                        <a href="">
+                        <img class="article__img" src="{% static 'img/blin.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <div class="index-article-section">
+                        <a href="">
+                        <h1 class="index-article__title">Блинчики с сыром</h1>
+                        <p class="index-article__text">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</p>
+                        </a>
+                            <ul class="index-article__list">
+                            <li class="index-article__item1">
+                                <div class="index-article-item1">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
+                                        22
+                                    </a>
+
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
+                                        522
+                                    </a>
+                                </div>
+                                <div class="index-article-item2">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites2.svg' %}" alt=""/>
+                                        Добавить в избранное!
+                                    </a>
+                                </div>
+
+                            </li>
+                            <li class="index-article__item2">
+                                <p class="index-item_ingredients">яйцо, масло растительное, мука, вода, сыр</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+            <article class="index__article-content">
+                    <div class="index-article__img">
+                        <a href="">
+                        <img class="article__img" src="{% static 'img/blin.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <div class="index-article-section">
+                        <a href="">
+                        <h1 class="index-article__title">Блинчики с сыром</h1>
+                        <p class="index-article__text">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</p>
+                        </a>
+                            <ul class="index-article__list">
+                            <li class="index-article__item1">
+                                <div class="index-article-item1">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
+                                        22
+                                    </a>
+
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
+                                        522
+                                    </a>
+                                </div>
+                                <div class="index-article-item2">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites2.svg' %}" alt=""/>
+                                        Добавить в избранное!
+                                    </a>
+                                </div>
+
+                            </li>
+                            <li class="index-article__item2">
+                                <p class="index-item_ingredients">яйцо, масло растительное, мука, вода, сыр</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+            <article class="index__article-content">
+                    <div class="index-article__img">
+                        <a href="">
+                        <img class="article__img" src="{% static 'img/blin.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <div class="index-article-section">
+                        <a href="">
+                        <h1 class="index-article__title">Блинчики с сыром</h1>
+                        <p class="index-article__text">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</p>
+                        </a>
+                            <ul class="index-article__list">
+                            <li class="index-article__item1">
+                                <div class="index-article-item1">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
+                                        22
+                                    </a>
+
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
+                                        522
+                                    </a>
+                                </div>
+                                <div class="index-article-item2">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites2.svg' %}" alt=""/>
+                                        Добавить в избранное!
+                                    </a>
+                                </div>
+
+                            </li>
+                            <li class="index-article__item2">
+                                <p class="index-item_ingredients">яйцо, масло растительное, мука, вода, сыр</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+            <article class="index__article-content">
+                    <div class="index-article__img">
+                        <a href="">
+                        <img class="article__img" src="{% static 'img/blin.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <div class="index-article-section">
+                        <a href="">
+                        <h1 class="index-article__title">Блинчики с сыром</h1>
+                        <p class="index-article__text">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</p>
+                        </a>
+                            <ul class="index-article__list">
+                            <li class="index-article__item1">
+                                <div class="index-article-item1">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
+                                        22
+                                    </a>
+
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
+                                        522
+                                    </a>
+                                </div>
+                                <div class="index-article-item2">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites2.svg' %}" alt=""/>
+                                        Добавить в избранное!
+                                    </a>
+                                </div>
+
+                            </li>
+                            <li class="index-article__item2">
+                                <p class="index-item_ingredients">яйцо, масло растительное, мука, вода, сыр</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+            <article class="index__article-content">
+                    <div class="index-article__img">
+                        <a href="">
+                        <img class="article__img" src="{% static 'img/blin.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <div class="index-article-section">
+                        <a href="">
+                        <h1 class="index-article__title">Блинчики с сыром</h1>
+                        <p class="index-article__text">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</p>
+                        </a>
+                            <ul class="index-article__list">
+                            <li class="index-article__item1">
+                                <div class="index-article-item1">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
+                                        22
+                                    </a>
+
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
+                                        522
+                                    </a>
+                                </div>
+                                <div class="index-article-item2">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites2.svg' %}" alt=""/>
+                                        Добавить в избранное!
+                                    </a>
+                                </div>
+
+                            </li>
+                            <li class="index-article__item2">
+                                <p class="index-item_ingredients">яйцо, масло растительное, мука, вода, сыр</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+        </section>
+        <section class="index__footer">
+            <h1>Регистрируйтесь и ведите свою
+                <br>электронную книгу рецептов бесплатно</h1>
+            <img src="{% static 'img/footer_index.png' %}" alt=""/>
+        </section>
+    </main>
+{% endblock %}
+
+
+
+
+<!--{% load static %}-->
+
+
+
+
+<!--    <div class="container-2">-->
+<!--        <h1>Добро пожаловать в “Соль по вкусу”!</h1>-->
+<!--        <div class="one-half">-->
+<!--            <div class="cont-1">-->
+<!--                <p>Создайте свою книгу рецептов</p>-->
+<!--                <p class="cont-line">Делитесь мнением <img src="{% static 'img/serdce.png' %}" alt="" width="41" height="41"></p>-->
+<!--                <p>Публикуйте свои рецепты</p>-->
+<!--            </div>-->
+<!--            <div class="cont-search">-->
+<!--                    <p>Воспользуйтесь нашим расширенным поиском рецептов!</p>-->
+<!--                 <div class="content-search-center">-->
+<!--                    <div class="content-search-img">-->
+<!--                        <img class="images-1" src="{% static 'img/strelka.png' %}" alt="" width="136" height="136">-->
+<!--                    </div>-->
+<!--                    <div class="one-half-search">-->
+<!--                            <div class="one-half-search-1">-->
+<!--                                <p>Что у вас есть?</p>-->
+<!--                            </div>-->
+<!--                        <div class="one-half-search-2">-->
+<!--                             <form class="search-box-index">-->
+<!--                                    <span class="icon"><i class="fa fa-search"></i></span>-->
+<!--                                    <input type="search" id="search" placeholder="Поиск">-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="popular-recept">-->
+<!--            <h3>Популярно сегодня</h3>-->
+<!--        </div>-->
+<!--    </div>-->

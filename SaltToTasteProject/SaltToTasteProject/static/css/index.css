@@ -1,0 +1,172 @@
+@charset "UTF-8";
+/* Адаптация шрифтов */
+/* Адаптация шрифтов */
+ul {
+  list-style: none; }
+
+a {
+  text-decoration: none;
+  outline: none; }
+
+img {
+  display: block; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal; }
+
+q {
+  quotes: "\00ab" "\00bb";
+  /* Кавычки в виде двойных угловых скобок */ }
+
+/* обнуление стилей браузера */
+.header-index {
+  display: flex;
+  margin-bottom: 30px; }
+
+.page_index {
+  display: flex;
+  margin: 120px 30px 40px 30px;
+  height: auto;
+  position: relative;
+  border-radius: 41px;
+  box-shadow: 0px 0px 31px -4px rgba(73, 63, 63, 0.6);
+  flex-wrap: wrap; }
+
+.header-index__section {
+  width: 55%;
+  padding: 116px 0 0 158px; }
+  .header-index__section .header__index-title {
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 134.5%;
+    /* @include adaptive-font (50, 16); */
+    font-size: 50px; }
+  .header-index__section .header__index-text {
+    color: #6BB420;
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    /* @include adaptive-font (30, 12); */
+    font-size: 30px; }
+  .header-index__section .header__index-title--h3 {
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 134.5%;
+    margin-top: 71px;
+    /*  @include adaptive-font (40, 14); */
+    font-size: 36px;
+    margin-bottom: 24px; }
+  .header-index__section .header__index-link {
+    height: 62px;
+    width: 100%;
+    border-radius: 90px;
+    border: 2px solid rgba(47, 41, 41, 0.5);
+    background: rgba(255, 255, 255, 0.61);
+    padding: 10px 20px 10px 20px;
+    color: rgba(47, 41, 41, 0.8);
+    text-align: center;
+    /* @include adaptive-font (20, 2); */
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal; }
+  .header-index__section .header__index-list {
+    margin: 108px 0 0 56px; }
+    .header-index__section .header__index-list li {
+      display: flex;
+      margin-bottom: 38px; }
+    .header-index__section .header__index-list img {
+      margin-right: 14px; }
+    .header-index__section .header__index-list p {
+      /* @include adaptive-font (30, 5); */
+      font-size: 30px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 126%; }
+
+.header-image-section {
+  display: block;
+  width: 45%;
+  transform: scale(110%, 110%); }
+  .header-image-section img {
+    width: 95%; }
+
+.index-article {
+  max-width: 1280px;
+  margin: 0 auto; }
+  .index-article h1 {
+    color: #2F2929;
+    text-align: center;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 134.5%; }
+
+.index-article__img .article-image-svg {
+  margin: 0 auto; }
+
+.index__article-content {
+  display: flex;
+  border-radius: 52px;
+  border: 1px solid #CBC8C8;
+  background: #FDF5F5;
+  max-height: 358px;
+  margin: 39px 15px; }
+  .index__article-content .index-article__img {
+    width: 100%; }
+    .index__article-content .index-article__img img {
+      border-radius: 52px;
+      width: 100%;
+      min-width: 300px;
+      height: 100%; }
+  .index__article-content .index-article-section {
+    padding: 36px 37px 35px 58px; }
+    .index__article-content .index-article-section h1 {
+      text-align: justify;
+      font-size: 30px;
+      font-weight: 700; }
+    .index__article-content .index-article-section p {
+      padding-top: 20px;
+      text-align: justify;
+      font-size: 21px;
+      font-weight: 400;
+      padding-bottom: 35px; }
+    .index__article-content .index-article-section ul {
+      display: flex; }
+      .index__article-content .index-article-section ul .index-article__item1 {
+        width: 30%; }
+      .index__article-content .index-article-section ul .index-article__item2 {
+        width: 70%; }
+        .index__article-content .index-article-section ul .index-article__item2 p {
+          text-align: right;
+          font-size: 15px;
+          font-weight: 400; }
+      .index__article-content .index-article-section ul li {
+        display: block;
+        width: 100%; }
+        .index__article-content .index-article-section ul li .index-article-item1 {
+          display: flex; }
+          .index__article-content .index-article-section ul li .index-article-item1 a {
+            display: inherit; }
+
+.index__footer {
+  display: block;
+  width: 100%;
+  margin: 0 auto; }
+  .index__footer h1 {
+    color: #2F2929;
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px; }
+
+.article-image-background {
+  position: absolute;
+  top: 810px;
+  left: -60px;
+  width: 20%; }
+
+/*# sourceMappingURL=index.css.map */

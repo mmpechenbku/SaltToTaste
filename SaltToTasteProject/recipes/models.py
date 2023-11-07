@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 from SaltToTasteProject import settings
@@ -67,7 +68,7 @@ class SaveRecipe(models.Model):
     class Meta:
         unique_together = ('recipe', 'user')
         ordering = ('-time_create',)
-        indexes = [models.Index(fields=['-time_create', 'value'])]
+        indexes = [models.Index(fields=['-time_create'])]
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
 

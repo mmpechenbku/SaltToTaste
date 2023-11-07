@@ -212,4 +212,18 @@
     /* 22px */
     font-weight: 500; }
 
+
+
+.save-recipe-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.save-recipe-button img {
+    width: 32px;
+    height: 32px;
+}
+
 /*# sourceMappingURL=reciept_search1.css.map */

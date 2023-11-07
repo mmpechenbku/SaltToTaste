@@ -1,16 +1,46 @@
-let btnSignin = document.querySelector(".shine-button_signin")
+let btnSign = document.querySelector(".shine-button_signin");
 
-btnSignin.onclick = () => {
-	let popup = document.querySelector(".background__login-container")
-	popup.classList.add("background__login-container_active")
+btnSign.onclick = () => {
+    let popupUp = document.querySelector(".signup__popup");
+	let popupIn = document.querySelector(".signin__popup");
+	let btnSignin = document.querySelector(".btn__signin");
+	let popup = document.querySelector(".sign__container");
+	popup.classList.add("sign__container_active");
+    popupIn.classList.add("signin__popup_active");
+    btnSignin.classList.add("btn__signin_active");
 
-
-	let btnExit = document.querySelector(".background__login")
+	let btnSignup = document.querySelector(".btn__signup");
+	btnSignup.onclick = () => {
+	popupIn.classList.remove("signin__popup_active");
+    popupUp.classList.add("signup__popup_active");
+    btnSignin.classList.remove("btn__signin_active");
+    btnSignup.classList.add("btn__signup_active");
+	}
+/*	let btnSignin = document.querySelector(".btn__signin");*/
+	btnSignin.onclick = () => {
+	popupUp.classList.remove("signup__popup_active");
+	popupIn.classList.add("signin__popup_active");
+	btnSignup.classList.remove("btn__signup_active");
+	btnSignin.classList.add("btn__signin_active");
+	}
+	let btnExit = document.querySelector(".sign_background");
+	let btnX = document.querySelector(".cl-btn-7");
+	btnX.onclick = () => {
+	popupIn.classList.remove("signin__popup_active");
+    popupUp.classList.remove("signup__popup_active");
+    btnSignin.classList.remove("btn__signin_active");
+    btnSignup.classList.remove("btn__signup_active");
+ 	popup.classList.remove("sign__container_active");
+ }
 	btnExit.onclick = () => {
- 	popup.classList.remove("background__login-container_active")
+	popupIn.classList.remove("signin__popup_active");
+    popupUp.classList.remove("signup__popup_active");
+    btnSignin.classList.remove("btn__signin_active");
+    btnSignup.classList.remove("btn__signup_active");
+ 	popup.classList.remove("sign__container_active");
  }
 }
-
+/*---------------------------------------------------------------*/
 
 /*Поиск по ингридиентам*/
 const availableIngredientsContainer = document.querySelector('.available-ingredients');

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1870px, initial-scale=1.0">
+    <meta name="viewport" content="width=width-device, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>    <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!--    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">-->
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/adaptation.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="{% static 'css/sign.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 
@@ -60,7 +61,7 @@
     </div>
 
     <script src="{% static 'js/main.js' %}"></script>
-    {% include 'users/login.html' %}
+    {% include 'users/sign.html' %}
 </body>
 
 </html>

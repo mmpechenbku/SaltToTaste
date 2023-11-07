@@ -14,7 +14,7 @@ def index(request):
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
-    template_name = 'users/signup.html'
+    template_name = 'users/sign.html'
 
     # # Функция для кастомной валидации полей формы модели
     def form_valid(self, form):

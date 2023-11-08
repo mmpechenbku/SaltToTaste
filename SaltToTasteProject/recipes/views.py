@@ -16,6 +16,11 @@ from .filters import RecipeFilter
 def recipe_detail(request):
     return render(request, 'recipes/recipe_detail.html')
 
+
+def collections(request):
+    return render(request, 'collections/collections.html')
+
+
 def add_recipe(request):
     if request.method == 'POST':
         title = request.POST['title']

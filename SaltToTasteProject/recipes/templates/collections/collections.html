@@ -3,6 +3,7 @@
 {% load static %}
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/collections.css' %}">
+<link rel="stylesheet" href="{% static 'css/add_collections.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -24,11 +25,9 @@
     <section class="collection__list">
 
         <div class="collection__item-create">
-            <a href="">
                 <div class="collection__item-create_img">
                     <img src="{% static 'img/svg_image/collections__btn-create.svg' %}" alt="">
                 </div>
-            </a>
             <div class="collection__item-name">
                 Добавить подборку
             </div>
@@ -190,5 +189,6 @@
 
     </section>
 </main>
+{% include 'collections/add_collections.html' %}
 
 {% endblock %}

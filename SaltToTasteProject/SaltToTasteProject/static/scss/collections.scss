@@ -52,10 +52,7 @@
     flex-direction: column;
     align-items: center;
     margin: 20px 10px;
-    a {
-        border-radius: 58px;
-    }
-
+    cursor: pointer;
 }
 .collection__item-create_img {
     display: flex;

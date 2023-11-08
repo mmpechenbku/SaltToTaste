@@ -5,6 +5,7 @@
     opacity: 0;
     visibility: hidden;
 }
+
 .sign__container_active {
     display: block;
     opacity: 1;
@@ -19,8 +20,6 @@
     top: 0;
     z-index: 2;
 }
-
-
 
 .popup__page {
 display: block;

@@ -13,6 +13,8 @@ from .filters import RecipeFilter
 
 # Create your views here.
 
+def recipe_detail(request):
+    return render(request, 'recipes/recipe_detail.html')
 
 def add_recipe(request):
     if request.method == 'POST':

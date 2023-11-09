@@ -40,7 +40,15 @@
                     <li class="navbar__item-search">
                         <img src="{% static 'img/svg_image/search.svg' %}" alt="">
                     </li>
-                    <li class="navbar__item-vk">
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.nickname }}</a>
+                    </li>
+                    <li>
+                        <a class="nav-item nav-link" href="{% url 'logout' %}">Выход</a>
+                    </li>
+          	        {% else %}
+                        <li class="navbar__item-vk">
                         <a href="">
                             <img src="{% static 'img/svg_image/sign_vk.svg' %}" alt="">
                                 Войти через Вконтакте
@@ -50,6 +58,9 @@
                         <img src="{% static 'img/svg_image/sign.svg' %}" alt="">
                         <p class="navbar__item-sign_link">Войти</p>
                     </li>
+          	        {% endif %}
+
+
                 </ul>
             </div>
 

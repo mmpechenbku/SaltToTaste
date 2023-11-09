@@ -1,4 +1,4 @@
-let btnSign = document.querySelector(".shine-button_signin");
+let btnSign = document.querySelector(".navbar__item-sign_link");
 
 btnSign.onclick = () => {
     let popupUp = document.querySelector(".signup__popup");

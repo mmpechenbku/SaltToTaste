@@ -18,19 +18,62 @@
 
 </head>
 <body>
-    <!-- Navigation bar -->
+    <header class="header">
+
+        <div class="header-area">
+            <!--<input class="side-menu" type="checkbox" id="side-menu"/>
+            <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>-->
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img class="logo-img" src="{% static 'img/logo.png' %}" alt="">
+                    Cоль по вкусу
+                </a>
+            </div>
+
+            <div class="navbar">
+                <ul class="navbar__list">
+                    <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li><a href="{% url 'search' %}">Рецепты</a></li>
+                    <li><a href="{% url 'collections' %}">Избранное</a></li>
+                </ul>
+                <ul class="navbar__list-right">
+                    <li class="navbar__item-search">
+                        <img src="{% static 'img/svg_image/search.svg' %}" alt="">
+                    </li>
+                    <li class="navbar__item-vk">
+                        <a href="">
+                            <img src="{% static 'img/svg_image/sign_vk.svg' %}" alt="">
+                                Войти через Вконтакте
+                        </a>
+                    </li>
+                    <li class="navbar__item-sign">
+                        <img src="{% static 'img/svg_image/sign.svg' %}" alt="">
+                        <p class="navbar__item-sign_link">Войти</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+
+
+  <!--  &lt;!&ndash; Navigation bar &ndash;&gt;
     <header class="header">
     <div class="header-area">
-                <!-- Hamburger icon -->
+                &lt;!&ndash; Hamburger icon &ndash;&gt;
         <input class="side-menu" type="checkbox" id="side-menu"/>
         <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
-        <!-- Logo -->
+        &lt;!&ndash; Logo &ndash;&gt;
         <div class="nav-logo">
             <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt="" width="30" height="40"></a>
             <a href="{% url 'home' %}" class="logo">Соль по вкусу</a>
         </div>
 
-        <!-- Menu -->
+        &lt;!&ndash; Menu &ndash;&gt;
 
         <nav class="nav-menu">
             <ul class="menu">
@@ -52,7 +95,7 @@
             <a href="{% url 'registration' %}" class="shine-button shine-button_signup">Зарегистрироваться</a>
         </div>
     </div>
-    </header>
+    </header>-->
     <div class="container">
     {% block content %}
     {% endblock %}

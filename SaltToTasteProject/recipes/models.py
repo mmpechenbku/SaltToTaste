@@ -54,6 +54,9 @@ class Recipe(models.Model):
     def get_sum_comments(self):
         return self.comments.count()
 
+    def __str__(self):
+        return self.title
+
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название')
@@ -64,6 +67,9 @@ class Ingredient(models.Model):
         MEAT = "Мясо"
 
     category = models.CharField(max_length=150, choices=Category.choices, verbose_name='Категория')
+
+    def __str__(self):
+        return self.name
 
 
 class RecipeStep(models.Model):

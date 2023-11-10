@@ -94,6 +94,7 @@ def search_recipes(request):
     recipe_ingr_dict = []
 
     for recipe in recipes:
+        print(recipe.picture)
         ingredients = []
         for ingredient in recipe.ingredients.all():
             ingredients.append(ingredient.name)

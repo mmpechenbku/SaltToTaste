@@ -1,17 +1,3 @@
-let btnSignin = document.querySelector(".shine-button_signin")
-
-btnSignin.onclick = () => {
-	let popup = document.querySelector(".background__login-container")
-	popup.classList.add("background__login-container_active")
-
-
-	let btnExit = document.querySelector(".background__login")
-	btnExit.onclick = () => {
- 	popup.classList.remove("background__login-container_active")
- }
-}
-
-
 /*Поиск по ингридиентам*/
 const availableIngredientsContainer = document.querySelector('.available-ingredients');
 const searchedIngredientsContainer = document.querySelector('.searched-ingredients');

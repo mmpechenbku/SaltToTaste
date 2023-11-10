@@ -1,66 +1,127 @@
-/*
-Error: Invalid CSS after "": expected selector, was "<<<<<<< HEAD"
-        on line 109 of PycharmProjects/SaltToTaste/SaltToTasteProject/SaltToTasteProject/static/scss/base.scss
+.header {
+  display: flex;
+  background-color: #493F3F;
+  box-shadow: 1px 1px 5px 0px var(--gray);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 2; }
 
-104:         &:hover {
-105:             color: #9c9797;
-106:         }
-107:     }
-108: }
-109: <<<<<<< HEAD
-110: =======
-111: 
-112: >>>>>>> 9567099afabdc2e83949e3de4165cf40a47c6bb3
-113: .navbar__item-search {
-114:     width: 100%;
+.header-area {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 15px; }
 
-Backtrace:
-PycharmProjects/SaltToTaste/SaltToTasteProject/SaltToTasteProject/static/scss/base.scss:109
-/usr/share/gems/gems/sass-3.7.4/lib/sass/scss/parser.rb:1308:in `expected'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/scss/parser.rb:1238:in `expected'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/scss/parser.rb:1218:in `expr!'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/scss/static_parser.rb:20:in `parse_selector'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:434:in `visit_rule'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/stack.rb:79:in `block in with_base'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/stack.rb:79:in `with_base'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `map'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:157:in `visit'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:10:in `visit'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/root_node.rb:36:in `css_tree'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/engine.rb:307:in `render_with_sourcemap'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:209:in `each'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
-/usr/share/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:320:in `block in watch'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/event/config.rb:28:in `call'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/event/processor.rb:117:in `block in _process_changes'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/thread.rb:26:in `rescue_and_log'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/event/processor.rb:116:in `_process_changes'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/event/processor.rb:25:in `block in loop_for'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/event/processor.rb:20:in `loop'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/event/processor.rb:20:in `loop_for'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/event/loop.rb:85:in `_process_changes'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/event/loop.rb:51:in `block in start'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/thread.rb:26:in `rescue_and_log'
-/usr/share/gems/gems/listen-3.7.1/lib/listen/thread.rb:18:in `block in new'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"\": expected selector, was \"<<<<<<< HEAD\"\A         on line 109 of PycharmProjects/SaltToTaste/SaltToTasteProject/SaltToTasteProject/static/scss/base.scss\A \A 104:         &:hover {\A 105:             color: #9c9797;\A 106:         }\A 107:     }\A 108: }\A 109: <<<<<<< HEAD\A 110: =======\A 111: \A 112: >>>>>>> 9567099afabdc2e83949e3de4165cf40a47c6bb3\A 113: .navbar__item-search {\A 114:     width: 100%;"; }
+.logo {
+  display: flex; }
+  .logo a {
+    display: inherit;
+    align-items: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0.5px; }
+
+.logo-img {
+  width: 30px;
+  height: 40px;
+  margin-right: 10px; }
+
+.navbar {
+  display: flex;
+  width: 100%;
+  margin-left: 20px; }
+
+.navbar__list {
+  height: 100%;
+  display: flex; }
+  .navbar__list li {
+    padding: 1.376rem 1rem; }
+    .navbar__list li a {
+      color: #fff;
+      font-size: 16px; }
+      .navbar__list li a:hover {
+        color: #9c9797; }
+
+.navbar__list-right {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end; }
+  .navbar__list-right li {
+    padding: 0 1rem; }
+    .navbar__list-right li a {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      font-size: 16px; }
+      .navbar__list-right li a:hover {
+        color: #9c9797; }
+      .navbar__list-right li a img {
+        width: 24px;
+        height: 24px;
+        margin-right: 5px; }
+    .navbar__list-right li p {
+      color: #fff; }
+      .navbar__list-right li p:hover {
+        color: #9c9797; }
+
+.navbar__item-sign {
+  display: flex;
+  align-items: center; }
+  .navbar__item-sign p {
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer; }
+  .navbar__item-sign svg {
+    margin-right: 5px;
+    cursor: pointer;
+    color: white; }
+    .navbar__item-sign svg:hover {
+      color: #9c9797; }
+
+.navbar__item-search {
+  width: 100%; }
+  .navbar__item-search label {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%; }
+    .navbar__item-search label svg {
+      fill: #fff;
+      margin-left: 10px;
+      cursor: pointer; }
+      .navbar__item-search label svg:hover {
+        fill: #9c9797; }
+
+.navbar__search-onclick {
+  overflow: hidden;
+  opacity: 0;
+  width: 100%; }
+  .navbar__search-onclick_active {
+    display: flex;
+    justify-content: flex-end;
+    overflow: visible;
+    width: 100%;
+    opacity: 1; }
+    .navbar__search-onclick_active input {
+      border-radius: 45px;
+      padding: 0 10px;
+      min-width: 200px;
+      border: 1px solid #9c9797;
+      max-width: 350px;
+      width: 100%;
+      height: 30px;
+      font-weight: 400;
+      font-size: 16px; }
+
+.navbar__item-vk {
+  border-right: 1px solid #fff; }
+
+/*# sourceMappingURL=base.css.map */

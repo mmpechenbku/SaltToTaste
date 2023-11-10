@@ -25,50 +25,56 @@
 
     <div class="search-form__btn-clear">
         <h1>Поиск по ингредиентам</h1>
-        <button type="submit" id="">Сбросить поиск</button>
+
     </div>
 
     <div class="recipe-search__content">
-        <div class="advertising"></div>
+        <!--<div class="advertising"></div>-->
         <div class="search__field" >
-            <div class="search__form-content">
-                <form class="search__form-ingredients" action="" method="get" accept-charset="windows-1251">
-                    <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
-                </form>
+            <div class="search-form__container">
+                <div class="search__form-content">
+                    <form class="search__form-ingredients" action="" method="get" accept-charset="windows-1251">
+                        <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
+                    </form>
 
-                <form class="search-field__choice" method="post" action="{% url 'search' %}" id="search-form">
-                    <h3>Быстрый выбор</h3>
-                            {% csrf_token %}
-                    <div class="available-ingredients">
-                        {% for ingredient in ingredients %}
-                        <div id="ingredient-buttons"></div>
-                        <button type="button" class="ingredient-button" data-ingredient-id="{{ ingredient.id }}">{{ ingredient.name }}</button>
-                        {% endfor %}
-                    </div>
-                    <div class="ingredients__container">
-                        <h3>Вы выбрали:</h3>
-                        <div class="selected-ingredients"></div>
-                        <div class="ingredient__coincidence">
-                            <input type="checkbox" id="coincidence" onclick="check();" name="coincidence" autocomplete="off" disabled/>
-                            <p>Только 100% совпадение</p>
+                    <form class="search-field__choice" method="post" action="{% url 'search' %}" id="search-form">
+                        <h3>Быстрый выбор</h3>
+                                {% csrf_token %}
+                        <div class="available-ingredients">
+                            {% for ingredient in ingredients %}
+                            <div id="ingredient-buttons"></div>
+                            <button type="button" class="ingredient-button" data-ingredient-id="{{ ingredient.id }}">{{ ingredient.name }}</button>
+                            {% endfor %}
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="search__parameters">
-                <div class="difficulty-container">
-                    <div class="parameters__name-box">
-                        <label for="difficulty">Сложность</label>
-                    </div>
-                    <select id="difficulty" name="difficulty">
-                        <option value="Все">Все</option>
-                        <option value="Легко">Легкая</option>
-                        <option value="Средняя">Средняя</option>
-                        <option value="Сложно">Сложная</option>
-                    </select>
+                        <div class="ingredients__container">
+                            <div class="ingredients__container-title">
+                            <h3>Вы выбрали:</h3>
+                                <button type="submit" id="">Сбросить</button>
+                            </div>
+                            <div class="selected-ingredients"></div>
+                            <div class="ingredient__coincidence">
+                                <label>
+                                <input type="checkbox" id="coincidence" onclick="check();" name="coincidence" autocomplete="off" disabled/>
+                                Только 100% совпадение
+                                </label>
+                                <button class="ingredient__coincidence_btn-search" type="submit">Найти</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
                 <div class="sorting__container">
+                    <div class="difficulty-container">
+                        <div class="parameters__name-box">
+                            <label for="difficulty">Сложность</label>
+                        </div>
+                        <select id="difficulty" name="difficulty">
+                            <option value="Все">Все</option>
+                            <option value="Легко">Легкая</option>
+                            <option value="Средняя">Средняя</option>
+                            <option value="Сложно">Сложная</option>
+                        </select>
+                    </div>
+
                     <div class="parameters__name-box">
                         <label for="search-sorting">Сортировать по</label>
                     </div>
@@ -79,13 +85,102 @@
                         <option value="Дата публикации">Дата публикации</option>
                     </select>
                 </div>
-                <input type="submit" value="Найти">
+
             </div>
+
+
+            <article class="index__article-content">
+                    <div class="index-article__img">
+                        <a href="">
+                        <img class="article__img" src="{% static 'img/blin.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <div class="index-article-section">
+                        <div class="index-article_content-block">
+                            <h1 class="index-article__title"><a href="">Блинчики с сыром</a></h1>
+                            <p class="index-article__text"><a href="">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</a></p>
+                        </div>
+                        <ul class="index-article__list">
+                            <li class="index-article__items">
+                                <div class="index-article-item1">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
+                                        22
+                                    </a>
+
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
+                                        522
+                                    </a>
+                                </div>
+                                <div class="index-article-item2">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites_noneselect.svg' %}" alt=""/>
+                                        Добавить в избранное!
+                                    </a>
+                                </div>
+
+                            </li>
+                            <li class="index-article__item2">
+                                <p class="index-item_ingredients">яйцо, масло растительное, мука, вода, сыр</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+            <article class="index__article-content">
+                    <div class="index-article__img">
+                        <a href="">
+                        <img class="article__img" src="{% static 'img/blin.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <div class="index-article-section">
+                        <div class="index-article_content-block">
+                            <h1 class="index-article__title"><a href="">Блинчики с сыром</a></h1>
+                            <p class="index-article__text"><a href="">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</a></p>
+                        </div>
+                        <ul class="index-article__list">
+                            <li class="index-article__items">
+                                <div class="index-article-item1">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
+                                        22
+                                    </a>
+
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
+                                        522
+                                    </a>
+                                </div>
+                                <div class="index-article-item2">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites_noneselect.svg' %}" alt=""/>
+                                        Добавить в избранное!
+                                    </a>
+                                </div>
+
+                            </li>
+                            <li class="index-article__item2">
+                                <p class="index-item_ingredients">яйцо, масло растительное, мука, вода, сыр</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+
+
         </div>
-        <div class="advertising">
-            <img src="{% static 'img/blin.png' %}" alt="">
-        </div>
+      <!--  <div class="advertising"></div>-->
+
     </div>
+
+
+
+
+
+
+
+
        <!--
 
 

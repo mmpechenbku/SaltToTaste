@@ -36,9 +36,19 @@
                     <li><a href="{% url 'search' %}">Рецепты</a></li>
                     <li><a href="{% url 'collections' %}">Избранное</a></li>
                 </ul>
+
                 <ul class="navbar__list-right">
+
                     <li class="navbar__item-search">
-                        <img src="{% static 'img/svg_image/search.svg' %}" alt="">
+                        <label for="nav-search_box">
+                            <div class="navbar__search-onclick">
+                                <input id="nav-search_box" type="text">
+                            </div>
+                            <!--<img class="navbar__item-search-img" src="{% static 'img/svg_image/search.svg' %}" alt="">-->
+                            <svg width="30" height="24" class="navbar__item-search-img">
+                                <use href="#Capa_1"></use>
+                            </svg>
+                        </label>
                     </li>
                     {% if user.is_authenticated %}
                     <li>
@@ -55,7 +65,10 @@
                         </a>
                     </li>
                     <li class="navbar__item-sign">
-                        <img src="{% static 'img/svg_image/sign.svg' %}" alt="">
+                       <!-- <img src="{% static 'img/svg_image/sign.svg' %}" alt="">-->
+                        <svg width="24" height="24">
+                            <use href="#sign"></use>
+                        </svg>
                         <p class="navbar__item-sign_link">Войти</p>
                     </li>
           	        {% endif %}
@@ -115,6 +128,7 @@
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/popup.js' %}"></script>
     {% include 'users/sign.html' %}
+    {% include 'svg.html' %}
 </body>
 
 </html>

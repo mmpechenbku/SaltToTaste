@@ -52,17 +52,19 @@
         a {
             color: #fff;
             font-size: 16px;
+            &:hover {
+                color: #9c9797;
+            }
         }
-        a:hover {
-            color: #e9ebee;
-        }
+
     }
 }
 
 .navbar__list-right {
     display: flex;
-    margin-left: auto;
     align-items: center;
+    width: 100%;
+    justify-content: flex-end;
     li{
         padding: 0 1rem;
         a {
@@ -70,10 +72,19 @@
             align-items: center;
             color: #fff;
             font-size: 16px;
+            &:hover {
+                color: #9c9797;
+            }
             img {
                 width: 24px;
                 height: 24px;
                 margin-right: 5px;
+            }
+        }
+        p {
+            color: #fff;
+            &:hover {
+                color: #9c9797;
             }
         }
     }
@@ -86,16 +97,56 @@
         font-size: 16px;
         cursor: pointer;
     }
-    img {
-        width: 24px;
-        height: 24px;
+    svg {
         margin-right: 5px;
         cursor: pointer;
+        color: white;
+        &:hover {
+            color: #9c9797;
+        }
     }
 }
 .navbar__item-search {
-    img {
-        width: 24px;
-        height: 24px;
+    width: 100%;
+    label {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        svg {
+            fill: #fff;
+            margin-left: 10px;
+            cursor: pointer;
+             &:hover {
+                fill:#9c9797;
+             }
+        }
     }
+}
+.navbar__search-onclick{
+    overflow: hidden;
+    opacity: 0;
+    width: 100%;
+    &_active {
+        display: flex;
+        justify-content: flex-end;
+        overflow: visible;
+        width: 100%;
+        opacity: 1;
+        input {
+            border-radius: 45px;
+            padding: 0 10px;
+            min-width: 200px;
+            border: 1px solid #9c9797;;
+            max-width: 350px;
+            width: 100%;
+            height: 30px;
+            font-weight: 400;
+            font-size: 16px;
+        }
+    }
+}
+
+.navbar__item-vk {
+    border-right: 1px solid #fff;
 }

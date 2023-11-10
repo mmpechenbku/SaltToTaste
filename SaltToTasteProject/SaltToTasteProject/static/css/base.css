@@ -46,13 +46,14 @@
     .navbar__list li a {
       color: #fff;
       font-size: 16px; }
-    .navbar__list li a:hover {
-      color: #e9ebee; }
+      .navbar__list li a:hover {
+        color: #9c9797; }
 
 .navbar__list-right {
   display: flex;
-  margin-left: auto;
-  align-items: center; }
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end; }
   .navbar__list-right li {
     padding: 0 1rem; }
     .navbar__list-right li a {
@@ -60,10 +61,16 @@
       align-items: center;
       color: #fff;
       font-size: 16px; }
+      .navbar__list-right li a:hover {
+        color: #9c9797; }
       .navbar__list-right li a img {
         width: 24px;
         height: 24px;
         margin-right: 5px; }
+    .navbar__list-right li p {
+      color: #fff; }
+      .navbar__list-right li p:hover {
+        color: #9c9797; }
 
 .navbar__item-sign {
   display: flex;
@@ -72,14 +79,49 @@
     color: #fff;
     font-size: 16px;
     cursor: pointer; }
-  .navbar__item-sign img {
-    width: 24px;
-    height: 24px;
+  .navbar__item-sign svg {
     margin-right: 5px;
-    cursor: pointer; }
+    cursor: pointer;
+    color: white; }
+    .navbar__item-sign svg:hover {
+      color: #9c9797; }
 
-.navbar__item-search img {
-  width: 24px;
-  height: 24px; }
+.navbar__item-search {
+  width: 100%; }
+  .navbar__item-search label {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%; }
+    .navbar__item-search label svg {
+      fill: #fff;
+      margin-left: 10px;
+      cursor: pointer; }
+      .navbar__item-search label svg:hover {
+        fill: #9c9797; }
+
+.navbar__search-onclick {
+  overflow: hidden;
+  opacity: 0;
+  width: 100%; }
+  .navbar__search-onclick_active {
+    display: flex;
+    justify-content: flex-end;
+    overflow: visible;
+    width: 100%;
+    opacity: 1; }
+    .navbar__search-onclick_active input {
+      border-radius: 45px;
+      padding: 0 10px;
+      min-width: 200px;
+      border: 1px solid #9c9797;
+      max-width: 350px;
+      width: 100%;
+      height: 30px;
+      font-weight: 400;
+      font-size: 16px; }
+
+.navbar__item-vk {
+  border-right: 1px solid #fff; }
 
 /*# sourceMappingURL=base.css.map */

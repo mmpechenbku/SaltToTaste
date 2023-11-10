@@ -3,14 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1870px, initial-scale=1.0">
+    <meta name="viewport" content="width=width-device, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}{% endblock %}</title>    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!--    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">-->
     {% block header %}
     {% endblock %}
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/adaptation.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,25 +18,92 @@
 
 </head>
 <body>
-    <!-- Navigation bar -->
+    <header class="header">
+
+        <div class="header-area">
+            <!--<input class="side-menu" type="checkbox" id="side-menu"/>
+            <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>-->
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img class="logo-img" src="{% static 'img/logo.png' %}" alt="">
+                    Cоль по вкусу
+                </a>
+            </div>
+
+            <div class="navbar">
+                <ul class="navbar__list">
+                    <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li><a href="{% url 'search' %}">Рецепты</a></li>
+                    <li><a href="{% url 'collections' %}">Избранное</a></li>
+                </ul>
+
+                <ul class="navbar__list-right">
+
+                    <li class="navbar__item-search">
+                        <label for="nav-search_box">
+                            <div class="navbar__search-onclick">
+                                <input id="nav-search_box" type="text">
+                            </div>
+                            <!--<img class="navbar__item-search-img" src="{% static 'img/svg_image/search.svg' %}" alt="">-->
+                            <svg width="30" height="24" class="navbar__item-search-img">
+                                <use href="#Capa_1"></use>
+                            </svg>
+                        </label>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.nickname }}</a>
+                    </li>
+                    <li>
+                        <a class="nav-item nav-link" href="">Выход</a>
+                    </li>
+          	        {% else %}
+                        <li class="navbar__item-vk">
+                        <a href="">
+                            <img src="{% static 'img/svg_image/sign_vk.svg' %}" alt="">
+                                Войти через Вконтакте
+                        </a>
+                    </li>
+                    <li class="navbar__item-sign">
+                       <!-- <img src="{% static 'img/svg_image/sign.svg' %}" alt="">-->
+                        <svg width="24" height="24">
+                            <use href="#sign"></use>
+                        </svg>
+                        <p class="navbar__item-sign_link">Войти</p>
+                    </li>
+          	        {% endif %}
+
+
+                </ul>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+
+
+  <!--  &lt;!&ndash; Navigation bar &ndash;&gt;
     <header class="header">
     <div class="header-area">
-                <!-- Hamburger icon -->
+                &lt;!&ndash; Hamburger icon &ndash;&gt;
         <input class="side-menu" type="checkbox" id="side-menu"/>
         <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
-        <!-- Logo -->
+        &lt;!&ndash; Logo &ndash;&gt;
         <div class="nav-logo">
             <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt="" width="30" height="40"></a>
             <a href="{% url 'home' %}" class="logo">Соль по вкусу</a>
         </div>
 
-        <!-- Menu -->
+        &lt;!&ndash; Menu &ndash;&gt;
 
         <nav class="nav-menu">
             <ul class="menu">
                 <li><a href="{% url 'home' %}">Главная</a></li>
                 <li><a href="{% url 'search' %}">Рецепты</a></li>
-                <li><a href="#">Избранное</a></li>
+                <li><a href="{% url 'collections' %}">Избранное</a></li>
                 <li id="menu-auth"><a href="#">Авторизация</a></li>
             </ul>
         </nav>
@@ -53,80 +119,16 @@
             <a href="{% url 'registration' %}" class="shine-button shine-button_signup">Зарегистрироваться</a>
         </div>
     </div>
-    </header>
+    </header>-->
     <div class="container">
     {% block content %}
     {% endblock %}
     </div>
 
     <script src="{% static 'js/main.js' %}"></script>
-    {% include 'users/login.html' %}
+    <script src="{% static 'js/popup.js' %}"></script>
+    {% include 'users/sign.html' %}
+    {% include 'svg.html' %}
 </body>
 
 </html>
-
-
-
-
-<!--{% load static %}-->
-<!--<!doctype html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport"-->
-<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
-
-<!--&lt;!&ndash;    <link rel="stylesheet" href="{% static 'main/css_old/main.css_old' %}">&ndash;&gt;-->
-<!--    <link rel="stylesheet" href="{% static 'css/base.css' %}">-->
-<!--    <link rel="stylesheet" href="{% static 'css/style.css' %}">-->
-<!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
-<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
-<!--    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-
-<!--</head>-->
-<!--<body>-->
-<!--    &lt;!&ndash; Navigation bar &ndash;&gt;-->
-<!--    <header class="header">-->
-<!--    <div class="header-area">-->
-<!--                &lt;!&ndash; Hamburger icon &ndash;&gt;-->
-<!--        <input class="side-menu" type="checkbox" id="side-menu"/>-->
-<!--        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>-->
-<!--        &lt;!&ndash; Logo &ndash;&gt;-->
-<!--        <div class="nav-logo">-->
-<!--            <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt="" width="30" height="40"></a>-->
-<!--            <a href="{% url 'home' %}" class="logo">Соль по вкусу</a>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Menu &ndash;&gt;-->
-
-<!--        <nav class="nav-menu">-->
-<!--            <ul class="menu">-->
-<!--                <li><a href="{% url 'home' %}">Главная</a></li>-->
-<!--                <li><a href="#">Рецепты</a></li>-->
-<!--                <li><a href="#">Избранное</a></li>-->
-<!--                <li id="menu-auth"><a href="#">Авторизация</a></li>-->
-<!--            </ul>-->
-<!--        </nav>-->
-<!--        <div class="search-wrap">-->
-<!--          <form action="" method="get" accept-charset="windows-1251">-->
-<!--              <input type="text" value="" name="name" placeholder="Поиск">-->
-<!--              <input type="submit" value="">-->
-<!--          </form>-->
-<!--        </div>-->
-<!--        <div class="header-profile">-->
-<!--            <a href="#" class="profile-button"><img src="{% static 'img/ProfileIcon.png' %}" alt="" width="45" height="45"></a>-->
-<!--            <a href="{% url 'login' %}" data-toggle="modal" class="shine-button">Войти</a>-->
-<!--            <a href="{% url 'registration' %}" class="shine-button">Зарегистрироваться</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    </header>-->
-<!--    <div class="container">-->
-<!--    {% block ccontent %}-->
-<!--    {% endblock %}-->
-
-<!--    </div>-->
-<!--</body>-->
-
-<!--</html>-->

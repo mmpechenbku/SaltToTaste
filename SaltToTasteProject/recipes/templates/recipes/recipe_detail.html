@@ -1,7 +1,9 @@
 {% extends 'base_layout.html' %}
 
 {% load static %}
-
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/reciept.css' %}">
+{% endblock %}
 {% block content %}
 <div class="btn__back btn-back">
     <a href="#" class="btn-back__image">

@@ -1,7 +1,6 @@
 /*Page recept*/
 .page__recept {
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto;
     width: 90%;
     height: auto;
     background-color: rgba(253, 245, 245, 1);
@@ -85,7 +84,7 @@
 
 .btn__back {
     display: flex;
-    margin-top: 50px;
+    margin-top: 120px;
     padding-left: 5%;
 }
 .btn-back__text{

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.http import JsonResponse, HttpResponseRedirect
@@ -11,10 +12,14 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'index.html')
 
+
+def profile(request):
+    return render(request, 'users/profile.html')
+
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
-    template_name = 'users/signup.html'
+    template_name = 'users/sign.html'
 
     # # Функция для кастомной валидации полей формы модели
     def form_valid(self, form):
@@ -42,6 +47,7 @@ class Login(SuccessMessageMixin, LoginView):
     form_class = AuthenticationForm
     template_name = 'users/login.html'
     success_message = 'Успешная авторизация'
+
     # print('in views')
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -65,3 +71,6 @@ class Login(SuccessMessageMixin, LoginView):
         print(self.request.user)
         # print('success')
         return reverse_lazy('home')
+
+    def profile(request):
+        return render(request, 'users/profile.html')

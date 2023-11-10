@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block header %}
-<link rel="stylesheet" href="{% static 'css/reciept_search1.css' %}">
+<link rel="stylesheet" href="{% static 'css/reciept_search.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
             </div>
             <div class="search-header__btn">
                 <a href="#" class="search-header__btn-image">
-                    <img src="{% static 'img/svg_image/addreciept.svg' %}" width="45" height="45" alt="Добавить свой рецепт">
+                    <img src="{% static 'img/svg_image/addreciept.svg' %}" width="30" height="30" alt="Добавить свой рецепт">
                 </a>
                 <a href="#" class="search-header__btn-text">Добавить свой рецепт</a>
             </div>
@@ -22,75 +22,166 @@
     <form class="search__form" action="" method="get" accept-charset="windows-1251">
         <input type="text" value="" name="name" placeholder="Блюдо">
     </form>
+    <button class="save-recipe-button"><img src="{% static 'img/svg_image/favorites.svg' %}"></button>
 
     <div class="search-form__btn-clear">
         <h1>Поиск по ингредиентам</h1>
-        <button type="submit" id="">Сбросить поиск</button>
+
     </div>
 
     <div class="recipe-search__content">
-        <div class="advertising"></div>
+        <!--<div class="advertising"></div>-->
         <div class="search__field" >
-            <div class="search__form-content">
-                <form class="search__form-ingredients" action="" method="get" accept-charset="windows-1251">
-                    <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
-                </form>
+            <div class="search-form__container">
+                <div class="search__form-content">
+                    <form class="search__form-ingredients" action="" method="get" accept-charset="windows-1251">
+                        <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
+                    </form>
 
-                <form class="search-field__choice" method="post" action="{% url 'search' %}" id="search-form">
-                    <h3>Быстрый выбор</h3>
-                            {% csrf_token %}
-                    <div class="available-ingredients">
-                        {% for ingredient in ingredients %}
-                        <div id="ingredient-buttons"></div>
-                        <button type="button" class="ingredient-button" data-ingredient-id="{{ ingredient.id }}">{{ ingredient.name }}</button>
-                        {% endfor %}
-                    </div>
-                    <div class="ingredients__container">
-                        <h3>Вы выбрали:</h3>
-                        <div class="selected-ingredients"></div>
-                        <div class="ingredient__coincidence">
-                            <input type="checkbox" id="coincidence" onclick="check();" name="coincidence" autocomplete="off" disabled/>
-                            <p>Только 100% совпадение</p>
+                    <form class="search-field__choice" method="post" action="{% url 'search' %}" id="search-form">
+                        <h3>Быстрый выбор</h3>
+                                {% csrf_token %}
+                        <div class="available-ingredients">
+                            {% for ingredient in ingredients %}
+                            <div id="ingredient-buttons"></div>
+                            <button type="button" class="ingredient-button" data-ingredient-id="{{ ingredient.id }}">{{ ingredient.name }}</button>
+                            {% endfor %}
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="search__parameters">
-                <div class="difficulty-container">
-                    <div class="parameters__name-box">
-                        <label for="difficulty">Сложность</label>
-                    </div>
-                    <select id="difficulty" name="difficulty">
-                        <option value="">Любая</option>
-                        <option value="Легко">Легкая</option>
-                        <option value="Средняя">Средняя</option>
-                        <option value="Сложно">Сложная</option>
-                    </select>
-                </div>
-                <div class="time-container">
-                    <div class="parameters__name-box">
-                        <label for="time">Время приготовления</label>
-                    </div>
-                    <input type="number" id="time" name="time" min="1">
+                        <div class="ingredients__container">
+                            <div class="ingredients__container-title">
+                            <h3>Вы выбрали:</h3>
+                                <button type="submit" id="">Сбросить</button>
+                            </div>
+                            <div class="selected-ingredients"></div>
+                            <div class="ingredient__coincidence">
+                                <label>
+                                <input type="checkbox" id="coincidence" onclick="check();" name="coincidence" autocomplete="off" disabled/>
+                                Только 100% совпадение
+                                </label>
+                                <button class="ingredient__coincidence_btn-search" type="submit">Найти</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="sorting__container">
+                    <div class="difficulty-container">
+                        <div class="parameters__name-box">
+                            <label for="difficulty">Сложность</label>
+                        </div>
+                        <select id="difficulty" name="difficulty">
+                            <option value="Все">Все</option>
+                            <option value="Легко">Легкая</option>
+                            <option value="Средняя">Средняя</option>
+                            <option value="Сложно">Сложная</option>
+                        </select>
+                    </div>
+
                     <div class="parameters__name-box">
                         <label for="search-sorting">Сортировать по</label>
                     </div>
                     <select id="search-sorting" name="difficulty">
-                        <option value="Сложность">Сложность</option>
                         <option value="Популярность">Популярность</option>
+                        <option value="Сложность">Сложность</option>
                         <option value="Время готовки">Время приготовления</option>
                         <option value="Дата публикации">Дата публикации</option>
                     </select>
                 </div>
-                <input type="submit" value="Найти">
+
             </div>
+
+
+            <article class="index__article-content">
+                    <div class="index-article__img">
+                        <a href="">
+                        <img class="article__img" src="{% static 'img/blin.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <div class="index-article-section">
+                        <div class="index-article_content-block">
+                            <h1 class="index-article__title"><a href="">Блинчики с сыром</a></h1>
+                            <p class="index-article__text"><a href="">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</a></p>
+                        </div>
+                        <ul class="index-article__list">
+                            <li class="index-article__items">
+                                <div class="index-article-item1">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
+                                        22
+                                    </a>
+
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
+                                        522
+                                    </a>
+                                </div>
+                                <div class="index-article-item2">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites_noneselect.svg' %}" alt=""/>
+                                        Добавить в избранное!
+                                    </a>
+                                </div>
+
+                            </li>
+                            <li class="index-article__item2">
+                                <p class="index-item_ingredients">яйцо, масло растительное, мука, вода, сыр</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+            <article class="index__article-content">
+                    <div class="index-article__img">
+                        <a href="">
+                        <img class="article__img" src="{% static 'img/blin.png' %}" alt="" />
+                        </a>
+                    </div>
+                    <div class="index-article-section">
+                        <div class="index-article_content-block">
+                            <h1 class="index-article__title"><a href="">Блинчики с сыром</a></h1>
+                            <p class="index-article__text"><a href="">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</a></p>
+                        </div>
+                        <ul class="index-article__list">
+                            <li class="index-article__items">
+                                <div class="index-article-item1">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
+                                        22
+                                    </a>
+
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
+                                        522
+                                    </a>
+                                </div>
+                                <div class="index-article-item2">
+                                    <a href="#" class="index-item__image">
+                                        <img src="{% static 'img/svg_image/favorites_noneselect.svg' %}" alt=""/>
+                                        Добавить в избранное!
+                                    </a>
+                                </div>
+
+                            </li>
+                            <li class="index-article__item2">
+                                <p class="index-item_ingredients">яйцо, масло растительное, мука, вода, сыр</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+
+
         </div>
-        <div class="advertising">
-            <img src="{% static 'img/blin.png' %}" alt="">
-        </div>
+      <!--  <div class="advertising"></div>-->
+
     </div>
+
+
+
+
+
+
+
+
        <!--
 
 
@@ -127,7 +218,7 @@
                 <h1 class="search-content__title">{{num_recipes}}</h1>
                   <article class="search-content__article search-article">
                     <div class="search-article__container">
-                        <img_old class="search-article__img" src="{% static 'img_old/blin.png' %}" alt="" />
+                        <img class="search-article__img" src="{% static 'img/blin.png' %}" alt="" />
                     </div>
                     <div class="search-article__container">
                         <h1 class="search-article__title">Блинчики с сыром</h1>
@@ -135,11 +226,11 @@
                         <ul class="search-article__list">
                             <li class="article-item">
                                 <a href="#" class="article-item__image">
-                                    <img_old src="{% static 'img_old/svg_image/comment.svg' %}" alt=""/>
+                                    <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
                                 </a>
                                 <b class="article-item_ingredients">22</b>
                                 <a href="#" class="article-item__image">
-                                    <img_old src="{% static 'img_old/svg_image/favorites.svg' %}" alt=""/>
+                                    <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
                                 </a>
                                 <b class="article-item_ingredients">522</b>
                             </li>
@@ -148,7 +239,7 @@
                             </li>
                             <li class="article-item">
                                     <a href="#" class="article-item__image">
-                                        <img_old src="{% static 'img_old/svg_image/favorites2.svg' %}" alt=""/>
+                                        <img src="{% static 'img/svg_image/favorites2.svg' %}" alt=""/>
                                     </a>
                                     <b class="article-item-favorites">Добавлено!</b>
                             </li>
@@ -169,356 +260,3 @@
 
 </main>
 {% endblock %}
-
-
-
-
-
-<!--{% load static %}-->
-
-<!--{% block ccontent %}-->
-<!--<div class="header__search">-->
-<!--    <div class="header-search__container">-->
-<!--        <a href="#" class="header-search__text">-->
-<!--            Найти рецепт-->
-<!--        </a>-->
-<!--        <a href="#" class="header-search__image">-->
-<!--            <img_old src="{% static 'img_old/svg_image/btn-back.svg' %}" alt=""/>-->
-<!--            <p>Добавить свой рецепт</p>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--    <div class="header-search__form search__form">-->
-<!--        <form action="" method="get" accept-charset="windows-1251">-->
-<!--                    <input type="text" value="" name="name" placeholder="Блюдо">-->
-<!--                    <input type="submit" value="">-->
-<!--        </form>-->
-<!--    </div>-->
-<!--    <div class="header-search__container">-->
-<!--        <h1>Поиск по ингредиентам</h1>-->
-<!--        <button type="submit">Сбросить поиск</button>-->
-<!--    </div>-->
-<!--</div>-->
-<!--    <main class="page-search">-->
-<!--        <section class="advertising__left">-->
-<!--            <svg width="194" height="767" viewBox="0 0 194 767" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--            <rect width="193.238" height="767" rx="58" fill="#D9D9D9"/>-->
-<!--            <path d="M55.685 352.217C56.3517 352.217 56.945 352.324 57.465 352.537C57.9984 352.75 58.445 353.037 58.805 353.397C59.1784 353.757 59.465 354.184 59.665 354.677C59.865 355.157 59.965 355.664 59.965 356.197C59.965 356.717 59.865 357.224 59.665 357.717C59.465 358.21 59.1784 358.644 58.805 359.017C58.445 359.377 58.005 359.67 57.485 359.897C56.965 360.124 56.3784 360.237 55.725 360.237H53.045V366.217H51.985V352.217H55.685ZM55.585 359.217C56.0917 359.217 56.545 359.137 56.945 358.977C57.3584 358.817 57.705 358.604 57.985 358.337C58.2784 358.057 58.4984 357.737 58.645 357.377C58.805 357.004 58.885 356.61 58.885 356.197C58.885 355.784 58.805 355.397 58.645 355.037C58.4984 354.677 58.2784 354.364 57.985 354.097C57.705 353.83 57.365 353.624 56.965 353.477C56.565 353.317 56.105 353.237 55.585 353.237H53.045V359.217H55.585ZM64.9092 366.377C64.2826 366.377 63.6959 366.27 63.1492 366.057C62.6159 365.83 62.1492 365.524 61.7492 365.137C61.3492 364.737 61.0292 364.257 60.7892 363.697C60.5626 363.137 60.4492 362.51 60.4492 361.817C60.4492 361.124 60.5692 360.504 60.8092 359.957C61.0626 359.41 61.3892 358.95 61.7892 358.577C62.2026 358.19 62.6692 357.897 63.1892 357.697C63.7092 357.497 64.2492 357.397 64.8092 357.397C65.4892 357.397 66.0826 357.517 66.5892 357.757C67.1092 357.997 67.5426 358.317 67.8892 358.717C68.2359 359.104 68.4959 359.544 68.6692 360.037C68.8426 360.517 68.9292 361.004 68.9292 361.497V362.037H61.2292V361.137H68.3892L67.9092 361.857V361.517C67.9092 361.09 67.8359 360.69 67.6892 360.317C67.5559 359.93 67.3559 359.59 67.0892 359.297C66.8226 359.004 66.4959 358.77 66.1092 358.597C65.7226 358.424 65.2826 358.337 64.7892 358.337C64.3359 358.337 63.9026 358.424 63.4892 358.597C63.0892 358.757 62.7359 358.997 62.4292 359.317C62.1359 359.624 61.9026 359.99 61.7292 360.417C61.5559 360.844 61.4692 361.317 61.4692 361.837C61.4692 362.37 61.5626 362.864 61.7492 363.317C61.9359 363.757 62.1826 364.137 62.4892 364.457C62.8092 364.764 63.1826 365.004 63.6092 365.177C64.0359 365.35 64.4826 365.437 64.9492 365.437C65.5759 365.437 66.1426 365.317 66.6492 365.077C67.1559 364.824 67.5826 364.497 67.9292 364.097L68.6092 364.717C68.1292 365.29 67.5692 365.71 66.9292 365.977C66.2892 366.244 65.6159 366.377 64.9092 366.377ZM77.0455 366.217L72.4855 361.677L76.2855 357.557H77.4255V357.697L73.8055 361.537L78.2655 366.077V366.217H77.0455ZM71.4055 362.097V361.197H73.0855V362.097H71.4055ZM71.0455 366.217V363.997V363.697V360.157V360.037V357.557H72.0655V360.037V360.157V366.217H71.0455ZM79.2713 366.317C79.1646 366.317 79.0779 366.31 79.0113 366.297C78.9446 366.284 78.8979 366.27 78.8713 366.257V365.197C78.9113 365.21 78.9513 365.217 78.9913 365.217C79.0446 365.217 79.0979 365.217 79.1513 365.217C79.2979 365.217 79.4513 365.164 79.6113 365.057C79.7846 364.937 79.9379 364.697 80.0713 364.337C80.2179 363.977 80.3379 363.464 80.4313 362.797C80.5246 362.117 80.5713 361.217 80.5713 360.097V357.557H86.1513V366.217H85.1113V358.497H81.5513V360.637C81.5513 361.717 81.4913 362.624 81.3713 363.357C81.2513 364.077 81.0846 364.657 80.8713 365.097C80.6579 365.524 80.4113 365.837 80.1313 366.037C79.8646 366.224 79.5779 366.317 79.2713 366.317ZM95.7622 366.217V363.997L95.7022 363.697V360.157L95.7622 360.037V357.557H96.7222V360.037V360.157V366.217H95.7622ZM92.4022 366.377C91.8689 366.377 91.3489 366.277 90.8422 366.077C90.3489 365.877 89.9089 365.584 89.5222 365.197C89.1355 364.81 88.8222 364.344 88.5822 363.797C88.3555 363.237 88.2422 362.597 88.2422 361.877C88.2422 361.184 88.3555 360.564 88.5822 360.017C88.8089 359.457 89.1089 358.984 89.4822 358.597C89.8689 358.21 90.3155 357.917 90.8222 357.717C91.3289 357.504 91.8689 357.397 92.4422 357.397C92.9355 357.397 93.3822 357.477 93.7822 357.637C94.1955 357.784 94.5555 357.984 94.8622 358.237C95.1689 358.49 95.4155 358.784 95.6022 359.117C95.8022 359.437 95.9355 359.764 96.0022 360.097L95.7822 361.737H95.7022C95.7022 361.297 95.6355 360.877 95.5022 360.477C95.3689 360.077 95.1689 359.724 94.9022 359.417C94.6355 359.097 94.3022 358.837 93.9022 358.637C93.5022 358.437 93.0289 358.337 92.4822 358.337C92.0289 358.337 91.6022 358.417 91.2022 358.577C90.8155 358.737 90.4755 358.97 90.1822 359.277C89.9022 359.57 89.6822 359.937 89.5222 360.377C89.3755 360.804 89.3022 361.297 89.3022 361.857C89.3022 362.39 89.3755 362.877 89.5222 363.317C89.6689 363.744 89.8755 364.117 90.1422 364.437C90.4222 364.757 90.7555 365.004 91.1422 365.177C91.5422 365.337 91.9755 365.417 92.4422 365.417C92.9755 365.417 93.4422 365.317 93.8422 365.117C94.2555 364.904 94.5955 364.63 94.8622 364.297C95.1422 363.964 95.3489 363.59 95.4822 363.177C95.6289 362.764 95.7022 362.357 95.7022 361.957H95.8822L95.9622 363.477C95.8955 363.877 95.7555 364.25 95.5422 364.597C95.3422 364.944 95.0889 365.25 94.7822 365.517C94.4755 365.784 94.1155 365.997 93.7022 366.157C93.3022 366.304 92.8689 366.377 92.4022 366.377ZM98.8277 366.217L100.368 357.557H100.808L103.968 364.337L107.028 357.557H107.448L108.988 366.217H108.008L106.928 359.857L104.008 366.277H103.848L100.888 359.997L99.8077 366.217H98.8277ZM111.785 361.997V361.057H117.545V361.997H111.785ZM111.085 366.217V363.997V363.697V360.157V360.037V357.557H112.105V360.037V360.157V366.217H111.085ZM117.225 366.217V363.997V363.697V360.157V360.037V357.557H118.245V360.037V360.157V366.217H117.225ZM123.691 360.657C124.878 360.657 125.764 360.877 126.351 361.317C126.938 361.757 127.231 362.457 127.231 363.417C127.231 364.377 126.924 365.084 126.311 365.537C125.698 365.99 124.758 366.217 123.491 366.217H120.811V357.557H121.831V360.657H123.691ZM128.691 366.217V357.557H129.711V366.217H128.691ZM123.351 365.277C123.831 365.277 124.251 365.25 124.611 365.197C124.984 365.13 125.284 365.024 125.511 364.877C125.751 364.73 125.924 364.544 126.031 364.317C126.151 364.077 126.211 363.777 126.211 363.417C126.211 362.75 125.998 362.284 125.571 362.017C125.144 361.75 124.464 361.617 123.531 361.617H121.831V365.277H123.351ZM132.276 366.217V357.557H133.296V364.697L132.796 364.737L139.036 357.557H139.416V366.217H138.396V358.977L139.076 358.817L132.656 366.217H132.276ZM135.856 356.077C135.443 356.077 135.063 356.024 134.716 355.917C134.369 355.81 134.076 355.664 133.836 355.477C133.596 355.277 133.416 355.037 133.296 354.757C133.176 354.464 133.116 354.13 133.116 353.757H134.056C134.043 354.224 134.196 354.597 134.516 354.877C134.836 355.157 135.296 355.297 135.896 355.297C136.456 355.297 136.903 355.17 137.236 354.917C137.569 354.65 137.736 354.264 137.736 353.757H138.656C138.656 354.13 138.589 354.464 138.456 354.757C138.323 355.037 138.129 355.277 137.876 355.477C137.636 355.664 137.343 355.81 136.996 355.917C136.649 356.024 136.269 356.077 135.856 356.077ZM69.899 390.377C69.2057 390.377 68.5857 390.257 68.039 390.017C67.4923 389.777 67.0323 389.41 66.659 388.917C66.2857 388.41 65.999 387.77 65.799 386.997C65.6123 386.21 65.519 385.264 65.519 384.157C65.519 382.717 65.659 381.537 65.939 380.617C66.2323 379.684 66.619 378.944 67.099 378.397C67.579 377.85 68.1257 377.464 68.739 377.237C69.3523 376.997 69.9857 376.85 70.639 376.797C70.9457 376.757 71.219 376.717 71.459 376.677C71.7123 376.624 71.9323 376.57 72.119 376.517C72.319 376.45 72.4923 376.377 72.639 376.297C72.799 376.204 72.939 376.09 73.059 375.957L73.759 376.577C73.6257 376.764 73.4457 376.93 73.219 377.077C72.9923 377.21 72.739 377.324 72.459 377.417C72.179 377.497 71.8923 377.564 71.599 377.617C71.3057 377.67 71.0257 377.71 70.759 377.737C70.119 377.79 69.539 377.917 69.019 378.117C68.499 378.317 68.0457 378.677 67.659 379.197C67.2857 379.704 66.9923 380.424 66.779 381.357C66.579 382.277 66.479 383.49 66.479 384.997L66.079 384.757C66.2123 384.184 66.4123 383.69 66.679 383.277C66.9457 382.85 67.2523 382.504 67.599 382.237C67.959 381.957 68.3523 381.757 68.779 381.637C69.2057 381.504 69.659 381.437 70.139 381.437C70.779 381.437 71.3457 381.55 71.839 381.777C72.3457 382.004 72.7723 382.317 73.119 382.717C73.479 383.117 73.7457 383.59 73.919 384.137C74.1057 384.67 74.199 385.244 74.199 385.857C74.199 386.524 74.0923 387.137 73.879 387.697C73.6657 388.244 73.3657 388.717 72.979 389.117C72.6057 389.517 72.1523 389.83 71.619 390.057C71.099 390.27 70.5257 390.377 69.899 390.377ZM69.919 389.437C70.3857 389.437 70.8123 389.357 71.199 389.197C71.599 389.024 71.939 388.784 72.219 388.477C72.5123 388.17 72.739 387.797 72.899 387.357C73.059 386.904 73.139 386.404 73.139 385.857C73.139 385.35 73.0657 384.89 72.919 384.477C72.7857 384.05 72.5857 383.684 72.319 383.377C72.0523 383.057 71.7257 382.81 71.339 382.637C70.9523 382.464 70.5057 382.377 69.999 382.377C69.6123 382.377 69.219 382.437 68.819 382.557C68.4323 382.677 68.079 382.877 67.759 383.157C67.4523 383.424 67.199 383.784 66.999 384.237C66.8123 384.677 66.719 385.21 66.719 385.837C66.719 386.384 66.799 386.884 66.959 387.337C67.119 387.777 67.3323 388.157 67.599 388.477C67.879 388.784 68.219 389.024 68.619 389.197C69.019 389.357 69.4523 389.437 69.919 389.437ZM83.4087 390.217V387.997L83.3487 387.697V384.157L83.4087 384.037V381.557H84.3687V384.037V384.157V390.217H83.4087ZM80.0487 390.377C79.5154 390.377 78.9954 390.277 78.4887 390.077C77.9954 389.877 77.5554 389.584 77.1687 389.197C76.782 388.81 76.4687 388.344 76.2287 387.797C76.002 387.237 75.8887 386.597 75.8887 385.877C75.8887 385.184 76.002 384.564 76.2287 384.017C76.4554 383.457 76.7554 382.984 77.1287 382.597C77.5154 382.21 77.962 381.917 78.4687 381.717C78.9754 381.504 79.5154 381.397 80.0887 381.397C80.582 381.397 81.0287 381.477 81.4287 381.637C81.842 381.784 82.202 381.984 82.5087 382.237C82.8154 382.49 83.062 382.784 83.2487 383.117C83.4487 383.437 83.582 383.764 83.6487 384.097L83.4287 385.737H83.3487C83.3487 385.297 83.282 384.877 83.1487 384.477C83.0154 384.077 82.8154 383.724 82.5487 383.417C82.282 383.097 81.9487 382.837 81.5487 382.637C81.1487 382.437 80.6754 382.337 80.1287 382.337C79.6754 382.337 79.2487 382.417 78.8487 382.577C78.462 382.737 78.122 382.97 77.8287 383.277C77.5487 383.57 77.3287 383.937 77.1687 384.377C77.022 384.804 76.9487 385.297 76.9487 385.857C76.9487 386.39 77.022 386.877 77.1687 387.317C77.3154 387.744 77.522 388.117 77.7887 388.437C78.0687 388.757 78.402 389.004 78.7887 389.177C79.1887 389.337 79.622 389.417 80.0887 389.417C80.622 389.417 81.0887 389.317 81.4887 389.117C81.902 388.904 82.242 388.63 82.5087 388.297C82.7887 387.964 82.9954 387.59 83.1287 387.177C83.2754 386.764 83.3487 386.357 83.3487 385.957H83.5287L83.6087 387.477C83.542 387.877 83.402 388.25 83.1887 388.597C82.9887 388.944 82.7354 389.25 82.4287 389.517C82.122 389.784 81.762 389.997 81.3487 390.157C80.9487 390.304 80.5154 390.377 80.0487 390.377ZM87.6342 385.997V385.057H93.3942V385.997H87.6342ZM86.9342 390.217V387.997V387.697V384.157V384.037V381.557H87.9542V384.037V384.157V390.217H86.9342ZM93.0742 390.217V387.997V387.697V384.157V384.037V381.557H94.0942V384.037V384.157V390.217H93.0742ZM97.3607 385.997V385.057H103.121V385.997H97.3607ZM96.6607 390.217V387.997V387.697V384.157V384.037V381.557H97.6807V384.037V384.157V390.217H96.6607ZM102.801 390.217V387.997V387.697V384.157V384.037V381.557H103.821V384.037V384.157V390.217H102.801ZM110.407 390.377C109.781 390.377 109.194 390.27 108.647 390.057C108.114 389.83 107.647 389.524 107.247 389.137C106.847 388.737 106.527 388.257 106.287 387.697C106.061 387.137 105.947 386.51 105.947 385.817C105.947 385.124 106.067 384.504 106.307 383.957C106.561 383.41 106.887 382.95 107.287 382.577C107.701 382.19 108.167 381.897 108.687 381.697C109.207 381.497 109.747 381.397 110.307 381.397C110.987 381.397 111.581 381.517 112.087 381.757C112.607 381.997 113.041 382.317 113.387 382.717C113.734 383.104 113.994 383.544 114.167 384.037C114.341 384.517 114.427 385.004 114.427 385.497V386.037H106.727V385.137H113.887L113.407 385.857V385.517C113.407 385.09 113.334 384.69 113.187 384.317C113.054 383.93 112.854 383.59 112.587 383.297C112.321 383.004 111.994 382.77 111.607 382.597C111.221 382.424 110.781 382.337 110.287 382.337C109.834 382.337 109.401 382.424 108.987 382.597C108.587 382.757 108.234 382.997 107.927 383.317C107.634 383.624 107.401 383.99 107.227 384.417C107.054 384.844 106.967 385.317 106.967 385.837C106.967 386.37 107.061 386.864 107.247 387.317C107.434 387.757 107.681 388.137 107.987 388.457C108.307 388.764 108.681 389.004 109.107 389.177C109.534 389.35 109.981 389.437 110.447 389.437C111.074 389.437 111.641 389.317 112.147 389.077C112.654 388.824 113.081 388.497 113.427 388.097L114.107 388.717C113.627 389.29 113.067 389.71 112.427 389.977C111.787 390.244 111.114 390.377 110.407 390.377ZM117.564 395.017H116.544V384.177V384.037V381.557H117.504V384.037L117.564 384.177V387.717V387.997V395.017ZM120.864 390.377C120.397 390.377 119.957 390.304 119.544 390.157C119.144 389.997 118.79 389.784 118.484 389.517C118.177 389.25 117.917 388.944 117.704 388.597C117.504 388.25 117.37 387.877 117.304 387.477L117.384 385.957H117.564C117.564 386.357 117.63 386.764 117.764 387.177C117.91 387.59 118.117 387.964 118.384 388.297C118.664 388.63 119.004 388.904 119.404 389.117C119.817 389.317 120.29 389.417 120.824 389.417C121.29 389.417 121.717 389.337 122.104 389.177C122.504 389.004 122.837 388.757 123.104 388.437C123.384 388.117 123.597 387.744 123.744 387.317C123.89 386.877 123.964 386.39 123.964 385.857C123.964 385.297 123.884 384.804 123.724 384.377C123.577 383.937 123.357 383.57 123.064 383.277C122.784 382.97 122.45 382.737 122.064 382.577C121.677 382.417 121.244 382.337 120.764 382.337C120.244 382.337 119.777 382.437 119.364 382.637C118.964 382.837 118.63 383.097 118.364 383.417C118.097 383.724 117.897 384.084 117.764 384.497C117.63 384.897 117.564 385.31 117.564 385.737H117.484L117.324 384.077C117.39 383.744 117.517 383.417 117.704 383.097C117.89 382.764 118.13 382.47 118.424 382.217C118.717 381.964 119.064 381.764 119.464 381.617C119.864 381.47 120.317 381.397 120.824 381.397C121.397 381.397 121.937 381.504 122.444 381.717C122.95 381.917 123.39 382.21 123.764 382.597C124.15 382.984 124.457 383.457 124.684 384.017C124.91 384.564 125.024 385.184 125.024 385.877C125.024 386.597 124.904 387.237 124.664 387.797C124.437 388.344 124.13 388.81 123.744 389.197C123.357 389.584 122.91 389.877 122.404 390.077C121.91 390.277 121.397 390.377 120.864 390.377Z" fill="black"/>-->
-<!--            </svg>-->
-
-<!--        </section>-->
-<!--        <section class="search__field search-field">-->
-<!--            <div class="search-field__ingredients">-->
-<!--                <div class="search__form">-->
-<!--                    <form action="" method="get" accept-charset="windows-1251">-->
-<!--                        <input type="text" value="" name="name" placeholder="Введите название ингридиента">-->
-<!--                        <input type="submit" value="">-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--                <div class="search-field__choice search-choice">-->
-<!--                    <ul class="search-choice__list">-->
-<!--                        <li class="search-choice__itembox">-->
-<!--                            <p>Быстрый выбор</p>-->
-<!--                        </li>-->
-
-<!--                        <form method="post" action="{% url 'search' %}" id="search-form">-->
-<!--                            {% csrf_token %}-->
-<!--                            <div class="ingredients-container">-->
-
-<!--                                <div class="searched-ingredient">-->
-<!--                                    <label for="ingredient-search">Поиск ингредиента:</label>-->
-<!--                                    <input type="text" id="ingredient-search" name="ingredient_search">-->
-<!--                                    <h3>Найденные ингредиенты</h3>-->
-<!--                                    <div id="ingredient-buttons"></div>-->
-<!--                                </div>-->
-
-<!--                                <div class="available-ingredients">-->
-<!--                                    <h3>Доступные ингредиенты:</h3>-->
-<!--                                    {% for ingredient in ingredients %}-->
-<!--                                        <button type="button" class="ingredient-button" data-ingredient-id="{{ ingredient.id }}">{{ ingredient.name }}</button>-->
-<!--                                    {% endfor %}-->
-<!--                                </div>-->
-
-<!--                                <div class="selected-ingredients">-->
-<!--                                    <h3>Выбранные ингредиенты:</h3>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            <div class="ingredients-container">-->
-<!--                                &lt;!&ndash; Ваши кнопки для выбора ингредиентов здесь &ndash;&gt;-->
-<!--                            </div>-->
-<!--                            <div class="difficulty-container">-->
-<!--                                <label for="difficulty">Сложность:</label>-->
-<!--                                <select id="difficulty" name="difficulty">-->
-<!--                                    <option value="">Любая</option>-->
-<!--                                    <option value="Легко">Легкая</option>-->
-<!--                                    <option value="Средняя">Средняя</option>-->
-<!--                                    <option value="Сложно">Сложная</option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                            <div class="time-container">-->
-<!--                                <label for="time">Время приготовления (в минутах):</label>-->
-<!--                                <input type="number" id="time" name="time" min="1">-->
-<!--                            </div>-->
-
-<!--                            <div>-->
-<!--                                <input type="checkbox" id="coincidence" onclick="check();" name="coincidence" autocomplete="off" disabled/>-->
-<!--                                <p>Только 100% совпадение</p>-->
-<!--                            </div>-->
-
-<!--                            <input type="submit" value="Поиск">-->
-<!--                        </form>-->
-
-<!--                        <script>-->
-
-<!--                            const availableIngredientsContainer = document.querySelector('.available-ingredients');-->
-<!--                            const searchedIngredientsContainer = document.querySelector('.searched-ingredients');-->
-<!--                            const selectedIngredientsContainer = document.querySelector('.selected-ingredients');-->
-<!--                            const searchForm = document.getElementById('search-form');-->
-<!--                            const selectedIngredientIds = new Set();-->
-<!--                            const checkbox = document.getElementById('coincidence');-->
-
-<!--                            // Слушатель событий для доступных ингредиентов-->
-<!--                            availableIngredientsContainer.addEventListener('click', (event) => {-->
-<!--                                const targetButton = event.target;-->
-<!--                                if (targetButton.classList.contains('ingredient-button')) {-->
-<!--                                    const ingredientId = targetButton.getAttribute('data-ingredient-id');-->
-
-<!--                                    // Проверяем, является ли ингредиент уже выбранным-->
-<!--                                    if (!selectedIngredientIds.has(ingredientId)) {-->
-<!--                                        // Если ингредиент не выбран, добавляем его в выбранные-->
-<!--                                        selectedIngredientIds.add(ingredientId);-->
-
-<!--                                        // Создаем кнопку для выбранного ингредиента в поле "Выбранные ингредиенты"-->
-<!--                                        const selectedIngredientButton = document.createElement('button');-->
-<!--                                        selectedIngredientButton.type = 'button';-->
-<!--                                        selectedIngredientButton.className = 'ingredient-button selected';-->
-<!--                                        selectedIngredientButton.setAttribute('data-ingredient-id', ingredientId);-->
-<!--                                        selectedIngredientButton.textContent = targetButton.textContent;-->
-
-<!--                                        selectedIngredientsContainer.appendChild(selectedIngredientButton);-->
-<!--                                        ingredientSearchInput.value = '';-->
-<!--                                        ingredientButtonsContainer.innerHTML = '';-->
-<!--                                        checkbox.disabled = false;-->
-<!--                                    }-->
-
-<!--                                    // Запрещаем добавление этого ингредиента в "Доступные ингредиенты"-->
-<!--                                    targetButton.disabled = true;-->
-<!--                                }-->
-<!--                            });-->
-
-<!--                            // Слушатель событий для выбранных ингредиентов-->
-<!--                            selectedIngredientsContainer.addEventListener('click', (event) => {-->
-<!--                                const targetButton = event.target;-->
-<!--                                if (targetButton.classList.contains('ingredient-button')) {-->
-<!--                                    const ingredientId = targetButton.getAttribute('data-ingredient-id');-->
-
-<!--                                    // Удаляем ингредиент из выбранных-->
-<!--                                    selectedIngredientIds.delete(ingredientId);-->
-
-<!--                                    // Удаляем кнопку ингредиента из раздела "Выбранные ингредиенты"-->
-<!--                                    targetButton.remove();-->
-
-<!--                                    // Разрешаем добавление этого ингредиента в "Доступные ингредиенты"-->
-<!--                                    const correspondingAvailableButton = document.querySelector(`.available-ingredients .ingredient-button[data-ingredient-id="${ingredientId}"]`);-->
-<!--                                    if (correspondingAvailableButton) {-->
-<!--                                        correspondingAvailableButton.disabled = false;-->
-<!--                                    }-->
-
-<!--                                    if (selectedIngredientIds.size == 0) {-->
-<!--                                        checkbox.checked = false;-->
-<!--                                        checkbox.disabled = true;-->
-<!--                                    }-->
-<!--                                }-->
-<!--                            });-->
-
-<!--                            // Слушатель событий для отправки формы-->
-
-<!--                            searchForm.addEventListener('submit', (event) => {-->
-<!--                                // Предотвращаем отправку формы при помощи обычного запроса-->
-<!--                                event.preventDefault();-->
-
-<!--                                // Собираем id выбранных ингредиентов-->
-<!--                                const selectedIngredientIdsArray = Array.from(selectedIngredientIds);-->
-<!--                                const selectedIngredientIdsString = selectedIngredientIdsArray.join(',');-->
-
-<!--                                // Добавляем собранные id в скрытое поле формы-->
-<!--                                const hiddenInput = document.createElement('input');-->
-<!--                                hiddenInput.type = 'hidden';-->
-<!--                                hiddenInput.name = 'ingredients';-->
-<!--                                hiddenInput.value = selectedIngredientIdsString;-->
-<!--                                searchForm.appendChild(hiddenInput);-->
-
-<!--                                // Отправляем форму на сервер-->
-<!--                                searchForm.submit();-->
-<!--                            });-->
-
-<!--                            const ingredientSearchInput = document.getElementById('ingredient-search');-->
-<!--                            const ingredientButtonsContainer = document.getElementById('ingredient-buttons');-->
-
-
-<!--                            ingredientSearchInput.addEventListener('input', () => {-->
-<!--                                const searchQuery = (ingredientSearchInput.value.charAt(0).toUpperCase() + ingredientSearchInput.value.slice(1).toLowerCase()).trim();-->
-
-<!--                                // Очистить текущие кнопки ингредиентов-->
-<!--                                ingredientButtonsContainer.innerHTML = '';-->
-
-<!--                                if (searchQuery.length >= 2) {-->
-<!--                                    // Отправить AJAX запрос для получения ингредиентов по поисковому запросу-->
-<!--                                    fetch(`/search/api/ingredients/?search=${searchQuery}`)-->
-<!--                                        .then(response => response.json())-->
-<!--                                        .then(data => {-->
-<!--                                            // Создать кнопки для каждого найденного ингредиента-->
-<!--                                            data.forEach(ingredient => {-->
-<!--                                                const button = document.createElement('button');-->
-<!--                                                button.type = 'button';-->
-<!--                                                button.className = 'ingredient-button';-->
-<!--                                                button.setAttribute('data-ingredient-id', ingredient.id);-->
-<!--                                                button.textContent = ingredient.name;-->
-<!--                                                ingredientButtonsContainer.appendChild(button);-->
-
-<!--                                                const ingredientId = button.getAttribute('data-ingredient-id');-->
-<!--                                                if (selectedIngredientIds.has(ingredientId)) {-->
-<!--                                                    button.disabled = true;-->
-<!--                                                }-->
-
-<!--                                            });-->
-<!--                                        });-->
-<!--                                }-->
-<!--                            });-->
-<!--                                ingredientButtonsContainer.addEventListener('click', (event) => {-->
-<!--                                    const targetButton = event.target;-->
-<!--                                    ingredientButtonsContainer.innerHTML = '';-->
-
-<!--                                    if (targetButton.classList.contains('ingredient-button')) {-->
-<!--                                        const ingredientId = targetButton.getAttribute('data-ingredient-id');-->
-
-<!--                                        // Проверяем, является ли ингредиент уже выбранным-->
-<!--                                        if (!selectedIngredientIds.has(ingredientId)) {-->
-<!--                                            // Если ингредиент не выбран, добавляем его в выбранные-->
-<!--                                            selectedIngredientIds.add(ingredientId);-->
-
-<!--                                            // Создаем кнопку для выбранного ингредиента в поле "Выбранные ингредиенты"-->
-<!--                                            const selectedIngredientButton = document.createElement('button');-->
-<!--                                            selectedIngredientButton.type = 'button';-->
-<!--                                            selectedIngredientButton.className = 'ingredient-button selected';-->
-<!--                                            selectedIngredientButton.setAttribute('data-ingredient-id', ingredientId);-->
-<!--                                            selectedIngredientButton.textContent = targetButton.textContent;-->
-
-<!--                                            selectedIngredientsContainer.appendChild(selectedIngredientButton);-->
-
-<!--                                            const correspondingAvailableButton = document.querySelector(`.available-ingredients .ingredient-button[data-ingredient-id="${ingredientId}"]`);-->
-<!--                                            correspondingAvailableButton.disabled = true;-->
-<!--                                            ingredientSearchInput.value = '';-->
-
-<!--                                            checkbox.disabled = false;-->
-<!--                                        }-->
-
-<!--                                        // Запрещаем добавление этого ингредиента в "Доступные ингредиенты"-->
-<!--                                        targetButton.disabled = true;-->
-<!--                                    }-->
-<!--                                });-->
-
-<!--                        </script>-->
-
-<!--&lt;!&ndash;                        <li class="search-choice__itembox">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <button name="ingredients">Яйцо</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <button name="ingredients">Яйцо</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <p>яйцо</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <p>масло растительное</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <p>масло сливочное</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <p>молоко</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
-<!--                        {% for recipe in recipes %}-->
-<!--                            <h1>{{recipe.title}}</h1>-->
-
-<!--                            {% for dict in percentsDict %}-->
-<!--                                {% for key, value in dict.items %}-->
-<!--                                    {% if key.title == recipe.title %}-->
-<!--                                        <h2>{{ value }}</h2>-->
-<!--                                    {% endif %}-->
-<!--                                {% endfor %}-->
-<!--                            {% endfor %}-->
-
-<!--                        {% endfor %}-->
-<!--&lt;!&ndash;                        <li class="search-choice__itembox&#45;&#45;grid">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <p>Вы выбрали:</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                                {% if selected_ingredients %}&ndash;&gt;-->
-<!--&lt;!&ndash;                                    {% for ingredient_id, ingredient_name in selected_ingredients.items %}&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <button>{{ ingredient_name }}</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    {% endfor %}&ndash;&gt;-->
-<!--&lt;!&ndash;                                {% endif %}&ndash;&gt;-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <p>яйцо</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <p>масло растительное</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <p>сыр</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <input type="checkbox" id="coincidence" onclick="check();" value="" autocomplete="off"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <p>Только 100% совпадение</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="search-field__sorting search-sorting">-->
-<!--                <ul class="search-sorting__list">-->
-<!--                    <li class="search-sorting__item">-->
-<!--                        <p>Cложность</p>-->
-<!--                    </li>-->
-<!--                    <li class="search-sorting__item">-->
-<!--                        <p>Время приготовления</p>-->
-<!--                    </li>-->
-<!--                    <li class="search-sorting__item">-->
-<!--                        <p>Сортировать по:</p>-->
-<!--                    </li>-->
-<!--                    <li class="search-sorting__item">-->
-<!--                        <button  type="submit">Найти</button>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--            <div class="search__content search-content">-->
-<!--                <h1 class="search-content__title">{{num_recipes}}</h1>-->
-<!--                <article class="search-content__article search-article">-->
-<!--                    <div class="search-article__container">-->
-<!--                        <img_old class="hero__img" src="{% static 'img_old/blin.png' %}" alt="" />-->
-<!--                    </div>-->
-<!--                    <div class="search-article__container">-->
-<!--                        <h1 class="section-title hero__title">Блинчики с сыром</h1>-->
-<!--                        <p class="hero__text">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</p>-->
-<!--                        <ul class="hero__list">-->
-<!--                            <li class="hero__item">-->
-<!--                                <a href="#" class="hero__image">-->
-<!--                                    <img_old src="{% static 'img_old/svg_image/comment.svg' %}" alt=""/>-->
-<!--                                </a>-->
-<!--                                <b class="hero_item_ingredients">22</b>-->
-<!--                                <a href="#" class="hero__image">-->
-<!--                                    <img_old src="{% static 'img_old/svg_image/favorites.svg' %}" alt=""/>-->
-<!--                                </a>-->
-<!--                                <b class="hero_item_ingredients">522</b>-->
-<!--                            </li>-->
-<!--                            <li class="hero__item">-->
-<!--                                <b class="hero_item_ingredients">яйцо, масло растительное, мука, вода, сыр</b>-->
-<!--                            </li>-->
-<!--                            <li class="hero__item">-->
-<!--                                    <a href="#" class="hero__image">-->
-<!--                                        <img_old src="{% static 'img_old/svg_image/favorites2.svg' %}" alt=""/>-->
-<!--                                    </a>-->
-<!--                                    <b class="hero_item-favorites">Добавлено!</b>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </article>-->
-<!--            </div>-->
-<!--        </section>-->
-<!--        <section class="advertising__right">-->
-<!--        <svg width="194" height="767" viewBox="0 0 194 767" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--        <rect width="193.238" height="767" rx="58" fill="#D9D9D9"/>-->
-<!--        <path d="M55.685 352.217C56.3517 352.217 56.945 352.324 57.465 352.537C57.9984 352.75 58.445 353.037 58.805 353.397C59.1784 353.757 59.465 354.184 59.665 354.677C59.865 355.157 59.965 355.664 59.965 356.197C59.965 356.717 59.865 357.224 59.665 357.717C59.465 358.21 59.1784 358.644 58.805 359.017C58.445 359.377 58.005 359.67 57.485 359.897C56.965 360.124 56.3784 360.237 55.725 360.237H53.045V366.217H51.985V352.217H55.685ZM55.585 359.217C56.0917 359.217 56.545 359.137 56.945 358.977C57.3584 358.817 57.705 358.604 57.985 358.337C58.2784 358.057 58.4984 357.737 58.645 357.377C58.805 357.004 58.885 356.61 58.885 356.197C58.885 355.784 58.805 355.397 58.645 355.037C58.4984 354.677 58.2784 354.364 57.985 354.097C57.705 353.83 57.365 353.624 56.965 353.477C56.565 353.317 56.105 353.237 55.585 353.237H53.045V359.217H55.585ZM64.9092 366.377C64.2826 366.377 63.6959 366.27 63.1492 366.057C62.6159 365.83 62.1492 365.524 61.7492 365.137C61.3492 364.737 61.0292 364.257 60.7892 363.697C60.5626 363.137 60.4492 362.51 60.4492 361.817C60.4492 361.124 60.5692 360.504 60.8092 359.957C61.0626 359.41 61.3892 358.95 61.7892 358.577C62.2026 358.19 62.6692 357.897 63.1892 357.697C63.7092 357.497 64.2492 357.397 64.8092 357.397C65.4892 357.397 66.0826 357.517 66.5892 357.757C67.1092 357.997 67.5426 358.317 67.8892 358.717C68.2359 359.104 68.4959 359.544 68.6692 360.037C68.8426 360.517 68.9292 361.004 68.9292 361.497V362.037H61.2292V361.137H68.3892L67.9092 361.857V361.517C67.9092 361.09 67.8359 360.69 67.6892 360.317C67.5559 359.93 67.3559 359.59 67.0892 359.297C66.8226 359.004 66.4959 358.77 66.1092 358.597C65.7226 358.424 65.2826 358.337 64.7892 358.337C64.3359 358.337 63.9026 358.424 63.4892 358.597C63.0892 358.757 62.7359 358.997 62.4292 359.317C62.1359 359.624 61.9026 359.99 61.7292 360.417C61.5559 360.844 61.4692 361.317 61.4692 361.837C61.4692 362.37 61.5626 362.864 61.7492 363.317C61.9359 363.757 62.1826 364.137 62.4892 364.457C62.8092 364.764 63.1826 365.004 63.6092 365.177C64.0359 365.35 64.4826 365.437 64.9492 365.437C65.5759 365.437 66.1426 365.317 66.6492 365.077C67.1559 364.824 67.5826 364.497 67.9292 364.097L68.6092 364.717C68.1292 365.29 67.5692 365.71 66.9292 365.977C66.2892 366.244 65.6159 366.377 64.9092 366.377ZM77.0455 366.217L72.4855 361.677L76.2855 357.557H77.4255V357.697L73.8055 361.537L78.2655 366.077V366.217H77.0455ZM71.4055 362.097V361.197H73.0855V362.097H71.4055ZM71.0455 366.217V363.997V363.697V360.157V360.037V357.557H72.0655V360.037V360.157V366.217H71.0455ZM79.2713 366.317C79.1646 366.317 79.0779 366.31 79.0113 366.297C78.9446 366.284 78.8979 366.27 78.8713 366.257V365.197C78.9113 365.21 78.9513 365.217 78.9913 365.217C79.0446 365.217 79.0979 365.217 79.1513 365.217C79.2979 365.217 79.4513 365.164 79.6113 365.057C79.7846 364.937 79.9379 364.697 80.0713 364.337C80.2179 363.977 80.3379 363.464 80.4313 362.797C80.5246 362.117 80.5713 361.217 80.5713 360.097V357.557H86.1513V366.217H85.1113V358.497H81.5513V360.637C81.5513 361.717 81.4913 362.624 81.3713 363.357C81.2513 364.077 81.0846 364.657 80.8713 365.097C80.6579 365.524 80.4113 365.837 80.1313 366.037C79.8646 366.224 79.5779 366.317 79.2713 366.317ZM95.7622 366.217V363.997L95.7022 363.697V360.157L95.7622 360.037V357.557H96.7222V360.037V360.157V366.217H95.7622ZM92.4022 366.377C91.8689 366.377 91.3489 366.277 90.8422 366.077C90.3489 365.877 89.9089 365.584 89.5222 365.197C89.1355 364.81 88.8222 364.344 88.5822 363.797C88.3555 363.237 88.2422 362.597 88.2422 361.877C88.2422 361.184 88.3555 360.564 88.5822 360.017C88.8089 359.457 89.1089 358.984 89.4822 358.597C89.8689 358.21 90.3155 357.917 90.8222 357.717C91.3289 357.504 91.8689 357.397 92.4422 357.397C92.9355 357.397 93.3822 357.477 93.7822 357.637C94.1955 357.784 94.5555 357.984 94.8622 358.237C95.1689 358.49 95.4155 358.784 95.6022 359.117C95.8022 359.437 95.9355 359.764 96.0022 360.097L95.7822 361.737H95.7022C95.7022 361.297 95.6355 360.877 95.5022 360.477C95.3689 360.077 95.1689 359.724 94.9022 359.417C94.6355 359.097 94.3022 358.837 93.9022 358.637C93.5022 358.437 93.0289 358.337 92.4822 358.337C92.0289 358.337 91.6022 358.417 91.2022 358.577C90.8155 358.737 90.4755 358.97 90.1822 359.277C89.9022 359.57 89.6822 359.937 89.5222 360.377C89.3755 360.804 89.3022 361.297 89.3022 361.857C89.3022 362.39 89.3755 362.877 89.5222 363.317C89.6689 363.744 89.8755 364.117 90.1422 364.437C90.4222 364.757 90.7555 365.004 91.1422 365.177C91.5422 365.337 91.9755 365.417 92.4422 365.417C92.9755 365.417 93.4422 365.317 93.8422 365.117C94.2555 364.904 94.5955 364.63 94.8622 364.297C95.1422 363.964 95.3489 363.59 95.4822 363.177C95.6289 362.764 95.7022 362.357 95.7022 361.957H95.8822L95.9622 363.477C95.8955 363.877 95.7555 364.25 95.5422 364.597C95.3422 364.944 95.0889 365.25 94.7822 365.517C94.4755 365.784 94.1155 365.997 93.7022 366.157C93.3022 366.304 92.8689 366.377 92.4022 366.377ZM98.8277 366.217L100.368 357.557H100.808L103.968 364.337L107.028 357.557H107.448L108.988 366.217H108.008L106.928 359.857L104.008 366.277H103.848L100.888 359.997L99.8077 366.217H98.8277ZM111.785 361.997V361.057H117.545V361.997H111.785ZM111.085 366.217V363.997V363.697V360.157V360.037V357.557H112.105V360.037V360.157V366.217H111.085ZM117.225 366.217V363.997V363.697V360.157V360.037V357.557H118.245V360.037V360.157V366.217H117.225ZM123.691 360.657C124.878 360.657 125.764 360.877 126.351 361.317C126.938 361.757 127.231 362.457 127.231 363.417C127.231 364.377 126.924 365.084 126.311 365.537C125.698 365.99 124.758 366.217 123.491 366.217H120.811V357.557H121.831V360.657H123.691ZM128.691 366.217V357.557H129.711V366.217H128.691ZM123.351 365.277C123.831 365.277 124.251 365.25 124.611 365.197C124.984 365.13 125.284 365.024 125.511 364.877C125.751 364.73 125.924 364.544 126.031 364.317C126.151 364.077 126.211 363.777 126.211 363.417C126.211 362.75 125.998 362.284 125.571 362.017C125.144 361.75 124.464 361.617 123.531 361.617H121.831V365.277H123.351ZM132.276 366.217V357.557H133.296V364.697L132.796 364.737L139.036 357.557H139.416V366.217H138.396V358.977L139.076 358.817L132.656 366.217H132.276ZM135.856 356.077C135.443 356.077 135.063 356.024 134.716 355.917C134.369 355.81 134.076 355.664 133.836 355.477C133.596 355.277 133.416 355.037 133.296 354.757C133.176 354.464 133.116 354.13 133.116 353.757H134.056C134.043 354.224 134.196 354.597 134.516 354.877C134.836 355.157 135.296 355.297 135.896 355.297C136.456 355.297 136.903 355.17 137.236 354.917C137.569 354.65 137.736 354.264 137.736 353.757H138.656C138.656 354.13 138.589 354.464 138.456 354.757C138.323 355.037 138.129 355.277 137.876 355.477C137.636 355.664 137.343 355.81 136.996 355.917C136.649 356.024 136.269 356.077 135.856 356.077ZM69.899 390.377C69.2057 390.377 68.5857 390.257 68.039 390.017C67.4923 389.777 67.0323 389.41 66.659 388.917C66.2857 388.41 65.999 387.77 65.799 386.997C65.6123 386.21 65.519 385.264 65.519 384.157C65.519 382.717 65.659 381.537 65.939 380.617C66.2323 379.684 66.619 378.944 67.099 378.397C67.579 377.85 68.1257 377.464 68.739 377.237C69.3523 376.997 69.9857 376.85 70.639 376.797C70.9457 376.757 71.219 376.717 71.459 376.677C71.7123 376.624 71.9323 376.57 72.119 376.517C72.319 376.45 72.4923 376.377 72.639 376.297C72.799 376.204 72.939 376.09 73.059 375.957L73.759 376.577C73.6257 376.764 73.4457 376.93 73.219 377.077C72.9923 377.21 72.739 377.324 72.459 377.417C72.179 377.497 71.8923 377.564 71.599 377.617C71.3057 377.67 71.0257 377.71 70.759 377.737C70.119 377.79 69.539 377.917 69.019 378.117C68.499 378.317 68.0457 378.677 67.659 379.197C67.2857 379.704 66.9923 380.424 66.779 381.357C66.579 382.277 66.479 383.49 66.479 384.997L66.079 384.757C66.2123 384.184 66.4123 383.69 66.679 383.277C66.9457 382.85 67.2523 382.504 67.599 382.237C67.959 381.957 68.3523 381.757 68.779 381.637C69.2057 381.504 69.659 381.437 70.139 381.437C70.779 381.437 71.3457 381.55 71.839 381.777C72.3457 382.004 72.7723 382.317 73.119 382.717C73.479 383.117 73.7457 383.59 73.919 384.137C74.1057 384.67 74.199 385.244 74.199 385.857C74.199 386.524 74.0923 387.137 73.879 387.697C73.6657 388.244 73.3657 388.717 72.979 389.117C72.6057 389.517 72.1523 389.83 71.619 390.057C71.099 390.27 70.5257 390.377 69.899 390.377ZM69.919 389.437C70.3857 389.437 70.8123 389.357 71.199 389.197C71.599 389.024 71.939 388.784 72.219 388.477C72.5123 388.17 72.739 387.797 72.899 387.357C73.059 386.904 73.139 386.404 73.139 385.857C73.139 385.35 73.0657 384.89 72.919 384.477C72.7857 384.05 72.5857 383.684 72.319 383.377C72.0523 383.057 71.7257 382.81 71.339 382.637C70.9523 382.464 70.5057 382.377 69.999 382.377C69.6123 382.377 69.219 382.437 68.819 382.557C68.4323 382.677 68.079 382.877 67.759 383.157C67.4523 383.424 67.199 383.784 66.999 384.237C66.8123 384.677 66.719 385.21 66.719 385.837C66.719 386.384 66.799 386.884 66.959 387.337C67.119 387.777 67.3323 388.157 67.599 388.477C67.879 388.784 68.219 389.024 68.619 389.197C69.019 389.357 69.4523 389.437 69.919 389.437ZM83.4087 390.217V387.997L83.3487 387.697V384.157L83.4087 384.037V381.557H84.3687V384.037V384.157V390.217H83.4087ZM80.0487 390.377C79.5154 390.377 78.9954 390.277 78.4887 390.077C77.9954 389.877 77.5554 389.584 77.1687 389.197C76.782 388.81 76.4687 388.344 76.2287 387.797C76.002 387.237 75.8887 386.597 75.8887 385.877C75.8887 385.184 76.002 384.564 76.2287 384.017C76.4554 383.457 76.7554 382.984 77.1287 382.597C77.5154 382.21 77.962 381.917 78.4687 381.717C78.9754 381.504 79.5154 381.397 80.0887 381.397C80.582 381.397 81.0287 381.477 81.4287 381.637C81.842 381.784 82.202 381.984 82.5087 382.237C82.8154 382.49 83.062 382.784 83.2487 383.117C83.4487 383.437 83.582 383.764 83.6487 384.097L83.4287 385.737H83.3487C83.3487 385.297 83.282 384.877 83.1487 384.477C83.0154 384.077 82.8154 383.724 82.5487 383.417C82.282 383.097 81.9487 382.837 81.5487 382.637C81.1487 382.437 80.6754 382.337 80.1287 382.337C79.6754 382.337 79.2487 382.417 78.8487 382.577C78.462 382.737 78.122 382.97 77.8287 383.277C77.5487 383.57 77.3287 383.937 77.1687 384.377C77.022 384.804 76.9487 385.297 76.9487 385.857C76.9487 386.39 77.022 386.877 77.1687 387.317C77.3154 387.744 77.522 388.117 77.7887 388.437C78.0687 388.757 78.402 389.004 78.7887 389.177C79.1887 389.337 79.622 389.417 80.0887 389.417C80.622 389.417 81.0887 389.317 81.4887 389.117C81.902 388.904 82.242 388.63 82.5087 388.297C82.7887 387.964 82.9954 387.59 83.1287 387.177C83.2754 386.764 83.3487 386.357 83.3487 385.957H83.5287L83.6087 387.477C83.542 387.877 83.402 388.25 83.1887 388.597C82.9887 388.944 82.7354 389.25 82.4287 389.517C82.122 389.784 81.762 389.997 81.3487 390.157C80.9487 390.304 80.5154 390.377 80.0487 390.377ZM87.6342 385.997V385.057H93.3942V385.997H87.6342ZM86.9342 390.217V387.997V387.697V384.157V384.037V381.557H87.9542V384.037V384.157V390.217H86.9342ZM93.0742 390.217V387.997V387.697V384.157V384.037V381.557H94.0942V384.037V384.157V390.217H93.0742ZM97.3607 385.997V385.057H103.121V385.997H97.3607ZM96.6607 390.217V387.997V387.697V384.157V384.037V381.557H97.6807V384.037V384.157V390.217H96.6607ZM102.801 390.217V387.997V387.697V384.157V384.037V381.557H103.821V384.037V384.157V390.217H102.801ZM110.407 390.377C109.781 390.377 109.194 390.27 108.647 390.057C108.114 389.83 107.647 389.524 107.247 389.137C106.847 388.737 106.527 388.257 106.287 387.697C106.061 387.137 105.947 386.51 105.947 385.817C105.947 385.124 106.067 384.504 106.307 383.957C106.561 383.41 106.887 382.95 107.287 382.577C107.701 382.19 108.167 381.897 108.687 381.697C109.207 381.497 109.747 381.397 110.307 381.397C110.987 381.397 111.581 381.517 112.087 381.757C112.607 381.997 113.041 382.317 113.387 382.717C113.734 383.104 113.994 383.544 114.167 384.037C114.341 384.517 114.427 385.004 114.427 385.497V386.037H106.727V385.137H113.887L113.407 385.857V385.517C113.407 385.09 113.334 384.69 113.187 384.317C113.054 383.93 112.854 383.59 112.587 383.297C112.321 383.004 111.994 382.77 111.607 382.597C111.221 382.424 110.781 382.337 110.287 382.337C109.834 382.337 109.401 382.424 108.987 382.597C108.587 382.757 108.234 382.997 107.927 383.317C107.634 383.624 107.401 383.99 107.227 384.417C107.054 384.844 106.967 385.317 106.967 385.837C106.967 386.37 107.061 386.864 107.247 387.317C107.434 387.757 107.681 388.137 107.987 388.457C108.307 388.764 108.681 389.004 109.107 389.177C109.534 389.35 109.981 389.437 110.447 389.437C111.074 389.437 111.641 389.317 112.147 389.077C112.654 388.824 113.081 388.497 113.427 388.097L114.107 388.717C113.627 389.29 113.067 389.71 112.427 389.977C111.787 390.244 111.114 390.377 110.407 390.377ZM117.564 395.017H116.544V384.177V384.037V381.557H117.504V384.037L117.564 384.177V387.717V387.997V395.017ZM120.864 390.377C120.397 390.377 119.957 390.304 119.544 390.157C119.144 389.997 118.79 389.784 118.484 389.517C118.177 389.25 117.917 388.944 117.704 388.597C117.504 388.25 117.37 387.877 117.304 387.477L117.384 385.957H117.564C117.564 386.357 117.63 386.764 117.764 387.177C117.91 387.59 118.117 387.964 118.384 388.297C118.664 388.63 119.004 388.904 119.404 389.117C119.817 389.317 120.29 389.417 120.824 389.417C121.29 389.417 121.717 389.337 122.104 389.177C122.504 389.004 122.837 388.757 123.104 388.437C123.384 388.117 123.597 387.744 123.744 387.317C123.89 386.877 123.964 386.39 123.964 385.857C123.964 385.297 123.884 384.804 123.724 384.377C123.577 383.937 123.357 383.57 123.064 383.277C122.784 382.97 122.45 382.737 122.064 382.577C121.677 382.417 121.244 382.337 120.764 382.337C120.244 382.337 119.777 382.437 119.364 382.637C118.964 382.837 118.63 383.097 118.364 383.417C118.097 383.724 117.897 384.084 117.764 384.497C117.63 384.897 117.564 385.31 117.564 385.737H117.484L117.324 384.077C117.39 383.744 117.517 383.417 117.704 383.097C117.89 382.764 118.13 382.47 118.424 382.217C118.717 381.964 119.064 381.764 119.464 381.617C119.864 381.47 120.317 381.397 120.824 381.397C121.397 381.397 121.937 381.504 122.444 381.717C122.95 381.917 123.39 382.21 123.764 382.597C124.15 382.984 124.457 383.457 124.684 384.017C124.91 384.564 125.024 385.184 125.024 385.877C125.024 386.597 124.904 387.237 124.664 387.797C124.437 388.344 124.13 388.81 123.744 389.197C123.357 389.584 122.91 389.877 122.404 390.077C121.91 390.277 121.397 390.377 120.864 390.377Z" fill="black"/>-->
-<!--        </svg>-->
-
-<!--        </section>-->
-
-<!--    </main>-->
-<!--{% endblock %}-->

@@ -20,12 +20,12 @@ User = get_user_model()
 
 class Recipe(models.Model):
     class RecipeManager(models.Manager):
-        def all(self):
-            return self.get_queryset().select_related('autor').prefetch_related('saveCount')
+        # def all(self):
+        #     return self.get_queryset().select_related('author').prefetch_related('saveCount')
 
         def detail(self):
-            return self.get_queryset() \
-                .select_related('autor') \
+            return self.get_queryset()\
+                .select_related('author')\
                 .prefetch_related('comments', 'recipe_comments_author', 'ingredients', 'saving')
 
     class Difficulty(models.TextChoices):
@@ -45,6 +45,8 @@ class Recipe(models.Model):
     # saveCount = models.IntegerField(default=0, verbose_name='Количество лайков')
     commentsCount = models.IntegerField(default=0, verbose_name='Количество комментариев')
 
+    objects = RecipeManager()
+
     def get_sum_save(self):
         # return sum([1 for save in self.saving.all()])
         return self.saving.count()
@@ -62,6 +64,7 @@ class Ingredient(models.Model):
 
 class RecipeStep(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, verbose_name='Рецепт', related_name='steps')
+    image = models.ImageField(upload_to='images/recipes_pictures/steps', blank=True, null=True, verbose_name='Фото шага')
     description = models.TextField(max_length=3000, verbose_name='Описание шага')
     step_number = models.IntegerField(verbose_name='Номер шага')
 
@@ -97,7 +100,7 @@ class CommentRecipe(MPTTModel):
     )
 
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, verbose_name='Рецепт', related_name='comments')
-    autor = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор комментария', related_name='recipe_comments_author')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор комментария', related_name='recipe_comments_author')
     content = models.TextField(verbose_name='Текст комментария', max_length=3000)
     time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
     time_update = models.DateTimeField(verbose_name='Время обновления', auto_now=True)

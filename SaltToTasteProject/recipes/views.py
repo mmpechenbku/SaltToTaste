@@ -3,13 +3,13 @@ from datetime import datetime
 from django.db.models import Prefetch, Count
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import CreateView, ListView
-from .models import Recipe, Ingredient, SaveRecipe
+from django.views.generic import CreateView, ListView, DetailView
+from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe
 
 from django.http import JsonResponse
 
-from django.db.models import Q
-from .filters import RecipeFilter
+from  .forms import CommentCreateForm, RecipeForm, StepForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -33,26 +33,57 @@ class AddingRecipe(CreateView):
     template_name = ''
     success_url = ''
 
+
+def add_recipe(request):
+    if request.method == 'POST':
+        recipe_form = RecipeForm(request.POST, request.FILES)
+        step_texts = request.POST.getlist('steps-text[]')
+        step_images = request.FILES.getlist('steps-image[]')
+
+        if recipe_form.is_valid():
+            recipe = recipe_form.save(commit=False)
+            recipe.author = request.user
+            recipe.save()
+
+            for text, image in zip(step_texts, step_images):
+                step = StepForm({'description': text})
+                if step.is_valid():
+                    step_instance = step.save(commit=False)
+                    step_instance.recipe = recipe
+                    step_instance.image = image
+                    step_instance.save()
+
+    else:
+        recipe_form = RecipeForm()
+
+    return render(request, '', {'recipe_form': recipe_form,})
+
+
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = ''
+    context_object_name = 'recipe'
+    queryset = model.objects.detail()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.object.title
+        context['form'] = CommentCreateForm
+        return context
+
+
 def search_recipes(request):
     message = 'Всего рецептов: '
     selected_ingredient_ids = request.POST.get('ingredients', '').split(',')
     difficulty = request.POST.get('difficulty', '')
     time = request.POST.get('time', '')
     fullHit = request.POST.get('coincidence')
-    # if fullHit:
-    #     print("true")
-    # else:
-    #     print("false")
 
     #  selected_ingredient_ids не пуст и не содержит пустых значений
     selected_ingredient_ids = [id for id in selected_ingredient_ids if id]
 
     recipes = Recipe.objects.all()
     percentsDict = []
-
-    # for index, value in enumerate(recipes):
-    #     recipes[index] = {'recipe' : value, 'percentage' : 100}
-
 
     if difficulty:
         recipes = recipes.filter(difficulty=difficulty)
@@ -79,21 +110,15 @@ def search_recipes(request):
         filtered_recipes = []
         percentsDict = []
         for recipe in recipes:
-            # total_ingredients = recipe.ingredients.count()
             total_ingredients = selected_ingredient_ids.__len__()
             ingredients_in_recipe = recipe.ingredients.count()
             matching_ingredients = recipe.ingredients.filter(id__in=selected_ingredient_ids).count()
-            # print(f"matching {recipe.title} - {matching_ingredients}")
-            # print(f"total {recipe.title} - {total_ingredients}")
-            # print(f"ingredients {recipe.title} - {ingredients_in_recipe}")
             percentage = (matching_ingredients / ingredients_in_recipe) * 100
             comparisonPercents = 100 if fullHit else 70
             if percentage >= comparisonPercents:
-                # filtered_recipes.append({ 'recipe' : recipe, 'percentage' : percentage })
                 filtered_recipes.append(recipe)
                 percents = f"{int(percentage)}%"
                 percentsDict.append({ recipe : percents })
-                # print(percentsDict[0])
         recipes = filtered_recipes
         message = 'Найдено рецептов: '
 
@@ -135,3 +160,39 @@ class SaveRecipeCreateView(View):
             return JsonResponse({'status': 'deleted', 'save_sum': save.recipe.get_sum_save()})
 
         return JsonResponse({'status': 'created', 'save_sum': save.recipe.get_sum_save()})
+
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = CommentRecipe
+    form_class = CommentCreateForm
+
+    def is_ajax(self):
+        return self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+    def form_invalid(self, form):
+        if self.is_ajax():
+            return JsonResponse({'error': form.errors}, status=400)
+        return super().form_invalid(form)
+
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.recipe_id = self.kwargs.get('pk')
+        comment.author = self.request.user
+        comment.parent_id = form.cleaned_data.get('parent')
+        comment.save()
+
+        if self.is_ajax():
+            return JsonResponse({
+                'is_child': comment.is_child_node(),
+                'id': comment.id,
+                'author': comment.parent_id,
+                'time_create': comment.time_create.strftime('%Y-%b-%d %H:%M:%S'),
+                'avatar': comment.author.avatar.url,
+                'content': comment.content,
+                'get_absolute_url': comment.author.get_absolute_url()
+            }, status=200)
+
+        return redirect(comment.recipe.get_absolute_url())
+
+    def handle_no_permission(self):
+        return JsonResponse({'error': 'need authorisation'}, status=400)

@@ -210,3 +210,62 @@ saveButton.forEach(button => {
         .catch(error => console.error(error));
     });
 });
+
+
+// Комментарии рецептов
+
+const commentForm = document.forms.commentForm;
+const commentFormContent = commentForm.content;
+const commentFormParentInput = commentForm.parent;
+const commentFormSubmit = commentForm.commentSubmit;
+const commentRecipeId = commentForm.getAttribute('data-recipe-id');
+
+commentForm.addEventListener('submit', createComment);
+
+replyUser()
+
+function replyUser() {
+    document.querySelectorAll('.btn-reply').forEach(e => {
+        e.addEventListener('click', replyComment);
+    });
+}
+
+function replyComment() {
+    const commentUsername = this.getAttribute('data-comment-username');
+    const commentMessageId = this.getAttribute('data-comment-id');
+    commentFormContent.value = `${commnetUsername}, `;
+    commentFormParentInput.value = commentMessageId;
+}
+async function createComment(event) {
+    event.preventDefault();
+    commentFormSubmit.disabled = true;
+    commentFormSubmit.innerText = "Ожидаем ответа сервера";
+    try {
+        const response = await fetch(`/search/${commentRecipeId}/comments/create/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken,
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: new FormData(commentForm),
+        });
+        const comment = await response.json();
+
+        //html для коммента
+        let commentTemplate = ``
+        if (comment.is_child) {
+            document.querySelector(`#comment-thread-${comment.parent_id}`).insertAdjacentHTML("beforeend", commentTemplate);
+        }
+        else {
+            document.querySelector('.nested-comments').insertAdjacentHTML("beforeend", commentTemplate)
+        }
+        commentForm.reset()
+        commentFormSubmit.disabled = false;
+        commentFormSubmit.innerText = "Добавить комментарий";
+        commentFormParentInput.value = null;
+        replyUser();
+    }
+    catch (error) {
+        console.log(error)
+    }
+}

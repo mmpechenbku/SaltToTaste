@@ -89,6 +89,9 @@
 
             </div>
 
+            {% for recipe in recipes %}
+                {% include 'recipes/recipe_card.html' %}
+            {% endfor %}
 
             <article class="index__article-content">
                     <div class="index-article__img">

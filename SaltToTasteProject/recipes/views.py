@@ -90,6 +90,12 @@ def search_recipes(request):
     selected_ingredient_ids = [id for id in selected_ingredient_ids if id]
 
     recipes = Recipe.objects.all()
+
+    recipe_ingr_dict = []
+
+    for recipe in recipes:
+        recipe_ingr_dict.append({ 'recipe': recipe, 'ingredients': recipe.ingredients})
+
     percentsDict = []
 
     if difficulty:
@@ -138,6 +144,7 @@ def search_recipes(request):
         'ingredients' : ingredients,
         'num_recipes' : num_recipes,
         'percentsDict' : percentsDict,
+        'recipes_ingr': recipe_ingr_dict,
     }
 
     return render(request, 'recipes/recipe_search.html', data)

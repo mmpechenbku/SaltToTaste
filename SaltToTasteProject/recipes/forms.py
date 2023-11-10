@@ -18,7 +18,7 @@ class CommentCreateForm(forms.ModelForm):
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ['title', 'description', 'difficulty', 'cooking_time', 'image', 'ingredients']
+        fields = ['title', 'description', 'difficulty', 'cookingTime', 'picture', 'ingredients']
 
 
 class StepForm(forms.ModelForm):

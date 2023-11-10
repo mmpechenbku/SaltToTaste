@@ -3,7 +3,8 @@
 <article class="index__article-content">
     <div class="index-article__img">
         <a href="">
-            <img class="article__img" src="{{ recipe.picture }}" alt="{{recipe.title}}" />
+<!--            <img class="article__img" src="../../media/{{ recipe.picture }}" alt="{{recipe.picture}}" />-->
+            <img class="article__img" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" />
         </a>
     </div>
     <div class="index-article-section">

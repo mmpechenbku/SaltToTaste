@@ -1,0 +1,80 @@
+
+<div class="sign__container">
+    <div class="sign_background"></div>
+
+    <div class="popup__page">
+        <div class="buttons__popup">
+            <input type="button" class="btn__signin" value="Вход">
+            <input type="button" class="btn__signup" value="Регистрация">
+            <div class="cl-btn-7"></div>
+        </div>
+        <div class="signin__popup">
+            <form class="sign_in" action='../account/login/' method="post">
+                    {% csrf_token %}
+                <label class="text-field__label" for="id_username">Email / Имя пользователя</label>
+                <input class="text-field__input" type="text"
+                       autofocus="" autocapitalize="none"
+                       autocomplete="username" maxlength="100"
+                       required=""
+                       name="username" id="id_username" value="">
+
+
+                <label class="text-field__label" for="id_password">Пароль</label>
+                <input class="text-field__input"
+                       autocomplete="current-password"
+                       type="password"
+                       name="password"
+                       id="id_password"
+                       value=""
+                       required="">
+
+
+                <div class="button-login">
+                    <button class="btn__signin-auth" type="submit">ВОЙТИ</button>
+                    <a href="#">У ВАС НЕТ УЧЕТНОЙ ЗАПИСИ?</a>
+                    <a href="#">ЗАБЫЛИ ПАРОЛЬ?</a>
+                </div>
+
+                {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <label>
+                <input type="checkbox" class="alertCheckbox" autocomplete="off"/>
+                <div class="alert error">
+                    <span class="alertClose">X</span>
+                    <span class="alertText">{{message}}
+                    <br class="clear"/></span>
+                </div>
+            </label>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            </form>
+        </div>
+        <div class="signup__popup">
+            <form action="" class="sign_up">
+
+                <label class="text-field__label" for="name">Имя</label>
+                <input class="text-field__input" type="text" name="name" id="name" value="">
+
+                <label class="text-field__label" for="nickname">Никнейм</label>
+                <input class="text-field__input" type="text" name="nickname" id="nickname" value="">
+
+                <label class="text-field__label" for="email">Email</label>
+                <input class="text-field__input" type="text" name="email" id="email" value="">
+
+                <label class="text-field__label" for="pass">Пароль</label>
+                <input class="text-field__input" type="password" name="password" id="pass" value="">
+
+                <label class="text-field__label" for="repassword">Пароль</label>
+                <input class="text-field__input" type="password" name="repassword" id="repassword" value="">
+
+                <input type="button" class="btn__signin-auth" value="Зарегистрироваться">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+

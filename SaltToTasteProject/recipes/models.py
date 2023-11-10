@@ -51,6 +51,10 @@ class Recipe(models.Model):
         # return sum([1 for save in self.saving.all()])
         return self.saving.count()
 
+    def get_sum_comments(self):
+        return self.comments.count()
+
+
 class Ingredient(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название')
 

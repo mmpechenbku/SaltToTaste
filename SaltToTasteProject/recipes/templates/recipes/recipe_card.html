@@ -3,7 +3,7 @@
 <article class="index__article-content">
     <div class="index-article__img">
         <a href="">
-            <img class="article__img" src="{{ recipe.picture }}" alt="" />
+            <img class="article__img" src="{{ recipe.picture }}" alt="{{recipe.title}}" />
         </a>
     </div>
     <div class="index-article-section">
@@ -33,7 +33,15 @@
 
             </li>
             <li class="index-article__item2">
-                <p class="index-item_ingredients">{% for ingredient in recipe_ingr %}{% endfor %}</p>
+                <p class="index-item_ingredients">
+                    {% for dict in recipes_ingr %}
+                        {% for key, value in dict.items %}
+                            {% if key == recipe %}
+                                {{ value|join:", " }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </p>
             </li>
         </ul>
     </div>

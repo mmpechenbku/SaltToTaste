@@ -94,7 +94,13 @@ def search_recipes(request):
     recipe_ingr_dict = []
 
     for recipe in recipes:
-        recipe_ingr_dict.append({ 'recipe': recipe, 'ingredients': recipe.ingredients})
+        ingredients = []
+        for ingredient in recipe.ingredients.all():
+            ingredients.append(ingredient.name)
+        recipe_ingr_dict.append({ recipe: ingredients})
+        # recipe_ingr_dict.append({recipe: recipe.ingredients.all()})
+
+    print(recipe_ingr_dict)
 
     percentsDict = []
 

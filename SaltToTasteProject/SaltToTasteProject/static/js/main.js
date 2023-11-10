@@ -269,3 +269,16 @@ async function createComment(event) {
         console.log(error)
     }
 }
+
+
+// Добавление рецепта по шагам
+document.getElementById('add-step').addEventListener('click', function() {
+    var stepFormset = document.getElementById('steps-formset');
+    if (stepFormset.children.length < 10) {
+      var stepDiv = document.createElement('div');
+      stepDiv.className = 'step';
+      stepDiv.innerHTML = '<input type="text" name="steps-text[]" placeholder="Текст шага">' +
+                          '<input type="file" name="steps-image[]" accept="image/*">';
+      stepFormset.appendChild(stepDiv);
+    }
+  });

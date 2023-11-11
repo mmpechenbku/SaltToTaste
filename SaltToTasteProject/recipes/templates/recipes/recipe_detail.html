@@ -74,6 +74,7 @@
                 <!--Инструкция по шагам-->
                     <div class="instructions_steps">
                         {% for step in steps %}
+<<<<<<< HEAD
                         <!--Изображение шага-->
                         <div class="instructions_steps-img">
                             <img src="{{ step.image.url }}" alt="">
@@ -82,15 +83,39 @@
                         <div class="instructions_steps-list">
                             {{ step.step_number }} шаг:
                             {{ step.description }}
+=======
+                        <div class="instructions_steps-flex">
+                        <!--Изображение шага-->
+                            <div class="instructions_steps-img">
+                                <img src="{{ step.image.url }}" alt="">
+                            </div>
+                            <!--Текст шагов-->
+                            <div class="instructions_steps-list">
+                                {{ step.description }}
+                            </div>
+>>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
                         </div>
                         {% endfor %}
                     </div>
                     <!--Краткая инструкция-->
+<<<<<<< HEAD
                     <div class="instructions_briefly"></div>
+=======
+                    <div class="instructions_briefly">
+                        {% for step in steps %}
+                        <div class="instructions_steps-list">
+                                {{ step.description }}
+                        </div>
+                        {% endfor %}
+                    </div>
+>>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
                 </div>
             </section>
         </main>
        <ul class="btn__favorites-list">
+            <li class="btn__favorites-items">
+                <h1>Отзывы</h1>
+            </li>
             <li class="btn__favorites-items">
                 <a href="#" class="hero__image">
                     <img src="{% static 'img/svg_image/comment.svg' %}" alt="" width="31" height="31"/>
@@ -104,4 +129,8 @@
                 <b class="favorites_values">522</b>
             </li>
        </ul>
+        <div class="recipe__comments">
+            <textarea name="" id="" cols="30" rows="10" placeholder="Понравилось? Поделитесь впечатлением"></textarea>
+
+        </div>
 {% endblock %}

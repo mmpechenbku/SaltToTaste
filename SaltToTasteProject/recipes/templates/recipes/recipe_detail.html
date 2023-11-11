@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block header %}
-<link rel="stylesheet" href="{% static 'css/reciept.css' %}">
+<link rel="stylesheet" href="{% static 'css/recipe_detail.css' %}">
 {% endblock %}
 {% block content %}
 <div class="btn__back btn-back">
@@ -64,22 +64,15 @@
 
             </section>
             <section class="instructions">
-                <h2 class="article-title instruction-title">Инструкции:</h2>
-                <ul class="instructions_list instructions-list">
-                    <li class="instructions-list sections__list-item"><p>1. В большой миске разбейте яйца и взбейте их вилкой.</p></li>
-                    <li class="instructions-list sections__list-item"><p>2. Добавьте растительное масло и воду, хорошо перемешайте.</p></li>
-                    <li class="instructions-list sections__list-item"><p>3. Постепенно добавляйте муку, постоянно помешивая, чтобы избежать комочков.</p></li>
-                    <li class="instructions-list sections__list-item"><p>4. Добавьте щепотку соли и перемешайте еще раз.</p></li>
-                    <li class="instructions-list sections__list-item"><p>5. Дайте тесту отдохнуть в течение 15-20 минут, чтобы мука полностью впиталась.</p></li>
-                    <li class="instructions-list sections__list-item"><p>6. Разогрейте сковороду на среднем огне и немного смажьте ее маслом.</p></li>
-                    <li class="instructions-list sections__list-item"><p>7. Вылейте половину порции теста на сковороду, распределите его равномерно.</p></li>
-                    <li class="instructions-list sections__list-item"><p>8. Посыпьте сверху немного тертого сыра.</p></li>
-                    <li class="instructions-list sections__list-item"><p>9. Жарьте блин с одной стороны, пока он не станет золотистым.</p></li>
-                    <li class="instructions-list sections__list-item"><p>10. Переверните блин на другую сторону и подождите, пока он также не приобретет золотистый цвет.</p></li>
-                    <li class="instructions-list sections__list-item"><p>11. Перекладывайте готовые блины на тарелку и повторяйте процесс для оставшегося теста.</p></li>
-                    <br/>
-                    <li class="instructions-list sections__list-item"><p>Ваши блины с сыром готовы к подаче на стол! Подайте их с оливковым маслом, сметаной или вашими любимыми соусами. Приятного аппетита!</p></li>
-                </ul>
+                <!--Инструкция по шагам-->
+                <div class="instructions_steps">
+                    <!--Изображение шага-->
+                    <div class="instructions_steps-img"></div>
+                    <!--Текст шагов-->
+                    <div class="instructions_steps-list"></div>
+                </div>
+                <!--Краткая инструкция-->
+                <div class="instructions_briefly"></div>
             </section>
         </main>
        <ul class="btn__favorites-list">

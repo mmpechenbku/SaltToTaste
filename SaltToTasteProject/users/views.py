@@ -45,7 +45,7 @@ class SignUpView(CreateView):
 
 class Login(SuccessMessageMixin, LoginView):
     form_class = AuthenticationForm
-    template_name = 'users/login.html'
+    template_name = 'users/sign.html'
     success_message = 'Успешная авторизация'
 
     # print('in views')

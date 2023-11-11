@@ -10,6 +10,7 @@ urlpatterns = [
     # path('', views.index, name='home'),
     path('registration/', SignUpView.as_view(), name='registration'),
     path('login/', Login.as_view(), name='login'),
+    # path('sign/')
     path('profile/', views.profile, name='profile'),
     path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout')
 ]

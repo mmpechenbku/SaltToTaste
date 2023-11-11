@@ -24,7 +24,7 @@ class CustomUserAdmin(UserAdmin):
                     'avatar',
                     'name',
                     'nickname',
-                    # 'email',
+                    'email',
                 )
             }
         )

@@ -53,7 +53,9 @@
             </form>
         </div>
         <div class="signup__popup">
-            <form action="{% url 'registration' %}" class="sign_up">
+            <form action="../account/registration/" class="sign_up" method="post">
+
+                {% csrf_token %}
 
                 <label class="text-field__label" for="name">Имя</label>
                 <input class="text-field__input" type="text" name="name" id="name" value="">

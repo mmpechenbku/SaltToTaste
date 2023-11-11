@@ -17,7 +17,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
-    return render(request, 'index.html')
+    recipes = Recipe.objects.all()
+    return render(request, 'index.html', {'recipes': recipes})
 
 def recipe_detail(request):
     return render(request, 'recipes/recipe_detail.html')

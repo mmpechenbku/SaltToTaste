@@ -55,7 +55,7 @@
                         <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.nickname }}</a>
                     </li>
                     <li>
-                        <a class="nav-item nav-link" href="">Выход</a>
+                        <a class="nav-item nav-link" href="{% url 'logout' %}">Выход</a>
                     </li>
           	        {% else %}
                         <li class="navbar__item-vk">

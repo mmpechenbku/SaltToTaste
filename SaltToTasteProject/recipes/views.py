@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView
 from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe
+from django.contrib.auth.decorators import login_required
 
 from django.http import JsonResponse
 
@@ -14,31 +15,36 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
+
+def index(request):
+    return render(request, 'index.html')
+
 def recipe_detail(request):
     return render(request, 'recipes/recipe_detail.html')
 
 
+@login_required
 def collections(request):
     return render(request, 'collections/collections.html')
 
 
-def add_recipe(request):
-    if request.method == 'POST':
-        title = request.POST['title']
-        ingredients = request.POST['ingredients']
-        instructions = request.POST['instructions']
-        cooking_time = request.POST['cooking_time']
+# def add_recipe(request):
+#     if request.method == 'POST':
+#         title = request.POST['title']
+#         ingredients = request.POST['ingredients']
+#         instructions = request.POST['instructions']
+#         cooking_time = request.POST['cooking_time']
+#
+#         recipe = Recipe(title=title, ingredients=ingredients, instructions=instructions, cooking_time=cooking_time)
+#         recipe.save()
+#
+#         return redirect('recipe_list')
 
-        recipe = Recipe(title=title, ingredients=ingredients, instructions=instructions, cooking_time=cooking_time)
-        recipe.save()
-
-        return redirect('recipe_list')
-
-class AddingRecipe(CreateView):
-    model = Recipe
-    # form_class = AddingRecipeForm
-    template_name = ''
-    success_url = ''
+# class AddingRecipe(CreateView):
+#     model = Recipe
+#     # form_class = AddingRecipeForm
+#     template_name = ''
+#     success_url = ''
 
 
 def add_recipe(request):
@@ -85,6 +91,7 @@ def search_recipes(request):
     difficulty = request.POST.get('difficulty', '')
     time = request.POST.get('time', '')
     fullHit = request.POST.get('coincidence')
+    recipe_title = request.POST.get('title_search')
 
     #  selected_ingredient_ids не пуст и не содержит пустых значений
     selected_ingredient_ids = [id for id in selected_ingredient_ids if id]
@@ -93,14 +100,9 @@ def search_recipes(request):
 
     recipe_ingr_dict = []
 
-    for recipe in recipes:
-        ingredients = []
-        for ingredient in recipe.ingredients.all():
-            ingredients.append(ingredient.name)
-        recipe_ingr_dict.append({ recipe: ingredients})
-        # recipe_ingr_dict.append({recipe: recipe.ingredients.all()})
-
-    print(recipe_ingr_dict)
+    print(recipe_title)
+    if recipe_title:
+        recipes = recipes.filter(title__icontains=title)
 
     percentsDict = []
 
@@ -115,6 +117,12 @@ def search_recipes(request):
         time = datetime.strptime(time, "%H:%M").time()
 
         recipes = recipes.filter(cookingTime__lte=time)
+
+    for recipe in recipes:
+        ingredients = []
+        for ingredient in recipe.ingredients.all():
+            ingredients.append(ingredient.name)
+        recipe_ingr_dict.append({ recipe: ingredients})
 
     if selected_ingredient_ids:
         recipes = Recipe.objects.filter(ingredients__id__in=selected_ingredient_ids).distinct()
@@ -170,7 +178,7 @@ class SaveRecipeCreateView(View):
         # ip_address = get_client_ip(request)
         user = request.user if request.user.is_autentificated else None
 
-        save, created = self.model.objects.get_of_create(
+        save, created = self.model.objects.get_or_create(
             recipe_id = recipe_id,
             user = user
         )

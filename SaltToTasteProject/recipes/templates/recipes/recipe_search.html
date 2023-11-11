@@ -19,8 +19,8 @@
             </div>
     </div>
     <!--Поле поиска (верхнее)-->
-    <form class="search__form" action="" method="get" accept-charset="windows-1251">
-        <input type="text" value="" name="name" placeholder="Блюдо">
+    <form class="search__form" action="{% url 'search' %}" method="POST" accept-charset="windows-1251">
+        <input type="text" value="" id="title_search" name="title_search" placeholder="Блюдо">
     </form>
     <button class="save-recipe-button"><img src="{% static 'img/svg_image/favorites.svg' %}"></button>
 

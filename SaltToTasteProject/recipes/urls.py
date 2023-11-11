@@ -1,7 +1,8 @@
 from django.urls import path, include
 from .views import *
 
-urlpatterns = [
+
+recipes_urls = [
     path('', search_recipes, name='search'),
     path('collections/', collections, name='collections'),
     path('save_recipe/', SaveRecipeCreateView.as_view(), name='save_recipe'),
@@ -10,3 +11,9 @@ urlpatterns = [
     path('add_recipe/', add_recipe, name='add_recipe'),
     path('api/ingredients/', IngredientSearchView.as_view(), name='ingredient-search'),
 ]
+
+urlpatterns = [
+    path('', index, name='home'),
+    path('search/', include(recipes_urls)),
+]
+

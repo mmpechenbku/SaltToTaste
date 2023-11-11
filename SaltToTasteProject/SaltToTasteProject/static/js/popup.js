@@ -77,25 +77,45 @@ btnSearch.onclick = () => {
 
 /*----------------------------------------------------------*/
 /*-----------------------------Перестроение столбцов---------------------------------*/
-
+if (document.getElementById('large__btn-2')) {
 document.getElementById('large__btn-2').addEventListener('click', function rearrangeColumns() {
         var container = document.querySelector('.article-content__container');
         container.classList.toggle('active-2');
         var btnRE = document.querySelector('.article-content__bnt-2');
         btnRE.classList.toggle('active');
 });
-
+}
+if (document.getElementById('th__btn-3')) {
 document.getElementById('th__btn-3').addEventListener('click', function rearrangeColumns() {
         var container = document.querySelector('.article-content__container');
         container.classList.toggle('active-3');
         var btnRE = document.querySelector('.article-content__bnt-3');
         btnRE.classList.toggle('active');
 });
-
+}
+if (document.getElementById('th-list')) {
 document.getElementById('th-list').addEventListener('click', function rearrangeColumns() {
         var container = document.querySelector('.article-content__container');
         container.classList.toggle('active');
         var btnRE = document.querySelector('.article-content__bnt-list');
         btnRE.classList.toggle('active');
 });
+}
 /*----------------------------------------------------------*/
+let btn1 = document.getElementById('instructions_steps__btn-id');
+let btn2 = document.getElementById('instructions_steps-list-btn-id');
+let container1 = document.querySelector('.instructions_steps__btn');
+let container2 = document.querySelector('.instructions_steps-list-btn');
+if (btn1) {
+    container1.classList.add('active');
+btn2.addEventListener('click', function () {
+    container2.classList.add('active');
+    container1.classList.remove('active');
+
+});
+
+btn1.addEventListener('click', function () {
+        container1.classList.add('active');
+        container2.classList.remove('active');
+});
+}

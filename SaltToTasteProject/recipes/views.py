@@ -83,6 +83,7 @@ class RecipeDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = self.object.title
         context['form'] = CommentCreateForm
+        context['steps'] = RecipeStep.objects.filter(self=recipe).order_by('step_number')
         return context
 
 
@@ -152,7 +153,8 @@ def search_recipes(request):
 
     # print(percentsDict)
     ingredients = Ingredient.objects.all()
-    num_recipes = f"{message}{len(recipes)}"
+    # num_recipes = f"{message}{len(recipes)}"
+    num_recipes = str(len(recipes))
 
     data = {
         'recipes' : recipes,

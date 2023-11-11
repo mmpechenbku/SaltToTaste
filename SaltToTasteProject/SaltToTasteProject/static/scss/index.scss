@@ -123,96 +123,11 @@ margin-bottom: 30px;
         margin: 0 auto;
     }
 }
-.index__article-content {
+.article-content__container {
     display: flex;
-    border-radius: 52px;
-    border: 1px solid #CBC8C8;
-    background: #FDF5F5;
-    max-height: 300px;
-    margin: 39px 15px;
-
-    .index-article__img {
-
-        img {
-            border-radius: 52px;
-              width: 100%;
-              min-width: 300px;
-              height: 100%;
-        }
-    }
-    .index-article-section {
-
-        padding: 36px 37px 35px 58px;
-
-        .index-article_content-block {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
-            height: 115px;
-
-            h1 {
-                text-align: justify;
-                font-size: 24px;
-                font-weight: 700;
-            }
-
-            p {
-                padding-top: 20px;
-                text-align: justify;
-                font-size: 16px;
-                font-weight: 400;
-                padding-bottom: 35px;
-            }
-        }
-
-        ul {
-            display: flex;
-            margin: 25px 0 0 0;
-            .index-article__item1 {
-                width: 30%;
-
-
-            }
-            .index-article__item2 {
-                width: 70%;
-                p {
-                    text-align: right;
-                    font-size: 15px;
-                    font-weight: 400;
-                }
-            }
-            li {
-                display: block;
-                width: 100%;
-                p {
-                }
-                .index-article-item1 {
-                    display: flex;
-                    a {
-                        display: inherit;
-                        align-items: center;
-                        margin-right: 10px;
-                    }
-                    img {
-                        margin-right: 5px;
-                        justify-content: center;
-                    }
-                }
-                .index-article-item2 {
-                    display: flex;
-                    margin-top: 10px;
-                    a {
-                        display: inherit;
-                        align-items: center;
-                    }
-                }
-            }
-
-        }
-
-    }
+    flex-direction: column;
+    justify-content: center;
+    @import "recipe_card.scss";
 }
 .index__footer {
     display: block;

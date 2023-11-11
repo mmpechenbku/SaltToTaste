@@ -76,3 +76,26 @@ btnSearch.onclick = () => {
 
 
 /*----------------------------------------------------------*/
+/*-----------------------------Перестроение столбцов---------------------------------*/
+
+document.getElementById('large__btn-2').addEventListener('click', function rearrangeColumns() {
+        var container = document.querySelector('.article-content__container');
+        container.classList.toggle('active-2');
+        var btnRE = document.querySelector('.article-content__bnt-2');
+        btnRE.classList.toggle('active');
+});
+
+document.getElementById('th__btn-3').addEventListener('click', function rearrangeColumns() {
+        var container = document.querySelector('.article-content__container');
+        container.classList.toggle('active-3');
+        var btnRE = document.querySelector('.article-content__bnt-3');
+        btnRE.classList.toggle('active');
+});
+
+document.getElementById('th-list').addEventListener('click', function rearrangeColumns() {
+        var container = document.querySelector('.article-content__container');
+        container.classList.toggle('active');
+        var btnRE = document.querySelector('.article-content__bnt-list');
+        btnRE.classList.toggle('active');
+});
+/*----------------------------------------------------------*/

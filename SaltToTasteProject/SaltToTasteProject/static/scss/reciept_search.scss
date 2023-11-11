@@ -1,3 +1,5 @@
+@import "recipe_card.scss";
+
 .page__recipe-search {
   margin: 120px 15px 30px 15px;
 }
@@ -30,6 +32,7 @@
     font-weight: 500;
     padding-left: 10px;
 }
+
 
 .search__form {
     display: flex;
@@ -281,94 +284,64 @@
 .time-container {
     padding-bottom: 20px;
 }
-.index__article-content {
+
+.article-content__title-and-grids {
     display: flex;
-    border-radius: 52px;
-    border: 1px solid #CBC8C8;
-    background: #FDF5F5;
-    max-height: 300px;
-    margin: 39px 15px;
+    flex-wrap: nowrap;
+    margin: 50px 80px 0 50px;
 
-    .index-article__img {
+    .article-content__btn-grids {
+        display: flex;
+        margin-left: auto;
 
-        img {
-            border-radius: 52px;
-              width: 100%;
-              min-width: 300px;
-              height: 100%;
+        span {
+          display: flex;
+          align-items: center;
+          background-color: #fff;
+          padding: .5rem;
+          margin-left: 5px;
+          border-radius: 2px;
+          cursor: pointer;
+          &.active {
+              display: flex;
+              align-items: center;
+              background-color: #6BB420;
+              padding: 0.5rem;
+              margin-left: 5px;
+              border-radius: 2px;
+              cursor: default;
+              & svg {
+                fill: #fff;
+              }
+          }
+        svg {
+            fill: #000;
         }
     }
-    .index-article-section {
-
-        padding: 36px 37px 35px 58px;
-
-        .index-article_content-block {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
-            height: 115px;
-
-            h1 {
-                text-align: justify;
-                font-size: 24px;
-                font-weight: 700;
-            }
-
-            p {
-                padding-top: 20px;
-                text-align: justify;
-                font-size: 16px;
-                font-weight: 400;
-                padding-bottom: 35px;
-            }
-        }
-
-        ul {
-            display: flex;
-            margin: 25px 0 0 0;
-            .index-article__item1 {
-                width: 30%;
-
-
-            }
-            .index-article__item2 {
-                width: 70%;
-                p {
-                    text-align: right;
-                    font-size: 15px;
-                    font-weight: 400;
-                }
-            }
-            li {
-                display: block;
-                width: 100%;
-                p {
-                }
-                .index-article-item1 {
-                    display: flex;
-                    a {
-                        display: inherit;
-                        align-items: center;
-                        margin-right: 10px;
-                    }
-                    img {
-                        margin-right: 5px;
-                        justify-content: center;
-                    }
-                }
-                .index-article-item2 {
-                    display: flex;
-                    margin-top: 10px;
-                    a {
-                        display: inherit;
-                        align-items: center;
-                    }
-                }
-            }
-
-        }
-
     }
 }
+
+.article-content__container {
+    display: flex;
+    flex-wrap: wrap;
+    &.active{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @import "recipe_card.scss";
+    }
+    &.active-2{
+        display: flex;
+        flex-direction: row;
+        @import "recipe_card-grid2.scss"
+    }
+    &.active-3{
+        display: flex;
+        @import "recipe_card-grid3.scss"
+    }
+}
+
+
+
+
+

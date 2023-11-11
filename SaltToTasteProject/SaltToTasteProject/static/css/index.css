@@ -193,4 +193,8 @@ q {
   left: -60px;
   width: 24%; }
 
+.index-article_content-block {
+  -webkit-line-clamp: 5;
+  height: 50% !important; }
+
 /*# sourceMappingURL=index.css.map */

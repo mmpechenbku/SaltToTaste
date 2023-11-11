@@ -91,6 +91,7 @@
                     <div class="instructions_briefly">
                         {% for step in steps %}
                         <div class="instructions_steps-list">
+                            {{ step.step_number }} шаг:
                                 {{ step.description }}
                         </div>
                         {% endfor %}

@@ -4,7 +4,7 @@ from django.db.models import Prefetch, Count
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView
-from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe
+from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe, RecipeStep
 from django.contrib.auth.decorators import login_required
 
 from django.http import JsonResponse
@@ -20,8 +20,8 @@ def index(request):
     recipes = Recipe.objects.all()
     return render(request, 'index.html', {'recipes': recipes})
 
-def recipe_detail(request):
-    return render(request, 'recipes/recipe_detail.html')
+# def recipe_detail(request):
+#     return render(request, 'recipes/recipe_detail.html')
 
 
 @login_required
@@ -73,17 +73,42 @@ def add_recipe(request):
     return render(request, '', {'recipe_form': recipe_form,})
 
 
+
+# def recipe_detail(request):
+#     recipe = Recipe.objects.filter(pk=7)
+#     steps = RecipeStep.objects.filter(recipe=recipe).order_by('step_number')
+#     # print('hello')
+#     # print(recipe)
+#     # if recipe != Non:
+#     #     print(recipe.title)
+#     # else:
+#     #     print("net")
+#
+#     data = {
+#         'recipe': recipe,
+#         'steps': steps,
+#     }
+#
+#     return render(request, 'recipes/recipe_detail.html', data)
+
+
 class RecipeDetailView(DetailView):
     model = Recipe
-    template_name = ''
+    template_name = 'recipes/recipe_detail.html'
     context_object_name = 'recipe'
     queryset = model.objects.detail()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.object.title
+
+        ingredients = []
+        for ingredient in self.object.ingredients.all():
+            ingredients.append(ingredient.name)
+
+        context['ingredients'] = ingredients
         context['form'] = CommentCreateForm
-        context['steps'] = RecipeStep.objects.filter(self=recipe).order_by('step_number')
+        context['steps'] = RecipeStep.objects.filter(recipe=self.object).order_by('step_number')
         return context
 
 

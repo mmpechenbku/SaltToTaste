@@ -24,9 +24,10 @@ class Recipe(models.Model):
         #     return self.get_queryset().select_related('author').prefetch_related('saveCount')
 
         def detail(self):
-            return self.get_queryset()\
-                .select_related('author')\
-                .prefetch_related('comments', 'recipe_comments_author', 'ingredients', 'saving')
+            return self.get_queryset() \
+                 .prefetch_related('comments',  'ingredients', 'saving', 'steps')
+                # .select_related('author')\
+                # .prefetch_related('comments', 'recipe_comments_author', 'ingredients', 'saving')
 
     class Difficulty(models.TextChoices):
         HARD = "Сложно"
@@ -110,7 +111,7 @@ class CommentRecipe(MPTTModel):
     )
 
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, verbose_name='Рецепт', related_name='comments')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор комментария', related_name='recipe_comments_author')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор комментария', related_name='comments_author')
     content = models.TextField(verbose_name='Текст комментария', max_length=3000)
     time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
     time_update = models.DateTimeField(verbose_name='Время обновления', auto_now=True)

@@ -14,11 +14,11 @@
         <main class="page__recept">
             <section class="hero">
                 <div class="hero__container">
-                <img class="hero__img" src="{% static 'img/blin.png' %}" alt="" />
+                <img class="hero__img" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" />
                 </div>
                 <div class="hero__container">
-                    <h1 class="section-title hero__title">Блинчики с сыром</h1>
-                    <p class="hero__text">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</p>
+                    <h1 class="section-title hero__title">{{ recipe.title }}</h1>
+                    <p class="hero__text">{{ recipe.description }}</p>
                     <ul class="hero__list">
                         <li class="hero__item">
                             <a href="#" class="hero__image">
@@ -31,7 +31,7 @@
                             <b class="hero_item_ingredients">522</b>
                         </li>
                         <li class="hero__item">
-                            <b class="hero_item_ingredients">яйцо, масло растительное, мука, вода, сыр</b>
+                            <b class="hero_item_ingredients">{{ ingredients|join:", " }}</b>
                         </li>
                         <li class="hero__item">
                                 <a href="#" class="hero__image">
@@ -66,10 +66,16 @@
             <section class="instructions">
                 <!--Инструкция по шагам-->
                 <div class="instructions_steps">
+                    {% for step in steps %}
                     <!--Изображение шага-->
-                    <div class="instructions_steps-img"></div>
+                    <div class="instructions_steps-img">
+                        <img src="{{ step.image.url }}" alt="">
+                    </div>
                     <!--Текст шагов-->
-                    <div class="instructions_steps-list"></div>
+                    <div class="instructions_steps-list">
+                        {{ step.description }}
+                    </div>
+                    {% endfor %}
                 </div>
                 <!--Краткая инструкция-->
                 <div class="instructions_briefly"></div>

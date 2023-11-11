@@ -53,7 +53,7 @@
             </form>
         </div>
         <div class="signup__popup">
-            <form action="" class="sign_up">
+            <form action="{% url 'registration' %}" class="sign_up">
 
                 <label class="text-field__label" for="name">Имя</label>
                 <input class="text-field__input" type="text" name="name" id="name" value="">
@@ -70,7 +70,7 @@
                 <label class="text-field__label" for="repassword">Пароль</label>
                 <input class="text-field__input" type="password" name="password2" id="repassword" value="">
 
-                <input type="button" class="btn__signin-auth" value="Зарегистрироваться">
+                <input type="submit" class="btn__signin-auth" value="Зарегистрироваться">
 
             </form>
         </div>

@@ -74,16 +74,6 @@
                 <!--Инструкция по шагам-->
                     <div class="instructions_steps">
                         {% for step in steps %}
-<<<<<<< HEAD
-                        <!--Изображение шага-->
-                        <div class="instructions_steps-img">
-                            <img src="{{ step.image.url }}" alt="">
-                        </div>
-                        <!--Текст шагов-->
-                        <div class="instructions_steps-list">
-                            {{ step.step_number }} шаг:
-                            {{ step.description }}
-=======
                         <div class="instructions_steps-flex">
                         <!--Изображение шага-->
                             <div class="instructions_steps-img">
@@ -93,14 +83,10 @@
                             <div class="instructions_steps-list">
                                 {{ step.description }}
                             </div>
->>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
                         </div>
                         {% endfor %}
                     </div>
                     <!--Краткая инструкция-->
-<<<<<<< HEAD
-                    <div class="instructions_briefly"></div>
-=======
                     <div class="instructions_briefly">
                         {% for step in steps %}
                         <div class="instructions_steps-list">
@@ -108,7 +94,6 @@
                         </div>
                         {% endfor %}
                     </div>
->>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
                 </div>
             </section>
         </main>

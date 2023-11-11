@@ -7,7 +7,7 @@
   margin: 6px 6px;
   width: 48.8%; }
   .index__article-content .index-article__img img {
-    border-radius: 52px;
+    border-radius: 52px 0 0 52px;
     width: 200px;
     height: 100%; }
   .index__article-content .index-article-section {

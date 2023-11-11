@@ -106,13 +106,6 @@ let btn1 = document.getElementById('instructions_steps__btn-id');
 let btn2 = document.getElementById('instructions_steps-list-btn-id');
 let container1 = document.querySelector('.instructions_steps__btn');
 let container2 = document.querySelector('.instructions_steps-list-btn');
-<<<<<<< HEAD
-if (btn1) {
-    container1.classList.add('active');
-btn2.addEventListener('click', function () {
-    container2.classList.add('active');
-    container1.classList.remove('active');
-=======
 let steps1 = document.querySelector('.instructions_steps');
 let steps2 = document.querySelector('.instructions_briefly');
 if (btn1) {
@@ -124,17 +117,13 @@ btn2.addEventListener('click', function () {
     container1.classList.remove('active');
     steps1.style.display = 'none';
     steps2.style.display = 'flex';
->>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
 
 });
 
 btn1.addEventListener('click', function () {
         container1.classList.add('active');
         container2.classList.remove('active');
-<<<<<<< HEAD
-=======
         steps1.style.display = 'flex';
         steps2.style.display = 'none';
->>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
 });
 }

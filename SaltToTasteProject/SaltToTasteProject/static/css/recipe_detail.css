@@ -139,10 +139,6 @@
   margin-left: auto; }
 
 .instructions__container {
-<<<<<<< HEAD
-  background: #ebebeb;
-=======
->>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
   border-radius: 0 0 52px 52px; }
 
 .instructions__btn {
@@ -151,23 +147,14 @@
   align-items: center; }
   .instructions__btn .border-bottom {
     width: 100%;
-<<<<<<< HEAD
-    height: 50px;
-=======
     height: 70px;
->>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
     border-bottom: 1px solid #CBC8C8; }
   .instructions__btn span {
     display: flex;
     justify-content: center;
     align-items: center;
-<<<<<<< HEAD
-    width: 700px;
-    height: 50px;
-=======
     width: 900px;
     height: 70px;
->>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
     color: #000;
     text-align: center;
     font-size: 22px;
@@ -175,22 +162,6 @@
     cursor: pointer;
     border-bottom: 1px solid #CBC8C8; }
     .instructions__btn span.instructions_steps__btn.active {
-<<<<<<< HEAD
-      border-radius: 20px 0 0 0;
-      border-top: 1px solid #CBC8C8;
-      border-left: 1px solid #CBC8C8;
-      border-right: 1px solid #CBC8C8;
-      background: #ebebeb;
-      cursor: default; }
-    .instructions__btn span.instructions_steps-list-btn.active {
-      border-radius: 0 20px 0 0;
-      border-top: 1px solid #CBC8C8;
-      border-left: 1px solid #CBC8C8;
-      border-right: 1px solid #CBC8C8;
-      background: #ebebeb;
-      cursor: default; }
-
-=======
       border-radius: 30px 30px 0 0;
       border-top: 1px solid #CBC8C8;
       border-left: 1px solid #CBC8C8;
@@ -264,5 +235,4 @@
     border: 1px solid #CBC8C8;
     background: #FDF5F5; }
 
->>>>>>> 9bf2ee9438afbe4f14d408b4ee6c38fbe2df49b7
 /*# sourceMappingURL=recipe_detail.css.map */

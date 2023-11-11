@@ -8,7 +8,7 @@
   margin: 15px 0;
   width: 100%; }
   .index__article-content .index-article__img img {
-    border-radius: 52px;
+    border-radius: 52px 0 0 52px;
     width: 400px;
     min-width: 300px;
     height: 100%; }
@@ -355,7 +355,7 @@
       margin: 15px 0;
       width: 100%; }
       .article-content__container.active .index__article-content .index-article__img img {
-        border-radius: 52px;
+        border-radius: 52px 0 0 52px;
         width: 400px;
         min-width: 300px;
         height: 100%; }
@@ -419,7 +419,7 @@
       margin: 6px 6px;
       width: 48.8%; }
       .article-content__container.active-2 .index__article-content .index-article__img img {
-        border-radius: 52px;
+        border-radius: 52px 0 0 52px;
         width: 200px;
         height: 100%; }
       .article-content__container.active-2 .index__article-content .index-article-section {
@@ -494,7 +494,7 @@
           display: -webkit-box;
           -webkit-line-clamp: 7;
           -webkit-box-orient: vertical;
-          height: 63.5%; }
+          height: 52.5%; }
           .article-content__container.active-3 .index__article-content .index-article-section .index-article_content-block h1 {
             text-align: justify;
             font-size: 18px;

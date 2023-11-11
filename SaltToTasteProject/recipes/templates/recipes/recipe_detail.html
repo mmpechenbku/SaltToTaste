@@ -64,21 +64,29 @@
 
             </section>
             <section class="instructions">
-                <!--Инструкция по шагам-->
-                <div class="instructions_steps">
-                    {% for step in steps %}
-                    <!--Изображение шага-->
-                    <div class="instructions_steps-img">
-                        <img src="{{ step.image.url }}" alt="">
-                    </div>
-                    <!--Текст шагов-->
-                    <div class="instructions_steps-list">
-                        {{ step.description }}
-                    </div>
-                    {% endfor %}
+                <div class="instructions__btn">
+                    <div class="border-bottom"></div>
+                    <span class="instructions_steps__btn" id="instructions_steps__btn-id"><p>Пошаговый рецепт</p></span>
+                    <span class="instructions_steps-list-btn" id="instructions_steps-list-btn-id"><p>Краткая инструкция</p></span>
+                    <div class="border-bottom"></div>
                 </div>
-                <!--Краткая инструкция-->
-                <div class="instructions_briefly"></div>
+                <div class="instructions__container">
+                <!--Инструкция по шагам-->
+                    <div class="instructions_steps">
+                        {% for step in steps %}
+                        <!--Изображение шага-->
+                        <div class="instructions_steps-img">
+                            <img src="{{ step.image.url }}" alt="">
+                        </div>
+                        <!--Текст шагов-->
+                        <div class="instructions_steps-list">
+                            {{ step.description }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!--Краткая инструкция-->
+                    <div class="instructions_briefly"></div>
+                </div>
             </section>
         </main>
        <ul class="btn__favorites-list">

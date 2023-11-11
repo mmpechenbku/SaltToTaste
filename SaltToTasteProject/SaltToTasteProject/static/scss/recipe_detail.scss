@@ -79,7 +79,7 @@
     padding-bottom: 20px;
 }
 .instructions {
-    padding: 0px 50px 50px 30px;
+    padding: 0;
 }
 
 .btn__back {
@@ -144,4 +144,56 @@
 	width: 80%;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+
+
+.instructions__container {
+    background: #ebebeb;
+    border-radius: 0 0 52px 52px;
+}
+
+
+.instructions__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .border-bottom {
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid #CBC8C8;
+    }
+    span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 700px;
+        height: 50px;
+        color: #000;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 500;
+        cursor: pointer;
+        border-bottom: 1px solid #CBC8C8;
+
+        &.instructions_steps__btn.active {
+            border-radius: 20px 0 0 0;
+            border-top: 1px solid #CBC8C8;
+            border-left: 1px solid #CBC8C8;
+            border-right: 1px solid #CBC8C8;
+            background: #ebebeb;
+            cursor: default;
+
+
+        }
+        &.instructions_steps-list-btn.active {
+            border-radius: 0 20px 0 0;
+            border-top: 1px solid #CBC8C8;
+            border-left: 1px solid #CBC8C8;
+            border-right: 1px solid #CBC8C8;
+            background: #ebebeb;
+            cursor: default;
+        }
+    }
 }

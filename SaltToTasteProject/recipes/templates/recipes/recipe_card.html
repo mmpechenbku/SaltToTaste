@@ -9,7 +9,7 @@
     </div>
     <div class="index-article-section">
         <div class="index-article_content-block">
-            <h1 class="index-article__title"><a href="">{{ recipe.title }}</a></h1>
+            <h1 class="index-article__title"><a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a></h1>
             <p class="index-article__text"><a href="">{{ recipe.description }}</a></p>
         </div>
         <ul class="index-article__list">

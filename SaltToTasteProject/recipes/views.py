@@ -29,6 +29,9 @@ def collections(request):
     return render(request, 'collections/collections.html')
 
 
+def recipe_add(request):
+    return render(request, 'recipes/recipe_add.html')
+
 # def add_recipe(request):
 #     if request.method == 'POST':
 #         title = request.POST['title']

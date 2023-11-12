@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .page__recipe-search {
-  margin: 120px 15px 30px 15px; }
+  padding: 120px 15px 30px 15px; }
 
 .search__header {
   display: flex;

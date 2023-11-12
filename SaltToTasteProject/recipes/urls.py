@@ -9,7 +9,7 @@ recipes_urls = [
     path('recipe/<int:pk>/comments/create/', CommentCreateView.as_view(), name='comment_create_view'),
     path('recipe/<int:pk>/', RecipeDetailView.as_view(), name='recipe_detail'),
     # path('recipe/<int:pk>', recipe_detail, name='recipe_detail'),
-    path('add_recipe/', add_recipe, name='add_recipe'),
+    path('recipe_add/', recipe_add, name='add_recipe'),
     path('api/ingredients/', IngredientSearchView.as_view(), name='ingredient-search'),
 ]
 

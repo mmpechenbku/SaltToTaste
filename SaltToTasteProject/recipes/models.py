@@ -48,6 +48,7 @@ class Recipe(models.Model):
 
     objects = RecipeManager()
 
+    @property
     def get_sum_save(self):
         # return sum([1 for save in self.saving.all()])
         return self.saving.count()

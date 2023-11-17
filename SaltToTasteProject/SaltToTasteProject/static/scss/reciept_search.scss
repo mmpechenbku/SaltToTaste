@@ -1,4 +1,4 @@
-@import "recipe_card.scss";
+
 
 .page__recipe-search {
   margin: 120px 15px 30px 15px;
@@ -324,6 +324,7 @@
 .article-content__container {
     display: flex;
     flex-wrap: wrap;
+    @import "recipe_card.scss";
     &.active{
         display: flex;
         flex-direction: column;

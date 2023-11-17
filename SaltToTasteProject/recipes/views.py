@@ -213,9 +213,9 @@ class SaveRecipeCreateView(View):
 
         if not created:
             save.delete()
-            return JsonResponse({'status': 'deleted', 'save_sum': save.recipe.get_sum_save()})
+            return JsonResponse({'status': 'deleted', 'save_sum': save.recipe.get_sum_save})
 
-        return JsonResponse({'status': 'created', 'save_sum': save.recipe.get_sum_save()})
+        return JsonResponse({'status': 'created', 'save_sum': save.recipe.get_sum_save})
 
 
 class CommentCreateView(LoginRequiredMixin, CreateView):

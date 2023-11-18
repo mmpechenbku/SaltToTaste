@@ -1,13 +1,43 @@
 {% extends 'base_layout.html' %}
 {% load static %}
 
-{% block title %}Профиль{% endblock %}
+{% block title %}Профиль {{ user.username }}{% endblock %}
 {% block header %}
-<!--<link rel="stylesheet" href="{% static 'css/index.css' %}">-->
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock %}
 {% block content %}
 
-<div class="content-section" style="margin: 120px;">
+
+
+<main class="page__profile">
+	<img class="soup" src="{% static 'img/background/soup.png' %}" alt="">
+	<img class="pizza" src="{% static 'img/background/pizza.png' %}" alt="">
+	<section class="profile__header">
+		<div class="profile__settings">
+			<ul>
+				<li>Поделиться профилем</li>
+				<li>Изменить профиль</li>
+			</ul>
+		</div>
+		<div class="account">
+			<img class="rounded-circle account-img" src="{% static 'img/ProfileIcon.png' %}">
+			<ul>
+				<li>@{{ user.nickname }}</li>
+				<li>{{ user.name }}</li>
+			</ul>
+		</div>
+		<div class="account__subscriptions">
+			<ul>
+				<li>20 подписчиков</li>
+				<li>12 подписки</li>
+			</ul>
+		</div>
+	</section>
+
+</main>
+
+
+<!--<div class="content-section" style="margin: 120px;">
   	<div class="media">
     	<img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
     	<div class="media-body">
@@ -15,7 +45,7 @@
   	    <p class="text-secondary">{{ user.email }}</p>
     	</div>
   	</div>
-  	<!-- Здесь будет форма -->
-</div>
+  	&lt;!&ndash; Здесь будет форма &ndash;&gt;
+</div>-->
 
 {% endblock %}

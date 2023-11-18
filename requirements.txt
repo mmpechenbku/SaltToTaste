@@ -38,3 +38,4 @@ urllib3==2.0.7
 URLObject==2.4.3
 virtualenv==20.24.6
 virtualenvwrapper-win==1.2.7
+beautifulsoup4==4.12.2

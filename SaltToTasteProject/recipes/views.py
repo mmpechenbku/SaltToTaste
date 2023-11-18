@@ -9,8 +9,10 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import JsonResponse
 
-from  .forms import CommentCreateForm, RecipeForm, StepForm
+from .forms import CommentCreateForm, RecipeForm, StepForm, IngredientQuantityForm, IngredientQuantityFormSet, StepFormSet
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+import bs4
 
 
 # Create your views here.
@@ -28,6 +30,9 @@ def index(request):
 def collections(request):
     return render(request, 'collections/collections.html')
 
+
+# def recipe_add(request):
+#     return render(request, 'recipes/recipe_add.html')
 
 # def add_recipe(request):
 #     if request.method == 'POST':
@@ -48,29 +53,72 @@ def collections(request):
 #     success_url = ''
 
 
+# def add_recipe(request):
+#     if request.method == 'POST':
+#         tree =bs4.BeautifulSoup(request.text, 'html.parser')
+#         for item in tree.select('.ingredient__step-list'):
+
+
 def add_recipe(request):
     if request.method == 'POST':
         recipe_form = RecipeForm(request.POST, request.FILES)
-        step_texts = request.POST.getlist('steps-text[]')
-        step_images = request.FILES.getlist('steps-image[]')
+        ingredient_quantity_formset = IngredientQuantityFormSet(request.POST, prefix='ingredient_quantity')
+        step_formset = StepFormSet(request.POST, request.FILES, prefix='steps')
 
-        if recipe_form.is_valid():
-            recipe = recipe_form.save(commit=False)
-            recipe.author = request.user
-            recipe.save()
+        if recipe_form.is_valid() and ingredient_quantity_formset.is_valid() and step_formset.is_valid():
+            # Сохранение формы рецепта
+            recipe = recipe_form.save()
 
-            for text, image in zip(step_texts, step_images):
-                step = StepForm({'description': text})
-                if step.is_valid():
-                    step_instance = step.save(commit=False)
-                    step_instance.recipe = recipe
-                    step_instance.image = image
-                    step_instance.save()
+            # Связывание рецепта с ингредиентами и их количествами
+            for form in ingredient_quantity_formset:
+                if form.is_valid():
+                    ingredient_quantity = form.save(commit=False)
+                    ingredient_quantity.recipe = recipe
+                    ingredient_quantity.save()
 
+            # Сохранение формы шагов
+            for form in step_formset:
+                if form.is_valid():
+                    step = form.save(commit=False)
+                    step.recipe = recipe
+                    step.save()
+
+            # Редирект на страницу с добавленным рецептом
+            return redirect('recipe_detail', recipe_id=recipe.id)
     else:
         recipe_form = RecipeForm()
+        ingredient_quantity_formset = IngredientQuantityFormSet(prefix='ingredient_quantity')
+        step_formset = StepFormSet(prefix='steps')
 
-    return render(request, '', {'recipe_form': recipe_form,})
+        # Получение всех ингредиентов для передачи в форму
+    ingredients = Ingredient.objects.all()
+    context = {'recipe_form': recipe_form, 'ingredient_quantity_formset': ingredient_quantity_formset,
+               'step_formset': step_formset, 'ingredients': ingredients}
+    return render(request, 'recipes/recipe_add.html', context)
+
+    # if request.method == 'POST':
+    #     # recipe_form = RecipeForm(request.POST, request.FILES)
+    #     recipe_form = RecipeForm()
+    #     step_texts = request.POST.getlist('steps-text[]')
+    #     step_images = request.FILES.getlist('steps-image[]')
+    #
+    #     if recipe_form.is_valid():
+    #         recipe = recipe_form.save(commit=False)
+    #         recipe.author = request.user
+    #         recipe.save()
+    #
+    #         for text, image in zip(step_texts, step_images):
+    #             step = StepForm({'description': text})
+    #             if step.is_valid():
+    #                 step_instance = step.save(commit=False)
+    #                 step_instance.recipe = recipe
+    #                 step_instance.image = image
+    #                 step_instance.save()
+    #
+    # else:
+    #     recipe_form = RecipeForm()
+    #
+    # return render(request, 'recipes/recipe_add.html', {'recipe_form': recipe_form, 'ingredients': Ingredient.objects.all()})
 
 
 

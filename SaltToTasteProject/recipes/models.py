@@ -73,6 +73,11 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
+class IngredientQuantity(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, verbose_name='Рецепт')
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, verbose_name='Ингредиент')
+    quantity = models.CharField(max_length=50, verbose_name='Количество')
+
 
 class RecipeStep(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, verbose_name='Рецепт', related_name='steps')

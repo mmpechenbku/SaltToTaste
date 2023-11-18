@@ -1,5 +1,6 @@
 from django import forms
-from .models import CommentRecipe, Recipe, RecipeStep
+from .models import CommentRecipe, Recipe, RecipeStep, IngredientQuantity
+from django.forms import modelformset_factory
 
 class CommentCreateForm(forms.ModelForm):
     parent = forms.IntegerField(widget=forms.HiddenInput, required=False)
@@ -25,3 +26,18 @@ class StepForm(forms.ModelForm):
     class Meta:
         model = RecipeStep
         fields = ['description', 'image']
+
+
+class IngredientQuantityForm(forms.ModelForm):
+    class Meta:
+        model = IngredientQuantity
+        fields = ['ingredient', 'quantity']
+
+IngredientQuantityFormSet = modelformset_factory(IngredientQuantity, form=IngredientQuantityForm, extra=1)
+
+class RecipeStepForm(forms.ModelForm):
+    class Meta:
+        model = RecipeStep
+        fields = ['description', 'image']
+
+StepFormSet = modelformset_factory(RecipeStep, form=RecipeStepForm, extra=1)

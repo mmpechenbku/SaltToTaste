@@ -127,3 +127,22 @@ btn1.addEventListener('click', function () {
         steps2.style.display = 'none';
 });
 }
+
+
+// Добавление рецепта по шагам
+document.getElementById('add-step').addEventListener('click', function() {
+    var stepFormset = document.querySelector('.ingredient__step-list');
+    if (stepFormset.children.length < 10) {
+      var stepDiv = document.createElement('div');
+      stepDiv.className = 'ingredient__step-item';
+      stepDiv.id = stepFormset.children.length;
+      stepDiv.innerHTML = '<div class="ingredient__step-item-img">' +
+                              '<img src="#" width="30" height="30">'+
+                              '<p>Добавьте фото</p>'+
+                            '</div>' +
+                            '<div class="ingredient__step-item-text">' +
+                                '<textarea rows="10" placeholder="Описание"></textarea>' +
+                            '</div>';
+      stepFormset.appendChild(stepDiv);
+    }
+  });

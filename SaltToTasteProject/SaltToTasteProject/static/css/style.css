@@ -30,7 +30,14 @@ body{
     height: auto;
     margin: 0 auto;
 }
-
+button[type=submit]:hover {
+    color: #ccc !important;
+    background: #6BB420;
+    background: linear-gradient(to top, #6BB420, #0a9e0d);
+}
+button[type=button]:hover {
+    background: linear-gradient(to top, #6c757d, #818a92);
+}
 :active, :hover, :focus {
     outline: 0;
     outline-offset: 0;

@@ -66,31 +66,26 @@ def add_recipe(request):
         step_formset = StepFormSet(request.POST, request.FILES, prefix='steps')
 
         if recipe_form.is_valid() and ingredient_quantity_formset.is_valid() and step_formset.is_valid():
-            # Сохранение формы рецепта
             recipe = recipe_form.save()
 
-            # Связывание рецепта с ингредиентами и их количествами
             for form in ingredient_quantity_formset:
                 if form.is_valid():
                     ingredient_quantity = form.save(commit=False)
                     ingredient_quantity.recipe = recipe
                     ingredient_quantity.save()
 
-            # Сохранение формы шагов
             for form in step_formset:
                 if form.is_valid():
                     step = form.save(commit=False)
                     step.recipe = recipe
                     step.save()
 
-            # Редирект на страницу с добавленным рецептом
             return redirect('recipe_detail', recipe_id=recipe.id)
     else:
         recipe_form = RecipeForm()
         ingredient_quantity_formset = IngredientQuantityFormSet(prefix='ingredient_quantity')
         step_formset = StepFormSet(prefix='steps')
 
-        # Получение всех ингредиентов для передачи в форму
     ingredients = Ingredient.objects.all()
     context = {'recipe_form': recipe_form, 'ingredient_quantity_formset': ingredient_quantity_formset,
                'step_formset': step_formset, 'ingredients': ingredients}

@@ -27,8 +27,8 @@
             <div class="recipe_add__container-add_step">
                 <h4>2. Краткое описание</h4>
                 <div class="container-add_content">
-<!--                    <textarea name="" id="" cols="30" rows="10"></textarea>-->
-                        {{ recipe_form.description }}
+                    <textarea name="description" cols="30" rows="10"></textarea>
+<!--                        {{ recipe_form.description }}-->
                 </div>
             </div>
         </div>
@@ -36,8 +36,18 @@
             <div class="recipe_add__container-add_step">
                 <h4>3. Загрузите обложку рецепта</h4>
                 <div class="container-add_content">
-                   <img src="{% static 'img/svg_image/addreciept.svg' %}" width="30" height="30" alt="Добавить свой рецепт">
-                    {{ recipe_form.picture }}
+<!--                   <img src="{% static 'img/svg_image/addreciept.svg' %}" width="30" height="30" alt="Добавить свой рецепт">-->
+                    <input style="appearance: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);" name="picture" class="chat-form__file-input" type="file" id="id_picture" accept=".png, .jpg, .jpeg">
+                    <label style="cursor: pointer;
+  display: block;
+  width: 28px;
+  height: 28px;" class="chat-form__file-label" for="id_picture"> <img src="{% static 'img/svg_image/addreciept.svg' %}" width="30" height="30" alt="Добавить свой рецепт"></span></label>
+<!--                    {{ recipe_form.picture }}-->
                 </div>
             </div>
         </div>

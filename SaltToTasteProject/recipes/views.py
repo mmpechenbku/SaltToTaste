@@ -4,7 +4,7 @@ from django.db.models import Prefetch, Count
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView
-from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe, RecipeStep
+from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe, RecipeStep, IngredientQuantity, Selection
 from django.contrib.auth.decorators import login_required
 
 from django.http import JsonResponse
@@ -20,6 +20,7 @@ import bs4
 
 def index(request):
     recipes = Recipe.objects.all()
+
     return render(request, 'index.html', {'recipes': recipes})
 
 # def recipe_detail(request):
@@ -28,111 +29,46 @@ def index(request):
 
 @login_required
 def collections(request):
+
     return render(request, 'collections/collections.html')
 
-
-# def recipe_add(request):
-#     return render(request, 'recipes/recipe_add.html')
-
-# def add_recipe(request):
-#     if request.method == 'POST':
-#         title = request.POST['title']
-#         ingredients = request.POST['ingredients']
-#         instructions = request.POST['instructions']
-#         cooking_time = request.POST['cooking_time']
-#
-#         recipe = Recipe(title=title, ingredients=ingredients, instructions=instructions, cooking_time=cooking_time)
-#         recipe.save()
-#
-#         return redirect('recipe_list')
-
-# class AddingRecipe(CreateView):
-#     model = Recipe
-#     # form_class = AddingRecipeForm
-#     template_name = ''
-#     success_url = ''
+@login_required
+def selections(request):
+    user = request.user
+    selections = Selection.objects.filter(user=user)
+    favorites = SaveRecipe.objects.filter(user=user)
+    favorite_recipes = [favorite.recipe for favorite in favorites]
+    data = {
+        'selections': selections,
+        'favorites': favorite_recipes,
+    }
+    return render(request, 'collections/collections.html', data)
 
 
-# def add_recipe(request):
-#     if request.method == 'POST':
-#         tree =bs4.BeautifulSoup(request.text, 'html.parser')
-#         for item in tree.select('.ingredient__step-list'):
-
-
-def add_recipe(request):
+def create_selection(request):
     if request.method == 'POST':
-        recipe_form = RecipeForm(request.POST, request.FILES)
-        ingredient_quantity_formset = IngredientQuantityFormSet(request.POST, prefix='ingredient_quantity')
-        step_formset = StepFormSet(request.POST, request.FILES, prefix='steps')
+        print('THEREEE')
+        user = request.user
+        name = request.POST.get('name')
+        # image = request.FILES.get('image')
 
-        if recipe_form.is_valid() and ingredient_quantity_formset.is_valid() and step_formset.is_valid():
-            recipe = recipe_form.save()
+        # Создаем новую подборку
+        selection = Selection.objects.create(
+            user=user,
+            title=name,
+            # image=image,
+        )
 
-            for form in ingredient_quantity_formset:
-                if form.is_valid():
-                    ingredient_quantity = form.save(commit=False)
-                    ingredient_quantity.recipe = recipe
-                    ingredient_quantity.save()
+        # Добавляем рецепты к подборке (если они выбраны в форме)
+        recipe_ids = request.POST.getlist('recipes')
+        recipes = Recipe.objects.filter(pk__in=recipe_ids)
+        selection.recipes.set(recipes)
 
-            for form in step_formset:
-                if form.is_valid():
-                    step = form.save(commit=False)
-                    step.recipe = recipe
-                    step.save()
-
-            return redirect('recipe_detail', recipe_id=recipe.id)
+        # Возвращаем JSON-ответ с информацией о созданной подборке
+        return JsonResponse({'status': 'success', 'collection_id': selection.id})
     else:
-        recipe_form = RecipeForm()
-        ingredient_quantity_formset = IngredientQuantityFormSet(prefix='ingredient_quantity')
-        step_formset = StepFormSet(prefix='steps')
-
-    ingredients = Ingredient.objects.all()
-    context = {'recipe_form': recipe_form, 'ingredient_quantity_formset': ingredient_quantity_formset,
-               'step_formset': step_formset, 'ingredients': ingredients}
-    return render(request, 'recipes/recipe_add.html', context)
-
-    # if request.method == 'POST':
-    #     # recipe_form = RecipeForm(request.POST, request.FILES)
-    #     recipe_form = RecipeForm()
-    #     step_texts = request.POST.getlist('steps-text[]')
-    #     step_images = request.FILES.getlist('steps-image[]')
-    #
-    #     if recipe_form.is_valid():
-    #         recipe = recipe_form.save(commit=False)
-    #         recipe.author = request.user
-    #         recipe.save()
-    #
-    #         for text, image in zip(step_texts, step_images):
-    #             step = StepForm({'description': text})
-    #             if step.is_valid():
-    #                 step_instance = step.save(commit=False)
-    #                 step_instance.recipe = recipe
-    #                 step_instance.image = image
-    #                 step_instance.save()
-    #
-    # else:
-    #     recipe_form = RecipeForm()
-    #
-    # return render(request, 'recipes/recipe_add.html', {'recipe_form': recipe_form, 'ingredients': Ingredient.objects.all()})
-
-
-
-# def recipe_detail(request):
-#     recipe = Recipe.objects.filter(pk=7)
-#     steps = RecipeStep.objects.filter(recipe=recipe).order_by('step_number')
-#     # print('hello')
-#     # print(recipe)
-#     # if recipe != Non:
-#     #     print(recipe.title)
-#     # else:
-#     #     print("net")
-#
-#     data = {
-#         'recipe': recipe,
-#         'steps': steps,
-#     }
-#
-#     return render(request, 'recipes/recipe_detail.html', data)
+        # Возвращаем JSON-ответ с ошибкой, если метод запроса не POST
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
 
 class RecipeDetailView(DetailView):
@@ -158,13 +94,17 @@ class RecipeDetailView(DetailView):
 def search_recipes(request):
     message = 'Всего рецептов: '
     selected_ingredient_ids = request.POST.get('ingredients', '').split(',')
+    # print('ingr', selected_ingredient_ids)
     difficulty = request.POST.get('difficulty', '')
+    # print(difficulty)
     time = request.POST.get('time', '')
     fullHit = request.POST.get('coincidence')
     recipe_title = request.POST.get('title_search')
+    # print('title', recipe_title)
 
     #  selected_ingredient_ids не пуст и не содержит пустых значений
     selected_ingredient_ids = [id for id in selected_ingredient_ids if id]
+    # print(selected_ingredient_ids)
 
     recipes = Recipe.objects.all()
 
@@ -172,14 +112,17 @@ def search_recipes(request):
 
     print(recipe_title)
     if recipe_title:
-        recipes = recipes.filter(title__icontains=title)
+        recipes = recipes.filter(title__icontains=recipe_title)
 
     percentsDict = []
 
-    if difficulty:
+    if difficulty and difficulty != 'Все':
+        print('dif')
+        print(difficulty)
         recipes = recipes.filter(difficulty=difficulty)
-
-    if time:
+    # print(recipes)
+    if time and time != 0:
+        print('time')
         time = int(time)
         hours = time // 60
         minutes = time % 60
@@ -196,17 +139,19 @@ def search_recipes(request):
 
     if selected_ingredient_ids:
         recipes = Recipe.objects.filter(ingredients__id__in=selected_ingredient_ids).distinct()
+        # print('with ingr', recipes)
 
-        if difficulty:
+        if difficulty and difficulty != 'Все':
             recipes = recipes.filter(difficulty=difficulty)
 
-        if time:
+        if time and time != 0:
             recipes = recipes.filter(cooking_time__lte=time)
 
         # Фильтрация рецептов по процентному попаданию
         filtered_recipes = []
         percentsDict = []
         for recipe in recipes:
+            # print(recipes)
             total_ingredients = selected_ingredient_ids.__len__()
             ingredients_in_recipe = recipe.ingredients.count()
             matching_ingredients = recipe.ingredients.filter(id__in=selected_ingredient_ids).count()
@@ -217,12 +162,14 @@ def search_recipes(request):
                 percents = f"{int(percentage)}%"
                 percentsDict.append({ recipe : percents })
         recipes = filtered_recipes
+        # print(recipes)
         message = 'Найдено рецептов: '
 
     # print(percentsDict)
     ingredients = Ingredient.objects.all()
     # num_recipes = f"{message}{len(recipes)}"
     num_recipes = str(len(recipes))
+    # print(num_recipes)
 
     data = {
         'recipes' : recipes,
@@ -246,19 +193,22 @@ class SaveRecipeCreateView(View):
 
     def post(self, request, *args, **kwargs):
         recipe_id = request.POST.get('recipe_id')
-        # ip_address = get_client_ip(request)
-        user = request.user if request.user.is_autentificated else None
+        user = request.user if request.user.is_authenticated else None
+        if user:
+            save, created = self.model.objects.get_or_create(
+                recipe_id = recipe_id,
+                user = user
+            )
+            count = str(save.recipe.get_sum_save)
+            print('count', count)
+            print('save', save)
+            print('recipe', save.recipe)
+            if not created:
+                save.delete()
+                # print(save.recipe.get_sum_save())
+                return JsonResponse({'status': 'deleted', 'save_sum': save.recipe.get_sum_save})
 
-        save, created = self.model.objects.get_or_create(
-            recipe_id = recipe_id,
-            user = user
-        )
-
-        if not created:
-            save.delete()
-            return JsonResponse({'status': 'deleted', 'save_sum': save.recipe.get_sum_save})
-
-        return JsonResponse({'status': 'created', 'save_sum': save.recipe.get_sum_save})
+            return JsonResponse({'status': 'created', 'save_sum': save.recipe.get_sum_save})
 
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
@@ -295,3 +245,76 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
     def handle_no_permission(self):
         return JsonResponse({'error': 'need authorisation'}, status=400)
+
+
+
+def test_add_recipe(request):
+    if request.method == 'POST':
+        try:
+            # Получаем данные из запроса
+            recipe_name = request.POST.get('recipe_name')
+            recipe_description = request.POST.get('recipe_description')
+            recipe_image = request.FILES.get('recipe_image')
+            difficulty = request.POST.get('difficulty')  # Получаем сложность
+            cooking_time = request.POST.get('cooking_time')  # Получ
+            ingredient_ids = request.POST.get('ingredients', '').split(',')
+            ingredients = Ingredient.objects.filter(id__in=ingredient_ids)
+            # ... дополнительные поля ...
+
+            print(recipe_name)
+            print(recipe_description)
+            print(recipe_image)
+            print(difficulty)
+            print(cooking_time)
+            print(ingredients)
+
+            # Создаем объект Recipe
+            recipe = Recipe.objects.create(
+                title=recipe_name,
+                description=recipe_description,
+                picture=recipe_image,
+                difficulty = difficulty,
+                cookingTime = cooking_time,
+                # ingredients = ingredients,
+                # ... дополнительные поля ...
+            )
+            recipe.ingredients.set(ingredients)
+
+            # iter = 1
+            for ingredient in ingredients:
+                quantity = request.POST.get(f'quantity_{ingredient.id}')
+                # iter += 1
+                print(ingredient)
+                print(quantity)
+
+                IngredientQuantity.objects.create(
+                    recipe=recipe,
+                    ingredient = ingredient,
+                    quantity = quantity
+                )
+
+            # Обработка шагов приготовления
+            steps_count = int(request.POST.get('steps_count', 0))
+            for i in range(1, steps_count + 1):
+                step_description = request.POST.get(f'step_description_{i}')
+                step_image = request.FILES.get(f'step_image_{i}')
+
+                RecipeStep.objects.create(
+                    recipe=recipe,
+                    description=step_description,
+                    image=step_image,
+                    step_number = i
+                )
+
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+    else:
+        ingredients = Ingredient.objects.all()
+        data = {
+                'ingredients': ingredients
+        }
+        return render(request, 'recipes/test_recipe_add.html', data)
+
+        # return JsonResponse({'status': 'error', 'message': 'Invalid request method'})

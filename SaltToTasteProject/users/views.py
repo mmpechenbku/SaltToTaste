@@ -74,3 +74,22 @@ class Login(SuccessMessageMixin, LoginView):
 
     def profile(request):
         return render(request, 'users/profile.html')
+
+    @login_required
+    def toggle_subscription(request, user_id):
+        # Получаем пользователя, на которого будет подписка
+        following_user = User.objects.get(pk=user_id)
+
+        # Пытаемся найти существующую подписку
+        try:
+            subscription = Subscription.objects.get(follower=request.user, following=following_user)
+            # Если подписка существует, удаляем ее
+            subscription.delete()
+            status = 'unsubscribed'
+        except Subscription.DoesNotExist:
+            # Если подписка не существует, создаем ее
+            Subscription.objects.create(follower=request.user, following=following_user)
+            status = 'subscribed'
+
+        # Возвращаем JSON-ответ
+        return JsonResponse({'status': status})

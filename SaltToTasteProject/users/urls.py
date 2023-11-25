@@ -12,5 +12,6 @@ urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     # path('sign/')
     path('profile/', views.profile, name='profile'),
-    path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout')
+    path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+    # path('toggle_subscription/<int:user_id>/', toggle_subscription, name='toggle_subscription'),
 ]

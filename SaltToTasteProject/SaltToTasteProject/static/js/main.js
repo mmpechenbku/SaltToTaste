@@ -176,13 +176,14 @@ const saveButton = document.querySelectorAll('.save-recipe-button');
 
 saveButton.forEach(button => {
     button.addEventListener('click', event => {
-        const recipeId = parseInt(event.target.dataset.recipe)
+        const recipeId = parseInt(button.dataset.recipe)
         const saveSum = button.querySelector('.save-sum');
+        console.log(saveSum);
         const formData = new FormData();
 
         formData.append('recipe_id', recipeId);
 
-        fetch("/save_recipe/", {
+        fetch("/search/save_recipe/", {
             method: "POST",
             headers: {
                 "X-CSRFToken": csrftoken,
@@ -256,4 +257,44 @@ async function createComment(event) {
     }
 }
 
+//const saveSelectionButton = document.querySelectorAll('.save');
+//saveSelectionButton.forEach(button => {
+//button.addEventListener('click', function () {
 
+//const saveSelectionButton = document.querySelector('.save_selection');
+//
+//
+//saveSelectionButton.addEventListener('click', function () {
+//
+//    var name = document.getElementById('collection-name').value;
+//    var selectedRecipes = Array.from(document.querySelectorAll('input[name="recipes"]:checked')).map(checkbox => checkbox.value);
+//
+//    console.log(selectedRecipes);
+//    console.log('lox');
+//
+//    var formData = new FormData();
+//    formData.append('name', name);
+//    selectedRecipes.forEach(recipeId => {
+//        formData.append('recipes', recipeId);
+//    });
+//
+//    // Отправляем POST-запрос
+//    fetch('/search/create_selection/', {
+//        method: 'POST',
+//        body: formData,
+//        credentials: 'same-origin',
+//        headers: {
+//                "X-CSRFToken": csrftoken,
+//                "X-Requested-With": "XMLHttpRequest",
+//        },
+//    })
+//    .then(response => response.json())
+//    .then(data => {
+//        console.log('Создана новая подборка:', data);
+//        // Дополнительные действия после успешного создания подборки
+//    })
+//    .catch(error => {
+//        console.error('Ошибка при создании подборки:', error);
+//    });
+//
+//});

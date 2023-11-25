@@ -1,12 +1,14 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
-from .models import Recipe, Ingredient, CommentRecipe, RecipeStep
+from .models import Recipe, Ingredient, CommentRecipe, RecipeStep, SaveRecipe, IngredientQuantity, Selection
 
 
 admin.site.register(Recipe)
 admin.site.register(Ingredient)
 admin.site.register(RecipeStep)
-
+admin.site.register(SaveRecipe)
+admin.site.register(IngredientQuantity)
+admin.site.register(Selection)
 
 @admin.register(CommentRecipe)
 class CommentAdminPage(DraggableMPTTAdmin):

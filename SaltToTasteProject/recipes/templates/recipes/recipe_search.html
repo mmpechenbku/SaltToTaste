@@ -18,10 +18,11 @@
                 <a href="{% url 'add_recipe' %}" class="search-header__btn-text">Добавить свой рецепт</a>
             </div>
     </div>
+    <form method="post" action="{% url 'search' %}" id="search-form">
     <!--Поле поиска (верхнее)-->
-    <form class="search__form" action="{% url 'search' %}" method="POST" accept-charset="windows-1251">
+    <div class="search__form" action="{% url 'search' %}" method="POST" accept-charset="windows-1251">
         <input type="text" value="" name="title_search" placeholder="Блюдо">
-    </form>
+    </div>
 
     <div class="search-form__btn-clear">
         <h1>Поиск по ингредиентам</h1>
@@ -33,11 +34,12 @@
         <div class="search__field" >
             <div class="search-form__container">
                 <div class="search__form-content">
-                    <form class="search__form-ingredients" action="" method="get" accept-charset="windows-1251">
+                    <div class="search__form-ingredients" action="" method="get" accept-charset="windows-1251">
                         <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
-                    </form>
+                    </div>
 
-                    <form class="search-field__choice" method="post" action="{% url 'search' %}" id="search-form">
+<!--                    <form class="search-field__choice" method="post" action="{% url 'search' %}" id="search-form">-->
+                    <div class="search-field__choice">
                         <h3>Быстрый выбор</h3>
                                 {% csrf_token %}
                         <div class="available-ingredients">
@@ -60,7 +62,7 @@
                                 <button class="ingredient__coincidence_btn-search" type="submit">Найти</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="sorting__container">
                     <div class="difficulty-container">
@@ -78,7 +80,7 @@
                     <div class="parameters__name-box">
                         <label for="search-sorting">Сортировать по</label>
                     </div>
-                    <select id="search-sorting" name="difficulty">
+                    <select id="search-sorting" name="sorting">
                         <option value="Популярность">Популярность</option>
                         <option value="Сложность">Сложность</option>
                         <option value="Время готовки">Время приготовления</option>
@@ -118,6 +120,7 @@
       <!--  <div class="advertising"></div>-->
 
     </div>
+    </form>>
 
 </main>
 {% endblock %}

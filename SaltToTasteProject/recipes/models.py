@@ -42,17 +42,17 @@ class Recipe(models.Model):
     # difficulty = models.CharField(max_length=50, choices=CHOICE_DIFFICULTY, verbose_name='Сложность')
     difficulty = models.CharField(max_length=50, choices=Difficulty.choices, verbose_name='Сложность')
     # cookingTime = models.IntegerField(verbose_name='Время приготовления')
-    cookingTime = models.TimeField(verbose_name="Время приготовления")
+    cookingTime = models.IntegerField(verbose_name="Время приготовления")
     # saveCount = models.IntegerField(default=0, verbose_name='Количество лайков')
-    commentsCount = models.IntegerField(default=0, verbose_name='Количество комментариев')
+    # commentsCount = models.IntegerField(default=0, verbose_name='Количество комментариев')
 
     objects = RecipeManager()
 
     @property
     def get_sum_save(self):
-        # return sum([1 for save in self.saving.all()])
         return self.saving.count()
 
+    @property
     def get_sum_comments(self):
         return self.comments.count()
 
@@ -108,6 +108,7 @@ class Selection(models.Model):
     picture = models.ImageField(upload_to='images/selection_pictures', verbose_name='Фото')
     title = models.CharField(max_length=255, verbose_name='Название')
     recipes = models.ManyToManyField(Recipe, related_name='recipes')
+    user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
 
 class CommentRecipe(MPTTModel):

@@ -5,8 +5,9 @@
         <div class="add_collections__title">Создание подборки</div>
         <div class="add_collections__btn-close">x</div>
         <div class="add_collections__collection-name">
+            {% csrf_token %}
             <h1>Название</h1>
-            <input type="text" id="collection-name" placeholder="Например, «Для гриля» или «Торты»">
+            <input type="text" name="title" id="collection-name" placeholder="Например, «Для гриля» или «Торты»">
         </div>
         <div class="add_collections__checkbox">
             <input type="checkbox">
@@ -18,40 +19,86 @@
         <div class="add_collections__recept-list">
             <h4>Давайте добавим некоторые рецепты из Вашей коллекции</h4>
             <div class="recept-list__scroll_box">
-                <div class="scroll_box__item">
-                    <label for="recept_id">Салат с тунцом и зеленью</label>
-                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">
-                </div>
-                <div class="scroll_box__item">
-                    <label for="recept_id">Салат с тунцом и зеленью</label>
-                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">
-                </div>
-                <div class="scroll_box__item">
-                    <label for="recept_id">Салат с тунцом и зеленью</label>
-                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">
-                </div>
-                <div class="scroll_box__item">
-                    <label for="recept_id">Салат с тунцом и зеленью</label>
-                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">
-                </div>
-                <div class="scroll_box__item">
-                    <label for="recept_id">Салат с тунцом и зеленью</label>
-                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">
-                </div>
-                <div class="scroll_box__item">
-                    <label for="recept_id">Салат с тунцом и зеленью</label>
-                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">
-                </div>
-                <div class="scroll_box__item">
-                    <label for="recept_id">Салат с тунцом и зеленью</label>
-                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">
-                </div>
+                {% for recipe in favorites %}
+                    <div class="scroll_box__item">
+                        <label for="recept">{{ recipe.title }}</label>
+                        <input type="checkbox" id="recept" name="recipes" value="{{ recipe.id }}">
+                    </div>
+                {% endfor %}
+<!--                <div class="scroll_box__item">-->
+<!--                    <label for="recept_id">Салат с тунцом и зеленью</label>-->
+<!--                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">-->
+<!--                </div>-->
+<!--                <div class="scroll_box__item">-->
+<!--                    <label for="recept_id">Салат с тунцом и зеленью</label>-->
+<!--                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">-->
+<!--                </div>-->
+<!--                <div class="scroll_box__item">-->
+<!--                    <label for="recept_id">Салат с тунцом и зеленью</label>-->
+<!--                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">-->
+<!--                </div>-->
+<!--                <div class="scroll_box__item">-->
+<!--                    <label for="recept_id">Салат с тунцом и зеленью</label>-->
+<!--                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">-->
+<!--                </div>-->
+<!--                <div class="scroll_box__item">-->
+<!--                    <label for="recept_id">Салат с тунцом и зеленью</label>-->
+<!--                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">-->
+<!--                </div>-->
+<!--                <div class="scroll_box__item">-->
+<!--                    <label for="recept_id">Салат с тунцом и зеленью</label>-->
+<!--                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">-->
+<!--                </div>-->
+<!--                <div class="scroll_box__item">-->
+<!--                    <label for="recept_id">Салат с тунцом и зеленью</label>-->
+<!--                    <input type="checkbox" id="recept_id" name="recept_id" value="yes">-->
+<!--                </div>-->
 
             </div>
         </div>
         <div class="add_collections__btn-save">
-            <button type="submit">Сохранить</button>
+            <button class="save_selection" type="">Сохранить</button>
         </div>
     </div>
 
 </div>
+
+<script>
+var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+    const saveSelectionButton = document.querySelector('.save_selection');
+
+
+saveSelectionButton.addEventListener('click', function () {
+
+    var name = document.getElementById('collection-name').value;
+    var selectedRecipes = Array.from(document.querySelectorAll('input[name="recipes"]:checked')).map(checkbox => checkbox.value);
+
+
+    var formData = new FormData();
+    formData.append('name', name);
+    selectedRecipes.forEach(recipeId => {
+        formData.append('recipes', recipeId);
+    });
+
+    // Отправляем POST-запрос
+    fetch('/search/create_selection/', {
+        method: 'POST',
+        body: formData,
+        credentials: 'same-origin',
+        headers: {
+                "X-CSRFToken": csrfToken,
+                "X-Requested-With": "XMLHttpRequest",
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Создана новая подборка:', data);
+        // Дополнительные действия после успешного создания подборки
+    })
+    .catch(error => {
+        console.error('Ошибка при создании подборки:', error);
+    });
+
+});
+
+</script>

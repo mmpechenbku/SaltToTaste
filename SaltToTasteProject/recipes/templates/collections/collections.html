@@ -32,6 +32,18 @@
                 Добавить подборку
             </div>
         </div>
+        {% for selection in selections %}
+        <div class="collection__item">
+            <a href="">
+                <div class="collection__item-img">
+                    <img src="{{ selection.picture }}" alt="">
+                </div>
+            </a>
+            <div class="collection__item-name">
+                {{ selection.title }}
+            </div>
+        </div>
+        {% endfor %}
         <div class="collection__item">
             <a href="">
                 <div class="collection__item-img">

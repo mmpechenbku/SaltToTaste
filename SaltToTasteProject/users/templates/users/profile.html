@@ -28,8 +28,8 @@
 		</div>
 		<div class="account__subscriptions">
 			<ul>
-				<li>20 подписчиков</li>
-				<li>12 подписки</li>
+				<li>Подписчиков: {{ user.get_sum_followers }}</li>
+				<li>Подписок: {{ user.get_sum_following }}</li>
 			</ul>
 		</div>
 	</section>

@@ -337,11 +337,11 @@
     &.active-2{
         display: flex;
         flex-direction: row;
-        @import "recipe_card-grid2.scss"
+        @import "recipe_card-grid2.scss";
     }
     &.active-3{
         display: flex;
-        @import "recipe_card-grid3.scss"
+        @import "recipe_card-grid3.scss";
     }
 }
 

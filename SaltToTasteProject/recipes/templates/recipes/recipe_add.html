@@ -46,7 +46,9 @@
                     <!--<h4>3. Загрузите обложку рецепта</h4>-->
                     <label>3. Загрузите обложку рецепта</label>
                     <div class="container-add_content">
-                        <input id="recipe_image" type="file" name="recipe_image" accept=".png, .jpg, .jpeg" required>
+                        <!--<input class="input-file" id="recipe_image" type="file" name="recipe_image" accept=".png, .jpg, .jpeg" required>-->
+                        <input type="file" onchange="previewFile()" /><br />
+                        <img class="img__preview" src="" height="200" alt="Image preview..." />
                     </div>
                 </div>
             </div>
@@ -381,5 +383,22 @@ ingredientSearchInput.addEventListener('input', () => {
 
 
     </script>
+<script>
+function previewFile() {
+  var preview = document.querySelector(".img__preview");
+  var file = document.querySelector("input[type=file]").files[0];
+  var reader = new FileReader();
 
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
+
+</script>
 {% endblock %}

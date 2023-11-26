@@ -118,6 +118,51 @@
        </ul>
         <div class="recipe__comments">
             <textarea name="" id="" cols="30" rows="10" placeholder="Понравилось? Поделитесь впечатлением"></textarea>
-
+            <div class="comment__container">
+                <img src="{% static 'img/ProfileIcon.png' %}" alt="profile-icon">
+                <div class="comment__content">
+                    <div class="comment__header">
+                        <p class="comment__nickname">@{{ user.nickname }}</p>
+                        <p class="comment__date">10.11.2023</p>
+                    </div>
+                    <div class="comment__text">
+                        <p>Восторг! Эти блины с сыром - великолепны! Нежное тесто, плавящийся сыр и аромат, который пленит с первого вздоха. Идеально для завтрака, обеда или дружеской вечеринки. Не забудьте добавить соус сметаны и зелени для полного наслаждения. Спасибо за рецепт!</p>
+                    </div>
+                    <div class="comment__functions">
+                        <svg width="24" height="24">
+                            <use href="#reply"></use>
+                        </svg>
+                        <div class="like">
+                            <svg width="18" height="18">
+                                <use href="#like"></use>
+                            </svg>
+                            <p class="like-count">1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment__container reply__comment">
+                <img src="{% static 'img/ProfileIcon.png' %}" alt="profile-icon">
+                <div class="comment__content">
+                    <div class="comment__header">
+                        <p class="comment__nickname">@{{ user.nickname }}</p>
+                        <p class="comment__date">10.11.2023</p>
+                    </div>
+                    <div class="comment__text">
+                        <p>О, как раз думал с чем бы их подать супруге на завтрак! Спасибо за рекомендацию)</p>
+                    </div>
+                    <div class="comment__functions">
+                        <svg width="24" height="24">
+                            <use href="#reply"></use>
+                        </svg>
+                        <div class="like">
+                            <svg width="18" height="18">
+                                <use href="#like"></use>
+                            </svg>
+                            <p class="like-count">1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 {% endblock %}

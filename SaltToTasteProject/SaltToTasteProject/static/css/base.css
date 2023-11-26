@@ -55,7 +55,13 @@
   width: 100%;
   justify-content: flex-end; }
   .navbar__list-right li {
-    padding: 0 1rem; }
+    padding: 0 1rem;
+    display: flex; }
+    .navbar__list-right li .account-img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-right: 10px; }
     .navbar__list-right li a {
       display: flex;
       align-items: center;

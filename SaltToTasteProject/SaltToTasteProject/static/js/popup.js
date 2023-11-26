@@ -62,9 +62,9 @@ if (btnAddCollections) {
 
 /*-----------------------Search Navbar----------------------------*/
 
-let btnSearch = document.querySelector(".navbar__item-search-img");
-let searchBox = document.querySelector(".navbar__search-onclick");
-btnSearch.onclick = () => {
+
+document.querySelector(".navbar__item-search-img").addEventListener('click', () => {
+    let searchBox = document.querySelector(".navbar__search-onclick");
     if (!searchBox.classList.contains(".navbar__search-onclick_active")) {
         searchBox.classList.add("navbar__search-onclick_active");
     }
@@ -72,36 +72,42 @@ btnSearch.onclick = () => {
     btnExit.onblur = () => {
         searchBox.classList.remove("navbar__search-onclick_active");
     }
-}
+});
 
 
-/*----------------------------------------------------------*/
 /*-----------------------------Перестроение столбцов---------------------------------*/
-if (document.getElementById('large__btn-2')) {
-document.getElementById('large__btn-2').addEventListener('click', function rearrangeColumns() {
-        var container = document.querySelector('.article-content__container');
-        container.classList.toggle('active-2');
-        var btnRE = document.querySelector('.article-content__bnt-2');
-        btnRE.classList.toggle('active');
-});
+if (document.querySelector("#sorter")) {
+document.querySelector("#sorter").addEventListener('click', (event) => {
+       var parent = document.querySelector('#sorter');
+       var t = parent.querySelector('.active');
+       var container = document.querySelector('.article-content__container');
+        if (t.classList.contains('active')) {
+            t.classList.remove('active');
+            if (container.classList.contains('active-1')) {
+                container.classList.remove('active-1');
+            } else if (container.classList.contains('active-2')) {
+                container.classList.remove('active-2');
+            } else if (container.classList.contains('active-3')) {
+                container.classList.remove('active-3');
+            }
+        }
+        t = event.target;
+        if (event.target.id == 'th__btn-3') {
+            container.classList.add('active-3');
+        }
+        if (event.target.id == 'large__btn-2') {
+            container.classList.add('active-2');
+        }
+        if (event.target.id == 'th-list') {
+            container.classList.add('active-1');
+        }
+        t.classList.add('active');
+    });
 }
-if (document.getElementById('th__btn-3')) {
-document.getElementById('th__btn-3').addEventListener('click', function rearrangeColumns() {
-        var container = document.querySelector('.article-content__container');
-        container.classList.toggle('active-3');
-        var btnRE = document.querySelector('.article-content__bnt-3');
-        btnRE.classList.toggle('active');
-});
-}
-if (document.getElementById('th-list')) {
-document.getElementById('th-list').addEventListener('click', function rearrangeColumns() {
-        var container = document.querySelector('.article-content__container');
-        container.classList.toggle('active');
-        var btnRE = document.querySelector('.article-content__bnt-list');
-        btnRE.classList.toggle('active');
-});
-}
-/*----------------------------------------------------------*/
+/*-----------------------------Перестроение столбцов---------------------------------*/
+
+
+
 let btn1 = document.getElementById('instructions_steps__btn-id');
 let btn2 = document.getElementById('instructions_steps-list-btn-id');
 let container1 = document.querySelector('.instructions_steps__btn');
@@ -128,21 +134,3 @@ btn1.addEventListener('click', function () {
 });
 }
 
-
-// Добавление рецепта по шагам
-document.getElementById('add-step').addEventListener('click', function() {
-    var stepFormset = document.querySelector('.ingredient__step-list');
-    if (stepFormset.children.length < 10) {
-      var stepDiv = document.createElement('div');
-      stepDiv.className = 'ingredient__step-item';
-      stepDiv.id = stepFormset.children.length;
-      stepDiv.innerHTML = '<div class="ingredient__step-item-img">' +
-                              '<img src="#" width="30" height="30">'+
-                              '<p>Добавьте фото</p>'+
-                            '</div>' +
-                            '<div class="ingredient__step-item-text">' +
-                                '<textarea rows="10" placeholder="Описание"></textarea>' +
-                            '</div>';
-      stepFormset.appendChild(stepDiv);
-    }
-  });

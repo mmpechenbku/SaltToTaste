@@ -30,7 +30,9 @@
   .profile__header .account {
     text-align: center; }
     .profile__header .account img {
-      width: 100px; }
+      width: 150px;
+      height: 150px;
+      border-radius: 50%; }
     .profile__header .account li {
       padding: 4px; }
   .profile__header .account__subscriptions {

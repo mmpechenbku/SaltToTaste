@@ -7,7 +7,7 @@ recipes_urls = [
     path('collections/', selections, name='collections'),
 
 
-    path('collections-detail/', collections_detail, name='collections'),
+    path('collections-detail/', collections_detail, name='collections-detail'),
 
 
     path('save_recipe/', SaveRecipeCreateView.as_view(), name='save_recipe'),

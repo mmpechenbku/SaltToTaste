@@ -9,7 +9,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import JsonResponse
 
-from .forms import CommentCreateForm, RecipeForm, StepForm, IngredientQuantityForm, IngredientQuantityFormSet, StepFormSet
+from .forms import CommentCreateForm, RecipeForm, StepForm, IngredientQuantityForm, IngredientQuantityFormSet, \
+    StepFormSet
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 import bs4
@@ -23,19 +24,19 @@ def index(request):
 
     return render(request, 'index.html', {'recipes': recipes})
 
+
 # def recipe_detail(request):
 #     return render(request, 'recipes/recipe_detail.html')
 
 
 @login_required
 def collections(request):
-
     return render(request, 'collections/collections.html')
 
-@login_required
-def collections_detail(request):
 
+def collections_detail(request):
     return render(request, 'collections/collections_detail.html')
+
 
 @login_required
 def selections(request):
@@ -131,7 +132,7 @@ def search_recipes(request):
         time = int(time)
         hours = time // 60
         minutes = time % 60
-        time =  "{:02}:{:02}".format(int(hours), int(minutes))
+        time = "{:02}:{:02}".format(int(hours), int(minutes))
         time = datetime.strptime(time, "%H:%M").time()
 
         recipes = recipes.filter(cookingTime__lte=time)
@@ -140,7 +141,7 @@ def search_recipes(request):
         ingredients = []
         for ingredient in recipe.ingredients.all():
             ingredients.append(ingredient.name)
-        recipe_ingr_dict.append({ recipe: ingredients})
+        recipe_ingr_dict.append({recipe: ingredients})
 
     if selected_ingredient_ids:
         recipes = Recipe.objects.filter(ingredients__id__in=selected_ingredient_ids).distinct()
@@ -165,7 +166,7 @@ def search_recipes(request):
             if percentage >= comparisonPercents:
                 filtered_recipes.append(recipe)
                 percents = f"{int(percentage)}%"
-                percentsDict.append({ recipe : percents })
+                percentsDict.append({recipe: percents})
         recipes = filtered_recipes
         # print(recipes)
         message = 'Найдено рецептов: '
@@ -177,14 +178,15 @@ def search_recipes(request):
     # print(num_recipes)
 
     data = {
-        'recipes' : recipes,
-        'ingredients' : ingredients,
-        'num_recipes' : num_recipes,
-        'percentsDict' : percentsDict,
+        'recipes': recipes,
+        'ingredients': ingredients,
+        'num_recipes': num_recipes,
+        'percentsDict': percentsDict,
         'recipes_ingr': recipe_ingr_dict,
     }
 
     return render(request, 'recipes/recipe_search.html', data)
+
 
 class IngredientSearchView(View):
     def get(self, request):
@@ -192,6 +194,7 @@ class IngredientSearchView(View):
         ingredients = Ingredient.objects.filter(name__icontains=search_query)
         data = [{'id': ingredient.id, 'name': ingredient.name} for ingredient in ingredients]
         return JsonResponse(data, safe=False)
+
 
 class SaveRecipeCreateView(View):
     model = SaveRecipe
@@ -201,8 +204,8 @@ class SaveRecipeCreateView(View):
         user = request.user if request.user.is_authenticated else None
         if user:
             save, created = self.model.objects.get_or_create(
-                recipe_id = recipe_id,
-                user = user
+                recipe_id=recipe_id,
+                user=user
             )
             count = str(save.recipe.get_sum_save)
             print('count', count)
@@ -252,7 +255,6 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return JsonResponse({'error': 'need authorisation'}, status=400)
 
 
-
 def add_recipe(request):
     if request.method == 'POST':
         try:
@@ -278,8 +280,8 @@ def add_recipe(request):
                 title=recipe_name,
                 description=recipe_description,
                 picture=recipe_image,
-                difficulty = difficulty,
-                cookingTime = cooking_time,
+                difficulty=difficulty,
+                cookingTime=cooking_time,
                 # ingredients = ingredients,
                 # ... дополнительные поля ...
             )
@@ -294,8 +296,8 @@ def add_recipe(request):
 
                 IngredientQuantity.objects.create(
                     recipe=recipe,
-                    ingredient = ingredient,
-                    quantity = quantity
+                    ingredient=ingredient,
+                    quantity=quantity
                 )
 
             # Обработка шагов приготовления
@@ -308,7 +310,7 @@ def add_recipe(request):
                     recipe=recipe,
                     description=step_description,
                     image=step_image,
-                    step_number = i
+                    step_number=i
                 )
 
             return JsonResponse({'status': 'success'})
@@ -318,7 +320,7 @@ def add_recipe(request):
     else:
         ingredients = Ingredient.objects.all()
         data = {
-                'ingredients': ingredients
+            'ingredients': ingredients
         }
         return render(request, 'recipes/recipe_add.html', data)
 

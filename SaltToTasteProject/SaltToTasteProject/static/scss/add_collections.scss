@@ -28,7 +28,7 @@
     left: 0;
     background-color: #fff;
     width: 600px;
-    height: 570px;
+    height: fit-content;
     z-index: 10;
     border-radius: 10px;
     padding: 20px 60px;
@@ -164,4 +164,48 @@
         cursor: pointer;
     }
 
+}
+.add_collections__image {
+    display: flex;
+    flex-direction: column;
+    h4 {
+        color: #2F2929;
+        leading-trim: both;
+        text-edge: cap;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 25px; /* 120% */
+        letter-spacing: 0.5px;
+        padding-top: 10px;
+        margin-bottom: 10px;
+    }
+    .container-add_content {
+        display: flex;
+        justify-content: center;
+        .input-file-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            svg, span {
+                color: #6C757D;
+                cursor: pointer;
+                &:hover {
+                    color: #000;
+                }
+            }
+            span {
+                margin-top: 7px;
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+    }
+
+}
+
+
+.input-file {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
 }

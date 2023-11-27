@@ -293,7 +293,8 @@
 
 .article-content__container {
   display: flex;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  padding: 0 20px; }
   .article-content__container.active-1 {
     display: flex;
     flex-direction: column;
@@ -310,17 +311,17 @@
       .article-content__container.active-1 .index__article-content .index-article__img img {
         border-radius: 52px 0 0 52px;
         width: 400px;
-        min-width: 300px;
         height: 100%; }
       .article-content__container.active-1 .index__article-content .index-article-section {
-        padding: 36px 37px 35px 58px; }
+        padding: 36px 37px 35px 58px;
+        width: 100%; }
         .article-content__container.active-1 .index__article-content .index-article-section .index-article_content-block {
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
-          -webkit-line-clamp: 5;
+          -webkit-line-clamp: 7;
           -webkit-box-orient: vertical;
-          height: 48%; }
+          height: 153px; }
           .article-content__container.active-1 .index__article-content .index-article-section .index-article_content-block h1 {
             text-align: justify;
             font-size: 24px;
@@ -328,23 +329,21 @@
           .article-content__container.active-1 .index__article-content .index-article-section .index-article_content-block p {
             padding-top: 20px;
             text-align: justify;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 400;
             padding-bottom: 35px; }
         .article-content__container.active-1 .index__article-content .index-article-section ul {
           display: flex;
           margin: 25px 0 0 0; }
-          .article-content__container.active-1 .index__article-content .index-article-section ul .index-article__item1 {
-            width: 30%; }
+          .article-content__container.active-1 .index__article-content .index-article-section ul .index-article__items {
+            width: 40%; }
           .article-content__container.active-1 .index__article-content .index-article-section ul .index-article__item2 {
-            width: 70%; }
-            .article-content__container.active-1 .index__article-content .index-article-section ul .index-article__item2 p {
-              text-align: right;
+            width: 100%; }
+          .article-content__container.active-1 .index__article-content .index-article-section ul li {
+            display: flex; }
+            .article-content__container.active-1 .index__article-content .index-article-section ul li p {
               font-size: 15px;
               font-weight: 400; }
-          .article-content__container.active-1 .index__article-content .index-article-section ul li {
-            display: block;
-            width: 100%; }
             .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 {
               display: flex; }
               .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 a {
@@ -354,6 +353,19 @@
               .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 img {
                 margin-right: 5px;
                 justify-content: center; }
+              .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                border: none;
+                background-color: transparent; }
+                .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 button span {
+                  color: #000;
+                  font-size: 18px;
+                  font-weight: 400;
+                  padding-left: 5px;
+                  font-family: Tilda Sans VF; }
             .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item2 {
               display: flex;
               margin-top: 10px; }

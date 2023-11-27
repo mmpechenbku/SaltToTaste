@@ -3,7 +3,6 @@
 <article class="index__article-content">
     <div class="index-article__img">
         <a href="">
-<!--            <img class="article__img" src="../../media/{{ recipe.picture }}" alt="{{recipe.picture}}" />-->
             <img class="article__img" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" />
         </a>
     </div>
@@ -21,13 +20,11 @@
                         22
                     </a>
 
-<!--                    <a href="" class="index-item__image">-->
-                    <button class="save-recipe-button" style="background-color: transparent;
-                                        border: none;"
-                                data-recipe="{{ recipe.id }}"
-                        >
-                        <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
-                        <div class="save-sum" style="white-space: nowrap;">{{ recipe.get_sum_save }}</div>
+                    <button class="save-recipe-button" data-recipe="{{ recipe.id }}">
+                            <svg width="32" height="32" class="navbar__item-search-img">
+                                <use href="#fav_icon"></use>
+                            </svg>
+                        <span class="save-sum">{{ recipe.get_sum_save }}</span>
                     </button>
                     {% if percentsDict|length > 0 %}
                         {% for dict in percentsDict %}
@@ -39,22 +36,6 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-<!--                <div class="index-article-item2">-->
-<!--                    {% if user.is_authenticated %}-->
-<!--                        <button class="save-recipe-button" style="background-color: transparent;-->
-<!--                                        border: none;"-->
-<!--                                data-recipe="{{ recipe.id }}"-->
-<!--                        >-->
-<!--                            <img src="{% static 'img/svg_image/favorites_noneselect.svg' %}" alt="dil">-->
-<!--                        </button>-->
-<!--                    {% else %}-->
-<!--                        <a href="#" class="index-item__image">-->
-<!--                            <img src="{% static 'img/svg_image/favorites_noneselect.svg' %}" alt=""/>-->
-<!--                            Добавить в избранное!-->
-<!--                        </a>-->
-<!--                    {% endif %}-->
-<!--                </div>-->
-
             </li>
             <li class="index-article__item2">
                 <p class="index-item_ingredients">

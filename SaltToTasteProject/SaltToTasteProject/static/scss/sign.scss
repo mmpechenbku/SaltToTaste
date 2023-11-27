@@ -32,7 +32,7 @@
   background-color: #fff;
   width: 45%;
   max-width: 600px;
-  height: auto;
+  height: fit-content;
   max-height: 700px;
   border-radius: 10px;
   padding: 25px;
@@ -65,7 +65,12 @@
     border-bottom: 3px solid rgba(47, 41, 41, 0.54);
     color: rgba(47, 41, 41, 0.54);
  }
-
+.sign_in {
+    min-height: 322px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 .signin__popup {
     display: none;

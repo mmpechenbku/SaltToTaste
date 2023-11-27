@@ -51,9 +51,9 @@
                         </label>
                     </li>
                     {% if user.is_authenticated %}
-                    
+
                     <li>
-                        <img class="account-img" src="{{ user.avatar.url }}" alt="">
+                        <img class="account-img" src="{{ user.avatar }}" alt="">
                         <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.nickname }}</a>
                     </li>
                     <li>

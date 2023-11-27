@@ -3,12 +3,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Получаем ссылки на элементы select и tbody
     var ingredientSelect = document.getElementById('id_ingredients');
     var quantityTBody = document.getElementById('ingredientquantity_set-group').querySelector('tbody');
+    var addRow = quantityTBody.querySelector('.add-row');
 
     // Счетчик добавленных ингредиентов
     var ingredientCounter = 0;
 
-    // Скрываем изначально tbody
-    quantityTBody.style.display = 'none';
+    console.log(ingredientCounter);
+//    // Скрываем изначально tbody
+//    if (ingredientCounter == 0) {
+//        quantityTBody.style.display = 'none';
+//        console.log('there');
+//    };
 
     // Добавляем обработчик события изменения выбора в ингредиенте
     ingredientSelect.addEventListener('change', function () {

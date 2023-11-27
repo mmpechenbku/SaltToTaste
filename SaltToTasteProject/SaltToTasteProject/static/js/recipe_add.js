@@ -176,7 +176,7 @@ function inputSelected(count) {
             formData.append('steps_count', stepCount);
 
             // Отправляем данные на сервер
-            fetch('/search/test_add_recipe/', {
+            fetch('/search/recipe_add/', {
               method: 'POST',
               body: formData
             })

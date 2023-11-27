@@ -126,7 +126,8 @@
     {% block content %}
     {% endblock %}
     </div>
-
+    {% block script %}
+    {% endblock %}
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/popup.js' %}"></script>
     {% include 'users/sign.html' %}

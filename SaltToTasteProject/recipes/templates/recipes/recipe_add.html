@@ -3,7 +3,7 @@
 {% load static %}
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/recipe_add.css' %}">
-{% endblock %}
+{% endblock%}
 {% block content %}
 <form id="recipe-form" enctype="multipart/form-data">
     {% csrf_token %}
@@ -21,7 +21,7 @@
                     <div class="container-add_content">
                             {{ recipe_form.title }}
                     </div>-->
-                    <label for="recipe_name">1. Название рецепта</label>
+                    <h4>1. Название рецепта</h4>
                     <div class="container-add_content">
                         <input type="text" id="recipe_name" name="recipe_name" required>
                     </div>
@@ -29,73 +29,73 @@
             </div>
             <div class="recipe_add__content">
                 <div class="recipe_add__container-add_step">
-                    <!--<h4>2. Краткое описание</h4>
-                    <div class="container-add_content">
-                        <textarea name="description" cols="30" rows="10"></textarea>
-    &lt;!&ndash;                        {{ recipe_form.description }}&ndash;&gt;
-                    </div>-->
-
-                    <label for="recipe_description">2. Краткое описание</label>
+                    <h4>2. Краткое описание</h4>
                     <div class="container-add_content">
                         <textarea id="recipe_description" name="recipe_description" required></textarea>
+                        <p style="margin-left: auto; margin-right: 7%; margin-top: 7px; color: rgba(0, 0, 0, 0.70); font-size: 14px;">До 310 символов</p>
                     </div>
                 </div>
             </div>
             <div class="recipe_add__content">
                 <div class="recipe_add__container-add_step">
-                    <!--<h4>3. Загрузите обложку рецепта</h4>-->
-                    <label>3. Загрузите обложку рецепта</label>
+                    <h4>3. Загрузите обложку рецепта</h4>
                     <div class="container-add_content">
-                        <!--<input class="input-file" id="recipe_image" type="file" name="recipe_image" accept=".png, .jpg, .jpeg" required>-->
-                        <input type="file" onchange="previewFile()" /><br />
-                        <img class="img__preview" src="" height="200" alt="Image preview..." />
+                        <label class="input-file-label" for="recipe_image">
+                            <svg width="128" height="128">
+                                <use id="file_add" href="#image_add"></use>
+                            </svg>
+                            <span id="title_file">Добавить файл</span>
+                        </label>
+                        <input class="input-file" id="recipe_image" name="recipe_image" type="file" onchange="inputSelected()" accept=".png, .jpg, .jpeg" required/>
                     </div>
                 </div>
             </div>
             <div class="recipe_add__content">
                 <div class="recipe_add__container-add_step">
-                    <!--<h4>4. Ингредиенты</h4>-->
-                    <label>4. Ингредиенты</label>
+                    <h4>4. Ингредиенты</h4>
                     <div class="container-add_content">
                         <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
+                        <p class="ingredient__search-title">Быстрый выбор</p>
                         <div class="available-ingredients">
                             {% for ingredient in ingredients %}
-                                <div id="ingredient-buttons"></div>
-                                <button type="button" class="ingredient-button" data-ingredient-id="{{ ingredient.id }}">{{ ingredient.name }}</button>
+                                {% if forloop.counter < 50 %}
+                                    <div id="ingredient-buttons"></div>
+                                    <button type="button" class="ingredient-button" data-ingredient-id="{{ ingredient.id }}">{{ ingredient.name }}</button>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
                     <div class="ingredients_quantity__container">
-                        <div class="ingredients_quantity__container-title">
-                            <label>Количесвто ингредиентов:</label>
+                        <div class="ingredient-quantity">
+                            <div class="quantity__container" style="margin-bottom: 5px;">
+                                <div class="quantity__button"><p>Вы выбрали:</p></div>
+                                <div class="quantity__input" style="text-align: center; border: none;min-width:230px;"><p>Укажите количество:</p></div>
+                            </div>
                         </div>
-                        <div class="ingredient-quantity"></div>
+                        <div class="ingredient-new">
+                            <p>Различные специи, пряности и др. Вы можете прописать ниже, они не будут включены в тэги* для расширенного поиска рецепта.
+                                <br/> Так же, введите ингредиент, которого не нашлось в нашем списке продуктов.</p>
+                            <input type="text" id="add-new__ingredient" name="add-new__ingredient" placeholder="Дополнительные ингредиенты, например “Соль по вкусу”">
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="recipe_add__content">
                 <div class="recipe_add__container-add_step">
-                    <!--<h4>5. Шаги приготовления</h4>-->
-                    <label>5. Шаги приготовления</label>
-                    <!--<div class="container-add_content">
-                        <form class="ingredient__step-list"></form>
-                        <div class="add-step__btn">
-                            <img id="add-step" src="{% static 'img/svg_image/addreciept.svg' %}" width="30" height="30" alt="Добавить свой рецепт">
-                        </div>
-                    </div>-->
+                    <h4>5. Шаги приготовления</h4>
 
                     <div class="container-add_content" id="steps-section">
                         <div class="ingredient__step-list" id="added-steps"></div>
                         <svg width="64" height="64" id="add-step">
                             <use href="#plus-icon"></use>
                         </svg>
+                        <span>Добавить шаг</span>
                     </div>
                 </div>
             </div>
             <div class="recipe_add__content">
                 <div class="recipe_add__container-add_step">
-                    <!--<h4>6. Краткая инструкция</h4>-->
-                    <label>6. Краткая инструкция</label>
+                    <h4>6. Краткая инструкция</h4>
                     <div class="container-add_content">
                         <div class="instructions__btn">
                             <div class="border-bottom"></div>
@@ -116,21 +116,19 @@
             </div>
             <div class="recipe_add__content">
                 <div class="recipe_add__container-add_step">
-                    <label>7. Оцените сложность и время приготовления</label>
-                    <div class="container-add_content">
+                    <h4>7. Оцените сложность и время приготовления</h4>
+                    <div class="container-add_content inrow">
                         <div class="difficulty-container">
-                            <div class="parameters__name-box">
                                 <label for="difficulty">Сложность</label>
-                            </div>
                             <select id="difficulty" name="difficulty">
                                 <option value="Легко">Легко</option>
                                 <option value="Средняя">Средне</option>
                                 <option value="Сложно">Сложно</option>
                             </select>
-
-                            <label for="cooking_time">Время приготовления (в минутах):</label>
+                        </div>
+                        <div class="time-container">
+                            <label for="cooking_time">Время приготовления</label>
                             <input type="number" name="cooking_time" id="cooking_time" required>
-
                         </div>
                     </div>
                 </div>
@@ -148,257 +146,7 @@
         </div>
     </main>
 </form>
-
-<script>
-
-        const availableIngredientsContainer = document.querySelector('.available-ingredients');
-<!--        const selectedIngredientsContainer = document.querySelector('.selected-ingredients');-->
-        const quantityIngredientsContainer = document.querySelector('.ingredient-quantity');
-        const selectedIngredientIds = new Set();
-        const recipeForm = document.getElementById('recipe-form');
-        var ingredientCount = 0;
-        var stepCount = 0;
-        var maxSteps = 10;
-
-        availableIngredientsContainer.addEventListener('click', (event) => {
-            const targetButton = event.target;
-            if (targetButton.classList.contains('ingredient-button')) {
-                const ingredientId = targetButton.getAttribute('data-ingredient-id');
-
-                if (!selectedIngredientIds.has(ingredientId)) {
-                    var divSelectedContainer = document.createElement('div');
-                    divSelectedContainer.className = 'quantity__container';
-                    selectedIngredientIds.add(ingredientId);
-                    const selectedIngredientButton = document.createElement('button');
-                    selectedIngredientButton.type = 'button';
-                    selectedIngredientButton.className = 'ingredient-button selected';
-                    selectedIngredientButton.setAttribute('data-ingredient-id', ingredientId);
-                    selectedIngredientButton.textContent = targetButton.textContent;
-
-<!--                    selectedIngredientsContainer.appendChild(selectedIngredientButton);-->
-                    quantityIngredientsContainer.appendChild(divSelectedContainer);
-                    divSelectedContainer.appendChild(selectedIngredientButton);
-
-
-                    var divQuantity = document.createElement('div');
-                    divQuantity.className = 'quantity__input';
-                    divQuantity.innerHTML = '<input data-quantity="' + selectedIngredientButton.getAttribute('data-ingredient-id') + '" name="quantity_' + selectedIngredientButton.getAttribute('data-ingredient-id') + '" placeholder="Количество"></div>';
-                    divSelectedContainer.appendChild(divQuantity);
-                    ingredientCount++;
-                }
-
-                targetButton.disabled = true;
-                targetButton.style.display = 'none';
-            }
-        });
-
-        document.getElementById('add-step').addEventListener('click', function () {
-            if (stepCount < maxSteps) {
-                stepCount++;
-
-                // Создадим новый div с полями для шага приготовления
-                var stepsSection = document.getElementById('steps-section');
-                var addedSteps = document.getElementById('added-steps');
-                var div = document.createElement('div');
-                div.className = 'ingredient__step-item';
-                var currentStep = stepCount;
-                div.innerHTML = '<div class="ingredient__step-item-img">' +
-                                '<input type="file" name="step_image_' + stepCount + '" accept=".png, .jpg, .jpeg" id="step-image-' + currentStep + '">' +
-                                '</div>' +
-                                '<div class="ingredient__step-item-text">' +
-                                '<textarea name="step_description_' + stepCount + '" placeholder="Описание шага"  id="step-description-' + stepCount + '"></textarea>' +
-                                '</div>';
-
-                // Добавляем созданный div в разметку
-                addedSteps.appendChild(div);
-
-                // Проверяем, нужно ли скрыть кнопку "Добавить шаг"
-                if (stepCount === maxSteps) {
-                    document.getElementById('add-step').style.display = 'none';
-                }
-            }
-            document.getElementById('step-description-' + currentStep).addEventListener('input', function () {
-                // Обновляем краткое описание
-                updateSummary();
-            });
-        });
-
-         function updateSummary() {
-            var summaryList = document.getElementById('summary-list');
-            summaryList.innerHTML = ''; // Очищаем текущий список
-
-            // Проходим по всем добавленным шагам и добавляем их в список
-            for (var i = 0; i < stepCount; i++) {
-                var stepDescription = document.getElementById('step-description-' + (i + 1)).value;
-
-                var listItem = document.createElement('li');
-                listItem.textContent = stepDescription;
-
-                summaryList.appendChild(listItem);
-            }
-         }
-
-         quantityIngredientsContainer.addEventListener('click', (event) => {
-             const targetButton = event.target;
-             if (targetButton.classList.contains('ingredient-button')) {
-                 const ingredientId = targetButton.getAttribute('data-ingredient-id');
-
-                 var quantityField = document.querySelector('[name="quantity_' + ingredientId + '"]');
-                 quantityField.remove();
-                 // Удаляем ингредиент из выбранных
-                 selectedIngredientIds.delete(ingredientId);
-
-                 // Удаляем кнопку ингредиента из раздела "Выбранные ингредиенты"
-                 targetButton.remove();
-
-
-                 // Разрешаем добавление этого ингредиента в "Доступные ингредиенты"
-                 const correspondingAvailableButton = document.querySelector(`.available-ingredients .ingredient-button[data-ingredient-id="${ingredientId}"]`);
-                 if (correspondingAvailableButton) {
-                     correspondingAvailableButton.disabled = false;
-                     correspondingAvailableButton.style.display = 'unset';
-
-                 }
-
-             }
-         });
-
-        document.getElementById('save-recipe').addEventListener('click', function () {
-
-            const selectedIngredientIdsArray = Array.from(selectedIngredientIds);
-            const selectedIngredientIdsString = selectedIngredientIdsArray.join(',');
-
-            // Добавляем собранные id в скрытое поле формы
-            const hiddenInput = document.createElement('input');
-            hiddenInput.type = 'hidden';
-            hiddenInput.name = 'ingredients';
-            hiddenInput.value = selectedIngredientIdsString;
-            recipeForm.appendChild(hiddenInput);
-
-            // Собираем данные формы
-            var formData = new FormData(document.getElementById('recipe-form'));
-
-            // Добавляем данные о количестве ингредиентов
-            formData.append('ingredients_count', ingredientCount);
-
-            // Добавляем данные о количестве шагов
-            formData.append('steps_count', stepCount);
-
-            // Отправляем данные на сервер
-            fetch('/search/test_add_recipe/', {
-              method: 'POST',
-              body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-              if (data.status === 'success') {
-                alert('Рецепт успешно сохранен!');
-                window.location.href = "{% url 'search' %}";
-                // Дополнительные действия после успешного сохранения
-              } else {
-                alert('Произошла ошибка при сохранении рецепта.');
-                console.log(data.message);
-              }
-            })
-            .catch(error => {
-              console.error('Ошибка при отправке данных на сервер:', error);
-            });
-        });
-
-
-
-
-
-        const ingredientSearchInput = document.getElementById('ingredient-search');
-        const ingredientButtonsContainer = document.getElementById('ingredient-buttons');
-
-
-ingredientSearchInput.addEventListener('input', () => {
-    const searchQuery = (ingredientSearchInput.value.charAt(0).toUpperCase() + ingredientSearchInput.value.slice(1).toLowerCase()).trim();
-
-    // Очистить текущие кнопки ингредиентов
-    ingredientButtonsContainer.innerHTML = '';
-
-    if (searchQuery.length >= 2) {
-        // Отправить AJAX запрос для получения ингредиентов по поисковому запросу
-        fetch(`/search/api/ingredients/?search=${searchQuery}`)
-            .then(response => response.json())
-            .then(data => {
-                // Создать кнопки для каждого найденного ингредиента
-                data.forEach(ingredient => {
-                    const button = document.createElement('button');
-                    button.type = 'button';
-                    button.className = 'ingredient-button';
-                    button.setAttribute('data-ingredient-id', ingredient.id);
-                    button.textContent = ingredient.name;
-                    ingredientButtonsContainer.appendChild(button);
-
-                    const ingredientId = button.getAttribute('data-ingredient-id');
-                    if (selectedIngredientIds.has(ingredientId)) {
-                        button.disabled = true;
-                    }
-
-                });
-            });
-    }
-});
-    ingredientButtonsContainer.addEventListener('click', (event) => {
-        const targetButton = event.target;
-        ingredientButtonsContainer.innerHTML = '';
-
-        if (targetButton.classList.contains('ingredient-button')) {
-            const ingredientId = targetButton.getAttribute('data-ingredient-id');
-
-            // Проверяем, является ли ингредиент уже выбранным
-            if (!selectedIngredientIds.has(ingredientId)) {
-                // Если ингредиент не выбран, добавляем его в выбранные
-                selectedIngredientIds.add(ingredientId);
-
-                // Создаем кнопку для выбранного ингредиента в поле "Выбранные ингредиенты"
-                const selectedIngredientButton = document.createElement('button');
-                selectedIngredientButton.type = 'button';
-                selectedIngredientButton.className = 'ingredient-button selected';
-                selectedIngredientButton.setAttribute('data-ingredient-id', ingredientId);
-                selectedIngredientButton.textContent = targetButton.textContent;
-
-                quantityIngredientsContainer.appendChild(selectedIngredientButton);
-
-                    var div = document.createElement('div');
-                    div.innerHTML = '<input data-quantity="' + selectedIngredientButton.getAttribute('data-ingredient-id') + '" name="quantity_' + selectedIngredientButton.getAttribute('data-ingredient-id') + '" placeholder="Количество"></div>';
-                    quantityIngredientsContainer.appendChild(div);
-                    ingredientCount++;
-
-                const correspondingAvailableButton = document.querySelector(`.available-ingredients .ingredient-button[data-ingredient-id="${ingredientId}"]`);
-                correspondingAvailableButton.disabled = true;
-                ingredientSearchInput.value = '';
-
-                checkbox.disabled = false;
-            }
-
-            // Запрещаем добавление этого ингредиента в "Доступные ингредиенты"
-            targetButton.disabled = true;
-        }
-    });
-
-
-
-    </script>
-<script>
-function previewFile() {
-  var preview = document.querySelector(".img__preview");
-  var file = document.querySelector("input[type=file]").files[0];
-  var reader = new FileReader();
-
-  reader.onloadend = function () {
-    preview.src = reader.result;
-  };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  } else {
-    preview.src = "";
-  }
-}
-
-</script>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/recipe_add.js' %}"></script>
 {% endblock %}

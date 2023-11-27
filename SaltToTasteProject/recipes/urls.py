@@ -5,6 +5,11 @@ from .views import *
 recipes_urls = [
     path('', search_recipes, name='search'),
     path('collections/', selections, name='collections'),
+
+
+    path('collections-detail/', collections_detail, name='collections'),
+
+
     path('save_recipe/', SaveRecipeCreateView.as_view(), name='save_recipe'),
     path('recipe/<int:pk>/comments/create/', CommentCreateView.as_view(), name='comment_create_view'),
     path('recipe/<int:pk>/', RecipeDetailView.as_view(), name='recipe_detail'),
@@ -18,5 +23,6 @@ recipes_urls = [
 urlpatterns = [
     path('', index, name='home'),
     path('search/', include(recipes_urls)),
+
 ]
 

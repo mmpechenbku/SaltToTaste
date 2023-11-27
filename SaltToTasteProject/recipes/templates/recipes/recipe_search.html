@@ -26,7 +26,6 @@
 
     <div class="search-form__btn-clear">
         <h1>Поиск по ингредиентам</h1>
-
     </div>
 
     <div class="recipe-search__content">
@@ -97,9 +96,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
   </form>
             <div class="article-content__title-and-grids">
-            <h1>Найдено {{ num_recipes }} совпадений...</h1>
+                <h1>Найдено {{ num_recipes }} совпадений...</h1>
                 <div class="article-content__btn-grids" id="sorter">
                     <span class="sorter-item" id="th__btn-3" role="button">
                         <svg width="30" height="30" class="icon-th__btn">
@@ -123,12 +124,5 @@
                 {% include 'recipes/recipe_card.html' %}
             {% endfor %}
             </div>
-
-
-        </div>
-      <!--  <div class="advertising"></div>-->
-
-    </div>
-
 </main>
 {% endblock %}

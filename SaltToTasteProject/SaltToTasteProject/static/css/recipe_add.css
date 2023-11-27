@@ -89,7 +89,8 @@
     /* Текст */
     color: var(--default-white, #FFF);
     font-size: 15px;
-    font-weight: 600; }
+    font-weight: 600;
+    cursor: pointer; }
 
 #add-step {
   color: #8BC24F; }

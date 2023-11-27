@@ -33,6 +33,11 @@ def collections(request):
     return render(request, 'collections/collections.html')
 
 @login_required
+def collections_detail(request):
+
+    return render(request, 'collections/collections_detail.html')
+
+@login_required
 def selections(request):
     user = request.user
     selections = Selection.objects.filter(user=user)

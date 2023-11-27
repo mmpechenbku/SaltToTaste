@@ -9,8 +9,8 @@ recipes_urls = [
     path('recipe/<int:pk>/comments/create/', CommentCreateView.as_view(), name='comment_create_view'),
     path('recipe/<int:pk>/', RecipeDetailView.as_view(), name='recipe_detail'),
     # path('recipe/<int:pk>', recipe_detail, name='recipe_detail'),
-    # path('recipe_add/', add_recipe, name='add_recipe'),
-    path('test_add_recipe/', test_add_recipe, name='add_recipe'),
+    path('recipe_add/', add_recipe, name='add_recipe'),
+    # path('test_add_recipe/', test_add_recipe, name='add_recipe'),
     path('create_selection/', create_selection, name='create_selection'),
     path('api/ingredients/', IngredientSearchView.as_view(), name='ingredient-search'),
 ]

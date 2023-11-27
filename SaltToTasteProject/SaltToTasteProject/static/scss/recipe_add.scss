@@ -2,6 +2,7 @@
     padding: 120px 15px 30px 15px;
 }
 
+
 .recipe_add__header {}
 
 .recipe_add__header-link {
@@ -22,22 +23,49 @@
     border-radius: 26px;
     background: var(--default-white, #FFF);
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.12);
+    padding: 40px 0;
+}
+#ingredient-search {
+    height: 40px;
+    border-radius: 11px;
+    border: 2px solid rgba(47, 41, 41, 0.50);
+    background: rgba(255, 255, 255, 0.20);
+    margin-bottom: 20px;
+}
+.ingredient__search-title {
+    font-size: 18px;
+    margin-right: auto;
+    margin-left: 50px;
+    font-weight: 400;
+    margin-bottom: 10px;
 }
 .recipe_add__content {
     width: 100%;
     padding: 20px 10%;
 }
 .recipe_add__container-add_step {
-    h4 {
+     h4 {
         color: #2F2929;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 700;
     }
     textarea {
         width: 90%;
+        height: 160px;
+        padding: 10px 20px;
         border-radius: 10px;
         border: 2px solid rgba(47, 41, 41, 0.40);
+        resize: none;
+        overflow: auto;
     }
+        textarea::-webkit-scrollbar {
+        width: 7px;
+        background-color: none;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color: #7d7c7c;
+            border-radius: 10px;
+        }
 
 }
 .container-add_content {
@@ -46,26 +74,113 @@
     width: 100%;
     padding: 20px 0;
     align-items: center;
-    input {
+    input[type=text] {
         width: 90%;
-        height: 30px;
+        height: 40px;
         border-radius: 10px;
         border: 2px solid rgba(47, 41, 41, 0.40);
         background: rgba(255, 255, 255, 0.00);
+        padding: 0 20px;
     }
 }
 
+.available-ingredients {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 105px;
+    line-clamp: 3;
+    overflow: hidden;
+    button {
+        border-radius: 4px;
+        background: var(--secondary-color, #6C757D);
+        padding: 4px 8px;
+        border: none;
+        height: 30px;
+        margin: 3px 3px;
+        /* Текст */
+        color: var(--default-white, #FFF);
+        font-size: 15px;
+        font-weight: 600;
+    }
+}
+
+#add-step {
+    color: #8BC24F;
+    &:hover {
+        color: #40C057;
+    }
+}
+.ingredient-quantity {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    flex-wrap: wrap;
+    .quantity__container {
+        display: flex;
+        border-radius: 4px;
+        .quantity__button {
+            width: 100%;
+            min-width: 200px;
+            button {
+                border-radius: 4px;
+                background: var(--secondary-color, #6C757D);
+                padding: 4px 8px;
+                border: none;
+                height: 30px;
+                /* Текст */
+                color: var(--default-white, #FFF);
+                font-size: 15px;
+                font-weight: 600;
+                margin: 1px 0;
+            }
+        }
+
+
+    }
+
+    .gray {
+        background-color: #D9D9D9;
+    }
+    .quantity__input {
+        display: flex;
+        margin-left: auto;
+        border-left: 1px solid rgba(0, 0, 0, 0.40);
+        width: 100%;
+        min-width: 230px;
+        input {
+            width: 100%;
+            margin-left: 10px;
+            height: 30px;
+            padding: 0 10px;
+            border: none;
+            background-color: inherit;
+        }
+        span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            transform: scaleX(1.5);
+            color: rgba(0, 0, 0, 0.40);
+            &:hover {
+                color: #000;
+                cursor: pointer;
+            }
+        }
+    }
+}
 /*---------------------Instructions------------------------------*/
 .instructions__btn {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-
     .border-bottom {
         width: 100%;
         height: 70px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.40);
+        border-bottom: 1px solid #CBC8C8;
     }
     span{
         display: flex;
@@ -78,17 +193,23 @@
         font-size: 18px;
         font-weight: 500;
         cursor: pointer;
-        border: 1px solid rgba(0, 0, 0, 0.40);
-        border-radius: 14px 14px 0 0;
-
+        border-bottom: 1px solid #CBC8C8;
 
         &.instructions_steps__btn.active {
-            background-color: #8BC24F;
+            border-radius: 30px 30px 0 0;
+            border-top: 1px solid #CBC8C8;
+            border-left: 1px solid #CBC8C8;
+            border-right: 1px solid #CBC8C8;
             border-bottom: none;
             cursor: default;
+
+
         }
         &.instructions_steps-list-btn.active {
-            background-color: #8BC24F;
+            border-radius: 30px 30px 0 0;
+            border-top: 1px solid #CBC8C8;
+            border-left: 1px solid #CBC8C8;
+            border-right: 1px solid #CBC8C8;
             border-bottom: none;
             cursor: default;
         }
@@ -166,19 +287,128 @@
 }
 
 .instructions_steps {
-    background-color: #8BC24F;
     width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.40);
-    border-left: 1px solid rgba(0, 0, 0, 0.40);
-    border-right: 1px solid rgba(0, 0, 0, 0.40);
-    border-radius: 0 0 14px 14px;
 }
 
 .instructions_briefly {
-    background-color: #8BC24F;
     width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.40);
-    border-left: 1px solid rgba(0, 0, 0, 0.40);
-    border-right: 1px solid rgba(0, 0, 0, 0.40);
-    border-radius: 0 0 14px 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    textarea {
+        margin: 20px;
+        height: 300px;
+    }
+}
+.instruction-summary {
+    width: 100%;
+    padding: 20px;
+    word-break: break-word;
+}
+
+.input-file {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+.input-file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    svg {
+        color: #6C757D;
+        cursor: pointer;
+        &:hover {
+            color: #000;
+        }
+    }
+    span {
+        margin-top: 7px;
+    }
+}
+.ingredients_quantity__container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    .ingredient-new {
+        max-width: 600px;
+        padding-top: 30px;
+        width: 100%;
+        p {
+            color: #000;
+            font-size: 14px;
+            font-weight: 500;
+            padding-bottom: 10px;
+        }
+        input[type=text] {
+            height: 40px;
+            border-radius: 11px;
+            border: 2px solid rgba(47, 41, 41, 0.50);
+            background: rgba(255, 255, 255, 0.20);
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 5px 10px;
+            margin-bottom: 0;
+        }
+    }
+}
+.inrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.time-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 500;
+    margin-left: 30px;
+    input[type=number] {
+        margin: 5px 10px 5px 10px;
+        width: 200px;
+        height: 35px;
+        border-radius: 4px;
+        background: var(--default-white, #FFF);
+        color: #000;
+        font-size: 17px;
+        border: 1px solid rgba(47, 41, 41, 0.50);
+        font-family: 'Tilda Sans VF';
+        line-height: 1;
+        font-weight: 400;
+        padding-left: 10px;
+    }
+}
+
+.difficulty-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 500;
+    select {
+        display: flex;
+        margin: 5px 10px 5px 10px;
+        width: 200px;
+        height: 35px;
+        border-radius: 4px;
+        background: var(--default-white, #FFF);
+        color: #000;
+        font-size: 17px;
+        font-family: 'Tilda Sans VF';
+        border: 1px solid rgba(47, 41, 41, 0.50);
+        line-height: 1;
+        font-weight: 400;
+        padding-left: 10px;
+    }
+
 }

@@ -85,30 +85,40 @@
                         <option value="Время готовки">Время приготовления</option>
                         <option value="Дата публикации">Дата публикации</option>
                     </select>
+                    <div class="parameters__name-box">
+                        <label>Время приготовления</label>
+                    </div>
+                    <div class="time-container">
+                        <p>от</p>
+                        <input type="number" maxlength="3" max="200" min="1" name="cooking_time-start" id="cooking_time-start">
+                        <p>- до</p>
+                        <input type="number" maxlength="3" max="999" min="1" name="cooking_time-end" id="cooking_time-end">
+                        <p>мин.</p>
+                    </div>
                 </div>
             </div>
   </form>
             <div class="article-content__title-and-grids">
             <h1>Найдено {{ num_recipes }} совпадений...</h1>
-                <div class="article-content__btn-grids">
-                    <span class="article-content__bnt-3" id="th__btn-3">
+                <div class="article-content__btn-grids" id="sorter">
+                    <span class="sorter-item" id="th__btn-3" role="button">
                         <svg width="30" height="30" class="icon-th__btn">
                             <use href="#icon-th"></use>
                         </svg>
                     </span>
-                    <span class="article-content__bnt-2" id="large__btn-2">
+                    <span class="sorter-item" id="large__btn-2" role="button">
                         <svg width="30" height="30" class="icon-th-large__btn">
                             <use href="#icon-th-large"></use>
                         </svg>
                     </span>
-                    <span class="article-content__bnt-list" id="th-list">
+                    <span class="sorter-item active" id="th-list" role="button">
                         <svg width="30" height="30" class="icon-th-list__btn">
                             <use href="#icon-th-list"></use>
                         </svg>
                     </span>
                 </div>
             </div>
-            <div class="article-content__container">
+            <div class="article-content__container active-1">
             {% for recipe in recipes %}
                 {% include 'recipes/recipe_card.html' %}
             {% endfor %}

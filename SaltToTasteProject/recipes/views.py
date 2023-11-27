@@ -248,7 +248,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
 
 
-def test_add_recipe(request):
+def add_recipe(request):
     if request.method == 'POST':
         try:
             # Получаем данные из запроса
@@ -315,6 +315,6 @@ def test_add_recipe(request):
         data = {
                 'ingredients': ingredients
         }
-        return render(request, 'recipes/test_recipe_add.html', data)
+        return render(request, 'recipes/recipe_add.html', data)
 
         # return JsonResponse({'status': 'error', 'message': 'Invalid request method'})

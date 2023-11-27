@@ -20,7 +20,7 @@
 			</ul>
 		</div>
 		<div class="account">
-			<img class="rounded-circle account-img" src="{% static 'img/ProfileIcon.png' %}">
+			<img class="rounded-circle account-img" src="{{ user.avatar.url }}">
 			<ul>
 				<li>@{{ user.nickname }}</li>
 				<li>{{ user.name }}</li>

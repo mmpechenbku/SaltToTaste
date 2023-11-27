@@ -53,7 +53,7 @@
                     {% if user.is_authenticated %}
                     
                     <li>
-                        <img src="{{ user.avatar }}" alt="">
+                        <img class="account-img" src="{{ user.avatar.url }}" alt="">
                         <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.nickname }}</a>
                     </li>
                     <li>
@@ -126,7 +126,8 @@
     {% block content %}
     {% endblock %}
     </div>
-
+    {% block script %}
+    {% endblock %}
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/popup.js' %}"></script>
     {% include 'users/sign.html' %}

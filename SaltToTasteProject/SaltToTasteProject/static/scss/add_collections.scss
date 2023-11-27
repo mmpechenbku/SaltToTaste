@@ -121,7 +121,7 @@
     border-radius: 10px;
     border: 2px solid rgba(26, 26, 26, 0.30);
     background: rgba(217, 217, 217, 0.00);
-    overflow-y: scroll;
+    overflow: auto;
 }
 .recept-list__scroll_box::-webkit-scrollbar {
     width: 7px;

@@ -29,12 +29,21 @@
             -webkit-line-clamp: 7;
             -webkit-box-orient: vertical;
             height: 153px;
-
-            h1 {
-                text-align: justify;
-                font-size: 24px;
-                font-weight: 700;
+            .index-article__header {
+                display: flex;
+                justify-content: space-between;
+                h1 {
+                    text-align: justify;
+                    font-size: 24px;
+                    font-weight: 700;
+                }
+                h4 {
+                    color: #549337;
+                    font-size: 15px;
+                    font-weight: 500;
+                }
             }
+
 
             p {
                 padding-top: 20px;

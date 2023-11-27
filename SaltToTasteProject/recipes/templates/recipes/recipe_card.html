@@ -8,7 +8,20 @@
     </div>
     <div class="index-article-section">
         <div class="index-article_content-block">
-            <h1 class="index-article__title"><a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a></h1>
+            <div class="index-article__header">
+                <h1 class="index-article__title"><a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a></h1>
+                <h4>Совпадение
+                    {% if percentsDict|length > 0 %}
+                        {% for dict in percentsDict %}
+                            {% for key, value in dict.items %}
+                                {% if key == recipe %}
+                                    {{ value }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                </h4>
+            </div>
             <p class="index-article__text"><a href="">{{ recipe.description }}</a></p>
         </div>
         <ul class="index-article__list">
@@ -26,15 +39,7 @@
                             </svg>
                         <span class="save-sum">{{ recipe.get_sum_save }}</span>
                     </button>
-                    {% if percentsDict|length > 0 %}
-                        {% for dict in percentsDict %}
-                            {% for key, value in dict.items %}
-                                {% if key == recipe %}
-                                    {{ value }}
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                    {% endif %}
+
                 </div>
             </li>
             <li class="index-article__item2">

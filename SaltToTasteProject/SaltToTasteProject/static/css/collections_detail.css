@@ -63,10 +63,17 @@
           -webkit-line-clamp: 7;
           -webkit-box-orient: vertical;
           height: 153px; }
-          .article-content__container.active-1 .index__article-content .index-article-section .index-article_content-block h1 {
-            text-align: justify;
-            font-size: 24px;
-            font-weight: 700; }
+          .article-content__container.active-1 .index__article-content .index-article-section .index-article_content-block .index-article__header {
+            display: flex;
+            justify-content: space-between; }
+            .article-content__container.active-1 .index__article-content .index-article-section .index-article_content-block .index-article__header h1 {
+              text-align: justify;
+              font-size: 24px;
+              font-weight: 700; }
+            .article-content__container.active-1 .index__article-content .index-article-section .index-article_content-block .index-article__header h4 {
+              color: #549337;
+              font-size: 15px;
+              font-weight: 500; }
           .article-content__container.active-1 .index__article-content .index-article-section .index-article_content-block p {
             padding-top: 20px;
             text-align: justify;

@@ -18,9 +18,9 @@
                 <a href="{% url 'add_recipe' %}" class="search-header__btn-text">Добавить свой рецепт</a>
             </div>
     </div>
-    <form method="post" action="{% url 'search' %}" id="search-form">
+  <form method="post" action="{% url 'search' %}" id="search-form">
     <!--Поле поиска (верхнее)-->
-    <div class="search__form" action="{% url 'search' %}" method="POST" accept-charset="windows-1251">
+    <div class="search__form" accept-charset="windows-1251">
         <input type="text" value="" name="title_search" placeholder="Блюдо">
     </div>
 
@@ -38,7 +38,6 @@
                         <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
                     </div>
 
-<!--                    <form class="search-field__choice" method="post" action="{% url 'search' %}" id="search-form">-->
                     <div class="search-field__choice">
                         <h3>Быстрый выбор</h3>
                                 {% csrf_token %}
@@ -87,8 +86,8 @@
                         <option value="Дата публикации">Дата публикации</option>
                     </select>
                 </div>
-
             </div>
+  </form>
             <div class="article-content__title-and-grids">
             <h1>Найдено {{ num_recipes }} совпадений...</h1>
                 <div class="article-content__btn-grids">
@@ -120,7 +119,6 @@
       <!--  <div class="advertising"></div>-->
 
     </div>
-    </form>>
 
 </main>
 {% endblock %}

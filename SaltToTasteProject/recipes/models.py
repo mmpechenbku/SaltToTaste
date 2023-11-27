@@ -59,6 +59,10 @@ class Recipe(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Рецепт'
+        verbose_name_plural = 'Рецепты'
+
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название')
@@ -73,10 +77,21 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Ингредиент'
+        verbose_name_plural = 'Ингредиенты'
+
 class IngredientQuantity(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, verbose_name='Рецепт')
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, verbose_name='Ингредиент')
     quantity = models.CharField(max_length=50, verbose_name='Количество')
+
+    def __str__(self):
+        return f'{self.recipe.title} - {self.ingredient.name}: {self.quantity}'
+
+    class Meta:
+        verbose_name = 'Количество ингредиента'
+        verbose_name_plural = 'Количества ингредиентов'
 
 
 class RecipeStep(models.Model):
@@ -84,6 +99,13 @@ class RecipeStep(models.Model):
     image = models.ImageField(upload_to='images/recipes_pictures/steps', blank=True, null=True, verbose_name='Фото шага')
     description = models.TextField(max_length=3000, verbose_name='Описание шага')
     step_number = models.IntegerField(verbose_name='Номер шага')
+
+    def __str__(self):
+        return f'{self.recipe.title}, Шаг приготовления {self.step_number}'
+
+    class Meta:
+        verbose_name = 'Шаг приготовления'
+        verbose_name_plural = 'Шаги приготовления'
 
 
 class SaveRecipe(models.Model):
@@ -101,7 +123,7 @@ class SaveRecipe(models.Model):
         verbose_name_plural = 'Избранное'
 
     def __str__(self):
-        return self.recipe.title
+        return f'{self.user.username} - {self.recipe.title}'
 
 
 class Selection(models.Model):
@@ -109,6 +131,13 @@ class Selection(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
     recipes = models.ManyToManyField(Recipe, related_name='recipes')
     user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.title}'
+
+    class Meta:
+        verbose_name = 'Подборка'
+        verbose_name_plural = 'Подборки'
 
 
 class CommentRecipe(MPTTModel):

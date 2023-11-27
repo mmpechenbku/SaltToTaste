@@ -178,7 +178,6 @@ saveButton.forEach(button => {
     button.addEventListener('click', event => {
         const recipeId = parseInt(button.dataset.recipe)
         const saveSum = button.querySelector('.save-sum');
-        console.log(saveSum);
         const formData = new FormData();
 
         formData.append('recipe_id', recipeId);

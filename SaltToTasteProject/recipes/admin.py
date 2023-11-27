@@ -2,13 +2,30 @@ from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 from .models import Recipe, Ingredient, CommentRecipe, RecipeStep, SaveRecipe, IngredientQuantity, Selection
 
+class IngredientQuantityInline(admin.TabularInline):
+    model = IngredientQuantity
+    extra = 0
+    # raw_id_fields = ['ingredient']
 
-admin.site.register(Recipe)
+class RecipeStepInline(admin.StackedInline):
+    model = RecipeStep
+    extra = 1
+
+class RecipeAdmin(admin.ModelAdmin):
+    inlines = [IngredientQuantityInline, RecipeStepInline]
+
+    class Media:
+        js = ('js/admin.js',)
+
+admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Ingredient)
 admin.site.register(RecipeStep)
 admin.site.register(SaveRecipe)
 admin.site.register(IngredientQuantity)
 admin.site.register(Selection)
+
+
+
 
 @admin.register(CommentRecipe)
 class CommentAdminPage(DraggableMPTTAdmin):

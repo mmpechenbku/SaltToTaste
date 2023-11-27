@@ -31,5 +31,10 @@ class Subscription(models.Model):
     following = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='followers')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'{self.follower.username} подписался на {self.following.username}'
+
     class Meta:
         unique_together = ('follower', 'following')
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'

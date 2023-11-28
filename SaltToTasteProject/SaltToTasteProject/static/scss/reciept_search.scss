@@ -42,16 +42,22 @@
     input {
         height: 40px;
         width: 60%;
-        border-radius: 90px;
+        border-radius: 11px;
         border: 2px solid rgba(47, 41, 41, 0.50);
         background: rgba(255, 255, 255, 0.61);
         padding: 10px 20px 10px 20px;
         /* Текст */
         color: #2F2929;
-        text-align: center;
-        font-size: 15px;
+        font-family: Tilda Sans VF;
+        font-size: 18px;
+        font-style: normal;
         font-weight: 400;
-
+        line-height: normal;
+    }
+    input::placeholder {
+        background: url("../img/svg_image/search.svg") no-repeat center/3%;
+        background-position: 44%;
+        text-align: center;
     }
 }
 
@@ -108,17 +114,24 @@
     justify-content: center;
 
     input {
-        height: 33px;
+        height: 40px;
         width: 60%;
-        border-radius: 90px;
+        border-radius: 11px;
         border: 2px solid rgba(47, 41, 41, 0.50);
         background: rgba(255, 255, 255, 0.61);
         padding: 10px 20px 10px 20px;
         /* Текст */
         color: #2F2929;
-        text-align: center;
+        font-family: Tilda Sans VF;
         font-size: 18px;
+        font-style: normal;
         font-weight: 400;
+        line-height: normal;
+    }
+    input::placeholder {
+        background: url("../img/svg_image/search.svg") no-repeat center/3%;
+        background-position: 24%;
+        text-align: center;
     }
 }
 .search-field__choice {
@@ -228,7 +241,6 @@
         border-radius: 6px;
         background: #6BB420;
         margin-left: 20px;
-
         color: var(--default-white, #FFF);
         font-size: 16px;
         font-weight: 600;
@@ -237,6 +249,7 @@
         width: 100px;
         height: 30px;
     }
+
 }
 /*.difficulty-container,*/
 .sorting__container {

@@ -31,6 +31,21 @@
     border: 2px solid rgba(47, 41, 41, 0.50);
     background: rgba(255, 255, 255, 0.20);
     margin-bottom: 20px;
+
+    /* Текст */
+        color: #2F2929;
+        font-family: Tilda Sans VF;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    &::placeholder {
+        background: url("../img/svg_image/search.svg") no-repeat center/3%;
+        background-position: 30%;
+        text-align: center;
+    }
+
+
 }
 .ingredient__search-title {
     font-size: 18px;

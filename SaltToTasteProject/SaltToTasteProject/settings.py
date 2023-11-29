@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'recipes.apps.RecipesConfig',
 
-    'mptt'
+    'mptt',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

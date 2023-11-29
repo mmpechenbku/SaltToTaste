@@ -3,10 +3,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, DetailView
 from django.contrib.messages.views import SuccessMessageMixin, messages
 from .forms import CustomUserCreationForm
 from django.shortcuts import render
+from .models import CustomUser
 
 
 # def index(request):
@@ -15,6 +16,18 @@ from django.shortcuts import render
 
 def profile(request):
     return render(request, 'users/profile.html')
+
+
+class ProfileDetailView(DetailView):
+    model = CustomUser
+    context_object_name = 'profile'
+    template_name = 'users/profile.html'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = f'Страница пользователя: {self.object.user.username}'
+    #     return context
+
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm

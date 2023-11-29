@@ -53,8 +53,8 @@
                     {% if user.is_authenticated %}
 
                     <li>
-                        <img class="account-img" src="{{ user.avatar }}" alt="">
-                        <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.nickname }}</a>
+                        <img class="account-img" src="{{ user.avatar.url }}" alt="">
+                        <a class="nav-item nav-link" href="{% url 'profile' user.pk %}">{{ user.nickname }}</a>
                     </li>
                     <li>
                         <a class="nav-item nav-link" href="{% url 'logout' %}">Выход</a>

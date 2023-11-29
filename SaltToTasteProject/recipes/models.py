@@ -56,6 +56,9 @@ class Recipe(models.Model):
     def get_sum_comments(self):
         return self.comments.count()
 
+    def get_absolute_url(self):
+        return reverse('recipe_detail', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.title
 
@@ -157,6 +160,9 @@ class CommentRecipe(MPTTModel):
     class MTTMeta:
         order_insertion_by = ('-time_create',)
 
+    def get_sum_likes(self):
+        return self.like_comment.count()
+
     class Meta:
         db_table = 'app_comments'
         indexes = [models.Index(fields=['-time_create', 'time_update', 'status', 'parent'])]
@@ -166,6 +172,25 @@ class CommentRecipe(MPTTModel):
 
     def __str__(self):
         return f'{self.author}:{self.content}'
+
+
+class LikeComment(models.Model):
+    comment = models.ForeignKey(to=CommentRecipe, verbose_name='Комментарий', on_delete=models.CASCADE, related_name='like_comment')
+    user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True, null=True)
+    time_create = models.DateTimeField(verbose_name='Время лайка', auto_now_add=True)
+
+    # ip_address = models.GenericIPAddressField(verbose_name='IP Адрес')
+
+
+    class Meta:
+        unique_together = ('comment', 'user')
+        ordering = ('-time_create',)
+        indexes = [models.Index(fields=['-time_create'])]
+        verbose_name = 'Лайк комментария'
+        verbose_name_plural = 'Лайки комментариев'
+
+    def __str__(self):
+        return f'{self.user.username} - {self.comment.content}'
 
 
 

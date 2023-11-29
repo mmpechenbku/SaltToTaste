@@ -4,7 +4,7 @@ from django.db.models import Prefetch, Count
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView
-from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe, RecipeStep, IngredientQuantity, Selection
+from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe, RecipeStep, IngredientQuantity, Selection, LikeComment
 from django.contrib.auth.decorators import login_required
 
 from django.http import JsonResponse
@@ -242,17 +242,42 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
             return JsonResponse({
                 'is_child': comment.is_child_node(),
                 'id': comment.id,
-                'author': comment.parent_id,
-                'time_create': comment.time_create.strftime('%Y-%b-%d %H:%M:%S'),
+                'author': comment.author.username,
+                'parent_id': comment.parent_id,
+                'time_create': comment.time_create.strftime('%d %B %Y %H:%M'),
                 'avatar': comment.author.avatar.url,
                 'content': comment.content,
+                'level': comment.level,
                 'get_absolute_url': comment.author.get_absolute_url()
             }, status=200)
-
         return redirect(comment.recipe.get_absolute_url())
 
     def handle_no_permission(self):
         return JsonResponse({'error': 'need authorisation'}, status=400)
+
+
+class LikeCommentCreateView(View):
+    model = LikeComment
+
+    def post(self, request, *args, **kwargs):
+        comment_id = request.POST.get('comment_id')
+        user = request.user if request.user.is_authenticated else None
+        if user:
+            like, created = self.model.objects.get_or_create(
+                comment_id=comment_id,
+                user=user
+            )
+            count = str(like.comment.get_sum_likes)
+            # print('count', count)
+            # print('save', save)
+            # print('recipe', save.recipe)
+            if not created:
+                like.delete()
+                # print(save.recipe.get_sum_save())
+                # print(like.comment.get_sum_likes())
+                return JsonResponse({'status': 'deleted', 'likes_sum': like.comment.get_sum_likes()})
+            # print(like.comment.get_sum_likes())
+            return JsonResponse({'status': 'created', 'likes_sum': like.comment.get_sum_likes()})
 
 
 def add_recipe(request):

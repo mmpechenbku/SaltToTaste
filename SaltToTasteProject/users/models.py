@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 
 class CustomUser(AbstractUser):
@@ -24,6 +25,9 @@ class CustomUser(AbstractUser):
     @property
     def get_sum_following(self):
         return self.following.count()
+
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'pk': self.pk})
 
 
 class Subscription(models.Model):

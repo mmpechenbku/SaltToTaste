@@ -152,109 +152,112 @@ ingredientSearchInput.addEventListener('input', () => {
     });
 
 
-//Сохранение
-
-const getCookie = (name) => {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-        const cookies = document.cookie.split(";");
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === name + "=") {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-};
-
-const csrftoken = getCookie("csrftoken")
-
-//Сохранение рецепта
-const saveButton = document.querySelectorAll('.save-recipe-button');
-
-saveButton.forEach(button => {
-    button.addEventListener('click', event => {
-        const recipeId = parseInt(button.dataset.recipe)
-        const saveSum = button.querySelector('.save-sum');
-        const formData = new FormData();
-
-        formData.append('recipe_id', recipeId);
-
-        fetch("/search/save_recipe/", {
-            method: "POST",
-            headers: {
-                "X-CSRFToken": csrftoken,
-                "X-Requested-With": "XMLHttpRequest",
-            },
-            body: formData
-        }).then(response => response.json())
-        .then(data => {
-            saveSum.textContent = data.save_sum;
-        })
-        .catch(error => console.error(error));
-    });
-});
-
-
-// Комментарии рецептов
-
-const commentForm = document.forms.commentForm;
-const commentFormContent = commentForm.content;
-const commentFormParentInput = commentForm.parent;
-const commentFormSubmit = commentForm.commentSubmit;
-const commentRecipeId = commentForm.getAttribute('data-recipe-id');
-
-commentForm.addEventListener('submit', createComment);
-
-replyUser()
-
-function replyUser() {
-    document.querySelectorAll('.btn-reply').forEach(e => {
-        e.addEventListener('click', replyComment);
-    });
-}
-
-function replyComment() {
-    const commentUsername = this.getAttribute('data-comment-username');
-    const commentMessageId = this.getAttribute('data-comment-id');
-    commentFormContent.value = `${commnetUsername}, `;
-    commentFormParentInput.value = commentMessageId;
-}
-async function createComment(event) {
-    event.preventDefault();
-    commentFormSubmit.disabled = true;
-    commentFormSubmit.innerText = "Ожидаем ответа сервера";
-    try {
-        const response = await fetch(`/search/${commentRecipeId}/comments/create/`, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': csrftoken,
-                'X-Requested-With': 'XMLHttpRequest',
-            },
-            body: new FormData(commentForm),
-        });
-        const comment = await response.json();
-
-        //html для коммента
-        let commentTemplate = ``
-        if (comment.is_child) {
-            document.querySelector(`#comment-thread-${comment.parent_id}`).insertAdjacentHTML("beforeend", commentTemplate);
-        }
-        else {
-            document.querySelector('.nested-comments').insertAdjacentHTML("beforeend", commentTemplate)
-        }
-        commentForm.reset()
-        commentFormSubmit.disabled = false;
-        commentFormSubmit.innerText = "Добавить комментарий";
-        commentFormParentInput.value = null;
-        replyUser();
-    }
-    catch (error) {
-        console.log(error)
-    }
-}
+////Сохранение
+//
+//const getCookie = (name) => {
+//    let cookieValue = null;
+//    if (document.cookie && document.cookie !== "") {
+//        const cookies = document.cookie.split(";");
+//        for (let i = 0; i < cookies.length; i++) {
+//            const cookie = cookies[i].trim();
+//            if (cookie.substring(0, name.length + 1) === name + "=") {
+//                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                break;
+//            }
+//        }
+//    }
+//    return cookieValue;
+//};
+//
+//const csrftoken = getCookie("csrftoken");
+//
+//console.log(csrftoken);
+//console.log('lox');
+//
+////Сохранение рецепта
+//const saveButton = document.querySelectorAll('.save-recipe-button');
+//
+//saveButton.forEach(button => {
+//    button.addEventListener('click', event => {
+//        const recipeId = parseInt(button.dataset.recipe)
+//        const saveSum = button.querySelector('.save-sum');
+//        const formData = new FormData();
+//
+//        formData.append('recipe_id', recipeId);
+//
+//        fetch("/search/save_recipe/", {
+//            method: "POST",
+//            headers: {
+//                "X-CSRFToken": csrftoken,
+//                "X-Requested-With": "XMLHttpRequest",
+//            },
+//            body: formData
+//        }).then(response => response.json())
+//        .then(data => {
+//            saveSum.textContent = data.save_sum;
+//        })
+//        .catch(error => console.error(error));
+//    });
+//});
+//
+//
+//// Комментарии рецептов
+//
+//const commentForm = document.forms.commentForm;
+//const commentFormContent = commentForm.content;
+//const commentFormParentInput = commentForm.parent;
+//const commentFormSubmit = commentForm.commentSubmit;
+//const commentRecipeId = commentForm.getAttribute('data-recipe-id');
+//
+//commentForm.addEventListener('submit', createComment);
+//
+//replyUser()
+//
+//function replyUser() {
+//    document.querySelectorAll('.btn-reply').forEach(e => {
+//        e.addEventListener('click', replyComment);
+//    });
+//}
+//
+//function replyComment() {
+//    const commentUsername = this.getAttribute('data-comment-username');
+//    const commentMessageId = this.getAttribute('data-comment-id');
+//    commentFormContent.value = `${commentUsername}, `;
+//    commentFormParentInput.value = commentMessageId;
+//}
+//async function createComment(event) {
+//    event.preventDefault();
+//    commentFormSubmit.disabled = true;
+//    commentFormSubmit.innerText = "Ожидаем ответа сервера";
+//    try {
+//        const response = await fetch(`/search/${commentRecipeId}/comments/create/`, {
+//            method: 'POST',
+//            headers: {
+//                'X-CSRFToken': csrftoken,
+//                'X-Requested-With': 'XMLHttpRequest',
+//            },
+//            body: new FormData(commentForm),
+//        });
+//        const comment = await response.json();
+//
+//        //html для коммента
+//        let commentTemplate = ``
+//        if (comment.is_child) {
+//            document.querySelector(`#comment-thread-${comment.parent_id}`).insertAdjacentHTML("beforeend", commentTemplate);
+//        }
+//        else {
+//            document.querySelector('.nested-comments').insertAdjacentHTML("beforeend", commentTemplate)
+//        }
+//        commentForm.reset()
+//        commentFormSubmit.disabled = false;
+//        commentFormSubmit.innerText = "Добавить комментарий";
+//        commentFormParentInput.value = null;
+//        replyUser();
+//    }
+//    catch (error) {
+//        console.log(error)
+//    }
+//}
 
 //const saveSelectionButton = document.querySelectorAll('.save');
 //saveSelectionButton.forEach(button => {

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
-from .models import Recipe, Ingredient, CommentRecipe, RecipeStep, SaveRecipe, IngredientQuantity, Selection
+from .models import Recipe, Ingredient, CommentRecipe, RecipeStep, SaveRecipe, IngredientQuantity, Selection, LikeComment
 
 class IngredientQuantityInline(admin.TabularInline):
     model = IngredientQuantity
@@ -34,5 +34,7 @@ class CommentAdminPage(DraggableMPTTAdmin):
     list_display_links = ('recipe',)
     list_filter = ('time_create', 'time_update', 'author')
     list_editable = ('status',)
+
+admin.site.register(LikeComment)
 
 # Register your models here.

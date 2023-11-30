@@ -10,12 +10,12 @@
         <div class="index-article_content-block">
             <div class="index-article__header">
                 <h1 class="index-article__title"><a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a></h1>
-                <h4>Совпадение
+                <h4>
                     {% if percentsDict|length > 0 %}
                         {% for dict in percentsDict %}
                             {% for key, value in dict.items %}
                                 {% if key == recipe %}
-                                    {{ value }}
+                                    Совпадение {{ value }}
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}

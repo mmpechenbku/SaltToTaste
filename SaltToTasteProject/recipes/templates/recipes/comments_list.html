@@ -15,7 +15,7 @@
     {% recursetree recipe.comments.all %}
     <ul id="comment-thread-{{ node.pk }}">
         <li>
-            <div class="comment__container" style="width: {{ 10|sub:node.level|mul:10 }}%; margin-left: auto;">
+            <div class="comment__container {% if node.level > 0 %}reply__comment{% endif %}">
                 <img src="{{ node.author.avatar.url }}" alt="profile-icon">
                 <div class="comment__content">
                     <div class="comment__header">
@@ -27,16 +27,26 @@
                     </div>
                     <div class="comment__functions">
                         <svg width="24" height="24">
+                            {% if node.author != user %}
                             <a class="btn-reply" href="#commentForm" data-comment-id="{{ node.pk }}"
                                data-comment-username="{{ node.author }}">
                                 <use href="#reply"></use>
                             </a>
+                            {%endif%}
                         </svg>
                         <div class="like" data-comment="{{ node.pk }}">
                             <svg width="18" height="18">
-                                <use href="#like"></use>
+                                <use href="{% if request.user.is_authenticated %}
+                                                {% if node.author == user %}
+                                                    #like-enable
+                                                {%else%}
+                                                    #like
+                                                {%endif%}
+                                            {%else%}
+                                            #like
+                                            {%endif%}"></use>
                             </svg>
-                            <p class="like-count">{{ node.get_sum_likes }}</p>
+                            <p class="like-count">{{ node.get_username_like }} {{ node.get_sum_likes }}</p>
                         </div>
                     </div>
                 </div>

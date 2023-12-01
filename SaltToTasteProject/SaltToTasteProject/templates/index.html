@@ -16,16 +16,21 @@
             <input class="header__index-link" type="button" src="#" value="Введите название ингредиентов, а мы найдем совпадение до 100%"/>
             <ul class="header__index-list">
                 <li class="header__index-item">
-                    <img src="{%static 'img/svg_image/favorites2.svg'%}" alt="" width="55" height="55">
-
+                    <svg width="55" height="55">
+				        <use href="#fav_icon-enable"></use>
+                    </svg>
                     <p class="header__index-item-text">Добавляйте понравившиеся<br>рецепты в подборки</p>
                 </li>
                 <li class="header__index-item">
-                     <img src="{%static 'img/svg_image/comment.svg'%}" alt="" width="55" height="55">
+                     <svg width="55" height="55">
+				        <use href="#comment-icon"></use>
+                    </svg>
                     <p class="header__index-item-text">Делитесь впечатлениями</p>
                 </li>
                 <li class="header__index-item">
-                     <img src="{%static 'img/svg_image/addreciept.svg'%}" alt="" width="55" height="55">
+                    <svg width="55" height="55">
+				        <use href="#add_recipe-icon"></use>
+                    </svg>
                     <p class="header__index-item-text">Записывайте свои рецепты и/или<br>делитесь ими с другими</p>
                 </li>
             </ul>

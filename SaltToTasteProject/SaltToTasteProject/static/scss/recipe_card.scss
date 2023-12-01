@@ -76,10 +76,16 @@
                         align-items: center;
                         margin-right: 10px;
                     }
-                    img {
+                    svg {
                         margin-right: 5px;
                         justify-content: center;
                     }
+                    span {
+                            color: #000;
+                            font-size: 18px;
+                            font-weight: 400;
+                            font-family: Tilda Sans VF;
+                        }
                     button {
                         display: flex;
                         justify-content: center;
@@ -87,13 +93,7 @@
                         cursor: pointer;
                         border: none;
                         background-color: transparent;
-                        span {
-                            color: #000;
-                            font-size: 18px;
-                            font-weight: 400;
-                            padding-left: 5px;
-                            font-family: Tilda Sans VF;
-                        }
+
                     }
                 }
                 .index-article-item2 {

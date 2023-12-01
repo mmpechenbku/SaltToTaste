@@ -12,11 +12,15 @@
     <div class="collections__header">
             <div class="collections__header-title">
                 <h1>Избранное</h1>
-                <img src="{% static 'img/svg_image/favorites2.svg' %}" width="30" height="30" alt="">
+                <svg width="30" height="30">
+				    <use href="#fav_icon-enable"></use>
+                </svg>
             </div>
             <div class="collections__header-btn">
                 <a href="#" class="collections__header-btn_image">
-                    <img src="{% static 'img/svg_image/addreciept.svg' %}" width="30" height="30" alt="Добавить свой рецепт">
+                    <svg width="30" height="30">
+				        <use href="#add_recipe-icon"></use>
+                    </svg>
                 </a>
                 <a href="#" class="collections__header-btn_text">Добавить свой рецепт</a>
             </div>

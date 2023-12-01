@@ -16,6 +16,8 @@
     font-size: 30px;
     font-weight: 700;
     margin-right: 10px; }
+  .collections__header-title svg {
+    color: #2F2929; }
 
 .collections__header-btn {
   display: inherit;
@@ -118,7 +120,7 @@
   width: 205px;
   height: 150px;
   border-radius: 58px;
-  border: 11px dashed #C7B4B4;
+  border: 6px dashed rgba(160, 151, 145, 0.5);
   background: rgba(199, 180, 180, 0); }
 
 .collection__item-img_none:hover {

@@ -172,13 +172,13 @@
   color: #000000; }
 
 .hero__list {
-  padding-top: 20px;
+  padding-top: 30px;
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   column-gap: 2em;
   row-gap: 2em; }
 
-.hero_item_ingredients {
+.comment-sum {
   font-family: 'Tilda Sans VF';
   font-style: normal;
   font-weight: 400;
@@ -203,7 +203,15 @@
   color: #000000; }
 
 .btn__favorites-items {
+  display: flex;
+  align-items: center;
   padding-left: 20px; }
+  .btn__favorites-items span {
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Tilda Sans VF;
+    margin-left: 5px; }
 
 .btn__favorites-list {
   margin-bottom: 20px;
@@ -316,5 +324,23 @@
     border-radius: 52px;
     border: 1px solid #CBC8C8;
     background: #FDF5F5; }
+
+.btn__com_save {
+  display: flex;
+  align-items: center; }
+  .btn__com_save span {
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Tilda Sans VF; }
+  .btn__com_save svg {
+    margin-right: 5px;
+    justify-content: center; }
+  .btn__com_save button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    margin-left: 10px; }
 
 /*# sourceMappingURL=recipe_detail.css.map */

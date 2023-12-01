@@ -61,3 +61,24 @@
         @import "recipe_card-grid3.scss";
     }
 }
+
+.search__header {
+    display: flex;
+    justify-content: space-between;
+}
+.search-header__btn {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #303030;
+    svg {
+        margin-right: 5px;
+    }
+    a {
+        color: unset;
+    }
+    &:hover {
+        color: #000;
+    }
+}

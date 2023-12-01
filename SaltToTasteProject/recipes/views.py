@@ -120,6 +120,7 @@ class RecipeDetailView(DetailView):
         context['ingredients'] = ingredients
         context['form'] = CommentCreateForm
         context['quantity_ingr'] = IngredientQuantity.objects.filter(recipe=self.object)
+        context['like_comments'] = LikeComment.objects.filter(user=self.request.user)
         context['steps'] = RecipeStep.objects.filter(recipe=self.object).order_by('step_number')
         return context
 
@@ -288,16 +289,9 @@ class LikeCommentCreateView(View):
                 comment_id=comment_id,
                 user=user
             )
-            count = str(like.comment.get_sum_likes)
-            # print('count', count)
-            # print('save', save)
-            # print('recipe', save.recipe)
             if not created:
                 like.delete()
-                # print(save.recipe.get_sum_save())
-                # print(like.comment.get_sum_likes())
                 return JsonResponse({'status': 'deleted', 'likes_sum': like.comment.get_sum_likes()})
-            # print(like.comment.get_sum_likes())
             return JsonResponse({'status': 'created', 'likes_sum': like.comment.get_sum_likes()})
 
 

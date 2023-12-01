@@ -54,6 +54,7 @@
         align-items: center;
         margin-left: 10px; }
         .comment__container .comment__content .comment__functions .like p {
+          width: 30px;
           color: rgba(0, 0, 0, 0.15);
           font-size: 16px;
           font-weight: 500;

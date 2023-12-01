@@ -193,6 +193,7 @@ class LikeComment(models.Model):
         verbose_name = 'Лайк комментария'
         verbose_name_plural = 'Лайки комментариев'
 
+
     def __str__(self):
         return f'{self.user.username} - {self.comment.content}'
 

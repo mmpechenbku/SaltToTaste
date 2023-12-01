@@ -86,11 +86,17 @@ async function createComment(event) {
         });
         const comment = await response.json();
 
-        const commentIndentation = comment.is_child ? comment.level * 10 : 0;
+        var commentIndentation = '';
+        if (comment.is_child) {
+            commentIndentation = 'reply__comment';
+        } else {
+            commentIndentation = '';
+        }
+
         //html для коммента
         let commentTemplate = `<ul id="comment-thread-${comment.id}">
         <li>
-            <div class="comment__container" style="width: ${100 - commentIndentation}%; margin-left: auto;">
+            <div class="comment__container ${commentIndentation}">
                 <img src="${comment.avatar}" alt="${comment.author}">
                 <div class="comment__content">
                     <div class="comment__header">
@@ -111,7 +117,7 @@ async function createComment(event) {
                             <svg width="18" height="18">
                                 <use href="#like"></use>
                             </svg>
-                            <p class="like-count">1</p>
+                            <p class="like-count">0</p>
                         </div>
                     </div>
                 </div>
@@ -158,8 +164,18 @@ likeButton.forEach(button => {
             body: formData
         }).then(response => response.json())
         .then(data => {
-            likeSum.textContent = data.likes_sum;
-            console.log(data.likes_sum);
+            button.innerHTML = '';
+            let like_status = '#like';
+            if (data.status == 'created') {
+                like_status = '#like-enable';
+            }
+            if (data.status == 'deleted') {
+                like_status = '#like';
+            }
+            button.innerHTML = '<svg width="18" height="18">' +
+                                '<use href="' + like_status + '"></use>' +
+                            '</svg>' +
+                            '<p class="like-count">' + data.likes_sum + '</p>';
         })
         .catch(error => console.error(error));
     });

@@ -98,9 +98,14 @@
                 display: inherit;
                 align-items: center;
                 margin-right: 10px; }
-              .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 img {
+              .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 svg {
                 margin-right: 5px;
                 justify-content: center; }
+              .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 span {
+                color: #000;
+                font-size: 18px;
+                font-weight: 400;
+                font-family: Tilda Sans VF; }
               .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 button {
                 display: flex;
                 justify-content: center;
@@ -108,12 +113,6 @@
                 cursor: pointer;
                 border: none;
                 background-color: transparent; }
-                .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item1 button span {
-                  color: #000;
-                  font-size: 18px;
-                  font-weight: 400;
-                  padding-left: 5px;
-                  font-family: Tilda Sans VF; }
             .article-content__container.active-1 .index__article-content .index-article-section ul li .index-article-item2 {
               display: flex;
               margin-top: 10px; }
@@ -248,5 +247,22 @@
                 display: inherit;
                 align-items: center;
                 font-size: 14px; }
+
+.search__header {
+  display: flex;
+  justify-content: space-between; }
+
+.search-header__btn {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #303030; }
+  .search-header__btn svg {
+    margin-right: 5px; }
+  .search-header__btn a {
+    color: unset; }
+  .search-header__btn:hover {
+    color: #000; }
 
 /*# sourceMappingURL=collections_detail.css.map */

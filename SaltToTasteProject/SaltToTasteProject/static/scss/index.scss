@@ -80,10 +80,12 @@ margin-bottom: 30px;
             display: flex;
             align-items: center;
             margin-bottom: 30px;
+            svg {
+                color: #2F2929;
+                margin-right: 10px;
+            }
          }
-         img {
-            margin-right: 10px;
-         }
+
          p {
             /* @include adaptive-font (30, 5); */
             font-size: 22px;

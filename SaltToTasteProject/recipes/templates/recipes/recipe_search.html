@@ -13,7 +13,9 @@
             </div>
             <div class="search-header__btn">
                 <a href="#" class="search-header__btn-image">
-                    <img src="{% static 'img/svg_image/addreciept.svg' %}" width="30" height="30" alt="Добавить свой рецепт">
+                    <svg width="30" height="30">
+				        <use href="#add_recipe-icon"></use>
+                    </svg>
                 </a>
                 <a href="{% url 'add_recipe' %}" class="search-header__btn-text">Добавить свой рецепт</a>
             </div>

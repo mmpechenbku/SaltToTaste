@@ -15,11 +15,7 @@
                         {% for dict in percentsDict %}
                             {% for key, value in dict.items %}
                                 {% if key == recipe %}
-<<<<<<< HEAD
-                                    Совпадение  {{ value }}
-=======
                                     Совпадение {{ value }}
->>>>>>> c7aed1b680fafb474ef3b7a1b0b833c20829c160
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
@@ -33,12 +29,14 @@
                 <div class="index-article-item1">
 
                     <a href="#" class="index-item__image">
-                        <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
-                        22
+                        <svg width="32" height="32">
+				            <use href="#comment-icon"></use>
+                        </svg>
+                        <span class="comment-sum">0</span>
                     </a>
 
                     <button class="save-recipe-button" data-recipe="{{ recipe.id }}">
-                            <svg width="32" height="32" class="navbar__item-search-img">
+                            <svg width="32" height="32">
                                 <use href="{% if saves %}{% if recipe.id in saves %}#fav_icon-enable{% else %}#fav_icon{% endif %}{% else %}#fav_icon{% endif %}"></use>
                             </svg>
                         <span class="save-sum">{{ recipe.get_sum_save }}</span>

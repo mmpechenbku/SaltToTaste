@@ -23,23 +23,23 @@
                     <p class="hero__text">{{ recipe.description }}</p>
                     <ul class="hero__list">
                         <li class="hero__item">
-                            <a href="#" class="hero__image">
-                                <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
-                            </a>
-                            <b class="hero_item_ingredients">22</b>
-                            <a href="#" class="hero__image">
-                                <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
-                            </a>
-                            <b class="hero_item_ingredients">522</b>
-                        </li>
-                        <li class="hero__item">
-                            <b class="hero_item_ingredients">{{ ingredients|join:", " }}</b>
-                        </li>
-                        <li class="hero__item">
+                            <div class="btn__com_save">
                                 <a href="#" class="hero__image">
-                                    <img src="{% static 'img/svg_image/favorites2.svg' %}" alt=""/>
+                                    <svg width="32" height="32">
+                                        <use href="#comment-icon"></use>
+                                    </svg>
                                 </a>
-                                <b class="hero_item-favorites">Добавлено!</b>
+                                <span class="comment-sum">0</span>
+                                <button class="save-recipe-button" data-recipe="{{ recipe.id }}">
+                                    <svg width="32" height="32">
+                                        <use href="{% if saves %}{% if recipe.id in saves %}#fav_icon-enable{% else %}#fav_icon{% endif %}{% else %}#fav_icon{% endif %}"></use>
+                                    </svg>
+                                    <span class="save-sum">{{ recipe.get_sum_save }}</span>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="hero__item">
+                            <p class="hero_item_ingredients">{{ ingredients|join:", " }}</p>
                         </li>
                     </ul>
                 </div>
@@ -109,16 +109,10 @@
                 <h1>Отзывы</h1>
             </li>
             <li class="btn__favorites-items">
-                <a href="#" class="hero__image">
-                    <img src="{% static 'img/svg_image/comment.svg' %}" alt="" width="31" height="31"/>
-                </a>
-                <b class="favorites_values">22</b>
-            </li>
-            <li class="btn__favorites-items">
-                <a href="#" class="hero__image">
-                    <img src="{% static 'img/svg_image/favorites.svg' %}" alt="" width="30" height="30"/>
-                </a>
-                <b class="favorites_values">522</b>
+                <svg width="32" height="32">
+                    <use href="#comment-icon"></use>
+                </svg>
+                <span class="comment-sum">0</span>
             </li>
        </ul>
         {% include 'recipes/comments_list.html' %}

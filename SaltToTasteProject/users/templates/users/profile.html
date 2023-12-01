@@ -12,40 +12,86 @@
 <main class="page__profile">
 	<img class="soup" src="{% static 'img/background/soup.png' %}" alt="">
 	<img class="pizza" src="{% static 'img/background/pizza.png' %}" alt="">
-	<section class="profile__header">
-		<div class="profile__settings">
-			<ul>
-				<li>Поделиться профилем</li>
-				<li>Изменить профиль</li>
-			</ul>
+	<section class="profile_header__bnt">
+		<div class="header__bnt-reply header_bnt">
+			<svg width="24" height="24">
+				<use href="#reply"></use>
+			</svg>
+			<p>Поделиться</p>
 		</div>
-		<div class="account">
-			<img class="rounded-circle account-img" src="{{ user.avatar.url }}">
-			<ul>
-				<li>@{{ user.nickname }}</li>
-				<li>{{ user.name }}</li>
-			</ul>
+		<div class="header__bnt-settings header_bnt">
+			<svg width="18" height="18">
+				<use href="#settings"></use>
+			</svg>
+			<p>Редактировать профиль</p>
 		</div>
-		<div class="account__subscriptions">
-			<ul>
-				<li>Подписчиков: {{ user.get_sum_followers }}</li>
-				<li>Подписок: {{ user.get_sum_following }}</li>
-			</ul>
+		<div class="header__bnt-more header_bnt">
+			<svg width="20" height="20">
+				<use href="#more"></use>
+			</svg>
+			<p>Еще</p>
 		</div>
 	</section>
+	<section class="profile__header">
+		<div class="profile__header-top">
+			<div class="profile__settings">
+				<ul>
+					<li class="count">{{ user.get_sum_followers }}</li>
+					<li>подписчики</li>
+				</ul>
+			</div>
+			<div class="account">
+				<img class="rounded-circle account-img" src="{{ user.avatar.url }}">
+				<ul>
+					<li id="username">{{ user.name }}</li>
+					<li>@{{ user.nickname }}</li>
+				</ul>
+			</div>
+			<div class="profile__settings">
+				<ul>
+					<li class="count">{{ user.get_sum_following }}</li>
+					<li>подписки</li>
+				</ul>
+			</div>
+		</div>
+		<div class="profile__header-bottom">
+			<p>Добро пожаловать на мою страницу! Здесь я делюсь своими<br/> любимыми рецептами! 👩‍🍳😊</p>
+		</div>
+	</section>
+	<section class="profile_tabs">
+		<div class="tabs">
+			<a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe">РЕЦЕПТЫ</a>
+			<a class="tab__link" id="tab__link-fav" href="#tab_area_fav">ПОДБОРКИ</a>
+		</div>
+		<div class="areas">
+			<div class="tab_area" id="tab_area_recipe" style="display: block;">
+				{% for recipe in recipes %}
+                	{% include 'recipes/recipe_card.html' %}
+            	{% endfor %}
+				Рецепты
+			</div>
+			<div class="tab_area" id="tab_area_fav" style="display: none;">
+				<div class="collection__item">
+					<a href="">
+						<!--<div class="collection__item-img">
+							<img src="{% static 'img/collections_img/collections__item-1.jpg' %}" alt="">
+						</div>-->
+					</a>
+					<div class="collection__item-name">
+						Название подборки
+					</div>
+				</div>
 
+			</div>
+		</div>
+	</section>
 </main>
 
 
-<!--<div class="content-section" style="margin: 120px;">
-  	<div class="media">
-    	<img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-    	<div class="media-body">
-      	<h2 class="account-heading">{{ user.username }}</h2>
-  	    <p class="text-secondary">{{ user.email }}</p>
-    	</div>
-  	</div>
-  	&lt;!&ndash; Здесь будет форма &ndash;&gt;
-</div>-->
 
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/tabs.js' %}"></script>
 {% endblock %}

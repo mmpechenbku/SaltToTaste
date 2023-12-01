@@ -9,7 +9,7 @@
             <textarea name="content" cols="30" rows="10"
                       placeholder="Понравилось? Поделитесь впечатлением" required id="id_content"></textarea>
             <input type="hidden" name="parent" id="id_parent">
-            <button type="submit" id="commentSubmit">send comment</button>
+            <button class="btn-standart" type="submit" id="commentSubmit">Отправить</button>
         </form>
     {% endif %}
     {% recursetree recipe.comments.all %}

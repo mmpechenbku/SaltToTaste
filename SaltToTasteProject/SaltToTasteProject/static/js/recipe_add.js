@@ -84,16 +84,19 @@ function inputSelected(count) {
                 div.className = 'ingredient__step-item';
                 var currentStep = stepCount;
                 div.innerHTML = '<div class="ingredient__step-item-img">' +
-                                '<label class="input-file-label" for="step-image-' + currentStep + '">' +
-                                    '<svg width="64" height="64">' +
-                                        '<use id="file_add-' + stepCount + '" href="#image_add"></use>' +
-                                    '</svg>' +
-                                    '<span id="title_file-' + stepCount + '">Добавить файл</span>' +
-                                '</label>' +
-                                '<input class="input-file" type="file" onchange="inputSelected(' + stepCount + ')" name="step_image_' + stepCount + '" accept=".png, .jpg, .jpeg" id="step-image-' + currentStep + '" required/>' +
+                                    '<label class="input-file-label" for="step-image-' + currentStep + '">' +
+                                        '<svg width="64" height="64">' +
+                                            '<use id="file_add-' + stepCount + '" href="#image_add"></use>' +
+                                        '</svg>' +
+                                        '<span id="title_file-' + stepCount + '">Добавить файл</span>' +
+                                    '</label>' +
+                                    '<input class="input-file" type="file" onchange="inputSelected(' + stepCount + ')" name="step_image_' + stepCount + '" accept=".png, .jpg, .jpeg" id="step-image-' + currentStep + '" required/>' +
                                 '</div>' +
                                 '<div class="ingredient__step-item-text">' +
-                                '<textarea name="step_description_' + stepCount + '" placeholder="Описание шага"  id="step-description-' + stepCount + '"></textarea>' +
+                                    '<textarea name="step_description_' + stepCount + '" placeholder="Описание шага"  id="step-description-' + stepCount + '"></textarea>' +
+                                '</div>' +
+                                '<div class="ingredient__stepbnt-delete">' +
+                                '<p>X</p>' +
                                 '</div>';
 
 

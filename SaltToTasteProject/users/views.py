@@ -8,7 +8,7 @@ from django.contrib.messages.views import SuccessMessageMixin, messages
 from .forms import CustomUserCreationForm
 from django.shortcuts import render
 from .models import CustomUser
-
+from recipes.models import Recipe, Selection
 
 # def index(request):
 #     return render(request, 'index.html')
@@ -22,6 +22,13 @@ class ProfileDetailView(DetailView):
     model = CustomUser
     context_object_name = 'profile'
     template_name = 'users/profile.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['recipes'] = Recipe.objects.filter(author=self.object)
+        context['selections'] = Selection.objects.filter(user=self.object)
+        # print('in get')
+        return context
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
@@ -106,3 +113,19 @@ class Login(SuccessMessageMixin, LoginView):
 
         # Возвращаем JSON-ответ
         return JsonResponse({'status': status})
+
+
+def get_user_recipes(request):
+    user_id = request.GET.get('user_id')
+    user_recipes = Recipe.objects.filter(author=user_id)
+
+    data = {'recipes': user_recipes}
+    return JsonResponse(data)
+
+def get_user_collections(request):
+    # Логика для получения подборок пользователя
+    user_id = request.GET.get('user_id')
+    user_collections = Selection.objects.filter(user=user_id)
+
+    data = {'collections': user_collections}
+    return JsonResponse(data)

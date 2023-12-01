@@ -40,6 +40,11 @@ class Recipe(models.Model):
         MEDIUM = "Средняя"
         EASY = "Легко"
 
+    ACCESS_OPTIONS = (
+        ('public', 'Общедоступный'),
+        ('private', 'Закрытый')
+    )
+
     # picture = models.ManyToManyField('Picture', blank=True)
     picture = models.ImageField(upload_to='images/recipes_pictures', blank=True, null=True, verbose_name='Фото')
     title = models.CharField(max_length=255, verbose_name='Название')
@@ -49,6 +54,8 @@ class Recipe(models.Model):
     difficulty = models.CharField(max_length=50, choices=Difficulty.choices, verbose_name='Сложность')
     # cookingTime = models.IntegerField(verbose_name='Время приготовления')
     cookingTime = models.IntegerField(verbose_name="Время приготовления")
+    author = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    access = models.CharField(choices=ACCESS_OPTIONS, default='private', verbose_name='Доступ', max_length=10)
 
     objects = RecipeManager()
 
@@ -134,10 +141,17 @@ class SaveRecipe(models.Model):
 
 
 class Selection(models.Model):
+
+    ACCESS_OPTIONS = (
+        ('public', 'Общедоступный'),
+        ('private', 'Закрытый')
+    )
+
     picture = models.ImageField(upload_to='images/selection_pictures', verbose_name='Фото')
     title = models.CharField(max_length=255, verbose_name='Название')
     recipes = models.ManyToManyField(Recipe, related_name='recipes')
     user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    access = models.CharField(choices=ACCESS_OPTIONS, default='private', verbose_name='Доступ', max_length=10)
 
     def __str__(self):
         return f'{self.user.username} - {self.title}'

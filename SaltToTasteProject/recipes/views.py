@@ -329,6 +329,7 @@ def add_recipe(request):
                 picture=recipe_image,
                 difficulty=difficulty,
                 cookingTime=cooking_time,
+                author=request.user,
                 # ingredients = ingredients,
                 # ... дополнительные поля ...
             )

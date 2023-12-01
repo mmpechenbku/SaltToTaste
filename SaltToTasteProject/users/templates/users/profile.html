@@ -36,20 +36,20 @@
 		<div class="profile__header-top">
 			<div class="profile__settings">
 				<ul>
-					<li class="count">{{ user.get_sum_followers }}</li>
+					<li class="count">{{ profile.get_sum_followers }}</li>
 					<li>подписчики</li>
 				</ul>
 			</div>
 			<div class="account">
 				<img class="rounded-circle account-img" src="{{ user.avatar.url }}">
 				<ul>
-					<li id="username">{{ user.name }}</li>
-					<li>@{{ user.nickname }}</li>
+					<li id="username">{{ profile.name }}</li>
+					<li>@{{ profile.nickname }}</li>
 				</ul>
 			</div>
 			<div class="profile__settings">
 				<ul>
-					<li class="count">{{ user.get_sum_following }}</li>
+					<li class="count">{{ profile.get_sum_following }}</li>
 					<li>подписки</li>
 				</ul>
 			</div>
@@ -60,13 +60,15 @@
 	</section>
 	<section class="profile_tabs">
 		<div class="tabs">
-			<a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe">РЕЦЕПТЫ</a>
-			<a class="tab__link" id="tab__link-fav" href="#tab_area_fav">ПОДБОРКИ</a>
+			<a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="loadContent('recipes')">РЕЦЕПТЫ</a>
+			<a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="loadContent('collections')">ПОДБОРКИ</a>
 		</div>
 		<div class="areas">
 			<div class="tab_area" id="tab_area_recipe" style="display: block;">
 				{% for recipe in recipes %}
-                	{% include 'recipes/recipe_card.html' %}
+					{% if profile == user or recipe.access == public %}
+                		{% include 'recipes/recipe_card.html' %}
+					{% endif %}
             	{% endfor %}
 				Рецепты
 			</div>
@@ -79,6 +81,20 @@
 					</a>
 					<div class="collection__item-name">
 						Название подборки
+						{% for selection in selections %}
+							{% if profile == user or recipe.access == public %}
+        						<div class="collection__item">
+        						    <a href="{% url 'collections-detail' selection.pk %}">
+        						        <div class="collection__item-img">
+        						            <img src="{{ selection.picture }}" alt="">
+        						        </div>
+        						    </a>
+        						    <div class="collection__item-name">
+        						        {{ selection.title }}
+        						    </div>
+        						</div>
+							{% endif %}
+        				{% endfor %}
 					</div>
 				</div>
 

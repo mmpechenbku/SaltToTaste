@@ -38,6 +38,32 @@ def collections_detail(request):
     return render(request, 'collections/collections_detail.html')
 
 
+class CollectionDetailView(DetailView):
+    model = Selection
+    template_name = 'collections/collections_detail.html'
+    context_object_name = 'collection'
+    #
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        recipes = [recipe for recipe in self.object.recipes.all()]
+
+        recipe_ingr_dict = []
+        for recipe in recipes:
+            ingredients = []
+            for ingredient in recipe.ingredients.all():
+                ingredients.append(ingredient.name)
+            recipe_ingr_dict.append({recipe: ingredients})
+
+        context['recipes'] = recipes
+        ingredients = [ingredient.name for ingredient in [recipe.ingredients for recipe in self.object.recipes.all()]]
+        context['ingredients'] = ingredients
+        context['recipes_ingr'] = recipe_ingr_dict
+
+        return context
+
+
+
 @login_required
 def selections(request):
     user = request.user
@@ -93,26 +119,23 @@ class RecipeDetailView(DetailView):
 
         context['ingredients'] = ingredients
         context['form'] = CommentCreateForm
+        context['quantity_ingr'] = IngredientQuantity.objects.filter(recipe=self.object)
         context['steps'] = RecipeStep.objects.filter(recipe=self.object).order_by('step_number')
         return context
 
 
 def search_recipes(request):
-    message = 'Всего рецептов: '
     selected_ingredient_ids = request.POST.get('ingredients', '').split(',')
-    # print('ingr', selected_ingredient_ids)
     difficulty = request.POST.get('difficulty', '')
-    # print(difficulty)
     time = request.POST.get('time', '')
     fullHit = request.POST.get('coincidence')
     recipe_title = request.POST.get('title_search')
-    # print('title', recipe_title)
+    sorting = request.POST.get('sorting')
+    print(sorting)
 
-    #  selected_ingredient_ids не пуст и не содержит пустых значений
     selected_ingredient_ids = [id for id in selected_ingredient_ids if id]
-    # print(selected_ingredient_ids)
 
-    recipes = Recipe.objects.all()
+    recipes = Recipe.objects.popular()
 
     recipe_ingr_dict = []
 
@@ -123,12 +146,10 @@ def search_recipes(request):
     percentsDict = []
 
     if difficulty and difficulty != 'Все':
-        print('dif')
         print(difficulty)
         recipes = recipes.filter(difficulty=difficulty)
-    # print(recipes)
+
     if time and time != 0:
-        print('time')
         time = int(time)
         hours = time // 60
         minutes = time % 60
@@ -136,6 +157,11 @@ def search_recipes(request):
         time = datetime.strptime(time, "%H:%M").time()
 
         recipes = recipes.filter(cookingTime__lte=time)
+
+    if sorting and sorting != 0:
+        if sorting != 'popularity':
+            sorting = f'-{sorting}'
+            recipes = recipes.order_by(sorting)
 
     for recipe in recipes:
         ingredients = []
@@ -145,7 +171,6 @@ def search_recipes(request):
 
     if selected_ingredient_ids:
         recipes = Recipe.objects.filter(ingredients__id__in=selected_ingredient_ids).distinct()
-        # print('with ingr', recipes)
 
         if difficulty and difficulty != 'Все':
             recipes = recipes.filter(difficulty=difficulty)
@@ -153,11 +178,12 @@ def search_recipes(request):
         if time and time != 0:
             recipes = recipes.filter(cooking_time__lte=time)
 
+
+
         # Фильтрация рецептов по процентному попаданию
         filtered_recipes = []
         percentsDict = []
         for recipe in recipes:
-            # print(recipes)
             total_ingredients = selected_ingredient_ids.__len__()
             ingredients_in_recipe = recipe.ingredients.count()
             matching_ingredients = recipe.ingredients.filter(id__in=selected_ingredient_ids).count()
@@ -168,14 +194,9 @@ def search_recipes(request):
                 percents = f"{int(percentage)}%"
                 percentsDict.append({recipe: percents})
         recipes = filtered_recipes
-        # print(recipes)
-        message = 'Найдено рецептов: '
 
-    # print(percentsDict)
     ingredients = Ingredient.objects.all()
-    # num_recipes = f"{message}{len(recipes)}"
     num_recipes = str(len(recipes))
-    # print(num_recipes)
 
     data = {
         'recipes': recipes,

@@ -34,7 +34,7 @@
         </div>
         {% for selection in selections %}
         <div class="collection__item">
-            <a href="">
+            <a href="{% url 'collections-detail' selection.pk %}">
                 <div class="collection__item-img">
                     <img src="{{ selection.picture }}" alt="">
                 </div>

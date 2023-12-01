@@ -4,6 +4,7 @@ from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 
 from SaltToTasteProject import settings
+from django.db.models import Count
 
 # Create your models here.
 
@@ -25,9 +26,14 @@ class Recipe(models.Model):
 
         def detail(self):
             return self.get_queryset() \
-                 .prefetch_related('comments',  'ingredients', 'saving', 'steps')
+                 .prefetch_related('comments', 'ingredients', 'saving', 'steps')
                 # .select_related('author')\
                 # .prefetch_related('comments', 'recipe_comments_author', 'ingredients', 'saving')
+
+        def popular(self):
+            return self.get_queryset() \
+                .annotate(save_count=Count('saving')) \
+                .order_by('-save_count')
 
     class Difficulty(models.TextChoices):
         HARD = "Сложно"
@@ -43,8 +49,6 @@ class Recipe(models.Model):
     difficulty = models.CharField(max_length=50, choices=Difficulty.choices, verbose_name='Сложность')
     # cookingTime = models.IntegerField(verbose_name='Время приготовления')
     cookingTime = models.IntegerField(verbose_name="Время приготовления")
-    # saveCount = models.IntegerField(default=0, verbose_name='Количество лайков')
-    # commentsCount = models.IntegerField(default=0, verbose_name='Количество комментариев')
 
     objects = RecipeManager()
 

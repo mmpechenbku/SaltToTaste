@@ -10,10 +10,11 @@
 <main class="page__collections_detail">
     <div class="search__header">
             <div class="search-header__title">
-                <h1>Найти рецепт</h1>
+<!--                <h1>Найти рецепт</h1>-->
+                <h1>{{ collection.title }}</h1>
             </div>
             <div class="search-header__btn">
-                <a href="#" class="search-header__btn-image">
+                <a href="{% url 'add_recipe' %}" class="search-header__btn-image">
                     <img src="{% static 'img/svg_image/addreciept.svg' %}" width="30" height="30" alt="Добавить свой рецепт">
                 </a>
                 <a href="{% url 'add_recipe' %}" class="search-header__btn-text">Добавить свой рецепт</a>
@@ -46,5 +47,5 @@
             {% endfor %}
             </div>
 </main>
-
+<script src="{% static 'js/save-comment.js' %}"></script>
 {% endblock %}

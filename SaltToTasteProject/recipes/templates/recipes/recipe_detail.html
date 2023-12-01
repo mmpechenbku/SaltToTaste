@@ -49,12 +49,15 @@
                 <div class="hero__container">
                 <h2 class="article-title ingredients__title">Ингредиенты:</h2>
                 <ul class="ingredients__list ingredients-list">
-                    <li class="ingredients-list sections__list-item">- 2 яйца</li>
-                    <li class="ingredients-list sections__list-item">- 2 столовые ложки растительного масла</li>
-                    <li class="ingredients-list sections__list-item">- 200 г муки</li>
-                    <li class="ingredients-list sections__list-item">- 400 мл воды</li>
-                    <li class="ingredients-list sections__list-item">- 100 г тертого сыра</li>
-                    <li class="ingredients-list sections__list-item">- щепотка соли</li>
+                        {% for quantity in quantity_ingr %}
+                            <li class="ingredients-list sections__list-item">- {{ quantity.ingredient.name}}: {{quantity.quantity }}</li>
+                        {% endfor %}
+<!--                    <li class="ingredients-list sections__list-item">- 2 яйца</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- 2 столовые ложки растительного масла</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- 200 г муки</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- 400 мл воды</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- 100 г тертого сыра</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- щепотка соли</li>-->
                 </ul>
                    </div>
                 <div class="hero__container">

@@ -5,7 +5,7 @@ from .views import *
 recipes_urls = [
     path('', search_recipes, name='search'),
     path('collections/', selections, name='collections'),
-
+    path('collections/<int:pk>/', CollectionDetailView.as_view(), name='collections-detail'),
 
     path('collections-detail/', collections_detail, name='collections-detail'),
 

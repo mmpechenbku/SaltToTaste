@@ -362,4 +362,14 @@
     font-weight: 400;
     padding-left: 10px; }
 
+.ingredient__stepbnt-delete p {
+  padding: 10px;
+  transform: scaleX(1.5);
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(47, 41, 41, 0.5);
+  cursor: pointer; }
+  .ingredient__stepbnt-delete p:hover {
+    color: #000; }
+
 /*# sourceMappingURL=recipe_add.css.map */

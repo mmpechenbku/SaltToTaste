@@ -39,7 +39,7 @@
 
                     <button class="save-recipe-button" data-recipe="{{ recipe.id }}">
                             <svg width="32" height="32" class="navbar__item-search-img">
-                                <use href="#fav_icon"></use>
+                                <use href="{% if saves %}{% if recipe.id in saves %}#fav_icon-enable{% else %}#fav_icon{% endif %}{% else %}#fav_icon{% endif %}"></use>
                             </svg>
                         <span class="save-sum">{{ recipe.get_sum_save }}</span>
                     </button>

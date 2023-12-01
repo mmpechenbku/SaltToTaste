@@ -428,3 +428,16 @@
     }
 
 }
+.ingredient__stepbnt-delete {
+    p {
+        padding: 10px;
+        transform: scaleX(1.5);
+        font-size: 20px;
+        font-weight: 600;
+        color: rgba(47, 41, 41, 0.50);
+        cursor: pointer;
+        &:hover {
+            color: #000;
+        }
+    }
+}

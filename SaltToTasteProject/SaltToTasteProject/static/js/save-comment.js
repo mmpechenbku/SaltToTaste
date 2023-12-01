@@ -37,7 +37,17 @@ saveButton.forEach(button => {
             body: formData
         }).then(response => response.json())
         .then(data => {
-            saveSum.textContent = data.save_sum;
+            if (data.status == 'created') {
+                var save_status = '#fav_icon-enable';
+            } else {
+                var save_status = '#fav_icon';
+            }
+            button.innerHTML = '';
+            button.innerHTML = '<svg width="32" height="32" class="navbar__item-search-img">' +
+                                '<use href="' + save_status + '"></use>' +
+                            '</svg>' +
+                        '<span class="save-sum">' + data.save_sum + '</span>';
+//            saveSum.textContent = data.save_sum;
         })
         .catch(error => console.error(error));
     });

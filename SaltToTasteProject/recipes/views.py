@@ -120,7 +120,7 @@ class RecipeDetailView(DetailView):
         context['ingredients'] = ingredients
         context['form'] = CommentCreateForm
         context['quantity_ingr'] = IngredientQuantity.objects.filter(recipe=self.object)
-        context['like_comments'] = LikeComment.objects.filter(user=self.request.user)
+        context['like_comments'] = LikeComment.objects.filter(user=self.request.user).values_list('comment', flat=True)
         context['steps'] = RecipeStep.objects.filter(recipe=self.object).order_by('step_number')
         return context
 
@@ -199,12 +199,19 @@ def search_recipes(request):
     ingredients = Ingredient.objects.all()
     num_recipes = str(len(recipes))
 
+    saves = None
+
+    if request.user.is_authenticated:
+        saves = SaveRecipe.objects.filter(user=request.user)
+        saves = saves.values_list('recipe', flat=True)
+
     data = {
         'recipes': recipes,
         'ingredients': ingredients,
         'num_recipes': num_recipes,
         'percentsDict': percentsDict,
         'recipes_ingr': recipe_ingr_dict,
+        'saves': saves,
     }
 
     return render(request, 'recipes/recipe_search.html', data)

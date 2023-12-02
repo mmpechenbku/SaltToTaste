@@ -19,7 +19,7 @@
 			</svg>
 			<p>Поделиться</p>
 		</div>
-		<div class="header__bnt-settings header_bnt">
+		{% if user.is_authenticated %}<div class="header__bnt-settings header_bnt">
 			<svg width="18" height="18">
 				<use href="#settings"></use>
 			</svg>
@@ -30,16 +30,16 @@
 				<use href="#more"></use>
 			</svg>
 			<p>Еще</p>
-		</div>
+		</div>{% endif %}
 	</section>
 	<section class="profile__header">
 		<div class="profile__header-top">
 			<div class="profile__settings">
 				<ul>
-					<li class="count">{{ profile.get_sum_followers }}</li>
+					<li id="followers_count" class="count">{{ profile.get_sum_followers }}</li>
 					<li><a href="{% url 'subs' profile.pk %}">подписчики</a></li>
 				</ul>
-				<a href="" class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>
+				{% if user.is_authenticated and profile != user %}{% if user.id in subscriptions %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}{% endif %}
 			</div>
 			<div class="account">
 				<img class="rounded-circle account-img" src="{{ profile.avatar.url }}">
@@ -50,7 +50,7 @@
 			</div>
 			<div class="profile__settings">
 				<ul>
-					<li class="count">{{ profile.get_sum_following }}</li>
+					<li id="following_count" class="count">{{ profile.get_sum_following }}</li>
 					<li><a href="">подписки</a></li>
 				</ul>
 			</div>

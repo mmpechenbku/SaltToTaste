@@ -15,6 +15,11 @@ const getCookie = (name) => {
 
 const csrftoken = getCookie("csrftoken");
 
+
+//var subscriptionBtn = document.getElementById('subscriptionBtn');
+//
+//subscriptionBtn.addEventListener('click', function() {
+
 document.getElementById('subscriptionBtn').addEventListener('click', function() {
     var userId = this.getAttribute('data-profile-id');
 
@@ -28,7 +33,11 @@ document.getElementById('subscriptionBtn').addEventListener('click', function() 
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Статус подписки:', data.status);
+//        document.getElementById('subscriptionBtn')
+        this.textContent = (data.status === 'subscribed') ? 'Вы подписаны' : 'Подписаться';
+        console.log(data.subs_count);
+        document.getElementById('followers_count').textContent = data.subs_count;
+//        console.log('Статус подписки:', data.status);
         // Обновите интерфейс в соответствии с новым статусом подписки
     })
     .catch(error => {

@@ -38,6 +38,8 @@ class ProfileDetailView(DetailView):
             recipe_ingr_dict.append({recipe: ingredients})
 
         context['recipes_ingr'] = recipe_ingr_dict
+        context['subscriptions'] = Subscription.objects.filter(follower=self.request.user).values_list('follower', flat=True) if self.request.user.is_authenticated else None
+        context['subscribers'] = Subscription.objects.filter(following=self.request.user).values_list('following', flat=True) if self.request.user.is_authenticated else None
 
         return context
 
@@ -103,33 +105,14 @@ class Login(SuccessMessageMixin, LoginView):
         # print('success')
         return reverse_lazy('home')
 
-    def profile(request):
-        return render(request, 'users/profile.html')
-
-    @login_required
-    def toggle_subscription(request, user_id):
-        # Получаем пользователя, на которого будет подписка
-        following_user = User.objects.get(pk=user_id)
-
-        # Пытаемся найти существующую подписку
-        try:
-            subscription = Subscription.objects.get(follower=request.user, following=following_user)
-            # Если подписка существует, удаляем ее
-            subscription.delete()
-            status = 'unsubscribed'
-        except Subscription.DoesNotExist:
-            # Если подписка не существует, создаем ее
-            Subscription.objects.create(follower=request.user, following=following_user)
-            status = 'subscribed'
-
-        # Возвращаем JSON-ответ
-        return JsonResponse({'status': status})
+    # def profile(request):
+    #     return render(request, 'users/profile.html')
 
 
 @login_required
-def subscription(request, user_id):
+def toggle_subscription(request, user_id):
     # Получаем пользователя, на которого будет подписка
-    following_user = CustomUser.objects.get(pk=user_id)
+    following_user = User.objects.get(pk=user_id)
 
     # Пытаемся найти существующую подписку
     try:
@@ -144,6 +127,22 @@ def subscription(request, user_id):
 
     # Возвращаем JSON-ответ
     return JsonResponse({'status': status})
+
+
+@login_required
+def subscription(request, user_id):
+    # Получаем пользователя, на которого будет подписка
+    following_user = CustomUser.objects.get(pk=user_id)
+    if request.user != following_user:
+        try:
+            subscription = Subscription.objects.get(follower=request.user, following=following_user)
+            subscription.delete()
+            status = 'unsubscribed'
+        except Subscription.DoesNotExist:
+            Subscription.objects.create(follower=request.user, following=following_user)
+            status = 'subscribed'
+        # print(following_user.get_sum_followers)
+        return JsonResponse({'status': status, 'subs_count': following_user.get_sum_followers})
 
 
 # def get_user_recipes(request):

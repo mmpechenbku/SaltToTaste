@@ -10,6 +10,4 @@ document.querySelector(".tabs").addEventListener('click', (event) => {
         linkActive.classList.remove('active');
         link.classList.add('active');
     }
-
-
 });

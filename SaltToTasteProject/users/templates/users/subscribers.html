@@ -10,9 +10,41 @@
 
 
 <main class="page__subscribers">
-    {% for sub in subs %}
-        {{ sub.follower.username }}
-    {% endfor %}
+    <div class="subs_profile__name">
+        <p>@{{ user.username }}</p>
+    </div>
+    <div class="subs_profile-header">
+        <div class="btn_back">
+            <a href="#" onclick="history.back(-1);">
+                <svg width="30" height="30">
+                    <use href="#btn-back-icon"></use>
+                </svg>
+                НАЗАД</a>
+        </div>
+        <div class="subs_profile-title">
+            <span>мои подписчики</span>
+        </div>
+        <div class="none"></div>
+    </div>
+    <div class="profile__search">
+        <input type="text" placeholder="ищите @"/>
+    </div>
+
+    <div class="users__card-container">
+        {% for sub in subs %}
+        <div class="users__card">
+            <div class="user__info">
+                <img class="rounded-circle account-img" src="{{ sub.follower.avatar.url }}">
+                <p class="card__username">@{{ sub.follower.username }}</p>
+            </div>
+            <a href="" class="bnt-subscribe active" id="subscriptionBtn">Подписаться</a>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+
 </main>
 
 
@@ -21,5 +53,4 @@
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'js/tabs.js' %}"></script>
 {% endblock %}

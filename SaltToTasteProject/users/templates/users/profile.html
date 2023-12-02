@@ -37,8 +37,9 @@
 			<div class="profile__settings">
 				<ul>
 					<li class="count">{{ profile.get_sum_followers }}</li>
-					<li>подписчики</li>
+					<li><a href="#">подписчики</a></li>
 				</ul>
+				<a href="#" class="bnt-subscribe active">Подписаться</a>
 			</div>
 			<div class="account">
 				<img class="rounded-circle account-img" src="{{ user.avatar.url }}">
@@ -50,7 +51,7 @@
 			<div class="profile__settings">
 				<ul>
 					<li class="count">{{ profile.get_sum_following }}</li>
-					<li>подписки</li>
+					<li><a href="#">подписки</a></li>
 				</ul>
 			</div>
 		</div>
@@ -60,8 +61,8 @@
 	</section>
 	<section class="profile_tabs">
 		<div class="tabs">
-			<a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="loadContent('recipes')">РЕЦЕПТЫ</a>
-			<a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="loadContent('collections')">ПОДБОРКИ</a>
+			<a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="loadContent('recipes')">МОИ РЕЦЕПТЫ</a>
+			<a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="loadContent('collections')"> МОИ ПОДБОРКИ</a>
 		</div>
 		<div class="areas">
 			<div class="tab_area" id="tab_area_recipe" style="display: block;">
@@ -70,17 +71,9 @@
                 		{% include 'recipes/recipe_card.html' %}
 					{% endif %}
             	{% endfor %}
-				Рецепты
 			</div>
 			<div class="tab_area" id="tab_area_fav" style="display: none;">
-				<div class="collection__item">
-					<a href="">
-						<!--<div class="collection__item-img">
-							<img src="{% static 'img/collections_img/collections__item-1.jpg' %}" alt="">
-						</div>-->
-					</a>
-					<div class="collection__item-name">
-						Название подборки
+				<div class="collection__list">
 						{% for selection in selections %}
 							{% if profile == user or recipe.access == public %}
         						<div class="collection__item">
@@ -95,7 +88,6 @@
         						</div>
 							{% endif %}
         				{% endfor %}
-					</div>
 				</div>
 
 			</div>

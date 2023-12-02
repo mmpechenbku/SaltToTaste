@@ -64,6 +64,14 @@
                 &.count {
                     font-size: 24px;
                 }
+                a {
+                    padding: 7px 15px;
+                    cursor: pointer;
+                    border-radius: 3px;
+                    &:hover {
+                        background-color: rgba(217, 217, 217, 0.54);
+                    }
+                }
             }
         }
         .account {
@@ -172,5 +180,24 @@
     img:hover {
         border: 3px solid #fff;
         transform: scale(98%, 98%);
+    }
+}
+.bnt-subscribe {
+    display: flex;
+    position: absolute;
+    top: 190px;
+    left: 126px;
+    padding: 7px 15px;
+    border-radius: 6px;
+    background: rgba(154, 152, 152, 0.60);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    &.active {
+        background: #6BB420;
+    }
+    &:hover {
+        background: #6BB420;
+        background: linear-gradient(to top, #6BB420, #0a9e0d);
     }
 }

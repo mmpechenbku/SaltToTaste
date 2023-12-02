@@ -37,8 +37,9 @@
 			<div class="profile__settings">
 				<ul>
 					<li class="count">{{ profile.get_sum_followers }}</li>
-					<li>подписчики</li>
+					<li><a href="#">подписчики</a></li>
 				</ul>
+				<a href="#" class="bnt-subscribe active">Подписаться</a>
 			</div>
 			<div class="account">
 				<img class="rounded-circle account-img" src="{{ user.avatar.url }}">
@@ -50,7 +51,7 @@
 			<div class="profile__settings">
 				<ul>
 					<li class="count">{{ profile.get_sum_following }}</li>
-					<li>подписки</li>
+					<li><a href="#">подписки</a></li>
 				</ul>
 			</div>
 		</div>

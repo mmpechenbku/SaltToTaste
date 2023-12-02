@@ -134,3 +134,11 @@ btn1.addEventListener('click', function () {
 });
 }
 
+window.onscroll = function() {
+  var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
+  if(scrolled !== 0){
+    document.querySelector('.header').style.opacity = '0.7';
+  }else{
+    document.querySelector('.header').style.opacity = '1';
+  };
+};

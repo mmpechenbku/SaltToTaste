@@ -25,9 +25,19 @@ class ProfileDetailView(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['recipes'] = Recipe.objects.filter(author=self.object)
+        recipes = Recipe.objects.filter(author=self.object)
+        context['recipes'] = recipes
         context['selections'] = Selection.objects.filter(user=self.object)
-        # print('in get')
+
+        recipe_ingr_dict = []
+        for recipe in recipes:
+            ingredients = []
+            for ingredient in recipe.ingredients.all():
+                ingredients.append(ingredient.name)
+            recipe_ingr_dict.append({recipe: ingredients})
+
+        context['recipes_ingr'] = recipe_ingr_dict
+
         return context
 
     # def get_context_data(self, **kwargs):

@@ -100,25 +100,46 @@ function inputSelected(count) {
                                 '</div>';
 
 
-                // Добавляем созданный div в разметку
                 addedSteps.appendChild(div);
 
-                // Проверяем, нужно ли скрыть кнопку "Добавить шаг"
                 if (stepCount === maxSteps) {
                     document.getElementById('add-step').style.display = 'none';
                 }
+                var deleteButton = div.querySelector('.ingredient__stepbnt-delete');
+                deleteButton.addEventListener('click', function () {
+                        var parentDiv = deleteButton.parentElement;
+                        parentDiv.remove();
+
+                        document.getElementById('add-step').style.display = 'block';
+
+                        stepCount--;
+
+                        var allStepDescriptions = document.querySelectorAll('[name^="step_description_"]');
+                        allStepDescriptions.forEach(function (descriptionInput, index) {
+                            var currentStepNumber = index + 1;
+                            var newStepNumber = currentStepNumber > stepCount ? currentStepNumber - 1 : currentStepNumber;
+                            descriptionInput.setAttribute('name', 'step_description_' + newStepNumber);
+                            descriptionInput.setAttribute('id', 'step-description-' + newStepNumber);
+                        });
+                        var allStepImages = document.querySelectorAll('[name^="step_image_"]');
+                        allStepImages.forEach(function (imageInput, index) {
+                            var currentStepNumber = index + 1;
+                            var newStepNumber = currentStepNumber > stepCount ? currentStepNumber - 1 : currentStepNumber;
+                            imageInput.setAttribute('name', 'step_image_' + newStepNumber);
+                        });
+                        updateSummary();
+
+                    });
             }
             document.getElementById('step-description-' + currentStep).addEventListener('input', function () {
-                // Обновляем краткое описание
                 updateSummary();
             });
         });
 
          function updateSummary() {
             var summaryList = document.getElementById('summary-list');
-            summaryList.innerHTML = ''; // Очищаем текущий список
+            summaryList.innerHTML = '';
 
-            // Проходим по всем добавленным шагам и добавляем их в список
             for (var i = 0; i < stepCount; i++) {
                 var stepDescription = document.getElementById('step-description-' + (i + 1)).value;
 

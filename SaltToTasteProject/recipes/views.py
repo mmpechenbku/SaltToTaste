@@ -21,8 +21,15 @@ import bs4
 
 def index(request):
     recipes = Recipe.objects.all()
+    saves = None
+    if request.user.is_authenticated:
+        saves = SaveRecipe.objects.filter(user=request.user).values_list('recipe', flat=True)
 
-    return render(request, 'index.html', {'recipes': recipes})
+    data = {
+        'recipes': recipes,
+        'saves': saves,
+    }
+    return render(request, 'index.html', data)
 
 
 # def recipe_detail(request):
@@ -79,15 +86,23 @@ def selections(request):
 
 def create_selection(request):
     if request.method == 'POST':
-        print('THEREEE')
         user = request.user
-        name = request.POST.get('name')
+        name = request.POST.get('title')
+        print(name)
+        picture = request.FILES.get('picture')
+        print(picture)
+        access = request.POST.get('access')
+        print(access)
         # image = request.FILES.get('image')
+        access = 'public' if access == 'on' else 'private'
 
         # Создаем новую подборку
         selection = Selection.objects.create(
             user=user,
             title=name,
+            picture=picture,
+            access=access,
+
             # image=image,
         )
 
@@ -120,7 +135,8 @@ class RecipeDetailView(DetailView):
         context['ingredients'] = ingredients
         context['form'] = CommentCreateForm
         context['quantity_ingr'] = IngredientQuantity.objects.filter(recipe=self.object)
-        context['like_comments'] = LikeComment.objects.filter(user=self.request.user).values_list('comment', flat=True)
+        context['saves'] = SaveRecipe.objects.filter(user=self.request.user).values_list('recipe', flat=True) if self.request.user.is_authenticated else None
+        context['like_comments'] = LikeComment.objects.filter(user=self.request.user).values_list('comment', flat=True) if self.request.user.is_authenticated else None
         context['steps'] = RecipeStep.objects.filter(recipe=self.object).order_by('step_number')
         return context
 

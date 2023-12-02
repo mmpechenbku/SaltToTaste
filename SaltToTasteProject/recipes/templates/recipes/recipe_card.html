@@ -32,7 +32,7 @@
                         <svg width="32" height="32">
 				            <use href="#comment-icon"></use>
                         </svg>
-                        <span class="comment-sum">0</span>
+                        <span class="comment-sum">{{ recipe.get_sum_comments }}</span>
                     </a>
 
                     <button class="save-recipe-button" data-recipe="{{ recipe.id }}">

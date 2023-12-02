@@ -11,11 +11,12 @@ urlpatterns = [
     path('registration/', SignUpView.as_view(), name='registration'),
     path('login/', Login.as_view(), name='login'),
     # path('sign/')
-    # path('profile/', views.profile, name='profile'),
+    # path('subscribers/', subscribers, name='subscribers'),
     path('profile/<int:pk>/', ProfileDetailView.as_view(), name='profile'),
     path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
     # path('get_user_recipes/', get_user_recipes, name='get_user_recipes'),
     # path('get_user_collections/', get_user_collections, name='get_user_collections'),
+    path('profile/<int:pk>/subs/', subscribers, name='subs'),
     path('subscription/<int:user_id>/', subscription, name='subscription'),
     # path('toggle_subscription/<int:user_id>/', toggle_subscription, name='toggle_subscription'),
 ]

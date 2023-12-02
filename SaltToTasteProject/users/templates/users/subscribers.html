@@ -1,0 +1,25 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block title %}Профиль {{ user.username }}{% endblock %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/subscribers.css' %}">
+{% endblock %}
+{% block content %}
+
+
+
+<main class="page__subscribers">
+    {% for sub in subs %}
+        {{ sub.follower.username }}
+    {% endfor %}
+</main>
+
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/tabs.js' %}"></script>
+{% endblock %}

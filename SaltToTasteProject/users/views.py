@@ -14,6 +14,7 @@ from recipes.models import Recipe, Selection
 #     return render(request, 'index.html')
 
 
+
 def profile(request):
     return render(request, 'users/profile.html')
 
@@ -159,3 +160,10 @@ def subscription(request, user_id):
 #
 #     data = {'collections': user_collections}
 #     return JsonResponse(data)
+
+def subscribers(request, pk):
+    user_subs = Subscription.objects.filter(following=pk)
+    data = {
+        'subs': user_subs,
+    }
+    return render(request, 'users/subscribers.html', data)

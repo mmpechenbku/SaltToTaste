@@ -37,7 +37,7 @@
 			<div class="profile__settings">
 				<ul>
 					<li class="count">{{ profile.get_sum_followers }}</li>
-					<li><a href="#">подписчики</a></li>
+					<li><a href="{% url 'subs' profile.pk %}">подписчики</a></li>
 				</ul>
 				<a href="" class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>
 			</div>
@@ -51,7 +51,7 @@
 			<div class="profile__settings">
 				<ul>
 					<li class="count">{{ profile.get_sum_following }}</li>
-					<li><a href="#">подписки</a></li>
+					<li><a href="">подписки</a></li>
 				</ul>
 			</div>
 		</div>

@@ -1,0 +1,36 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block title %}Профиль {{ user.username }}{% endblock %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/subscribers.css' %}">
+{% endblock %}
+{% block content %}
+
+
+
+<main class="page__editing">
+    <div class="editing-header">
+        <div class="btn_back">
+            <a href="#" onclick="history.back(-1);">
+                <svg width="30" height="30">
+                    <use href="#btn-back-icon"></use>
+                </svg>
+                НАЗАД</a>
+        </div>
+        <div class="editing-title">
+            <span>мои подписчики</span>
+        </div>
+        <div class="none"></div>
+    </div>
+
+</main>
+
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/tabs.js' %}"></script>
+{% endblock %}

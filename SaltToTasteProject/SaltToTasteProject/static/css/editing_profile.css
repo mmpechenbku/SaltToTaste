@@ -1,0 +1,40 @@
+.page__editing {
+  padding: 40px 15px;
+  width: 80%;
+  margin: 100px auto;
+  border-radius: 30px;
+  background: var(--default-white, #FFF);
+  box-shadow: 0px 0px 12px -5px rgba(73, 63, 63, 0.6); }
+
+.editing-header {
+  display: flex;
+  justify-content: space-around; }
+  .editing-header a {
+    display: flex;
+    align-items: center;
+    color: rgba(47, 41, 41, 0.54);
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 40px;
+    /* 200% */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer; }
+    .editing-header a svg {
+      margin-right: 5px; }
+    .editing-header a:hover {
+      color: #000; }
+  .editing-header .none {
+    width: 100px; }
+  .editing-header span {
+    color: #2F2929;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 40px;
+    /* 160% */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0 15px;
+    border-bottom: 3px solid #6BB420; }
+
+/*# sourceMappingURL=editing_profile.css.map */

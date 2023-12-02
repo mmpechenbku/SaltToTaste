@@ -7,7 +7,7 @@ from django.views.generic import CreateView, FormView, DetailView
 from django.contrib.messages.views import SuccessMessageMixin, messages
 from .forms import CustomUserCreationForm
 from django.shortcuts import render
-from .models import CustomUser
+from .models import CustomUser, Subscription
 from recipes.models import Recipe, Selection
 
 # def index(request):
@@ -125,17 +125,37 @@ class Login(SuccessMessageMixin, LoginView):
         return JsonResponse({'status': status})
 
 
-def get_user_recipes(request):
-    user_id = request.GET.get('user_id')
-    user_recipes = Recipe.objects.filter(author=user_id)
+@login_required
+def subscription(request, user_id):
+    # Получаем пользователя, на которого будет подписка
+    following_user = CustomUser.objects.get(pk=user_id)
 
-    data = {'recipes': user_recipes}
-    return JsonResponse(data)
+    # Пытаемся найти существующую подписку
+    try:
+        subscription = Subscription.objects.get(follower=request.user, following=following_user)
+        # Если подписка существует, удаляем ее
+        subscription.delete()
+        status = 'unsubscribed'
+    except Subscription.DoesNotExist:
+        # Если подписка не существует, создаем ее
+        Subscription.objects.create(follower=request.user, following=following_user)
+        status = 'subscribed'
 
-def get_user_collections(request):
-    # Логика для получения подборок пользователя
-    user_id = request.GET.get('user_id')
-    user_collections = Selection.objects.filter(user=user_id)
+    # Возвращаем JSON-ответ
+    return JsonResponse({'status': status})
 
-    data = {'collections': user_collections}
-    return JsonResponse(data)
+
+# def get_user_recipes(request):
+#     user_id = request.GET.get('user_id')
+#     user_recipes = Recipe.objects.filter(author=user_id)
+#
+#     data = {'recipes': user_recipes}
+#     return JsonResponse(data)
+#
+# def get_user_collections(request):
+#     # Логика для получения подборок пользователя
+#     user_id = request.GET.get('user_id')
+#     user_collections = Selection.objects.filter(user=user_id)
+#
+#     data = {'collections': user_collections}
+#     return JsonResponse(data)

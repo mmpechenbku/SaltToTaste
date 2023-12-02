@@ -66,6 +66,7 @@ class CollectionDetailView(DetailView):
         ingredients = [ingredient.name for ingredient in [recipe.ingredients for recipe in self.object.recipes.all()]]
         context['ingredients'] = ingredients
         context['recipes_ingr'] = recipe_ingr_dict
+        context['saves'] = SaveRecipe.objects.filter(user=self.request.user).values_list('recipe', flat=True) if self.request.user.is_authenticated else None
 
         return context
 

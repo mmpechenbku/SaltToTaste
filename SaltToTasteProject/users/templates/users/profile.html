@@ -39,10 +39,10 @@
 					<li class="count">{{ profile.get_sum_followers }}</li>
 					<li><a href="#">подписчики</a></li>
 				</ul>
-				<a href="#" class="bnt-subscribe active">Подписаться</a>
+				<a href="" class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>
 			</div>
 			<div class="account">
-				<img class="rounded-circle account-img" src="{{ user.avatar.url }}">
+				<img class="rounded-circle account-img" src="{{ profile.avatar.url }}">
 				<ul>
 					<li id="username">{{ profile.name }}</li>
 					<li>@{{ profile.nickname }}</li>
@@ -67,7 +67,7 @@
 		<div class="areas">
 			<div class="tab_area" id="tab_area_recipe" style="display: block;">
 				{% for recipe in recipes %}
-					{% if profile == user or recipe.access == public %}
+					{% if profile == user or recipe.access == 'public' %}
                 		{% include 'recipes/recipe_card.html' %}
 					{% endif %}
             	{% endfor %}
@@ -102,4 +102,5 @@
 
 {% block script %}
     <script src="{% static 'js/tabs.js' %}"></script>
+	<script src="{% static 'js/subscription.js' %}"></script>
 {% endblock %}

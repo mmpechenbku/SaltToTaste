@@ -18,7 +18,6 @@ import bs4
 
 # Create your views here.
 
-
 def index(request):
     recipes = Recipe.objects.all()
     saves = None

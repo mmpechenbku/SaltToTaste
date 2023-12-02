@@ -14,6 +14,7 @@ from recipes.models import Recipe, Selection
 #     return render(request, 'index.html')
 
 
+
 def profile(request):
     return render(request, 'users/profile.html')
 

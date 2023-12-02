@@ -144,7 +144,7 @@ async function createComment(event) {
         }
         commentForm.reset()
         commentFormSubmit.disabled = false;
-        commentFormSubmit.innerText = "Добавить комментарий";
+        commentFormSubmit.innerText = "Отправить";
         commentFormParentInput.value = null;
         replyUser();
     }

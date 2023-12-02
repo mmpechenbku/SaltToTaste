@@ -6,7 +6,7 @@ from django.urls import reverse
 
 
 class CustomUser(AbstractUser):
-    avatar = models.ImageField(upload_to='images/avatars/', verbose_name='avatar', blank=True, null=True)
+    avatar = models.ImageField(upload_to='images/avatars/', default='images/avatars/ProfileIcon.png', verbose_name='avatar', blank=True, null=True)
     name = models.CharField(max_length=100, verbose_name="Имя")
     nickname = models.CharField(max_length=100, verbose_name="Никнейм", unique=True)
     email = models.EmailField(verbose_name='Электронная почта', unique=True)

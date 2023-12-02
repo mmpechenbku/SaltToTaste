@@ -29,7 +29,7 @@
                                         <use href="#comment-icon"></use>
                                     </svg>
                                 </a>
-                                <span class="comment-sum">0</span>
+                                <span class="comment-sum">{{ recipe.get_sum_comments }}</span>
                                 <button class="save-recipe-button" data-recipe="{{ recipe.id }}">
                                     <svg width="32" height="32">
                                         <use href="{% if saves %}{% if recipe.id in saves %}#fav_icon-enable{% else %}#fav_icon{% endif %}{% else %}#fav_icon{% endif %}"></use>
@@ -112,7 +112,7 @@
                 <svg width="32" height="32">
                     <use href="#comment-icon"></use>
                 </svg>
-                <span class="comment-sum">0</span>
+                <span class="comment-sum">{{ recipe.get_sum_comments }}</span>
             </li>
        </ul>
         {% include 'recipes/comments_list.html' %}

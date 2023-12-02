@@ -13,6 +13,7 @@ urlpatterns = [
     # path('sign/')
     # path('subscribers/', subscribers, name='subscribers'),
     path('profile/<int:pk>/', ProfileDetailView.as_view(), name='profile'),
+    path('profile/<int:pk>/edit', profile_edit, name='profile_edit'),
     path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
     # path('get_user_recipes/', get_user_recipes, name='get_user_recipes'),
     # path('get_user_collections/', get_user_collections, name='get_user_collections'),

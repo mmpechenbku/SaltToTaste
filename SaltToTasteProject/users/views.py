@@ -145,6 +145,7 @@ def subscription(request, user_id):
         return JsonResponse({'status': status, 'subs_count': following_user.get_sum_followers})
 
 
+
 # def get_user_recipes(request):
 #     user_id = request.GET.get('user_id')
 #     user_recipes = Recipe.objects.filter(author=user_id)
@@ -166,3 +167,6 @@ def subscribers(request, pk):
         'subs': user_subs,
     }
     return render(request, 'users/subscribers.html', data)
+
+def profile_edit(request, pk):
+    return render(request, 'users/editing_profile.html')

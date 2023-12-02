@@ -19,11 +19,11 @@
 			</svg>
 			<p>Поделиться</p>
 		</div>
-		{% if user.is_authenticated %}<div class="header__bnt-settings header_bnt">
+		{% if user.is_authenticated and user == profile %}<div class="header__bnt-settings header_bnt">
 			<svg width="18" height="18">
 				<use href="#settings"></use>
 			</svg>
-			<p>Редактировать профиль</p>
+			<p><a href="{% url 'profile_edit' user.id %}">Редактировать профиль</a></p>
 		</div>
 		<div class="header__bnt-more header_bnt">
 			<svg width="20" height="20">
@@ -61,8 +61,8 @@
 	</section>
 	<section class="profile_tabs">
 		<div class="tabs">
-			<a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="loadContent('recipes')">МОИ РЕЦЕПТЫ</a>
-			<a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="loadContent('collections')"> МОИ ПОДБОРКИ</a>
+			<a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="loadContent('recipes')">{% if user.is_authenticated and user == profile %} МОИ {% endif %}РЕЦЕПТЫ</a>
+			<a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="loadContent('collections')">{% if user.is_authenticated and user == profile %} МОИ {% endif %}ПОДБОРКИ</a>
 		</div>
 		<div class="areas">
 			<div class="tab_area" id="tab_area_recipe" style="display: block;">

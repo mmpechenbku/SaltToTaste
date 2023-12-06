@@ -4,6 +4,7 @@
 {% block title %}Профиль {{ user.username }}{% endblock %}
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'css/add_collections.css' %}">
 {% endblock %}
 {% block content %}
 
@@ -74,6 +75,16 @@
 			</div>
 			<div class="tab_area" id="tab_area_fav" style="display: none;">
 				<div class="collection__list">
+					{% if user.is_authenticated and user == profile %}
+					<div class="collection__item-create">
+							<div class="collection__item-create_img">
+								<img src="{% static 'img/svg_image/collections__btn-create.svg' %}" alt="">
+							</div>
+						<div class="collection__item-name">
+							Добавить подборку
+						</div>
+					</div>
+					{% endif %}
 						{% for selection in selections %}
 							{% if profile == user or recipe.access == public %}
         						<div class="collection__item">
@@ -94,7 +105,7 @@
 		</div>
 	</section>
 </main>
-
+{% include 'collections/add_collections.html' %}
 
 
 

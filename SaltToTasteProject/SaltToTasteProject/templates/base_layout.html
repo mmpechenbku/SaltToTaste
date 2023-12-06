@@ -53,7 +53,7 @@
                     {% if user.is_authenticated %}
 
                     <li>
-                        <img class="account-img" src="{{ user.avatar }}" alt="">
+                        <img class="account-img" src="{{ user.avatar.url }}" alt="">
                         <a class="nav-item nav-link" href="{% url 'profile' user.pk %}">{{ user.nickname }}</a>
                     </li>
                     <li>

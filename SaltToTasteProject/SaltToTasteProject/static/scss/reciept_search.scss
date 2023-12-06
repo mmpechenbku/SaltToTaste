@@ -26,11 +26,18 @@
     align-items: center;
 
 }
-.search-header__btn-text {
-    color: #2F2929;
+.search-header__btn-orange{
+    display: flex;
+    align-items: center;
+    color: var(--default-white, #FFF);
     font-size: 20px;
-    font-weight: 500;
-    padding-left: 10px;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: #DF8A5A;
+    svg {
+        margin-right: 5px;
+    }
 }
 
 
@@ -65,12 +72,18 @@
     display: flex;
     align-items: center;
     position: relative;
-    margin: 25px 0 15px 50px;
+    padding: 25px 30px 10px 50px;
+    max-width: 1000px;
+    width: 100%;
+    justify-content: space-between;
     h1 {
         /* Текст */
         color: #2F2929;
         font-size: 24px;
         font-weight: 600;
+    }
+    button[type=submit] {
+        padding: 5px 15px;
     }
 }
 .recipe-search__content {
@@ -167,29 +180,17 @@
 .ingredients__container {
     display: flex;
     margin: 0 40px;
-    min-height: 80px;
+    min-height: 113px;
 
 }
 .ingredients__container-title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-right: 1px solid gray;
     h3 {
         width: 100px;
         margin: 5px 5px 0 0;
         white-space: nowrap;
-    }
-    button {
-        border-radius: 6px;
-        background: #6BB420;
-        height: 30px;
-        border: none;
-        margin-top: 10px;
-        color: var(--default-white, #FFF);
-        font-size: 16px;
-        font-weight: 600;
-        padding: 5px 10px;
     }
 }
 
@@ -199,10 +200,9 @@
     display: flex;
     margin-left: auto;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding-left: 5px;
-    border-left: 1px solid gray;
+    justify-content: flex-end;
     label {
     display: flex;
     white-space: nowrap;
@@ -217,16 +217,6 @@
         font-size: 16px;
         font-weight: 400;
         }
-    }
-    button {
-        border-radius: 6px;
-        background: #6BB420;
-        width: 130px;
-        height: 30px;
-        border: none;
-        color: var(--default-white, #FFF);
-        font-size: 16px;
-        font-weight: 600;
     }
 }
 
@@ -373,7 +363,14 @@
     }
 }
 
-
-
+.fl_row {
+    display: flex;
+    flex-direction: column;
+}
+.search_bnt-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
 
 

@@ -30,13 +30,27 @@ body{
     height: auto;
     margin: 0 auto;
 }
-button[type=submit]:hover {
-    color: #ccc !important;
+
+button[type=submit] {
+    border: none;
+    border-radius: 6px;
     background: #6BB420;
-    background: linear-gradient(to top, #6BB420, #0a9e0d);
+    color: var(--default-white, #FFF);
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 15px;
+    cursor: pointer;
+    &:hover {
+        color: #ccc !important;
+        background: #6BB420;
+        background: linear-gradient(to top, #6BB420, #0a9e0d);
+    }
 }
-button[type=button]:hover {
-    background: linear-gradient(to top, #6c757d, #818a92);
+button[type=button] {
+    cursor: pointer;
+    &:hover {
+        background: linear-gradient(to top, #6c757d, #818a92);
+    }
 }
 :active, :hover, :focus {
     outline: 0;

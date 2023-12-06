@@ -129,7 +129,7 @@ q {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 7;
+        -webkit-line-clamp: 6;
         -webkit-box-orient: vertical;
         height: 153px; }
         .article-content__container .index__article-content .index-article-section .index-article_content-block .index-article__header {

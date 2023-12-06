@@ -8,10 +8,13 @@
 {% endblock %}
 {% block content %}
 <div class="btn__back btn-back">
-    <a href="#" class="btn-back__image">
-        <img src="{% static 'img/svg_image/btn-back.svg' %}" alt=""/>
+    <a href="#" onclick="history.back(-1);">
+        <svg width="30" height="30">
+            <use href="#btn-back-icon"></use>
+        </svg>
+        НАЗАД
     </a>
-    <a href="#" class="btn-back__text">Поиск рецепта</a>
+    <p class="recept_header-title">Поиск рецепта</p>
         </div>
         <main class="page__recept">
             <section class="hero">

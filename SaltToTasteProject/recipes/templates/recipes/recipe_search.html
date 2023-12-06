@@ -12,12 +12,11 @@
                 <h1>Найти рецепт</h1>
             </div>
             <div class="search-header__btn">
-                <a href="#" class="search-header__btn-image">
-                    <svg width="30" height="30">
+                <a href="{% url 'add_recipe' %}" class="search-header__btn-orange">
+                    <svg width="22" height="22">
 				        <use href="#add_recipe-icon"></use>
                     </svg>
-                </a>
-                <a href="{% url 'add_recipe' %}" class="search-header__btn-text">Добавить свой рецепт</a>
+                    Добавить свой рецепт</a>
             </div>
     </div>
   <form method="post" action="{% url 'search' %}" id="search-form">
@@ -28,6 +27,7 @@
 
     <div class="search-form__btn-clear">
         <h1>Поиск по ингредиентам</h1>
+        <button type="submit" id="">Сбросить</button>
     </div>
 
     <div class="recipe-search__content">
@@ -51,7 +51,7 @@
                         <div class="ingredients__container">
                             <div class="ingredients__container-title">
                             <h3>Вы выбрали:</h3>
-                                <button type="submit" id="">Сбросить</button>
+
                             </div>
                             <div class="selected-ingredients"></div>
                             <div class="ingredient__coincidence">
@@ -59,42 +59,46 @@
                                 <input type="checkbox" id="coincidence" onclick="check();" name="coincidence" autocomplete="off" disabled/>
                                 Только 100% совпадение
                                 </label>
-                                <button class="ingredient__coincidence_btn-search" type="submit">Найти</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="sorting__container">
-                    <div class="difficulty-container">
-                        <div class="parameters__name-box">
-                            <label for="difficulty">Сложность</label>
+                <div class="fl_row">
+                    <div class="sorting__container">
+                        <div class="difficulty-container">
+                            <div class="parameters__name-box">
+                                <label for="difficulty">Сложность</label>
+                            </div>
+                            <select id="difficulty" name="difficulty">
+                                <option value="Все">Все</option>
+                                <option value="Легко">Легкая</option>
+                                <option value="Средняя">Средняя</option>
+                                <option value="Сложно">Сложная</option>
+                            </select>
                         </div>
-                        <select id="difficulty" name="difficulty">
-                            <option value="Все">Все</option>
-                            <option value="Легко">Легкая</option>
-                            <option value="Средняя">Средняя</option>
-                            <option value="Сложно">Сложная</option>
-                        </select>
-                    </div>
 
-                    <div class="parameters__name-box">
-                        <label for="search-sorting">Сортировать по</label>
+                        <div class="parameters__name-box">
+                            <label for="search-sorting">Сортировать по</label>
+                        </div>
+                        <select id="search-sorting" name="sorting">
+                            <option value="popularity">Популярность</option>
+                            <option value="difficulty">Сложность</option>
+                            <option value="cookingTime">Время приготовления</option>
+                            <option value="Дата публикации">Дата публикации</option>
+                        </select>
+                        <div class="parameters__name-box">
+                            <label>Время приготовления</label>
+                        </div>
+                        <div class="time-container">
+                            <p>от</p>
+                            <input type="number" maxlength="3" max="200" min="1" name="cooking_time-start" id="cooking_time-start">
+                            <p>- до</p>
+                            <input type="number" maxlength="3" max="999" min="1" name="cooking_time-end" id="cooking_time-end">
+                            <p>мин.</p>
+                        </div>
                     </div>
-                    <select id="search-sorting" name="sorting">
-                        <option value="popularity">Популярность</option>
-                        <option value="difficulty">Сложность</option>
-                        <option value="cookingTime">Время приготовления</option>
-                        <option value="Дата публикации">Дата публикации</option>
-                    </select>
-                    <div class="parameters__name-box">
-                        <label>Время приготовления</label>
-                    </div>
-                    <div class="time-container">
-                        <p>от</p>
-                        <input type="number" maxlength="3" max="200" min="1" name="cooking_time-start" id="cooking_time-start">
-                        <p>- до</p>
-                        <input type="number" maxlength="3" max="999" min="1" name="cooking_time-end" id="cooking_time-end">
-                        <p>мин.</p>
+                    <div class="search_bnt-container">
+                        <button class="ingredient__coincidence_btn-search" type="submit">Найти</button>
                     </div>
                 </div>
             </div>

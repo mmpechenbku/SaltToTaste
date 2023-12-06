@@ -269,17 +269,6 @@
 .recipe_add__btn {
     display: flex;
     padding-bottom: 30px;
-    button {
-        border-radius: 6px;
-        background: #6BB420;
-        padding: 7px 20px;
-        color: var(--default-white, #FFF);
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 18px; /* 112.5% */
-        margin-bottom: 10px;
-        border: none;
-    }
     p {
         color: #2F2929;
         text-align: center;

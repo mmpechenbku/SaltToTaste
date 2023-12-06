@@ -11,3 +11,17 @@ document.querySelector(".tabs").addEventListener('click', (event) => {
         link.classList.add('active');
     }
 });
+
+const elements = document.querySelectorAll('.password-control');
+for (let elem of elements) {
+    elem.onclick = function(event) {
+    event.preventDefault()
+        if (elem.classList.contains('hide')){
+            elem.classList.remove('hide');
+            document.querySelector(elem.getAttribute('href')).setAttribute('type', 'password');
+        } else {
+            elem.classList.add('hide');
+            document.querySelector(elem.getAttribute('href')).setAttribute('type', 'text');
+        }
+    }
+}

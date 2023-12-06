@@ -19,9 +19,90 @@
                 НАЗАД</a>
         </div>
         <div class="editing-title">
-            <span>мои подписчики</span>
+            <span>Редактировать профиль</span>
         </div>
         <div class="none"></div>
+    </div>
+    <div class="editing-content">
+        <div class="tabs">
+			<span><a class="tab__link active" id="tab__link-editing" href="#tab_area_editing" onclick="return false">Редактировать профиль</a></span>
+			<span><a class="tab__link" id="tab__link-secure" href="#tab_area_secure" onclick="return false">Почта и пароль</a></span>
+		</div>
+		<div class="areas">
+			<div class="tab_area" id="tab_area_editing" style="display: block;">
+                <div class="profile__img">
+                    <img class="rounded-circle account-img" src="{{ user.avatar.url }}">
+                    <div class="fl_column">
+                        <label for="profile_picture">Фотография
+                            <input type="file" id="profile_picture"/>
+                            <span>Изменить</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="area_section">
+                    <label>Имя</label>
+                    <input class="text-input" type="text" placeholder="Имя" />
+                </div>
+                 <div class="area_section">
+                    <label>@nickname</label>
+                    <input class="text-input" type="text" placeholder="@nickname" />
+                </div>
+                <div class="area_section">
+                    <label>Описание</label>
+                    <textarea placeholder="Описание"></textarea>
+                    <p>До 114 символов</p>
+                </div>
+            </div>
+            <div class="tab_area" id="tab_area_secure" style="display: none;">
+                <div class="area_section">
+                    <label>Адрес электронной почты</label>
+                    <input class="text-input" type="text" placeholder="Введите почту @" />
+                </div>
+                <div class="area_section">
+                    <label>Старый пароль</label>
+                    <div class="password">
+                        <input class="password-input" id="password_old" type="password" placeholder="Введите старый пароль" />
+                        <a href="#password_old" class="password-control"></a>
+                    </div>
+                </div>
+                <div class="area_section">
+                    <label>Новый пароль</label>
+                    <div class="password">
+                        <input class="password-input" id="password_new" type="password" placeholder="Введите новый пароль" />
+                        <a href="#password_new" class="password-control"></a>
+                    </div>
+                </div>
+                <div class="area_section">
+                    <label>Повторите новый пароль</label>
+                    <div class="password">
+                        <input class="password-input" id="password_renew" type="password" placeholder="Повторите новый пароль" />
+                        <a href="#password_renew" class="password-control"></a>
+                    </div>
+                </div>
+
+                <div class="personal_data-info">
+                    <label>Персональные данные</label>
+                </div>
+
+                <div class="area_section">
+                    <label>Дата рождения</label>
+                    <input class="input-date" type="date" />
+                </div>
+                <div class="area_section">
+                    <label>Пол</label>
+                    <span><input type="checkbox"/>Женский</span>
+                    <span><input type="checkbox"/>Мужской</span>
+                </div>
+                <div class="area_section">
+                    <label>Страна</label>
+                    <input class="text-input" type="text" placeholder="Страна"/>
+                </div>
+            </div>
+            <div class="btn-save">
+            <button type="submit">Сохранить</button>
+        </div>
+        </div>
+
     </div>
 
 </main>

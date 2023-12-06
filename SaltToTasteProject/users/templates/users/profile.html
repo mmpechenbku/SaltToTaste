@@ -61,8 +61,8 @@
 	</section>
 	<section class="profile_tabs">
 		<div class="tabs">
-			<a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="loadContent('recipes')">{% if user.is_authenticated and user == profile %} МОИ {% endif %}РЕЦЕПТЫ</a>
-			<a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="loadContent('collections')">{% if user.is_authenticated and user == profile %} МОИ {% endif %}ПОДБОРКИ</a>
+			<span onclick="loadContent('recipes')"><a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="return false">{% if user.is_authenticated and user == profile %} МОИ {% endif %}РЕЦЕПТЫ</a></span>
+			<span onclick="loadContent('collections')"><a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="return false">{% if user.is_authenticated and user == profile %} МОИ {% endif %}ПОДБОРКИ</a></span>
 		</div>
 		<div class="areas">
 			<div class="tab_area" id="tab_area_recipe" style="display: block;">

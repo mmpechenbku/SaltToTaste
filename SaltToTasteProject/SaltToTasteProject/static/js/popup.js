@@ -142,3 +142,4 @@ window.onscroll = function() {
     document.querySelector('.header').style.opacity = '1';
   };
 };
+

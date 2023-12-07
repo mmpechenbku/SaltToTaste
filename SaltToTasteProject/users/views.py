@@ -3,12 +3,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, FormView, DetailView
+from django.views.generic import CreateView, FormView, DetailView, View
 from django.contrib.messages.views import SuccessMessageMixin, messages
 from .forms import CustomUserCreationForm
 from django.shortcuts import render
 from .models import CustomUser, Subscription
 from recipes.models import Recipe, Selection
+
+from django.core.serializers import serialize
+import json
 
 # def index(request):
 #     return render(request, 'index.html')
@@ -163,10 +166,85 @@ def subscription(request, user_id):
 
 def subscribers(request, pk):
     user_subs = Subscription.objects.filter(following=pk)
+    subs = [sub.follower for sub in user_subs]
     data = {
-        'subs': user_subs,
+        'title': 'Мои подписчики',
+        'title_another_user': 'Подписчики',
+        'profile': CustomUser.objects.get(pk=pk),
+        'subs': subs,
+        'type': 'subscribers',
+        'subscriptions': Subscription.objects.filter(follower=request.user).values_list('follower',
+                                                                                                   flat=True) if request.user.is_authenticated else None,
+        'subscribers': Subscription.objects.filter(following=request.user).values_list('following',
+                                                                                                  flat=True) if request.user.is_authenticated else None,
     }
     return render(request, 'users/subscribers.html', data)
 
+
+def subscriptions(request, pk):
+    user_subs = Subscription.objects.filter(follower=pk)
+    subs = [sub.following for sub in user_subs]
+    data = {
+        'title': 'Мои подписки',
+        'title_another_user': 'Подписки',
+        'profile': CustomUser.objects.get(pk=pk),
+        'subs': subs,
+        'type': 'subscriptions',
+        'subscriptions': Subscription.objects.filter(follower=request.user).values_list('follower',
+                                                                                             flat=True) if request.user.is_authenticated else None,
+        'subscribers': Subscription.objects.filter(following=request.user).values_list('following',
+                                                                                            flat=True) if request.user.is_authenticated else None,
+    }
+    return render(request, 'users/subscribers.html', data)
+
+
+
 def profile_edit(request, pk):
     return render(request, 'users/editing_profile.html')
+
+
+
+class search_subscribers(View):
+    def get(self, request, pk):
+        search_query = request.GET.get('search', '')
+        if len(search_query) > 0:
+            subs = Subscription.objects.filter(follower__username__icontains=search_query)
+            subs = [sub.follower for sub in subs if sub.following.pk == pk]
+        else:
+            subs = Subscription.objects.filter(following=pk)
+            subs = [sub.follower for sub in subs]
+        subs_data = serialize('json', subs)
+        subs_json = json.loads(subs_data)
+
+        if request.user.is_authenticated:
+            for sub in subs_json:
+                sub['is_subscribed'] = Subscription.objects.filter(follower=request.user, following=sub['pk']).exists()
+
+        user_data = {
+            'is_authenticated': request.user.is_authenticated,
+        }
+
+        return JsonResponse({'subs': subs_json, 'user': user_data}, safe=False)
+
+
+class search_subscriptions(View):
+    def get(self, request, pk):
+        search_query = request.GET.get('search', '')
+        if len(search_query) > 0:
+            subs = Subscription.objects.filter(following__username__icontains=search_query)
+            subs = [sub.following for sub in subs if sub.follower.pk == pk]
+        else:
+            subs = Subscription.objects.filter(follower=pk)
+            subs = [sub.following for sub in subs]
+        subs_data = serialize('json', subs)
+        subs_json = json.loads(subs_data)
+
+        if request.user.is_authenticated:
+            for sub in subs_json:
+                sub['is_subscribed'] = Subscription.objects.filter(follower=request.user, following=sub['pk']).exists()
+
+        user_data = {
+            'is_authenticated': request.user.is_authenticated,
+        }
+
+        return JsonResponse({'subs': subs_json, 'user': user_data}, safe=False)

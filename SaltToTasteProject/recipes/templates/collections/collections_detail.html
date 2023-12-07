@@ -9,21 +9,28 @@
 
 <main class="page__collections_detail">
     <div class="search__header">
-            <div class="search-header__title">
-                <h1>{{ collection.title }}</h1>
-            </div>
             <div class="search-header__btn">
-                <a href="{% url 'add_recipe' %}" class="search-header__btn-image">
-                    <svg width="30" height="30">
-                        <use href="#edit-icon"></use>
-                    </svg>
-                </a>
-                <a href="{% url 'add_recipe' %}" class="search-header__btn-text">Редактировать подборку</a>
+                <p class="search-header__btn-text">ПОДБОРКИ</p>
+                <a href="{% url 'add_recipe' %}" class="search-header__btn-text">@профиль</a>
             </div>
     </div>
 
             <div class="article-content__title-and-grids">
-                <!--<h1>Рецепты</h1>-->
+                <div class="btn_back">
+                    <a href="#" onclick="history.back(-1);">
+                        <svg width="30" height="30">
+                            <use href="#btn-back-icon"></use>
+                        </svg>
+                        НАЗАД</a>
+                </div>
+                <div class="search-header__title">
+                    <h1>{{ collection.title }}</h1>
+                    <a href="{% url 'add_recipe' %}" class="search-header__btn-image">
+                        <svg width="24" height="24">
+                            <use href="#edit-icon"></use>
+                        </svg>
+                    </a>
+                </div>
                 <div class="article-content__btn-grids" id="sorter">
                     <span class="sorter-item" id="th__btn-3" role="button">
                         <svg width="30" height="30" class="icon-th__btn">

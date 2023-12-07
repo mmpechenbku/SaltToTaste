@@ -44,3 +44,45 @@ document.getElementById('subscriptionBtn').addEventListener('click', function() 
         console.error('Ошибка при обработке подписки:', error);
     });
 });
+
+
+const searchInput = document.getElementById('searchInput');
+const cardContainer = document.querySelector('.users__card-container');
+
+searchInput.addEventListener('input', () => {
+    var userId = searchInput.getAttribute('data-profile-id');
+    const searchQuery = (searchInput.value.charAt(0).toUpperCase() + searchInput.value.slice(1).toLowerCase()).trim();
+    type = searchInput.getAttribute('data-type');
+
+        fetch(`/account/profile/${userId}/${type}/search_${type}/?search=${searchQuery}`)
+            .then(response => response.json())
+            .then(data => {
+
+            cardContainer.innerHTML = data.subs.map(sub => {
+                const user = data.user;
+                if (user.is_authenticated) {
+                return `
+                    <div class="users__card">
+                        <div class="user__info">
+                            <img class="rounded-circle account-img" src="/media/${sub.fields.avatar}">
+                            <p class="card__username">@${sub.fields.username}</p>
+                        </div>
+                        <a class="bnt-subscribe active" data-profile-id="${sub.pk}" id="subscriptionBtn">${sub.is_subscribed ? 'Вы подписаны' : 'Подписаться'}</a>
+                    </div>
+                `;
+                } else {
+                    return `
+                        <div class="users__card">
+                            <div class="user__info">
+                                <img class="rounded-circle account-img" src="/media/${sub.fields.avatar}">
+                                <p class="card__username">@${sub.fields.username}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            ).join('');
+        });
+//    }
+});

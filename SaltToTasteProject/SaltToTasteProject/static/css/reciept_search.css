@@ -415,7 +415,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
-          -webkit-line-clamp: 8;
+          -webkit-line-clamp: 7;
           -webkit-box-orient: vertical;
           height: 157px; }
           .article-content__container.active-2 .index__article-content .index-article-section .index-article_content-block h1 {

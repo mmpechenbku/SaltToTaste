@@ -11,8 +11,7 @@
 
 
 <main class="page__profile">
-	<img class="soup" src="{% static 'img/background/soup.png' %}" alt="">
-	<img class="pizza" src="{% static 'img/background/pizza.png' %}" alt="">
+	<!--<img class="profile_background" src="{% static 'img/background/profile-background.png' %}" alt="">-->
 	<section class="profile_header__bnt">
 		<div class="header__bnt-reply header_bnt">
 			<svg width="24" height="24">
@@ -40,7 +39,7 @@
 					<li id="followers_count" class="count">{{ profile.get_sum_followers }}</li>
 					<li><a href="{% url 'subscribers' profile.pk %}">подписчики</a></li>
 				</ul>
-				{% if user.is_authenticated and profile != user %}{% if user.id in subscriptions %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}{% endif %}
+				{% if user.is_authenticated and profile != user %}{% if user.id in subscriptions %}<a class="bnt-subscribe" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}{% endif %}
 			</div>
 			<div class="account">
 				<img class="rounded-circle account-img" src="{{ profile.avatar.url }}">
@@ -62,11 +61,18 @@
 	</section>
 	<section class="profile_tabs">
 		<div class="tabs">
-			<span onclick="loadContent('recipes')"><a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="return false">{% if user.is_authenticated and user == profile %} МОИ {% endif %}РЕЦЕПТЫ</a></span>
-			<span onclick="loadContent('collections')"><a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="return false">{% if user.is_authenticated and user == profile %} МОИ {% endif %}ПОДБОРКИ</a></span>
+			<span onclick="loadContent('recipes')"><a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="return false">{% if user.is_authenticated and user == profile %}МОИ {% endif %}РЕЦЕПТЫ</a></span>
+			{% if user.is_authenticated and user == profile %}<span onclick="loadContent('collections')"><a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="return false">РЕКОМЕНДАЦИИ</a></span>{% else %}<span onclick="loadContent('collections')"><a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="return false">ПОДБОРКИ</a></span>{% endif %}
 		</div>
 		<div class="areas">
 			<div class="tab_area" id="tab_area_recipe" style="display: block;">
+				<!--Если ничего нет то выводится это:-->
+				<div class="tab_area-none_content">
+					<img class="account__none_content" src="{% static 'img/none__content.png' %}" alt="">
+					<p class="account__none_content-text">Здесь пока пусто</p>
+				</div>
+				<!------------------------------------->
+
 				{% for recipe in recipes %}
 					{% if profile == user or recipe.access == 'public' %}
                 		{% include 'recipes/recipe_card.html' %}
@@ -75,16 +81,6 @@
 			</div>
 			<div class="tab_area" id="tab_area_fav" style="display: none;">
 				<div class="collection__list">
-					{% if user.is_authenticated and user == profile %}
-					<div class="collection__item-create">
-							<div class="collection__item-create_img">
-								<img src="{% static 'img/svg_image/collections__btn-create.svg' %}" alt="">
-							</div>
-						<div class="collection__item-name">
-							Добавить подборку
-						</div>
-					</div>
-					{% endif %}
 						{% for selection in selections %}
 							{% if profile == user or recipe.access == public %}
         						<div class="collection__item">

@@ -2,17 +2,13 @@
     padding: 100px 15px;
     width: 100%;
     margin: 0 auto;
-    .soup {
-        position: absolute;
-        transform: translate(-140px, -38px);
-        width: 380px;
 
-    }
-    .pizza {
-        position: absolute;
-        transform: translate(930px, -28px);
-        width: 658px;
-    }
+}
+body {
+    background-image: url("../img/background/profile-background.png");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 1800px;
 }
 .profile_header__bnt {
     display: flex;
@@ -228,5 +224,23 @@
     &:hover {
         background: #6BB420;
         background: linear-gradient(to top, #6BB420, #0a9e0d);
+    }
+}
+
+.tab_area-none_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 50px 0;
+    img {
+        width: 200px;
+    }
+    p {
+        color: rgba(47, 41, 41, 0.54);
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
     }
 }

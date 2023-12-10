@@ -26,9 +26,16 @@
   font-weight: 600;
   padding: 10px 15px;
   border-radius: 5px;
-  background: #DF8A5A; }
+  border: 3px solid #DF8A5A;
+  background: #DF8A5A;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s; }
   .search-header__btn-orange svg {
     margin-right: 5px; }
+  .search-header__btn-orange:hover {
+    background: var(--default-white, #FFF);
+    color: #DF8A5A; }
 
 .search__form {
   display: flex;
@@ -129,18 +136,6 @@
   font-size: 18px;
   font-weight: 500;
   margin: 15px 0 10px 190px; }
-
-.ingredient-button {
-  border-radius: 4px;
-  background: var(--secondary-color, #6C757D);
-  padding: 4px 8px;
-  border: none;
-  height: 30px;
-  margin: 3px 3px;
-  /* Текст */
-  color: var(--default-white, #FFF);
-  font-size: 15px;
-  font-weight: 600; }
 
 .available-ingredients {
   display: flex;

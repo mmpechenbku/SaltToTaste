@@ -185,6 +185,8 @@ z-index: 1;
     display: block;
     color: #000;
     cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
     &:hover {
         background: #6BB420;
         color: #fff;

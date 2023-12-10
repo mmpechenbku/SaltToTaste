@@ -153,7 +153,10 @@
 .subnav-content li {
   display: block;
   color: #000;
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s; }
   .subnav-content li:hover {
     background: #6BB420;
     color: #fff; }

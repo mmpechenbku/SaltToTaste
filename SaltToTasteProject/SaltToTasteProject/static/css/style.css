@@ -33,7 +33,7 @@ body{
 }
 
 button[type=submit] {
-    border: none;
+    border: 3px solid #6BB420;
     border-radius: 6px;
     background: #6BB420;
     color: var(--default-white, #FFF);
@@ -41,16 +41,31 @@ button[type=submit] {
     font-weight: 600;
     padding: 10px 15px;
     cursor: pointer;
+    text-shadow: 1px 1px 1px #000000;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
     &:hover {
-        color: #ccc !important;
-        background: #6BB420;
-        background: linear-gradient(to top, #6BB420, #0a9e0d);
+        background: var(--default-white, #FFF);
+        color: #6BB420;
     }
 }
 button[type=button] {
     cursor: pointer;
+    border-radius: 4px;
+    background: var(--secondary-color, #6C757D);
+    padding: 4px 8px;
+    border: 3px solid #6C757D;
+    height: 30px;
+    margin: 3px 3px;
+    /* Текст */
+    color: var(--default-white, #FFF);
+    font-size: 15px;
+    font-weight: 600;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
     &:hover {
-        background: linear-gradient(to top, #6c757d, #818a92);
+        background: var(--default-white, #FFF);
+        color: #6C757D;
     }
 }
 :active, :hover, :focus {

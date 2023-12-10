@@ -76,18 +76,6 @@
   height: 105px;
   line-clamp: 3;
   overflow: hidden; }
-  .available-ingredients button {
-    border-radius: 4px;
-    background: var(--secondary-color, #6C757D);
-    padding: 4px 8px;
-    border: none;
-    height: 30px;
-    margin: 3px 3px;
-    /* Текст */
-    color: var(--default-white, #FFF);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer; }
 
 #add-step {
   color: #8BC24F; }

@@ -92,8 +92,7 @@
   border: none;
   color: var(--default-white, #FFF);
   font-size: 14px;
-  font-weight: 600;
-  text-shadow: 1px 1px 1px #000000; }
+  font-weight: 600; }
 
 .sign__other {
   display: flex;

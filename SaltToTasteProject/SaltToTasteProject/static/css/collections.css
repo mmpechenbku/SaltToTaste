@@ -115,8 +115,15 @@
   font-weight: 600;
   padding: 10px 15px;
   border-radius: 5px;
-  background: #DF8A5A; }
+  border: 3px solid #DF8A5A;
+  background: #DF8A5A;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s; }
   .search-header__btn-orange svg {
     margin-right: 5px; }
+  .search-header__btn-orange:hover {
+    background: var(--default-white, #FFF);
+    color: #DF8A5A; }
 
 /*# sourceMappingURL=collections.css.map */

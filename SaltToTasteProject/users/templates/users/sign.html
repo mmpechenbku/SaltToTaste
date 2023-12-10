@@ -20,14 +20,16 @@
 
 
                 <label class="text-field__label" for="id_password">Пароль</label>
-                <input class="text-field__input"
-                       autocomplete="current-password"
-                       type="password"
-                       name="password"
-                       id="id_password"
-                       placeholder="Введите пароль"
-                       required="">
-
+                <div class="password">
+                    <input class="password-input"
+                           autocomplete="current-password"
+                           type="password"
+                           name="password"
+                           id="id_password"
+                           placeholder="Введите пароль"
+                           required="">
+                    <a href="#id_password" class="password-control"></a>
+                </div>
 
                 <div class="button-login">
                     <button class="btn__signin-auth" type="submit">Войти</button>
@@ -65,18 +67,26 @@
                     </div>
                     <div class="col-2">
                         <label class="text-field__label" for="nickname">@никнейм</label>
-                        <input class="text-field__input" type="text" name="nickname" id="nickname" placeholder="Введите @никнейм">
+                        <div class="input-nickname">
+                            <span>@</span>
+                            <input class="text-input" type="text" name="nickname" id="nickname" placeholder="Введите nickname">
+                        </div>
                     </div>
                 </div>
                 <div class="str-1">
                     <div class="col-2">
                         <label class="text-field__label" for="pass">Пароль</label>
-                        <input class="text-field__input" type="password" name="password1" id="pass" placeholder="Введите пароль" autocomplete="off">
-
+                        <div class="password">
+                            <input class="password-input" type="password" name="password1" id="pass" placeholder="Введите пароль" autocomplete="off">
+                            <a href="#pass" class="password-control"></a>
+                        </div>
                     </div>
                     <div class="col-2">
                         <label class="text-field__label" for="repassword">Повторите пароль</label>
-                        <input class="text-field__input" type="password" name="password2" id="repassword" placeholder="Повторите пароль" autocomplete="off">
+                        <div class="password">
+                            <input class="password-input" type="password" name="password2" id="repassword" placeholder="Повторите пароль" autocomplete="off">
+                            <a href="#repassword" class="password-control"></a>
+                        </div>
                     </div>
                 </div>
                 <div class="consent__processing">

@@ -36,15 +36,23 @@
 
     <div class="users__card-container">
         {% for sub in subs %}
-        <div class="users__card">
-            <div class="user__info">
-                <img class="rounded-circle account-img" src="{{ sub.avatar.url }}">
-                <p class="card__username">@{{ sub.username }}</p>
+        <a href="{% url 'profile' sub.pk %}">
+            <div class="users__card">
+                <div class="user__info">
+                    <img class="rounded-circle account-img" src="{{ sub.avatar.url }}">
+                    <p class="card__username">@{{ sub.username }}</p>
+                </div>
+    <!--            <a href="" class="bnt-subscribe active" id="subscriptionBtn">Подписаться</a>-->
+                {% if user.is_authenticated %}
+                    {% if user.pk in subscriptions %}
+                        <a class="bnt-subscribe" id="subscriptionBtn" data-profile-id="{{ sub.id }}">Вы подписаны</a>
+                    {% else %}
+                        <a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>
+                    {% endif %}
+                {% endif %}
+    <!--            {% if user.id in subscriptions %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}-->
             </div>
-<!--            <a href="" class="bnt-subscribe active" id="subscriptionBtn">Подписаться</a>-->
-            {% if user.is_authenticated %}{% if user.pk in subscriptions %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ sub.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}{% endif %}
-<!--            {% if user.id in subscriptions %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}-->
-        </div>
+        </a>
         {% endfor %}
     </div>
 

@@ -87,9 +87,7 @@
   height: auto;
   background-color: #fdf5f5;
   border-radius: 52px;
-  border: 1px solid #CBC8C8;
-  margin-top: 30px;
-  margin-bottom: 30px; }
+  border: 1px solid #CBC8C8; }
 
 .hero {
   display: grid;
@@ -159,7 +157,6 @@
 
 .btn__back {
   display: flex;
-  margin-top: 120px;
   padding-left: 5%; }
 
 .recept_header-title {

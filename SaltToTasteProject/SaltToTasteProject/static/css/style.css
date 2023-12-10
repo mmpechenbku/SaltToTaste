@@ -29,6 +29,7 @@ body{
     max-width: 1280px;
     height: auto;
     margin: 0 auto;
+    padding: 40px 15px 40px 15px;
 }
 
 button[type=submit] {
@@ -68,6 +69,61 @@ input[type="number"]:focus {
     appearance: none;
     -moz-appearance: textfield;
 }
+textarea {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 2px solid rgba(47, 41, 41, 0.40);
+    resize: none;
+    overflow: auto;
+    color: #2F2929;
+    font-family: Tilda Sans VF;
+    font-size: 18px;
+    font-weight: 400;
+}
+textarea::placeholder {
+    font-size: 16px;
+}
+textarea::-webkit-scrollbar {
+    width: 7px;
+    background-color: none;
+}
+textarea::-webkit-scrollbar-thumb {
+    background-color: #7d7c7c;
+    border-radius: 10px;
 
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    color: #2F2929;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 30px 0 50px 0;
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+        border-radius: 4px;
+        border: 1px solid var(--gray-200, #E9ECEF);
+        background: var(--default-white, #FFF);
+        cursor: pointer;
+}
+.pagination-btn:hover {
+    background: #6BB420;
+    color: var(--default-white, #FFF);
+}
+.pagination-btn.active {
+            background: #6BB420;
+            color: var(--default-white, #FFF);
+            cursor: default;
+}
+.pagination-btn--points {
+    padding: 12px 15px;
+    cursor: default;
+}
 
 

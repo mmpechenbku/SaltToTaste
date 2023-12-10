@@ -32,9 +32,25 @@
 
             <div class="navbar">
                 <ul class="navbar__list">
-                    <li><a href="{% url 'home' %}">Главная</a></li>
-                    <li><a href="{% url 'search' %}">Рецепты</a></li>
-                    <li><a href="{% url 'collections' %}">Избранное</a></li>
+                    <a href="{% url 'home' %}"><li>Главная</li></a>
+                    <li class="subnabar">
+                        <a href="#" onclick="return false">Рецепты</a>
+                        <ul class="subnav-content">
+                            <a href="#"><li>Популярное</li></a>
+                            <a href="{% url 'search' %}"><li>Поиск по ингредиентам</li></a>
+                            <a href="#"><li>Избранное</li></a>
+                        </ul>
+                    </li>
+
+                    <li class="subnabar">
+                        <a href="#" class="subnavbtn" onclick="return false">Подборки</a>
+                        <ul class="subnav-content">
+                            <a href="#"><li>Популярное</li></a>
+                            <a href="{% url 'collections' %}"><li>Мои подборки</li></a>
+                            <a href="#"><li>Избранное</li></a>
+                        </ul>
+                        <!--<a href="{% url 'collections' %}">Избранное</a>-->
+                    </li>
                 </ul>
 
                 <ul class="navbar__list-right">
@@ -53,8 +69,11 @@
                     {% if user.is_authenticated %}
 
                     <li>
-                        <img class="account-img" src="{{ user.avatar.url }}" alt="">
-                        <a class="nav-item nav-link" href="{% url 'profile' user.pk %}">{{ user.nickname }}</a>
+
+                        <a class="nav-item nav-link" href="{% url 'profile' user.pk %}">
+                            <img class="account-img" src="{{ user.avatar.url }}" alt="">
+                            {{ user.nickname }}
+                        </a>
                     </li>
                     <li>
                         <a class="nav-item nav-link" href="{% url 'logout' %}">Выход</a>
@@ -68,10 +87,12 @@
                     </li>
                     <li class="navbar__item-sign">
                        <!-- <img src="{% static 'img/svg_image/sign.svg' %}" alt="">-->
-                        <svg width="24" height="24">
-                            <use href="#sign"></use>
-                        </svg>
-                        <p class="navbar__item-sign_link">Войти</p>
+                        <p class="navbar__item-sign_link">
+                            <svg width="24" height="24">
+                                <use href="#sign"></use>
+                            </svg>
+                            Войти
+                        </p>
                     </li>
           	        {% endif %}
 
@@ -131,6 +152,8 @@
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/popup.js' %}"></script>
     {% include 'users/sign.html' %}
+    <script src="{% static 'js/tabs.js' %}"></script>
+
     {% include 'svg.html' %}
 </body>
 

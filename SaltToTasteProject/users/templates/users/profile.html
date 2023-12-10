@@ -62,25 +62,33 @@
 	<section class="profile_tabs">
 		<div class="tabs">
 			<span onclick="loadContent('recipes')"><a class="tab__link active" id="tab__link-recipe" href="#tab_area_recipe" onclick="return false">{% if user.is_authenticated and user == profile %}МОИ {% endif %}РЕЦЕПТЫ</a></span>
-			{% if user.is_authenticated and user == profile %}<span onclick="loadContent('collections')"><a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="return false">РЕКОМЕНДАЦИИ</a></span>{% else %}<span onclick="loadContent('collections')"><a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="return false">ПОДБОРКИ</a></span>{% endif %}
+			{% if user.is_authenticated and user == profile %}<span onclick="loadContent('collections')"><a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="return false">СОХРАНЕННЫЕ</a></span>{% else %}<span onclick="loadContent('collections')"><a class="tab__link" id="tab__link-fav" href="#tab_area_fav" onclick="return false">ПОДБОРКИ</a></span>{% endif %}
 		</div>
 		<div class="areas">
 			<div class="tab_area" id="tab_area_recipe" style="display: block;">
 				<!--Если ничего нет то выводится это:-->
-				<div class="tab_area-none_content">
+				<!--<div class="tab_area-none_content">
 					<img class="account__none_content" src="{% static 'img/none__content.png' %}" alt="">
 					<p class="account__none_content-text">Здесь пока пусто</p>
-				</div>
+				</div>-->
 				<!------------------------------------->
+				{% if recipes %}
+					{% for recipe in recipes %}
 
-				{% for recipe in recipes %}
-					{% if profile == user or recipe.access == 'public' %}
-                		{% include 'recipes/recipe_card.html' %}
-					{% endif %}
-            	{% endfor %}
+						{% if profile == user or recipe.access == 'public' %}
+                			{% include 'recipes/recipe_card.html' %}
+						{% endif %}
+            		{% endfor %}
+				{% else %}
+						<div class="tab_area-none_content">
+							<img class="account__none_content" src="{% static 'img/none__content.png' %}" alt="">
+							<p class="account__none_content-text">Здесь пока пусто</p>
+						</div>
+				{% endif %}
 			</div>
 			<div class="tab_area" id="tab_area_fav" style="display: none;">
 				<div class="collection__list">
+					{%if selections %}
 						{% for selection in selections %}
 							{% if profile == user or recipe.access == public %}
         						<div class="collection__item">
@@ -95,6 +103,12 @@
         						</div>
 							{% endif %}
         				{% endfor %}
+					{% else %}
+						<div class="tab_area-none_content">
+							<img class="account__none_content" src="{% static 'img/none__content.png' %}" alt="">
+							<p class="account__none_content-text">Здесь пока пусто</p>
+						</div>
+					{% endif %}
 				</div>
 
 			</div>

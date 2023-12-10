@@ -1,7 +1,4 @@
 @charset "UTF-8";
-.page__recipe_add {
-  padding: 120px 15px 30px 15px; }
-
 .recipe_add__header-link {
   display: flex;
   align-items: center;
@@ -55,18 +52,7 @@
   font-weight: 700; }
 .recipe_add__container-add_step textarea {
   width: 90%;
-  height: 160px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 2px solid rgba(47, 41, 41, 0.4);
-  resize: none;
-  overflow: auto; }
-.recipe_add__container-add_step textarea::-webkit-scrollbar {
-  width: 7px;
-  background-color: none; }
-.recipe_add__container-add_step textarea::-webkit-scrollbar-thumb {
-  background-color: #7d7c7c;
-  border-radius: 10px; }
+  height: 160px; }
 
 .container-add_content {
   display: flex;

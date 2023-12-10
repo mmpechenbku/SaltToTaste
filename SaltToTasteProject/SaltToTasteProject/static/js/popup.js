@@ -1,4 +1,4 @@
-let btnSign = document.querySelector(".navbar__item-sign_link");
+let btnSign = document.querySelector(".navbar__item-sign");
 if (btnSign) {
     btnSign.onclick = () => {
         let popupUp = document.querySelector(".signup__popup");
@@ -65,13 +65,7 @@ if (btnAddCollections) {
 
 document.querySelector(".navbar__item-search-img").addEventListener('click', () => {
     let searchBox = document.querySelector(".navbar__search-onclick");
-    if (!searchBox.classList.contains(".navbar__search-onclick_active")) {
-        searchBox.classList.add("navbar__search-onclick_active");
-    }
-    let btnExit = document.querySelector("#nav-search_box")
-    btnExit.onblur = () => {
-        searchBox.classList.remove("navbar__search-onclick_active");
-    }
+    searchBox.classList.toggle("navbar__search-onclick_active");
 });
 
 
@@ -134,12 +128,23 @@ btn1.addEventListener('click', function () {
 });
 }
 
-window.onscroll = function() {
+/*window.onscroll = function() {
   var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
   if(scrolled !== 0){
     document.querySelector('.header').style.opacity = '0.7';
   }else{
     document.querySelector('.header').style.opacity = '1';
   };
-};
+};*/
 
+/*
+window.onscroll = function() {
+if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+// когда прокрутка превышает 200px, меняем верхнее меню на кнопку
+document.querySelector('.header').style.display = "none";
+} else {
+// когда прокрутка меньше 200px, возвращаем верхнее меню
+document.querySelector('.header').style.display = "flex";
+}
+};
+*/

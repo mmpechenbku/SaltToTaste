@@ -1,7 +1,7 @@
 .page__editing {
     padding: 40px 15px;
     width: 80%;
-    margin: 100px auto;
+    margin: 0px auto;
     border-radius: 30px;
     background: var(--default-white, #FFF);
     box-shadow: 0px 0px 12px -5px rgba(73, 63, 63, 0.60);
@@ -77,13 +77,13 @@
         flex-direction: column;
             .area_section {
                 display: flex;
-                width: 100%;
+                width: 300px;
                 flex-direction: column;
                 align-items: flex-start;
                 margin: 15px;
                 .text-input {
                     position: relative;
-                    width: 300px;
+                    width: 100%;
                     height: 40px;
                     border-radius: 10px;
                     border: 2px solid rgba(26, 26, 26, 0.30);
@@ -99,24 +99,12 @@
                     }
                 }
                 textarea {
-                    width: 80%;
+                    width: 100%;
                     height: 80px;
-                    border-radius: 19px;
-                    border: 2px solid rgba(26, 26, 26, 0.30);
-                    background: rgba(217, 217, 217, 0.00);
-                    padding: 10px 15px;
-                    color: #2F2929;
-                    font-family: Tilda Sans VF;
-                    font-size: 18px;
-                    font-weight: 500;
-                    line-height: normal;
-                    &::placeholder {
-                        font-size: 16px;
-                    }
                 }
                 p {
                     display: flex;
-                    width: 80%;
+                    width: 100%;
                     justify-content: flex-end;
                     padding-right: 20px;
                     color: rgba(47, 41, 41, 0.54);
@@ -239,4 +227,22 @@ input[type=radio] {
     font-style: normal;
     font-weight: 500;
     letter-spacing: 1px;
+}
+.input-nickname {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid rgba(26, 26, 26, 0.30);
+    span {
+        padding-left: 10px;
+        cursor: default;
+    }
+    .text-input {
+        border: none !important;
+        border-radius: 0 !important;
+        padding-left: 2px !important;
+        height: 36px !important;
+    }
 }

@@ -1,6 +1,4 @@
-.page__recipe_add {
-    padding: 120px 15px 30px 15px;
-}
+
 
 
 .recipe_add__header {}
@@ -67,20 +65,9 @@
     textarea {
         width: 90%;
         height: 160px;
-        padding: 10px 20px;
-        border-radius: 10px;
-        border: 2px solid rgba(47, 41, 41, 0.40);
-        resize: none;
-        overflow: auto;
+
     }
-        textarea::-webkit-scrollbar {
-        width: 7px;
-        background-color: none;
-        }
-        textarea::-webkit-scrollbar-thumb {
-            background-color: #7d7c7c;
-            border-radius: 10px;
-        }
+
 
 }
 .container-add_content {

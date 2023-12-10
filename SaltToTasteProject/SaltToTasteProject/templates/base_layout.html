@@ -38,7 +38,9 @@
                         <ul class="subnav-content">
                             <a href="#"><li>Популярное</li></a>
                             <a href="{% url 'search' %}"><li>Поиск по ингредиентам</li></a>
+                            {% if user.is_authenticated %}
                             <a href="#"><li>Избранное</li></a>
+                            {% endif %}
                         </ul>
                     </li>
 
@@ -46,8 +48,10 @@
                         <a href="#" class="subnavbtn" onclick="return false">Подборки</a>
                         <ul class="subnav-content">
                             <a href="#"><li>Популярное</li></a>
+                            {% if user.is_authenticated %}
                             <a href="{% url 'collections' %}"><li>Мои подборки</li></a>
                             <a href="#"><li>Избранное</li></a>
+                            {% endif %}
                         </ul>
                         <!--<a href="{% url 'collections' %}">Избранное</a>-->
                     </li>

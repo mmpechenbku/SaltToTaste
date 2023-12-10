@@ -9,7 +9,6 @@
     <div class="index-article-section">
         <div class="index-article_content-block">
             <div class="index-article__header">
-                <h1 class="index-article__title"><a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a></h1>
                 <h4>
                     {% if percentsDict|length > 0 %}
                         {% for dict in percentsDict %}
@@ -21,6 +20,8 @@
                         {% endfor %}
                     {% endif %}
                 </h4>
+                <h1 class="index-article__title"><a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a></h1>
+
             </div>
             <p class="index-article__text"><a href="">{{ recipe.description }}</a></p>
         </div>

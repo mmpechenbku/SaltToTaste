@@ -9,7 +9,7 @@
     min-width: 530px;
     .index-article__header {
                 display: flex;
-                justify-content: space-between;
+                flex-direction: column;
                 h1 {
                     text-align: justify;
                     font-size: 24px;
@@ -18,9 +18,11 @@
                 h4 {
                     color: #549337;
                     text-align: center;
-                    padding-left: 15px;
+                    padding-right: 15px;
                     font-size: 15px;
                     font-weight: 500;
+                    margin-left: auto;
+                    padding-bottom: 10px;
                 }
     }
     .index-article__img {
@@ -39,9 +41,9 @@
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 7;
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
-            height: 157px;
+            height: 129px;
 
             h1 {
                 text-align: justify;
@@ -59,7 +61,8 @@
 
         ul {
             display: flex;
-            padding-top: 10px;
+            align-items: center;
+            padding-top: 35px;
             height: 63px;
             .index-article__items {
                 width: 40%;
@@ -73,13 +76,14 @@
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
                 height: 45px;
-            }
-            li {
-                display: flex;
                 p {
+                    color: #000;
                     font-size: 15px;
                     font-weight: 400;
                 }
+            }
+            li {
+                display: flex;
                 .index-article-item1 {
                     display: flex;
                     a {

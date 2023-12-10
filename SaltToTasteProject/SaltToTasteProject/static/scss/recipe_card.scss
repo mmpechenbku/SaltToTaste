@@ -31,7 +31,7 @@
             height: 153px;
             .index-article__header {
                 display: flex;
-                justify-content: space-between;
+                flex-direction: column;
                 h1 {
                     text-align: justify;
                     font-size: 24px;
@@ -41,6 +41,7 @@
                     color: #549337;
                     font-size: 15px;
                     font-weight: 500;
+                    margin-left: auto;
                 }
             }
 
@@ -62,13 +63,14 @@
             }
             .index-article__item2 {
                 width: 100%;
-            }
-            li {
-                display: flex;
                 p {
+                    color: #000;
                     font-size: 15px;
                     font-weight: 400;
                 }
+            }
+            li {
+                display: flex;
                 .index-article-item1 {
                     display: flex;
                     a {

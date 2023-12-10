@@ -9,7 +9,7 @@
   min-width: 530px; }
   .index__article-content .index-article__header {
     display: flex;
-    justify-content: space-between; }
+    flex-direction: column; }
     .index__article-content .index-article__header h1 {
       text-align: justify;
       font-size: 24px;
@@ -17,9 +17,11 @@
     .index__article-content .index-article__header h4 {
       color: #549337;
       text-align: center;
-      padding-left: 15px;
+      padding-right: 15px;
       font-size: 15px;
-      font-weight: 500; }
+      font-weight: 500;
+      margin-left: auto;
+      padding-bottom: 10px; }
   .index__article-content .index-article__img img {
     border-radius: 52px 0 0 52px;
     width: 250px;
@@ -30,9 +32,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 7;
+      -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
-      height: 157px; }
+      height: 129px; }
       .index__article-content .index-article-section .index-article_content-block h1 {
         text-align: justify;
         font-size: 20px;
@@ -44,7 +46,8 @@
         font-weight: 400; }
     .index__article-content .index-article-section ul {
       display: flex;
-      padding-top: 10px;
+      align-items: center;
+      padding-top: 35px;
       height: 63px; }
       .index__article-content .index-article-section ul .index-article__items {
         width: 40%; }
@@ -57,11 +60,12 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         height: 45px; }
-      .index__article-content .index-article-section ul li {
-        display: flex; }
-        .index__article-content .index-article-section ul li p {
+        .index__article-content .index-article-section ul .index-article__item2 p {
+          color: #000;
           font-size: 15px;
           font-weight: 400; }
+      .index__article-content .index-article-section ul li {
+        display: flex; }
         .index__article-content .index-article-section ul li .index-article-item1 {
           display: flex; }
           .index__article-content .index-article-section ul li .index-article-item1 a {

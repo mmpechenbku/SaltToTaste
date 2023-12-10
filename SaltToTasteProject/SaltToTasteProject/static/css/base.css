@@ -41,7 +41,8 @@
   height: 100%;
   display: flex; }
   .navbar__list li {
-    padding: 1rem 1rem; }
+    padding: 1rem 1rem;
+    letter-spacing: 0.5px; }
   .navbar__list a {
     color: #2F2929;
     font-size: 16px;
@@ -69,7 +70,8 @@
       align-items: center;
       color: #2F2929;
       font-size: 18px;
-      font-weight: 400; }
+      font-weight: 400;
+      letter-spacing: 0.5px; }
       .navbar__list-right li a:hover {
         color: #6BB420; }
       .navbar__list-right li a img {

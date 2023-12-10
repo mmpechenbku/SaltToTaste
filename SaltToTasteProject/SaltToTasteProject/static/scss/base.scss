@@ -48,6 +48,7 @@
     display: flex;
     li {
         padding: 1rem 1rem;
+        letter-spacing: 0.5px;
     }
     a {
         color: #2F2929;
@@ -81,6 +82,7 @@
             color: #2F2929;
             font-size: 18px;
             font-weight: 400;
+            letter-spacing: 0.5px;
             &:hover {
                 color: #6BB420;
             }

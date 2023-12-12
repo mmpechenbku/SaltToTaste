@@ -14,16 +14,16 @@ body {
   margin-bottom: 15px;
   justify-content: space-evenly;
   width: 50%; }
-  .profile_header__bnt .header_bnt {
+  .profile_header__bnt .header_bnt a {
     display: flex;
     align-items: center;
     color: #4f4d4d;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600; }
-    .profile_header__bnt .header_bnt:hover {
+    .profile_header__bnt .header_bnt a:hover {
       color: #000; }
-    .profile_header__bnt .header_bnt svg {
+    .profile_header__bnt .header_bnt a svg {
       margin-right: 5px; }
 
 .profile__header {
@@ -76,9 +76,19 @@ body {
     font-size: 18px;
     font-weight: 500; }
 
+@media screen and (max-width: 920px) {
+  .account img {
+    width: 100px !important;
+    height: 100px !important; }
+
+  .profile__header {
+    width: 100% !important; } }
+@media screen and (max-width: 530px) {
+  .account img {
+    width: 70px !important;
+    height: 70px !important; } }
 .profile_tabs {
   display: flex;
-  width: 90%;
   margin: 20px auto;
   position: relative;
   border-radius: 30px;
@@ -105,6 +115,7 @@ body {
       pointer-events: auto;
       padding: 0 10px;
       margin: 0 15px;
+      white-space: nowrap;
       border-bottom: 2px solid rgba(47, 41, 41, 0.54); }
       .profile_tabs .tabs .tab__link:hover {
         color: #000; }
@@ -114,7 +125,8 @@ body {
         cursor: default; }
   .profile_tabs .areas {
     margin-top: 20px;
-    width: 85%; }
+    width: 100%;
+    padding: 0 70px; }
     .profile_tabs .areas .tab_area {
       width: 100%;
       /*______________________________gr2---------------------------------------*/ }
@@ -126,45 +138,53 @@ body {
         height: 300px;
         margin: 15px 0;
         width: 100%; }
-        .profile_tabs .areas .tab_area .index__article-content .index-article__img img {
-          border-radius: 52px 0 0 52px;
-          width: 400px;
-          height: 100%; }
+        .profile_tabs .areas .tab_area .index__article-content .index-article__img {
+          width: 500px; }
+          .profile_tabs .areas .tab_area .index__article-content .index-article__img img {
+            border-radius: 52px 0 0 52px;
+            width: 100%;
+            height: 100%; }
         .profile_tabs .areas .tab_area .index__article-content .index-article-section {
           padding: 36px 37px 35px 58px;
           width: 100%; }
-          .profile_tabs .areas .tab_area .index__article-content .index-article-section .index-article_content-block {
+          .profile_tabs .areas .tab_area .index__article-content .index-article-section .index-article_content-block .index-article__header {
+            display: flex;
+            flex-direction: column; }
+            .profile_tabs .areas .tab_area .index__article-content .index-article-section .index-article_content-block .index-article__header h1 {
+              text-align: justify;
+              font-size: 24px;
+              font-weight: 700; }
+            .profile_tabs .areas .tab_area .index__article-content .index-article-section .index-article_content-block .index-article__header h4 {
+              color: #549337;
+              font-size: 15px;
+              font-weight: 500;
+              margin-left: auto; }
+          .profile_tabs .areas .tab_area .index__article-content .index-article-section .index-article_content-block p {
+            padding-top: 20px;
+            text-align: justify;
+            font-size: 18px;
+            font-weight: 400;
+            padding-bottom: 35px;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 6;
             -webkit-box-orient: vertical;
-            height: 153px; }
-            .profile_tabs .areas .tab_area .index__article-content .index-article-section .index-article_content-block .index-article__header {
-              display: flex;
-              flex-direction: column; }
-              .profile_tabs .areas .tab_area .index__article-content .index-article-section .index-article_content-block .index-article__header h1 {
-                text-align: justify;
-                font-size: 24px;
-                font-weight: 700; }
-              .profile_tabs .areas .tab_area .index__article-content .index-article-section .index-article_content-block .index-article__header h4 {
-                color: #549337;
-                font-size: 15px;
-                font-weight: 500;
-                margin-left: auto; }
-            .profile_tabs .areas .tab_area .index__article-content .index-article-section .index-article_content-block p {
-              padding-top: 20px;
-              text-align: justify;
-              font-size: 18px;
-              font-weight: 400;
-              padding-bottom: 35px; }
+            height: 129px; }
           .profile_tabs .areas .tab_area .index__article-content .index-article-section ul {
             display: flex;
             margin: 25px 0 0 0; }
             .profile_tabs .areas .tab_area .index__article-content .index-article-section ul .index-article__items {
               width: 40%; }
             .profile_tabs .areas .tab_area .index__article-content .index-article-section ul .index-article__item2 {
-              width: 100%; }
+              width: 100%;
+              padding-left: 20px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              height: 45px; }
               .profile_tabs .areas .tab_area .index__article-content .index-article-section ul .index-article__item2 p {
                 color: #000;
                 font-size: 15px;
@@ -199,6 +219,25 @@ body {
                   display: inherit;
                   align-items: center; }
 
+@media screen and (max-width: 920px) {
+  .areas {
+    padding: 0 10px !important; } }
+@media screen and (max-width: 768px) {
+  .tab__link {
+    font-size: 16px !important;
+    margin: 0 5px !important;
+    padding: 0 !important; }
+
+  .header_bnt p {
+    display: none !important; }
+  .header_bnt svg {
+    width: 24px;
+    height: 24px; } }
+/*@media screen and (max-width: 420px) {
+    .tab__link {
+        font-size: 14px !important;
+    }
+}*/
 .collection__list {
   display: flex;
   flex-wrap: wrap; }

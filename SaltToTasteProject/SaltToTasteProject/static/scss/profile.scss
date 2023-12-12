@@ -16,17 +16,19 @@ body {
     justify-content: space-evenly;
     width: 50%;
     .header_bnt {
-        display: flex;
-        align-items: center;
-        color: #4f4d4d;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 600;
-        &:hover {
-            color: #000;
-        }
-        svg {
-            margin-right: 5px;
+        a {
+            display: flex;
+            align-items: center;
+            color: #4f4d4d;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            &:hover {
+                color: #000;
+            }
+            svg {
+                margin-right: 5px;
+            }
         }
     }
 }
@@ -68,6 +70,7 @@ body {
                 }
             }
         }
+
         .account {
             text-align: center;
             img {
@@ -85,6 +88,7 @@ body {
             }
 
         }
+
         li {
             color: #2F2929;
             font-size: 18px;
@@ -100,9 +104,33 @@ body {
         }
     }
 }
+        @media screen and (max-width: 920px) {
+
+            .account {
+                img {
+                    width: 100px !important;
+                    height: 100px !important;
+                }
+            }
+            .profile__header {
+                width: 100% !important;
+            }
+
+        }
+        @media screen and (max-width: 530px) {
+
+            .account {
+                img {
+                    width: 70px !important;
+                    height: 70px !important;
+                }
+            }
+
+
+
+        }
 .profile_tabs {
     display: flex;
-    width: 90%;
     margin: 20px auto;
     position: relative;
     border-radius: 30px;
@@ -128,6 +156,7 @@ body {
             pointer-events: auto;
             padding: 0 10px;
             margin: 0 15px;
+            white-space: nowrap;
             border-bottom: 2px solid rgba(47, 41, 41, 0.54);
             &:hover {
                 color: #000;
@@ -141,13 +170,40 @@ body {
     }
     .areas {
         margin-top: 20px;
-        width: 85%;
+        width: 100%;
+        padding: 0 70px;
         .tab_area {
             width: 100%;
             @import "recipe_card.scss";
         }
     }
 }
+@media screen and (max-width: 920px) {
+    .areas {
+        padding: 0 10px !important;
+    }
+}
+@media screen and (max-width: 768px) {
+    .tab__link {
+        font-size: 16px !important;
+        margin: 0 5px !important;
+        padding: 0 !important;
+    }
+    .header_bnt {
+                p {
+                    display: none !important;
+                }
+                svg {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+}
+/*@media screen and (max-width: 420px) {
+    .tab__link {
+        font-size: 14px !important;
+    }
+}*/
 .collection__list {
     display: flex;
     flex-wrap: wrap;

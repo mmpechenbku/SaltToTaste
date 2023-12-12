@@ -14,22 +14,30 @@
 	<!--<img class="profile_background" src="{% static 'img/background/profile-background.png' %}" alt="">-->
 	<section class="profile_header__bnt">
 		<div class="header__bnt-reply header_bnt">
-			<svg width="24" height="24">
-				<use href="#reply"></use>
-			</svg>
-			<p>Поделиться</p>
+			<a href="#">
+				<svg width="24" height="24">
+					<use href="#reply"></use>
+				</svg>
+				<p>Поделиться</p>
+			</a>
 		</div>
-		{% if user.is_authenticated and user == profile %}<div class="header__bnt-settings header_bnt">
-			<svg width="18" height="18">
-				<use href="#settings"></use>
-			</svg>
-			<p><a href="{% url 'profile_edit' user.id %}">Редактировать профиль</a></p>
+		{% if user.is_authenticated and user == profile %}
+		<div class="header__bnt-settings header_bnt">
+			<a href="{% url 'profile_edit' user.id %}">
+				<svg width="18" height="18">
+					<use href="#settings"></use>
+				</svg>
+				<p>Редактировать профиль</p>
+			</a>
 		</div>
+
 		<div class="header__bnt-more header_bnt">
-			<svg width="20" height="20">
-				<use href="#more"></use>
-			</svg>
-			<p>Еще</p>
+			<a href="#">
+				<svg width="20" height="20">
+					<use href="#more"></use>
+				</svg>
+				<p>Еще</p>
+			</a>
 		</div>{% endif %}
 	</section>
 	<section class="profile__header">

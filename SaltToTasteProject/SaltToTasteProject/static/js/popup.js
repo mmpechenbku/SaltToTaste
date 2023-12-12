@@ -148,3 +148,11 @@ document.querySelector('.header').style.display = "flex";
 }
 };
 */
+
+document.querySelector('.side-bar-btn').addEventListener('click', (event) => {
+    document.querySelector('.side-panel').classList.add('active');
+});
+
+document.querySelector('.side-btn--close').addEventListener('click', (event) => {
+    document.querySelector('.side-panel.active').classList.remove('active');
+});

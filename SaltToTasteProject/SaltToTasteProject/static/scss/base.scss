@@ -18,7 +18,36 @@
     margin: 0 auto;
     padding: 0 15px;
 }
-
+@media screen and (max-width: 1024px) {
+    .header-area {
+        width: 1024px;
+    }
+}
+@media screen and (max-width: 920px) {
+    .header-area {
+        width: 920px;
+    }
+    .logo a span {
+        display: none;
+    }
+}
+@media screen and (max-width: 768px) {
+    .header-area {
+        width: 768px;
+    }
+    .navbar__list {
+        display: none !important;
+    }
+    .logo {
+        display: none !important;
+    }
+    .navbar__item-search {
+        display: none !important;
+    }
+    .side-bar-btn {
+        display: block !important;
+    }
+}
 .logo {
     display: flex;
     a {
@@ -143,6 +172,9 @@
     overflow: hidden;
     opacity: 0;
     width: 100%;
+    input {
+        display: none;
+    }
     &_active {
         display: flex;
         justify-content: flex-end;
@@ -150,6 +182,9 @@
         width: 100%;
         opacity: 1;
         input {
+            display: block;
+            position: absolute;
+            top: 35px;
             border-radius: 45px;
             padding: 0 10px;
             min-width: 200px;
@@ -197,4 +232,71 @@ z-index: 1;
 
 .subnabar:hover .subnav-content {
 display: block;
+}
+.side-bar-btn {
+        display: none;
+        cursor: pointer;
+        color: gray;
+        &:hover {
+            color: black;
+        }
+    }
+.side-panel {
+    overflow: hidden;
+    opacity: 0;
+    position: fixed;
+    left: -360px;
+
+}
+.side-panel.active {
+    overflow: visible;
+    opacity: 1;
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    background: #F6F0E4;
+    transition: all 0.5s;
+    width: 320px;
+    height: 100vh;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.4);
+    color: #FFF;
+    padding: 40px 20px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+
+}
+.side-title {
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #6BB420;
+}
+.side-btn--close {
+    position: relative;
+    top: -24px;
+    left: 265px;
+    color: #2F2929;
+    cursor: pointer;
+    &:hover {
+        color: #6BB420;
+    }
+
+}
+.sidebar__list {
+    display: flex;
+    flex-direction: column;
+    li {
+        padding: 1rem 1rem;
+        letter-spacing: 0.5px;
+    }
+    a {
+        color: #2F2929;
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        &:hover {
+            color: #6BB420;
+        }
+    }
 }

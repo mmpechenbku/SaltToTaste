@@ -31,6 +31,11 @@ body{
     margin: 0 auto;
     padding: 40px 15px 40px 15px;
 }
+@media screen and (max-width: 320px) {
+    .container {
+        width: 320px;
+    }
+}
 
 button[type=submit] {
     border: 3px solid #6BB420;
@@ -49,13 +54,22 @@ button[type=submit] {
         color: #6BB420;
     }
 }
+@media screen and (max-width: 500px) {
+    button[type=submit] {
+        font-size: 14px !important;
+        padding: 5px 10px !important;
+    }
+    button[type=button] {
+        font-size: 12px !important;
+        padding: 4px 4px !important;
+    }
+}
 button[type=button] {
     cursor: pointer;
     border-radius: 4px;
     background: var(--secondary-color, #6C757D);
     padding: 4px 8px;
     border: 3px solid #6C757D;
-    height: 30px;
     margin: 3px 3px;
     /* Текст */
     color: var(--default-white, #FFF);

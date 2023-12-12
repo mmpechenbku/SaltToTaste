@@ -16,7 +16,8 @@
                     <svg width="22" height="22">
 				        <use href="#add_recipe-icon"></use>
                     </svg>
-                    Добавить свой рецепт</a>
+                    <span>Добавить свой рецепт</span>
+                </a>
             </div>
     </div>
   <form method="post" action="{% url 'search' %}" id="search-form">
@@ -65,36 +66,41 @@
                 </div>
                 <div class="fl_row">
                     <div class="sorting__container">
+                        <div class="fl_column">
+                            <div class="difficulty-container">
+                                <div class="parameters__name-box">
+                                    <label for="difficulty">Сложность</label>
+                                </div>
+                                <select id="difficulty" name="difficulty">
+                                    <option value="Все">Все</option>
+                                    <option value="Легко">Легкая</option>
+                                    <option value="Средняя">Средняя</option>
+                                    <option value="Сложно">Сложная</option>
+                                </select>
+                            </div>
+                            <div class="difficulty-container">
+                                <div class="parameters__name-box">
+                                    <label for="search-sorting">Сортировать по</label>
+                                </div>
+                                <select id="search-sorting" name="sorting">
+                                    <option value="popularity">Популярность</option>
+                                    <option value="difficulty">Сложность</option>
+                                    <option value="cookingTime">Время приготовления</option>
+                                    <option value="Дата публикации">Дата публикации</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="difficulty-container">
                             <div class="parameters__name-box">
-                                <label for="difficulty">Сложность</label>
+                                <label>Время приготовления</label>
                             </div>
-                            <select id="difficulty" name="difficulty">
-                                <option value="Все">Все</option>
-                                <option value="Легко">Легкая</option>
-                                <option value="Средняя">Средняя</option>
-                                <option value="Сложно">Сложная</option>
-                            </select>
-                        </div>
-
-                        <div class="parameters__name-box">
-                            <label for="search-sorting">Сортировать по</label>
-                        </div>
-                        <select id="search-sorting" name="sorting">
-                            <option value="popularity">Популярность</option>
-                            <option value="difficulty">Сложность</option>
-                            <option value="cookingTime">Время приготовления</option>
-                            <option value="Дата публикации">Дата публикации</option>
-                        </select>
-                        <div class="parameters__name-box">
-                            <label>Время приготовления</label>
-                        </div>
-                        <div class="time-container">
-                            <p>от</p>
-                            <input type="number" maxlength="3" max="200" min="1" name="cooking_time-start" id="cooking_time-start">
-                            <p>- до</p>
-                            <input type="number" maxlength="3" max="999" min="1" name="cooking_time-end" id="cooking_time-end">
-                            <p>мин.</p>
+                            <div class="time-container">
+                                <p>от</p>
+                                <input type="number" maxlength="3" max="200" min="1" name="cooking_time-start" id="cooking_time-start">
+                                <p>- до</p>
+                                <input type="number" maxlength="3" max="999" min="1" name="cooking_time-end" id="cooking_time-end">
+                                <p>мин.</p>
+                            </div>
                         </div>
                     </div>
                     <div class="search_bnt-container">

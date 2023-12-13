@@ -14,6 +14,7 @@ from .forms import CommentCreateForm, RecipeForm, StepForm, IngredientQuantityFo
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 import bs4
+from .paginator import paginator
 
 
 # Create your views here.
@@ -25,6 +26,7 @@ def index(request):
         saves = SaveRecipe.objects.filter(user=request.user).values_list('recipe', flat=True)
 
     data = {
+        'page_obj': paginator(request, recipes, 10),
         'recipes': recipes,
         'saves': saves,
     }
@@ -222,6 +224,7 @@ def search_recipes(request):
         saves = saves.values_list('recipe', flat=True)
 
     data = {
+        'page_obj': paginator(request, recipes, 10),
         'recipes': recipes,
         'ingredients': ingredients,
         'num_recipes': num_recipes,

@@ -126,19 +126,22 @@
                 </div>
             </div>
             <div class="article-content__container active-1">
-            {% for recipe in recipes %}
+            {% for recipe in page_obj %}
                 {% include 'recipes/recipe_card.html' %}
             {% endfor %}
             </div>
+            {% if page_obj %}
             <div class="pagination">
-                <span class="pagination-btn switch"><</span>
-                <a href="#" class="pagination-btn active">1</a>
-                <a href="#" class="pagination-btn">2</a>
-                <a href="#" class="pagination-btn">3</a>
-                <span class="pagination-btn--points">...</span>
-                <a href="#" class="pagination-btn">20</a>
-                <span class="pagination-btn switch">></span>
+                {% include 'recipes/paginator.html' %}
+<!--                <span class="pagination-btn switch"><</span>-->
+<!--                <a href="#" class="pagination-btn active">1</a>-->
+<!--                <a href="#" class="pagination-btn">2</a>-->
+<!--                <a href="#" class="pagination-btn">3</a>-->
+<!--                <span class="pagination-btn&#45;&#45;points">...</span>-->
+<!--                <a href="#" class="pagination-btn">20</a>-->
+<!--                <span class="pagination-btn switch">></span>-->
             </div>
+            {% endif %}
 </main>
 <script src="{% static 'js/save-comment.js' %}"></script>
 {% endblock %}

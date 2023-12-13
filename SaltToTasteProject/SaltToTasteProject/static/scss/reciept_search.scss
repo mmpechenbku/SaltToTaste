@@ -14,13 +14,14 @@
     }
 }
 
+
 .search-header__btn {
     display: inherit;
     float: right;
     margin-right: 10%;
     align-items: center;
-
 }
+
 .search-header__btn-orange{
     display: flex;
     align-items: center;
@@ -42,7 +43,6 @@
     }
 }
 
-
 .search__form {
     display: flex;
     justify-content: center;
@@ -63,6 +63,7 @@
         font-weight: 400;
         line-height: normal;
     }
+
     input::placeholder {
         background: url("../img/svg_image/search.svg") no-repeat left/15px;
         text-align: center;
@@ -163,6 +164,9 @@
     .search-form__btn-clear {
         padding: 25px 0 10px 0 !important;
     }
+    .article-content__container {
+        padding: 0 !important;
+   }
 }
 @media screen and (max-width: 678px) {
     .sorting__container {
@@ -170,8 +174,11 @@
             flex-direction: column !important;
         }
     }
+    .article-content__title-and-grids {
+        margin: 10px 20px 0 0 !important;
+    }
     .search__form {
-        padding: 0 30px !important;
+        padding: 0 !important;
     }
 }
 @media screen and (max-width: 500px) {
@@ -205,7 +212,6 @@
             font-size: 10px !important;
             background-size: 10px !important;
         }
-        height: 30px !important;
     }
 
     .sorting__container {
@@ -224,7 +230,7 @@
         }
     }
     .available-ingredients {
-        height: 60px !important;
+        height: 100px !important;
     }
 
 
@@ -282,7 +288,6 @@
     padding: 0 15px;
     flex-wrap: wrap;
     height: 70px;
-    line-clamp: 2;
     overflow: hidden;
     justify-content: center;
 }
@@ -382,8 +387,8 @@
         font-weight: 400;
         padding-left: 10px;
     }
-
 }
+
 .parameters__name-box {
     display: flex;
     width: 200px;
@@ -421,7 +426,9 @@
     display: flex;
     flex-wrap: nowrap;
     margin: 50px 80px 0 50px;
-
+    h1 {
+        font-size: 30px;
+    }
     .article-content__btn-grids {
         display: flex;
         margin-left: auto;
@@ -449,6 +456,8 @@
                 fill: #fff;
               }
           }
+
+
           &:hover {
             background-color: #6BB420 !important;
             & svg {
@@ -473,6 +482,7 @@
         justify-content: center;
         @import "recipe_card.scss";
     }
+
     &.active-2{
         display: flex;
         flex-direction: row;

@@ -1,0 +1,213 @@
+{% extends 'base_layout.html' %}
+
+{% load static %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/collections.css' %}">
+<link rel="stylesheet" href="{% static 'css/add_collections.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="page__collections">
+    <div class="collections__header">
+            <div class="collections__header-title">
+                <h1>Избранное</h1>
+                <svg width="30" height="30">
+				    <use href="#fav_icon-enable"></use>
+                </svg>
+            </div>
+            <div class="collections__header-btn">
+                <a href="{% url 'add_recipe' %}" class="search-header__btn-orange">
+                    <svg width="22" height="22">
+				        <use href="#add_recipe-icon"></use>
+                    </svg>
+                    Добавить свой рецепт</a>
+            </div>
+    </div>
+
+    <section class="collection__list">
+
+        <div class="collection__item-create">
+                <div class="collection__item-create_img">
+                    <img src="{% static 'img/svg_image/collections__btn-create.svg' %}" alt="">
+                </div>
+            <div class="collection__item-name">
+                Добавить подборку
+            </div>
+        </div>
+        {% for selection in selections %}
+        <div class="collection__item">
+            <a href="{% url 'collections-detail' selection.pk %}">
+                <div class="collection__item-img">
+                    <img src="{{ selection.picture }}" alt="">
+                </div>
+            </a>
+            <div class="collection__item-name">
+                {{ selection.title }}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="collection__item">
+            <a href="">
+                <div class="collection__item-img">
+                    <img src="{% static 'img/collections_img/collections__item-1.jpg' %}" alt="">
+                </div>
+            </a>
+            <div class="collection__item-name">
+                Все
+            </div>
+        </div>
+        <div class="collection__item">
+            <a href="">
+                <div class="collection__item-img">
+                    <img src="{% static 'img/collections_img/collections__item-1.jpg' %}" alt="">
+                </div>
+            </a>
+            <div class="collection__item-name">
+                Все
+            </div>
+        </div>
+        <div class="collection__item">
+            <a href="">
+                <div class="collection__item-img">
+                    <img src="{% static 'img/collections_img/collections__item-1.jpg' %}" alt="">
+                </div>
+            </a>
+            <div class="collection__item-name">
+                Все
+            </div>
+        </div>
+        <!--<div class="collection__item-column">-->
+                <div class="collection__item">
+                    <a href="">
+                        <div class="collection__item-img">
+                            <img src="{% static 'img/collections_img/collections__item-1.jpg' %}" alt="">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        Все
+                    </div>
+                </div>
+                <div class="collection__item">
+                    <a href="">
+                        <div class="collection__item-img">
+                            <img src="{% static 'img/collections_img/collections__item-1.jpg' %}" alt="">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        Все
+                    </div>
+                </div>
+                <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        Все
+                    </div>
+                </div>
+                <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        Все
+                    </div>
+                </div>
+                <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        Все
+                    </div>
+                </div>
+                <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        Все
+                    </div>
+                </div>
+       <!-- </div>-->
+        <!--<div class="collection__item-column-advertise">
+            <img src="{% static 'img/advertisebanner.svg' %}" alt="">
+        </div>
+        <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        Все
+                    </div>
+        </div>-->
+        <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        name
+                    </div>
+        </div>
+        <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        name
+                    </div>
+        </div>
+        <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        name
+                    </div>
+        </div>
+        <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        name
+                    </div>
+        </div>
+        <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        name
+                    </div>
+        </div>
+        <div class="collection__item-none">
+                    <a href="">
+                        <div class="collection__item-img_none">
+                        </div>
+                    </a>
+                    <div class="collection__item-name">
+                        name
+                    </div>
+        </div>
+
+    </section>
+</main>
+{% include 'collections/add_collections.html' %}
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/recipe_add.js' %}"></script>
+{% endblock %}

@@ -1,41 +1,48 @@
 {% extends 'base_layout.html' %}
 
 {% load static %}
+{% load mptt_tags %}
 
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/recipe_detail.css' %}">
+{% endblock %}
 {% block content %}
 <div class="btn__back btn-back">
-    <a href="#" class="btn-back__image">
-        <img src="{% static 'img/svg_image/btn-back.svg' %}" alt=""/>
+    <a href="#" onclick="history.back(-1);">
+        <svg width="30" height="30">
+            <use href="#btn-back-icon"></use>
+        </svg>
+        НАЗАД
     </a>
-    <a href="#" class="btn-back__text">Поиск рецепта</a>
+    <p class="recept_header-title">Поиск рецепта</p>
         </div>
         <main class="page__recept">
             <section class="hero">
                 <div class="hero__container">
-                <img class="hero__img" src="{% static 'img/blin.png' %}" alt="" />
+                <img class="hero__img" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" />
                 </div>
                 <div class="hero__container">
-                    <h1 class="section-title hero__title">Блинчики с сыром</h1>
-                    <p class="hero__text">Друзья, предлагаю вам простой и вкусный рецепт блинчиков с сыром! Это идеальное блюдо для быстрого и сытного завтрака или легкого обеда. Мягкие и пышные блинчики, сочетающиеся с ароматным расплавленным сыром, приведут вас в восторг. Готовим вместе и наслаждаемся этим вкусным угощением!</p>
+                    <h1 class="section-title hero__title">{{ recipe.title }}</h1>
+                    <p class="hero__text">{{ recipe.description }}</p>
                     <ul class="hero__list">
                         <li class="hero__item">
-                            <a href="#" class="hero__image">
-                                <img src="{% static 'img/svg_image/comment.svg' %}" alt=""/>
-                            </a>
-                            <b class="hero_item_ingredients">22</b>
-                            <a href="#" class="hero__image">
-                                <img src="{% static 'img/svg_image/favorites.svg' %}" alt=""/>
-                            </a>
-                            <b class="hero_item_ingredients">522</b>
-                        </li>
-                        <li class="hero__item">
-                            <b class="hero_item_ingredients">яйцо, масло растительное, мука, вода, сыр</b>
-                        </li>
-                        <li class="hero__item">
+                            <div class="btn__com_save">
                                 <a href="#" class="hero__image">
-                                    <img src="{% static 'img/svg_image/favorites2.svg' %}" alt=""/>
+                                    <svg width="32" height="32">
+                                        <use href="#comment-icon"></use>
+                                    </svg>
                                 </a>
-                                <b class="hero_item-favorites">Добавлено!</b>
+                                <span class="comment-sum">{{ recipe.get_sum_comments }}</span>
+                                <button class="save-recipe-button" data-recipe="{{ recipe.id }}">
+                                    <svg width="32" height="32">
+                                        <use href="{% if saves %}{% if recipe.id in saves %}#fav_icon-enable{% else %}#fav_icon{% endif %}{% else %}#fav_icon{% endif %}"></use>
+                                    </svg>
+                                    <span class="save-sum">{{ recipe.get_sum_save }}</span>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="hero__item">
+                            <p class="hero_item_ingredients">{{ ingredients|join:", " }}</p>
                         </li>
                     </ul>
                 </div>
@@ -45,12 +52,15 @@
                 <div class="hero__container">
                 <h2 class="article-title ingredients__title">Ингредиенты:</h2>
                 <ul class="ingredients__list ingredients-list">
-                    <li class="ingredients-list sections__list-item">- 2 яйца</li>
-                    <li class="ingredients-list sections__list-item">- 2 столовые ложки растительного масла</li>
-                    <li class="ingredients-list sections__list-item">- 200 г муки</li>
-                    <li class="ingredients-list sections__list-item">- 400 мл воды</li>
-                    <li class="ingredients-list sections__list-item">- 100 г тертого сыра</li>
-                    <li class="ingredients-list sections__list-item">- щепотка соли</li>
+                        {% for quantity in quantity_ingr %}
+                            <li class="ingredients-list sections__list-item">- {{ quantity.ingredient.name}}: {{quantity.quantity }}</li>
+                        {% endfor %}
+<!--                    <li class="ingredients-list sections__list-item">- 2 яйца</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- 2 столовые ложки растительного масла</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- 200 г муки</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- 400 мл воды</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- 100 г тертого сыра</li>-->
+<!--                    <li class="ingredients-list sections__list-item">- щепотка соли</li>-->
                 </ul>
                    </div>
                 <div class="hero__container">
@@ -62,36 +72,101 @@
 
             </section>
             <section class="instructions">
-                <h2 class="article-title instruction-title">Инструкции:</h2>
-                <ul class="instructions_list instructions-list">
-                    <li class="instructions-list sections__list-item"><p>1. В большой миске разбейте яйца и взбейте их вилкой.</p></li>
-                    <li class="instructions-list sections__list-item"><p>2. Добавьте растительное масло и воду, хорошо перемешайте.</p></li>
-                    <li class="instructions-list sections__list-item"><p>3. Постепенно добавляйте муку, постоянно помешивая, чтобы избежать комочков.</p></li>
-                    <li class="instructions-list sections__list-item"><p>4. Добавьте щепотку соли и перемешайте еще раз.</p></li>
-                    <li class="instructions-list sections__list-item"><p>5. Дайте тесту отдохнуть в течение 15-20 минут, чтобы мука полностью впиталась.</p></li>
-                    <li class="instructions-list sections__list-item"><p>6. Разогрейте сковороду на среднем огне и немного смажьте ее маслом.</p></li>
-                    <li class="instructions-list sections__list-item"><p>7. Вылейте половину порции теста на сковороду, распределите его равномерно.</p></li>
-                    <li class="instructions-list sections__list-item"><p>8. Посыпьте сверху немного тертого сыра.</p></li>
-                    <li class="instructions-list sections__list-item"><p>9. Жарьте блин с одной стороны, пока он не станет золотистым.</p></li>
-                    <li class="instructions-list sections__list-item"><p>10. Переверните блин на другую сторону и подождите, пока он также не приобретет золотистый цвет.</p></li>
-                    <li class="instructions-list sections__list-item"><p>11. Перекладывайте готовые блины на тарелку и повторяйте процесс для оставшегося теста.</p></li>
-                    <br/>
-                    <li class="instructions-list sections__list-item"><p>Ваши блины с сыром готовы к подаче на стол! Подайте их с оливковым маслом, сметаной или вашими любимыми соусами. Приятного аппетита!</p></li>
-                </ul>
+                <div class="instructions__btn">
+                    <div class="border-bottom"></div>
+                    <span class="instructions_steps__btn" id="instructions_steps__btn-id"><p>Пошаговый рецепт</p></span>
+                    <span class="instructions_steps-list-btn" id="instructions_steps-list-btn-id"><p>Краткая инструкция</p></span>
+                    <div class="border-bottom"></div>
+                </div>
+                <div class="instructions__container">
+                <!--Инструкция по шагам-->
+                    <div class="instructions_steps">
+                        {% for step in steps %}
+                        <div class="instructions_steps-flex">
+                        <!--Изображение шага-->
+                            <div class="instructions_steps-img">
+                                <img src="{{ step.image.url }}" alt="">
+                            </div>
+                            <!--Текст шагов-->
+                            <div class="instructions_steps-list">
+                                {{ step.step_number }} шаг:
+                                {{ step.description }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!--Краткая инструкция-->
+                    <div class="instructions_briefly">
+                        {% for step in steps %}
+                        <div class="instructions_steps-list">
+                            {{ step.step_number }} шаг:
+                                {{ step.description }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </section>
         </main>
        <ul class="btn__favorites-list">
             <li class="btn__favorites-items">
-                <a href="#" class="hero__image">
-                    <img src="{% static 'img/svg_image/comment.svg' %}" alt="" width="31" height="31"/>
-                </a>
-                <b class="favorites_values">22</b>
+                <h1>Отзывы</h1>
             </li>
             <li class="btn__favorites-items">
-                <a href="#" class="hero__image">
-                    <img src="{% static 'img/svg_image/favorites.svg' %}" alt="" width="30" height="30"/>
-                </a>
-                <b class="favorites_values">522</b>
+                <svg width="32" height="32">
+                    <use href="#comment-icon"></use>
+                </svg>
+                <span class="comment-sum">{{ recipe.get_sum_comments }}</span>
             </li>
        </ul>
+        {% include 'recipes/comments_list.html' %}
+<!--        <div class="recipe__comments">-->
+<!--            <textarea name="" id="" cols="30" rows="10" placeholder="Понравилось? Поделитесь впечатлением"></textarea>-->
+<!--            <div class="comment__container">-->
+<!--                <img src="{% static 'img/ProfileIcon.png' %}" alt="profile-icon">-->
+<!--                <div class="comment__content">-->
+<!--                    <div class="comment__header">-->
+<!--                        <p class="comment__nickname">@{{ user.nickname }}</p>-->
+<!--                        <p class="comment__date">10.11.2023</p>-->
+<!--                    </div>-->
+<!--                    <div class="comment__text">-->
+<!--                        <p>Восторг! Эти блины с сыром - великолепны! Нежное тесто, плавящийся сыр и аромат, который пленит с первого вздоха. Идеально для завтрака, обеда или дружеской вечеринки. Не забудьте добавить соус сметаны и зелени для полного наслаждения. Спасибо за рецепт!</p>-->
+<!--                    </div>-->
+<!--                    <div class="comment__functions">-->
+<!--                        <svg width="24" height="24">-->
+<!--                            <use href="#reply"></use>-->
+<!--                        </svg>-->
+<!--                        <div class="like">-->
+<!--                            <svg width="18" height="18">-->
+<!--                                <use href="#like"></use>-->
+<!--                            </svg>-->
+<!--                            <p class="like-count">1</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="comment__container reply__comment">-->
+<!--                <img src="{% static 'img/ProfileIcon.png' %}" alt="profile-icon">-->
+<!--                <div class="comment__content">-->
+<!--                    <div class="comment__header">-->
+<!--                        <p class="comment__nickname">@{{ user.nickname }}</p>-->
+<!--                        <p class="comment__date">10.11.2023</p>-->
+<!--                    </div>-->
+<!--                    <div class="comment__text">-->
+<!--                        <p>О, как раз думал с чем бы их подать супруге на завтрак! Спасибо за рекомендацию)</p>-->
+<!--                    </div>-->
+<!--                    <div class="comment__functions">-->
+<!--                        <svg width="24" height="24">-->
+<!--                            <use href="#reply"></use>-->
+<!--                        </svg>-->
+<!--                        <div class="like">-->
+<!--                            <svg width="18" height="18">-->
+<!--                                <use href="#like"></use>-->
+<!--                            </svg>-->
+<!--                            <p class="like-count">1</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<script src="{% static 'js/save-comment.js' %}"></script>
 {% endblock %}

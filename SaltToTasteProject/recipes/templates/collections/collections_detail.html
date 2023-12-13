@@ -1,0 +1,64 @@
+{% extends 'base_layout.html' %}
+
+{% load static %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/collections_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="page__collections_detail">
+    <div class="search__header">
+            <div class="search-header__btn">
+                <p class="search-header__btn-text">ПОДБОРКИ</p>
+                <a href="{% url 'add_recipe' %}" class="search-header__btn-text">@профиль</a>
+            </div>
+    </div>
+
+            <div class="article-content__title-and-grids">
+                <div class="btn_back">
+                    <a href="#" onclick="history.back(-1);">
+                        <svg width="30" height="30">
+                            <use href="#btn-back-icon"></use>
+                        </svg>
+                        НАЗАД</a>
+                </div>
+                <div class="search-header__title">
+                    <h1>{{ collection.title }}</h1>
+                    <a href="{% url 'add_recipe' %}" class="search-header__btn-image">
+                        <svg width="24" height="24">
+                            <use href="#edit-icon"></use>
+                        </svg>
+                    </a>
+                    <a href="{% url 'add_recipe' %}" class="search-header__btn-image">
+                        <svg width="24" height="24">
+                            <use href="#save-collections-icon"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="article-content__btn-grids" id="sorter">
+                    <span class="sorter-item" id="th__btn-3" role="button">
+                        <svg width="30" height="30" class="icon-th__btn">
+                            <use href="#icon-th"></use>
+                        </svg>
+                    </span>
+                    <span class="sorter-item" id="large__btn-2" role="button">
+                        <svg width="30" height="30" class="icon-th-large__btn">
+                            <use href="#icon-th-large"></use>
+                        </svg>
+                    </span>
+                    <span class="sorter-item active" id="th-list" role="button">
+                        <svg width="30" height="30" class="icon-th-list__btn">
+                            <use href="#icon-th-list"></use>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            <div class="article-content__container active-1">
+            {% for recipe in recipes %}
+                {% include 'recipes/recipe_card.html' %}
+            {% endfor %}
+            </div>
+</main>
+<script src="{% static 'js/save-comment.js' %}"></script>
+{% endblock %}

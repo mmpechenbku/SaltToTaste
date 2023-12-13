@@ -1,0 +1,65 @@
+<!--{% load static %}-->
+{% load mptt_tags static mathfilters %}
+
+<div class="recipe__comments">
+    {% if request.user.is_authenticated %}
+        {% csrf_token %}
+        <form method="post" action="{% url 'comment_create_view' recipe.pk %}" id="commentForm" name="commentForm"
+            data-recipe-id="{{ recipe.pk }}">
+            <textarea name="content" cols="30" rows="10"
+                      placeholder="Понравилось? Поделитесь впечатлением" required id="id_content"></textarea>
+            <input type="hidden" name="parent" id="id_parent">
+            <button class="btn-standart" type="submit" id="commentSubmit">Отправить</button>
+        </form>
+    {% endif %}
+    {% recursetree recipe.comments.all %}
+    <ul id="comment-thread-{{ node.pk }}">
+        <li>
+            <div class="comment__container {% if node.level > 0 %}reply__comment{% endif %}">
+                <img src="{{ node.author.avatar.url }}" alt="profile-icon">
+                <div class="comment__content">
+                    <div class="comment__header">
+                        <p class="comment__nickname">@{{ node.author.username }}</p>
+                        <p class="comment__date">{{ node.time_create }}</p>
+                    </div>
+                    <div class="comment__text">
+                        <p>{{ node.content }}</p>
+                    </div>
+                    <div class="comment__functions">
+                        <svg width="24" height="24">
+                            {% if node.author != user %}
+                            <a class="btn-reply" href="#commentForm" data-comment-id="{{ node.pk }}"
+                               data-comment-username="{{ node.author }}">
+                                <use href="#reply"></use>
+                            </a>
+                            {%endif%}
+                        </svg>
+                        <div class="like" data-comment="{{ node.pk }}">
+                            <svg width="18" height="18">
+                                <use href="{% if like_comments %}{% if node.pk in like_comments %}#like-enable{% else %}#like{% endif %}{% else %}#like{% endif %}"></use>
+<!--                                <use href="{% for like in like_comments %}{% if like.comment == node %}#like-enable{% endif %}{% endfor %}"></use>-->
+<!--                                <use href="{% for like in like_comments %}{% if like == node %} #like-enable{% else %} #like-enable{% endif %}-->
+<!--                                           {% endfor %}"></use>-->
+
+<!--                                <use href="{% if request.user.is_authenticated %}-->
+<!--                                                {% if node.author == user %}-->
+<!--                                                    #like-enable-->
+<!--                                                {%else%}-->
+<!--                                                    #like-->
+<!--                                                {%endif%}-->
+<!--                                            {%else%}-->
+<!--                                            #like-->
+<!--                                            {%endif%}"></use>-->
+                            </svg>
+                            <p class="like-count">{{ node.get_username_like }} {{ node.get_sum_likes }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% if not node.is_leaf_node %}
+        {{ children }}
+        {% endif %}
+    </ul>
+    {% endrecursetree %}
+</div>

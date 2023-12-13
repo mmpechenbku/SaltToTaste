@@ -1,0 +1,152 @@
+{% extends 'base_layout.html' %}
+
+{% load static %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/recipe_add.css' %}">
+{% endblock%}
+{% block content %}
+<form id="recipe-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <main class="page__recipe_add">
+        <div class="recipe_add__header">
+            <a href="#" class="recipe_add__header-link">
+                <h1>Добавление рецепта</h1>
+                <img src="{% static 'img/svg_image/addreciept.svg' %}" width="30" height="30" alt="Добавить свой рецепт">
+            </a>
+        </div>
+        <div class="recipe_add__container">
+            <div class="recipe_add__content">
+                <div class="recipe_add__container-add_step">
+                    <!--<h4>1. Название блюда</h4>
+                    <div class="container-add_content">
+                            {{ recipe_form.title }}
+                    </div>-->
+                    <h4>1. Название рецепта</h4>
+                    <div class="container-add_content">
+                        <input type="text" id="recipe_name" name="recipe_name" required>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe_add__content">
+                <div class="recipe_add__container-add_step">
+                    <h4>2. Краткое описание</h4>
+                    <div class="container-add_content">
+                        <textarea id="recipe_description" name="recipe_description" required></textarea>
+                        <p style="margin-left: auto; margin-right: 7%; margin-top: 7px; color: rgba(0, 0, 0, 0.70); font-size: 14px;">До 310 символов</p>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe_add__content">
+                <div class="recipe_add__container-add_step">
+                    <h4>3. Загрузите обложку рецепта</h4>
+                    <div class="container-add_content">
+                        <label class="input-file-label" for="recipe_image">
+                            <svg width="128" height="128">
+                                <use id="file_add" href="#image_add"></use>
+                            </svg>
+                            <span id="title_file">Добавить файл</span>
+                        </label>
+                        <input class="input-file" id="recipe_image" name="recipe_image" type="file" onchange="inputSelected()" accept=".png, .jpg, .jpeg" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe_add__content">
+                <div class="recipe_add__container-add_step">
+                    <h4>4. Ингредиенты</h4>
+                    <div class="container-add_content">
+                        <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
+                        <p class="ingredient__search-title">Быстрый выбор</p>
+                        <div class="available-ingredients">
+                            {% for ingredient in ingredients %}
+                                {% if forloop.counter < 50 %}
+                                    <div id="ingredient-buttons"></div>
+                                    <button type="button" class="ingredient-button" data-ingredient-id="{{ ingredient.id }}">{{ ingredient.name }}</button>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="ingredients_quantity__container">
+                        <div class="ingredient-quantity">
+                            <div class="quantity__container" style="margin-bottom: 5px;">
+                                <div class="quantity__button"><p>Вы выбрали:</p></div>
+                                <div class="quantity__input" style="text-align: center; border: none;min-width:230px;"><p>Укажите количество:</p></div>
+                            </div>
+                        </div>
+                        <div class="ingredient-new">
+                            <p>Различные специи, пряности и др. Вы можете прописать ниже, они не будут включены в тэги* для расширенного поиска рецепта.
+                                <br/> Так же, введите ингредиент, которого не нашлось в нашем списке продуктов.</p>
+                            <input type="text" id="add-new__ingredient" name="add-new__ingredient" placeholder="Дополнительные ингредиенты, например “Соль по вкусу”">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe_add__content">
+                <div class="recipe_add__container-add_step">
+                    <h4>5. Шаги приготовления</h4>
+
+                    <div class="container-add_content" id="steps-section">
+                        <div class="ingredient__step-list" id="added-steps"></div>
+                        <svg width="64" height="64" id="add-step">
+                            <use href="#plus-icon"></use>
+                        </svg>
+                        <span>Добавить шаг</span>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe_add__content">
+                <div class="recipe_add__container-add_step">
+                    <h4>6. Краткая инструкция</h4>
+                    <div class="container-add_content">
+                        <div class="instructions__btn">
+                            <div class="border-bottom"></div>
+                            <span class="instructions_steps__btn" id="instructions_steps__btn-id"><p>Собрать из описания <br> шагов приготовления</p></span>
+                            <span class="instructions_steps-list-btn" id="instructions_steps-list-btn-id"><p>Написать самостоятельно</p></span>
+                            <div class="border-bottom"></div>
+                        </div>
+                        <div class="instructions_steps">
+                            <div class="instruction-summary" id="instruction-summary">
+                                <ol class="summary-list" id="summary-list"></ol>
+                            </div>
+                        </div>
+                        <div class="instructions_briefly">
+                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe_add__content">
+                <div class="recipe_add__container-add_step">
+                    <h4>7. Оцените сложность и время приготовления</h4>
+                    <div class="container-add_content inrow">
+                        <div class="difficulty-container">
+                                <label for="difficulty">Сложность</label>
+                            <select id="difficulty" name="difficulty">
+                                <option value="Легко">Легко</option>
+                                <option value="Средняя">Средне</option>
+                                <option value="Сложно">Сложно</option>
+                            </select>
+                        </div>
+                        <div class="time-container">
+                            <label for="cooking_time">Время приготовления</label>
+                            <input type="number" name="cooking_time" id="cooking_time" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe_add__btn">
+                <div class="recipe_add__btn-collections">
+                    <button type="submit">Сохранить в избранном</button>
+                    <p>Рецепт будете видеть только Вы<br> во вкладке «Избранное»</p>
+                </div>
+                <div class="recipe_add__btn-publish">
+                    <button type="submit" id="save-recipe">Сохранить рецепт</button>
+                    <p>После модерации Ваш рецепт<br> будет опубликован!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</form>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/recipe_add.js' %}"></script>
+{% endblock %}

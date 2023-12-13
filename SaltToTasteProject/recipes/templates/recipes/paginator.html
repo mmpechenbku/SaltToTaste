@@ -1,0 +1,36 @@
+{% if page_obj.has_previous %}
+  <a href="?page={{ page_obj.previous_page_number }}" class="pagination-btn switch"><</a>
+{% endif %}
+{% for i in page_obj.paginator.page_range %}
+<!--  {% if page_obj.paginator.page_range|length > 4 %}-->
+<!---->
+<!--    {% if page_obj.number == i %}-->
+<!--      <a href="#" class="pagination-btn active">{{ i }}</a>-->
+<!--    {% endif %}-->
+<!---->
+<!--  {% endif %}-->
+<!--{{page_obj.paginator.page_range|length}}-->
+
+<!--  {% if page_obj.number == 4 %}-->
+<!--    <span class="pagination-btn&#45;&#45;points">...</span>&ndash;&gt;-->
+<!--  {% endif %}-->
+  {% if page_obj.number == i %}
+    <a href="#" class="pagination-btn active">{{ i }}</a>
+  {% else %}
+    <a href="?page={{ i }}" class="pagination-btn">{{ i }}</a>
+  {% endif %}
+{% endfor %}
+{% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}" class="pagination-btn switch">></a>
+{% endif %}
+
+
+<!--<div class="pagination">-->
+<!--                <span class="pagination-btn switch"><</span>-->
+<!--                <a href="#" class="pagination-btn active">1</a>-->
+<!--                <a href="#" class="pagination-btn">2</a>-->
+<!--                <a href="#" class="pagination-btn">3</a>-->
+<!--                <span class="pagination-btn&#45;&#45;points">...</span>-->
+<!--                <a href="#" class="pagination-btn">20</a>-->
+<!--                <span class="pagination-btn switch">></span>-->
+<!--            </div>-->

@@ -1,0 +1,190 @@
+.popup__add_collections-container {
+  opacity: 0;
+  visibility: hidden; }
+
+.popup__add_collections-container_active {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transition: 0.3s; }
+
+.popup__add_collections-container_active .popup__add_collections-background {
+  background-color: rgba(0, 0, 0, 0.75);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2; }
+
+.page__add_collections {
+  display: block;
+  position: fixed;
+  margin: auto;
+  top: 10px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  width: 600px;
+  height: fit-content;
+  z-index: 10;
+  border-radius: 10px;
+  padding: 20px 60px; }
+
+.add_collections__title {
+  text-align: center;
+  color: #2F2929;
+  font-size: 26px;
+  font-weight: 700; }
+
+.add_collections__btn-close {
+  position: absolute;
+  top: 2px;
+  right: 13px;
+  font-weight: 500;
+  font-size: 30px;
+  color: #454141;
+  transform: scale(121%, 99%);
+  cursor: pointer; }
+
+.add_collections__btn-close:hover {
+  transform: scale(125%, 99%);
+  color: #000; }
+
+.add_collections__collection-name {
+  margin: 30px 0 20px 0; }
+  .add_collections__collection-name h1 {
+    color: #2F2929;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 25px;
+    margin-bottom: 5px; }
+  .add_collections__collection-name input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid rgba(26, 26, 26, 0.3);
+    background: rgba(217, 217, 217, 0);
+    font-family: Tilda Sans VF;
+    color: rgba(47, 41, 41, 0.5);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 25px;
+    padding: 0px 20px; }
+
+.add_collections__checkbox {
+  display: flex;
+  align-items: flex-start; }
+  .add_collections__checkbox input {
+    margin: 6px 10px;
+    cursor: pointer; }
+  .add_collections__checkbox h4 {
+    color: #2F2929;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: 0.8px; }
+  .add_collections__checkbox p {
+    color: #2F2929;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.5px; }
+
+.add_collections__recept-list {
+  margin: 30px 0; }
+  .add_collections__recept-list h4 {
+    color: #2F2929;
+    leading-trim: both;
+    text-edge: cap;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 25px;
+    /* 120% */
+    letter-spacing: 0.5px; }
+
+.recept-list__scroll_box {
+  width: 100%;
+  margin-top: 10px;
+  height: 182px;
+  border-radius: 10px;
+  border: 2px solid rgba(26, 26, 26, 0.3);
+  background: rgba(217, 217, 217, 0);
+  overflow: auto; }
+
+.recept-list__scroll_box::-webkit-scrollbar {
+  width: 7px;
+  background-color: none; }
+
+.recept-list__scroll_box::-webkit-scrollbar-thumb {
+  background-color: #7d7c7c;
+  border-radius: 10px; }
+
+.scroll_box__item {
+  display: flex;
+  padding: 5px 20px;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.3); }
+  .scroll_box__item input {
+    margin-left: auto;
+    cursor: pointer; }
+  .scroll_box__item label {
+    font-family: Tilda Sans VF;
+    color: rgba(47, 41, 41, 0.9);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 25px; }
+
+.add_collections__btn-save {
+  display: flex;
+  justify-content: center; }
+  .add_collections__btn-save button {
+    border-radius: 6px;
+    background: #6BB420;
+    color: var(--default-white, #FFF);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    padding: 10px 25px;
+    border: none;
+    cursor: pointer; }
+
+.add_collections__image {
+  display: flex;
+  flex-direction: column; }
+  .add_collections__image h4 {
+    color: #2F2929;
+    leading-trim: both;
+    text-edge: cap;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 25px;
+    /* 120% */
+    letter-spacing: 0.5px;
+    padding-top: 10px;
+    margin-bottom: 10px; }
+  .add_collections__image .container-add_content {
+    display: flex;
+    justify-content: center; }
+    .add_collections__image .container-add_content .input-file-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center; }
+      .add_collections__image .container-add_content .input-file-label svg, .add_collections__image .container-add_content .input-file-label span {
+        color: #6C757D;
+        cursor: pointer; }
+        .add_collections__image .container-add_content .input-file-label svg:hover, .add_collections__image .container-add_content .input-file-label span:hover {
+          color: #000; }
+      .add_collections__image .container-add_content .input-file-label span {
+        margin-top: 7px;
+        font-size: 14px;
+        font-weight: 600; }
+
+.input-file {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden; }
+
+/*# sourceMappingURL=add_collections.css.map */

@@ -22,9 +22,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     # path('', include('users.urls')),
     # path('recipes/', include('recipes.urls'))
+    path('', include('recipes.urls')),
     path('account/', include('users.urls')),
     path('admin/', admin.site.urls),
-    path('search/', include('recipes.urls'))
+    # path('search/', include('recipes.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

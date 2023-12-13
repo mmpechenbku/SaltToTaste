@@ -1,0 +1,121 @@
+
+<div class="sign__container">
+    <div class="sign_background"></div>
+
+    <div class="popup__page">
+        <div class="buttons__popup">
+            <input type="button" class="btn__signin" value="Вход">
+            <input type="button" class="btn__signup" value="Регистрация">
+            <div class="cl-btn-7"></div>
+        </div>
+        <div class="signin__popup">
+            <form class="sign_in" action='../account/login/' method="post">
+                    {% csrf_token %}
+                <label class="text-field__label" for="id_username">Email или @никнейм</label>
+                <input class="text-field__input" type="text"
+                       autofocus="" autocapitalize="none"
+                       autocomplete="username" maxlength="100"
+                       required=""
+                       name="username" id="id_username" placeholder="Введите email или @никнейм">
+
+
+                <label class="text-field__label" for="id_password">Пароль</label>
+                <div class="password">
+                    <input class="password-input"
+                           autocomplete="current-password"
+                           type="password"
+                           name="password"
+                           id="id_password"
+                           placeholder="Введите пароль"
+                           required="">
+                    <a href="#id_password" class="password-control"></a>
+                </div>
+
+                <div class="button-login">
+                    <button class="btn__signin-auth" type="submit">Войти</button>
+                </div>
+
+                {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <label>
+                <input type="checkbox" class="alertCheckbox" autocomplete="off"/>
+                <div class="alert error">
+                    <span class="alertClose">X</span>
+                    <span class="alertText">{{message}}
+                    <br class="clear"/></span>
+                </div>
+            </label>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            </form>
+        </div>
+        <div class="signup__popup">
+            <form action="../account/registration/" class="sign_up" method="post">
+
+                {% csrf_token %}
+                <div class="str-first">
+                    <label class="text-field__label" for="name">Как Вас зовут?</label>
+                    <input class="text-field__input" type="text" name="name" id="name" placeholder="Введите имя">
+                </div>
+                <div class="str-1">
+                    <div class="col-2">
+                        <label class="text-field__label" for="email">Email</label>
+                        <input class="text-field__input" type="text" name="email" id="email" placeholder="Введите email">
+                    </div>
+                    <div class="col-2">
+                        <label class="text-field__label" for="nickname">@никнейм</label>
+                        <div class="input-nickname">
+                            <span>@</span>
+                            <input class="text-input" type="text" name="nickname" id="nickname" placeholder="Введите nickname">
+                        </div>
+                    </div>
+                </div>
+                <div class="str-1">
+                    <div class="col-2">
+                        <label class="text-field__label" for="pass">Пароль</label>
+                        <div class="password">
+                            <input class="password-input" type="password" name="password1" id="pass" placeholder="Введите пароль" autocomplete="off">
+                            <a href="#pass" class="password-control"></a>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <label class="text-field__label" for="repassword">Повторите пароль</label>
+                        <div class="password">
+                            <input class="password-input" type="password" name="password2" id="repassword" placeholder="Повторите пароль" autocomplete="off">
+                            <a href="#repassword" class="password-control"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="consent__processing">
+                    <input type="checkbox">
+                    <p>Согласие на обработку персональных данных <span>*</span></p>
+                </div>
+                <div class="button-login">
+                    <button class="btn__signin-auth" type="submit">Зарегистрироваться</button>
+                </div>
+            </form>
+        </div>
+        <div class="sign__other">
+            <p>или</p>
+            <div class="sign__other-list">
+                <p>Войти через</p>
+                <div class="other-icons">
+                    <svg width="50" height="50">
+                        <use href="#ya-icon"></use>
+                    </svg>
+                    <svg width="50" height="50">
+                        <use href="#google-icon"></use>
+                    </svg>
+                    <svg width="50" height="50" >
+                        <use href="#vk-icon"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

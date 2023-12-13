@@ -1,0 +1,42 @@
+
+@font-face {
+  font-family: 'Tilda Sans VF';
+  src: local("../fonts/TildaSans-Light.ttf"), url("../fonts/TildaSans-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Tilda Sans VF';
+  src: local("../fonts/TildaSans-Regular.ttf"), url("../fonts/TildaSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Tilda Sans VF';
+  src: local("../fonts/TildaSans-Medium.ttf"), url("../fonts/TildaSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Tilda Sans VF';
+  src: local("../fonts/TildaSans-Semibold.ttf"), url("../fonts/TildaSans-Semibold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Tilda Sans VF';
+  src: local("../fonts/TildaSans-Bold.ttf"), url("../fonts/TildaSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Tilda Sans VF';
+  src: local("../fonts/TildaSans-ExtraBold.ttf"), url("../fonts/TildaSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Tilda Sans VF';
+  src: local("../fonts/TildaSans-Black.ttf"), url("../fonts/TildaSans-Black.ttf") format("truetype");
+  font-weight: 800;
+}

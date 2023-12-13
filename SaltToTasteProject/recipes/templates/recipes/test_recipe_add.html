@@ -1,0 +1,296 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <form id="recipe-form" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="recipe_name">Название рецепта:</label>
+        <input type="text" id="recipe_name" name="recipe_name" required>
+
+        <label for="recipe_description">Описание рецепта:</label>
+        <textarea id="recipe_description" name="recipe_description" required></textarea>
+
+        <label for="recipe_image">Изображение рецепта:</label>
+        <input id="recipe_image" type="file" name="recipe_image" accept=".png, .jpg, .jpeg" required>
+        <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
+        <div class="available-ingredients">
+            <label>Ингредиенты:</label>
+            {% for ingredient in ingredients %}
+                <div id="ingredient-buttons"></div>
+                <button type="button" class="ingredient-button" data-ingredient-id="{{ ingredient.id }}">{{ ingredient.name }}</button>
+            {% endfor %}
+        </div>
+
+        <div class="ingredients_quantity__container">
+            <div class="ingredients_quantity__container-title">
+                <h3>Количесвта ингредиентов:</h3>
+            </div>
+            <div class="ingredient-quantity-column">
+                <div class="ingredient-quantity"></div>
+            </div>
+        </div>
+
+        <div id="steps-section">
+            <label>Шаги приготовления:</label>
+            <div id="added-steps"></div>
+            <button type="button" id="add-step">Добавить шаг</button>
+
+        </div>
+
+        <div id="instruction-summary">
+            <label>Краткое описание:</label>
+            <ol id="summary-list"></ol>
+        </div>
+
+        <label for="difficulty">Сложность:</label>
+        <select name="difficulty" id="difficulty">
+            <option value="Легко">Легко</option>
+            <option value="Средняя">Средне</option>
+            <option value="Сложно">Сложно</option>
+        </select>
+
+        <label for="cooking_time">Время приготовления (в минутах):</label>
+        <input type="number" name="cooking_time" id="cooking_time" required>
+
+
+        <button type="button" id="save-recipe">Сохранить рецепт</button>
+
+
+
+    </form>
+
+
+    <script>
+
+        const availableIngredientsContainer = document.querySelector('.available-ingredients');
+<!--        const selectedIngredientsContainer = document.querySelector('.selected-ingredients');-->
+        const quantityIngredientsContainer = document.querySelector('.ingredient-quantity');
+        const selectedIngredientIds = new Set();
+        const recipeForm = document.getElementById('recipe-form');
+        var ingredientCount = 0;
+        var stepCount = 0;
+        var maxSteps = 10;
+
+        availableIngredientsContainer.addEventListener('click', (event) => {
+            const targetButton = event.target;
+            if (targetButton.classList.contains('ingredient-button')) {
+                const ingredientId = targetButton.getAttribute('data-ingredient-id');
+
+                if (!selectedIngredientIds.has(ingredientId)) {
+                    selectedIngredientIds.add(ingredientId);
+                    const selectedIngredientButton = document.createElement('button');
+                    selectedIngredientButton.type = 'button';
+                    selectedIngredientButton.className = 'ingredient-button selected';
+                    selectedIngredientButton.setAttribute('data-ingredient-id', ingredientId);
+                    selectedIngredientButton.textContent = targetButton.textContent;
+
+<!--                    selectedIngredientsContainer.appendChild(selectedIngredientButton);-->
+                    quantityIngredientsContainer.appendChild(selectedIngredientButton);
+
+                    var div = document.createElement('div');
+                    div.innerHTML = '<input data-quantity="' + selectedIngredientButton.getAttribute('data-ingredient-id') + '" name="quantity_' + selectedIngredientButton.getAttribute('data-ingredient-id') + '" placeholder="Количество"></div>';
+                    quantityIngredientsContainer.appendChild(div);
+                    ingredientCount++;
+                }
+
+                targetButton.disabled = true;
+                targetButton.style.display = 'none';
+            }
+        });
+
+        document.getElementById('add-step').addEventListener('click', function () {
+            if (stepCount < maxSteps) {
+                stepCount++;
+
+                // Создадим новый div с полями для шага приготовления
+                var stepsSection = document.getElementById('steps-section');
+                var addedSteps = document.getElementById('added-steps');
+                var div = document.createElement('div');
+                var currentStep = stepCount;
+                div.innerHTML = '<input type="file" name="step_image_' + stepCount + '" accept=".png, .jpg, .jpeg" id="step-image-' + currentStep + '">' +
+                                '<textarea name="step_description_' + stepCount + '" placeholder="Описание шага"  id="step-description-' + stepCount + '"></textarea>';
+
+                // Добавляем созданный div в разметку
+                addedSteps.appendChild(div);
+
+                // Проверяем, нужно ли скрыть кнопку "Добавить шаг"
+                if (stepCount === maxSteps) {
+                    document.getElementById('add-step').style.display = 'none';
+                }
+            }
+            document.getElementById('step-description-' + currentStep).addEventListener('input', function () {
+                // Обновляем краткое описание
+                updateSummary();
+            });
+        });
+
+         function updateSummary() {
+            var summaryList = document.getElementById('summary-list');
+            summaryList.innerHTML = ''; // Очищаем текущий список
+
+            // Проходим по всем добавленным шагам и добавляем их в список
+            for (var i = 0; i < stepCount; i++) {
+                var stepDescription = document.getElementById('step-description-' + (i + 1)).value;
+
+                var listItem = document.createElement('li');
+                listItem.textContent = stepDescription;
+
+                summaryList.appendChild(listItem);
+            }
+         }
+
+         quantityIngredientsContainer.addEventListener('click', (event) => {
+             const targetButton = event.target;
+             if (targetButton.classList.contains('ingredient-button')) {
+                 const ingredientId = targetButton.getAttribute('data-ingredient-id');
+
+                 var quantityField = document.querySelector('[name="quantity_' + ingredientId + '"]');
+                 quantityField.remove();
+                 // Удаляем ингредиент из выбранных
+                 selectedIngredientIds.delete(ingredientId);
+
+                 // Удаляем кнопку ингредиента из раздела "Выбранные ингредиенты"
+                 targetButton.remove();
+
+
+                 // Разрешаем добавление этого ингредиента в "Доступные ингредиенты"
+                 const correspondingAvailableButton = document.querySelector(`.available-ingredients .ingredient-button[data-ingredient-id="${ingredientId}"]`);
+                 if (correspondingAvailableButton) {
+                     correspondingAvailableButton.disabled = false;
+                     correspondingAvailableButton.style.display = 'unset';
+
+                 }
+
+             }
+         });
+
+        document.getElementById('save-recipe').addEventListener('click', function () {
+
+            const selectedIngredientIdsArray = Array.from(selectedIngredientIds);
+            const selectedIngredientIdsString = selectedIngredientIdsArray.join(',');
+
+            // Добавляем собранные id в скрытое поле формы
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'ingredients';
+            hiddenInput.value = selectedIngredientIdsString;
+            recipeForm.appendChild(hiddenInput);
+
+            // Собираем данные формы
+            var formData = new FormData(document.getElementById('recipe-form'));
+
+            // Добавляем данные о количестве ингредиентов
+            formData.append('ingredients_count', ingredientCount);
+
+            // Добавляем данные о количестве шагов
+            formData.append('steps_count', stepCount);
+
+            // Отправляем данные на сервер
+            fetch('/search/test_add_recipe/', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.status === 'success') {
+                alert('Рецепт успешно сохранен!');
+                window.location.href = "{% url 'search' %}";
+                // Дополнительные действия после успешного сохранения
+              } else {
+                alert('Произошла ошибка при сохранении рецепта.');
+                console.log(data.message);
+              }
+            })
+            .catch(error => {
+              console.error('Ошибка при отправке данных на сервер:', error);
+            });
+        });
+
+
+
+
+
+        const ingredientSearchInput = document.getElementById('ingredient-search');
+        const ingredientButtonsContainer = document.getElementById('ingredient-buttons');
+
+
+ingredientSearchInput.addEventListener('input', () => {
+    const searchQuery = (ingredientSearchInput.value.charAt(0).toUpperCase() + ingredientSearchInput.value.slice(1).toLowerCase()).trim();
+
+    // Очистить текущие кнопки ингредиентов
+    ingredientButtonsContainer.innerHTML = '';
+
+    if (searchQuery.length >= 2) {
+        // Отправить AJAX запрос для получения ингредиентов по поисковому запросу
+        fetch(`/search/api/ingredients/?search=${searchQuery}`)
+            .then(response => response.json())
+            .then(data => {
+                // Создать кнопки для каждого найденного ингредиента
+                data.forEach(ingredient => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'ingredient-button';
+                    button.setAttribute('data-ingredient-id', ingredient.id);
+                    button.textContent = ingredient.name;
+                    ingredientButtonsContainer.appendChild(button);
+
+                    const ingredientId = button.getAttribute('data-ingredient-id');
+                    if (selectedIngredientIds.has(ingredientId)) {
+                        button.disabled = true;
+                    }
+
+                });
+            });
+    }
+});
+    ingredientButtonsContainer.addEventListener('click', (event) => {
+        const targetButton = event.target;
+        ingredientButtonsContainer.innerHTML = '';
+
+        if (targetButton.classList.contains('ingredient-button')) {
+            const ingredientId = targetButton.getAttribute('data-ingredient-id');
+
+            // Проверяем, является ли ингредиент уже выбранным
+            if (!selectedIngredientIds.has(ingredientId)) {
+                // Если ингредиент не выбран, добавляем его в выбранные
+                selectedIngredientIds.add(ingredientId);
+
+                // Создаем кнопку для выбранного ингредиента в поле "Выбранные ингредиенты"
+                const selectedIngredientButton = document.createElement('button');
+                selectedIngredientButton.type = 'button';
+                selectedIngredientButton.className = 'ingredient-button selected';
+                selectedIngredientButton.setAttribute('data-ingredient-id', ingredientId);
+                selectedIngredientButton.textContent = targetButton.textContent;
+
+                quantityIngredientsContainer.appendChild(selectedIngredientButton);
+
+                    var div = document.createElement('div');
+                    div.innerHTML = '<input data-quantity="' + selectedIngredientButton.getAttribute('data-ingredient-id') + '" name="quantity_' + selectedIngredientButton.getAttribute('data-ingredient-id') + '" placeholder="Количество"></div>';
+                    quantityIngredientsContainer.appendChild(div);
+                    ingredientCount++;
+
+                const correspondingAvailableButton = document.querySelector(`.available-ingredients .ingredient-button[data-ingredient-id="${ingredientId}"]`);
+                correspondingAvailableButton.disabled = true;
+                ingredientSearchInput.value = '';
+
+                checkbox.disabled = false;
+            }
+
+            // Запрещаем добавление этого ингредиента в "Доступные ингредиенты"
+            targetButton.disabled = true;
+        }
+    });
+
+
+
+    </script>
+
+</body>
+</html>

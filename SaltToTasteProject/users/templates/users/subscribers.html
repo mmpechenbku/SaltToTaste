@@ -44,11 +44,13 @@
                 </div>
     <!--            <a href="" class="bnt-subscribe active" id="subscriptionBtn">Подписаться</a>-->
                 {% if user.is_authenticated %}
-                    {% if user.pk in subscriptions %}
+                {% if sub != user %}
+                    {% if sub.pk in subscriptions %}
                         <a class="bnt-subscribe" id="subscriptionBtn" data-profile-id="{{ sub.id }}">Вы подписаны</a>
                     {% else %}
-                        <a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>
+                        <a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ sub.id }}">Подписаться</a>
                     {% endif %}
+                {% endif %}
                 {% endif %}
     <!--            {% if user.id in subscriptions %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}-->
             </div>

@@ -6,12 +6,14 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, FormView, DetailView, View
 from django.contrib.messages.views import SuccessMessageMixin, messages
 from .forms import CustomUserCreationForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import CustomUser, Subscription
 from recipes.models import Recipe, Selection
 
 from django.core.serializers import serialize
 import json
+
+from django.utils.decorators import method_decorator
 
 # def index(request):
 #     return render(request, 'index.html')
@@ -41,8 +43,8 @@ class ProfileDetailView(DetailView):
             recipe_ingr_dict.append({recipe: ingredients})
 
         context['recipes_ingr'] = recipe_ingr_dict
-        context['subscriptions'] = Subscription.objects.filter(follower=self.request.user).values_list('follower', flat=True) if self.request.user.is_authenticated else None
-        context['subscribers'] = Subscription.objects.filter(following=self.request.user).values_list('following', flat=True) if self.request.user.is_authenticated else None
+        context['subscriptions'] = Subscription.objects.filter(follower=self.request.user).values_list('following', flat=True) if self.request.user.is_authenticated else None
+        context['subscribers'] = Subscription.objects.filter(following=self.request.user).values_list('follower', flat=True) if self.request.user.is_authenticated else None
 
         return context
 
@@ -173,9 +175,9 @@ def subscribers(request, pk):
         'profile': CustomUser.objects.get(pk=pk),
         'subs': subs,
         'type': 'subscribers',
-        'subscriptions': Subscription.objects.filter(follower=request.user).values_list('follower',
+        'subscriptions': Subscription.objects.filter(follower=request.user).values_list('following',
                                                                                                    flat=True) if request.user.is_authenticated else None,
-        'subscribers': Subscription.objects.filter(following=request.user).values_list('following',
+        'subscribers': Subscription.objects.filter(following=request.user).values_list('follower',
                                                                                                   flat=True) if request.user.is_authenticated else None,
     }
     return render(request, 'users/subscribers.html', data)
@@ -190,18 +192,46 @@ def subscriptions(request, pk):
         'profile': CustomUser.objects.get(pk=pk),
         'subs': subs,
         'type': 'subscriptions',
-        'subscriptions': Subscription.objects.filter(follower=request.user).values_list('follower',
+        'subscriptions': Subscription.objects.filter(follower=request.user).values_list('following',
                                                                                              flat=True) if request.user.is_authenticated else None,
-        'subscribers': Subscription.objects.filter(following=request.user).values_list('following',
+        'subscribers': Subscription.objects.filter(following=request.user).values_list('follower',
                                                                                             flat=True) if request.user.is_authenticated else None,
     }
     return render(request, 'users/subscribers.html', data)
 
 
 
-def profile_edit(request, pk):
-    return render(request, 'users/editing_profile.html')
+# def profile_edit(request, pk):
+#     return render(request, 'users/editing_profile.html')
 
+@method_decorator(login_required, name='dispatch')
+class EditProfileView(View):
+    template_name = 'users/editing_profile.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'user': request.user})
+
+    def post(self, request, *args, **kwargs):
+
+        name = request.POST.get('name')
+        nickname = request.POST.get('nickname')
+        email = request.POST.get('email')
+        gender = request.POST.get('gender')
+        birth_date = request.POST.get('birth_date')
+        avatar = request.FILES.get('avatar')
+        print(request.FILES)
+
+        user = request.user
+        user.name = name
+        user.nickname = nickname
+        user.email = email
+        user.gender = gender
+        user.birth_date = birth_date
+        if avatar:
+            user.avatar = avatar
+        user.save()
+
+        return redirect(user.get_absolute_url())
 
 
 class search_subscribers(View):

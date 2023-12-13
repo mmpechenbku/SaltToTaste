@@ -9,7 +9,7 @@
             <div class="cl-btn-7"></div>
         </div>
         <div class="signin__popup">
-            <form class="sign_in" action='../account/login/' method="post">
+            <form class="sign_in" action="{% url 'login' %}" method="post">
                     {% csrf_token %}
                 <label class="text-field__label" for="id_username">Email или @никнейм</label>
                 <input class="text-field__input" type="text"
@@ -53,7 +53,7 @@
             </form>
         </div>
         <div class="signup__popup">
-            <form action="../account/registration/" class="sign_up" method="post">
+            <form action="{% url 'registration' %}" class="sign_up" method="post">
 
                 {% csrf_token %}
                 <div class="str-first">

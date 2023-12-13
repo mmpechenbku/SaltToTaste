@@ -35,6 +35,7 @@ document.getElementById('subscriptionBtn').addEventListener('click', function() 
     .then(data => {
 //        document.getElementById('subscriptionBtn')
         this.textContent = (data.status === 'subscribed') ? 'Вы подписаны' : 'Подписаться';
+        this.className = (data.status === 'subscribed') ? 'bnt-subscribe' : 'bnt-subscribe active'
         console.log(data.subs_count);
         document.getElementById('followers_count').textContent = data.subs_count;
 //        console.log('Статус подписки:', data.status);
@@ -67,7 +68,7 @@ searchInput.addEventListener('input', () => {
                             <img class="rounded-circle account-img" src="/media/${sub.fields.avatar}">
                             <p class="card__username">@${sub.fields.username}</p>
                         </div>
-                        <a class="bnt-subscribe active" data-profile-id="${sub.pk}" id="subscriptionBtn">${sub.is_subscribed ? 'Вы подписаны' : 'Подписаться'}</a>
+                        <a class="bnt-subscribe ${sub.is_subscribed ? 'active' : ''}" data-profile-id="${sub.pk}" id="subscriptionBtn">${sub.is_subscribed ? 'Вы подписаны' : 'Подписаться'}</a>
                     </div>
                 `;
                 } else {

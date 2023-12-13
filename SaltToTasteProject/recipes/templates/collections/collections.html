@@ -39,7 +39,7 @@
         <div class="collection__item">
             <a href="{% url 'collections-detail' selection.pk %}">
                 <div class="collection__item-img">
-                    <img src="{{ selection.picture }}" alt="">
+                    <img src="{{ selection.picture.url }}" alt="">
                 </div>
             </a>
             <div class="collection__item-name">

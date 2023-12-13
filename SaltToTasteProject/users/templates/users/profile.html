@@ -23,7 +23,7 @@
 			<svg width="18" height="18">
 				<use href="#settings"></use>
 			</svg>
-			<p><a href="{% url 'profile_edit' user.id %}">Редактировать профиль</a></p>
+			<p><a href="{% url 'profile_edit' %}">Редактировать профиль</a></p>
 		</div>
 		<div class="header__bnt-more header_bnt">
 			<svg width="20" height="20">
@@ -39,7 +39,7 @@
 					<li id="followers_count" class="count">{{ profile.get_sum_followers }}</li>
 					<li><a href="{% url 'subscribers' profile.pk %}">подписчики</a></li>
 				</ul>
-				{% if user.is_authenticated and profile != user %}{% if user.id in subscriptions %}<a class="bnt-subscribe" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}{% endif %}
+				{% if user.is_authenticated and profile != user %}{% if profile.id in subscriptions %}<a class="bnt-subscribe" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}{% endif %}
 			</div>
 			<div class="account">
 				<img class="rounded-circle account-img" src="{{ profile.avatar.url }}">

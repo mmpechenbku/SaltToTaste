@@ -54,6 +54,44 @@ saveButton.forEach(button => {
 });
 
 
+//Сохранение подборки
+const saveCollButton = document.querySelectorAll('.search-header__btn-image');
+
+saveCollButton.forEach(button => {
+    button.addEventListener('click', event => {
+        const selectionId = parseInt(button.dataset.selection)
+//        const saveSum = button.querySelector('.save-sum');
+        const formData = new FormData();
+
+        formData.append('selection_id', selectionId);
+
+        fetch("/search/save_collection/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": csrftoken,
+                "X-Requested-With": "XMLHttpRequest",
+            },
+            body: formData
+        }).then(response => response.json())
+        .then(data => {
+            if (data.status == 'created') {
+//                var save_status = '#fav_icon-enable';
+            } else {
+//                var save_status = '#fav_icon';
+            }
+            button.innerHTML = '';
+            button.innerHTML = '<svg width="32" height="32" class="navbar__item-search-img">' +
+                                '<use href="' + save_status + '"></use>' +
+                            '</svg>' +
+                        '<span class="save-sum">' + data.save_sum + '</span>';
+//            saveSum.textContent = data.save_sum;
+        })
+        .catch(error => console.error(error));
+    });
+});
+
+
+
 // Комментарии рецептов
 
 const commentForm = document.forms.commentForm;

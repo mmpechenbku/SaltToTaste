@@ -6,10 +6,19 @@ from django.urls import reverse
 
 
 class CustomUser(AbstractUser):
+    class Gender(models.TextChoices):
+        Male = "Мужской"
+        Female = "Женский"
+
     avatar = models.ImageField(upload_to='images/avatars/', default='images/avatars/ProfileIcon.png', verbose_name='avatar', blank=True, null=True)
     name = models.CharField(max_length=100, verbose_name="Имя")
     nickname = models.CharField(max_length=100, verbose_name="Никнейм", unique=True)
     email = models.EmailField(verbose_name='Электронная почта', unique=True)
+    description = models.TextField(max_length=114, null=True, blank=True, default='', verbose_name="Описание")
+    gender = models.CharField(max_length=20, choices=Gender.choices, blank=True, null=True, verbose_name='Пол')
+    # birth_date = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
+    # birth_date = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
+    date_of_birth = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
     # likes =
 
     USERNAME_FIELD = 'nickname'

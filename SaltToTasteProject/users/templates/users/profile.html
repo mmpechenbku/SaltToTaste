@@ -47,7 +47,7 @@
 					<li id="followers_count" class="count">{{ profile.get_sum_followers }}</li>
 					<li><a href="{% url 'subscribers' profile.pk %}">подписчики</a></li>
 				</ul>
-				{% if user.is_authenticated and profile != user %}{% if user.id in subscriptions %}<a class="bnt-subscribe" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}{% endif %}
+				{% if user.is_authenticated and profile != user %}{% if profile.id in subscriptions %}<a class="bnt-subscribe" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Вы подписаны</a>{% else %}<a class="bnt-subscribe active" id="subscriptionBtn" data-profile-id="{{ profile.id }}">Подписаться</a>{% endif %}{% endif %}
 			</div>
 			<div class="account">
 				<img class="rounded-circle account-img" src="{{ profile.avatar.url }}">

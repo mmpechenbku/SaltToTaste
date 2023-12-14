@@ -54,7 +54,7 @@
                 <div class="recipe_add__container-add_step">
                     <h4>4. Ингредиенты</h4>
                     <div class="container-add_content">
-                        <input type="text" id="ingredient-search" name="ingredient_search" placeholder="Введите название ингридиента">
+                        <input type="text" id="ingredient-search" name="ingredient_search" placeholder=" ">
                         <p class="ingredient__search-title">Быстрый выбор</p>
                         <div class="available-ingredients">
                             {% for ingredient in ingredients %}
@@ -69,7 +69,7 @@
                         <div class="ingredient-quantity">
                             <div class="quantity__container" style="margin-bottom: 5px;">
                                 <div class="quantity__button"><p>Вы выбрали:</p></div>
-                                <div class="quantity__input" style="text-align: center; border: none;min-width:230px;"><p>Укажите количество:</p></div>
+                                <div class="quantity__input" style="text-align: center; border: none;"><p>Укажите количество:</p></div>
                             </div>
                         </div>
                         <div class="ingredient-new">
@@ -136,11 +136,11 @@
             <div class="recipe_add__btn">
                 <div class="recipe_add__btn-collections">
                     <button type="submit">Сохранить в избранном</button>
-                    <p>Рецепт будете видеть только Вы<br> во вкладке «Избранное»</p>
+                    <p>Рецепт будете видеть только Вы во вкладке «Избранное»</p>
                 </div>
                 <div class="recipe_add__btn-publish">
-                    <button type="submit" id="save-recipe">Сохранить рецепт</button>
-                    <p>После модерации Ваш рецепт<br> будет опубликован!</p>
+                    <button type="submit" id="save-recipe">Опубликовать</button>
+                    <p>После модерации Ваш рецепт будет опубликован!</p>
                 </div>
             </div>
         </div>

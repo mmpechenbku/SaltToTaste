@@ -273,11 +273,21 @@ body {
     margin: 0 5px !important;
     padding: 0 !important; }
 
+  .collection__item-name {
+    padding-top: 5px !important; }
+
   .header_bnt p {
     display: none !important; }
   .header_bnt svg {
     width: 24px;
-    height: 24px; } }
+    height: 24px; }
+
+  .collection__item-img {
+    width: calc( 0.4241071429 * 100vw + -35.7142857143px ) !important;
+    height: calc( 0.2232142857 * 100vw + 28.5714285714px ) !important;
+    border-radius: calc( 0.0848214286 * 100vw + -7.1428571429px ) !important; }
+    .collection__item-img img {
+      border-radius: calc( 0.0848214286 * 100vw + -7.1428571429px ) !important; } }
 /*@media screen and (max-width: 420px) {
     .tab__link {
         font-size: 14px !important;
@@ -285,7 +295,11 @@ body {
 }*/
 .collection__list {
   display: flex;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.collection__item-name {
+  padding-top: 10px; }
 
 .collection__item {
   display: flex;

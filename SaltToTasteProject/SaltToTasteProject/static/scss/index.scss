@@ -27,6 +27,7 @@ q {
     border-radius: 41px;
     box-shadow: 0px 0px 31px -4px rgba(73, 63, 63, 0.60);
     flex-wrap: wrap;
+    background-color: #fff;
 }
 
 .header-index {
@@ -44,6 +45,7 @@ margin-bottom: 30px;
         line-height: 134.5%;
         font-size: 40px;
     }
+
     .header__index-text {
         color: #6BB420;
         text-align: center;
@@ -155,7 +157,4 @@ img {
     top: 555px;
     left: -60px;
     width: 24%;
-}
-.index-article_content-block {
-            height: 162px !important;
 }

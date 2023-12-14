@@ -63,10 +63,12 @@ if (btnAddCollections) {
 /*-----------------------Search Navbar----------------------------*/
 
 
+/*
 document.querySelector(".navbar__item-search-img").addEventListener('click', () => {
     let searchBox = document.querySelector(".navbar__search-onclick");
     searchBox.classList.toggle("navbar__search-onclick_active");
 });
+*/
 
 
 /*-----------------------------Перестроение столбцов---------------------------------*/

@@ -17,17 +17,15 @@
 
 .popup__page {
   display: block;
-  position: fixed;
+  position: absolute;
   margin: auto;
   top: 5%;
   right: 0;
-  bottom: 0;
   left: 0;
   background-color: #fff;
-  width: 45%;
+  width: 100%;
   max-width: 600px;
   height: fit-content;
-  max-height: 700px;
   border-radius: 10px;
   padding: 25px; }
 
@@ -56,7 +54,7 @@
   color: rgba(47, 41, 41, 0.54); }
 
 .sign_in {
-  min-height: 322px;
+  min-height: 336px;
   display: flex;
   flex-direction: column;
   justify-content: center; }
@@ -146,6 +144,11 @@
     .consent__processing p span {
       color: #FC3F1D; }
 
+.sign_in input[type=text], .sign_up input[type=text] {
+  font-size: 18px !important; }
+  .sign_in input[type=text]::placeholder, .sign_up input[type=text]::placeholder {
+    font-size: 16px !important; }
+
 /*------------------------*/
 .cl-btn-7 {
   width: 40px;
@@ -198,21 +201,16 @@
 .text-field__input {
   display: block;
   width: 100%;
-  margin: 0 auto;
-  height: calc(2.25rem + 2px);
-  padding: 0.375rem 0.75rem;
-  font-family: inherit;
-  font-size: 18;
+  height: 40px;
   font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: rgba(217, 217, 217, 0);
-  background-clip: padding-box;
-  border-radius: 12px;
+  font-family: Tilda Sans VF;
+  font-size: 18px;
+  padding-left: 15px;
+  border-radius: 10px;
   border: 2px solid rgba(26, 26, 26, 0.3);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  letter-spacing: 1px;
-  font-family: Tilda Sans VF; }
+  background: rgba(217, 217, 217, 0); }
+  .text-field__input::placeholder {
+    font-size: 16px; }
 
 .password {
   display: flex;
@@ -255,12 +253,39 @@
   .input-nickname span {
     padding-left: 10px;
     cursor: default; }
-  .input-nickname .text-input {
+  .input-nickname .text-field__input {
     border: none !important;
     border-radius: 0 !important;
     padding-left: 2px !important;
     height: 36px !important; }
 
 /*-------------------------------------------------*/
+@media screen and (max-width: 700px) {
+  .cl-btn-7 {
+    right: 6px !important;
+    top: -14px !important; }
+
+  .cl-btn-7:before {
+    color: #000 !important; }
+
+  .signin__popup_active {
+    padding: 20px 0 0 0 !important; } }
+@media screen and (max-width: 500px) {
+  .popup__page {
+    padding-bottom: 50px !important; }
+
+  .str-1 {
+    flex-direction: column !important; }
+    .str-1 .col-2 {
+      width: 100% !important; }
+
+  .consent__processing p {
+    line-height: 1 !important; }
+
+  .buttons__popup input {
+    font-size: calc( 0.0044642857 * 100vw + 12.5714285714px ) !important; }
+
+  .popup__page {
+    top: 0 !important; } }
 
 /*# sourceMappingURL=sign.css.map */

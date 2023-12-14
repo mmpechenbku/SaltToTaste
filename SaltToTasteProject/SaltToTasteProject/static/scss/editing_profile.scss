@@ -1,3 +1,13 @@
+@function calcFluidFontSize($f-min, $f-max, $v-min, $v-max) {
+  $k: ($f-max - $f-min)/($v-max - $v-min);
+  $b: $f-min - $k * $v-min;
+
+  $b: $b * 1px;
+
+  @return calc( #{$k} * 100vw + #{$b} );
+}
+
+
 .page__editing {
     padding: 40px 15px;
     width: 80%;
@@ -10,6 +20,7 @@
 .editing-header {
     display: flex;
     justify-content: space-around;
+    white-space: nowrap;
     a {
         display: flex;
         align-items: center;
@@ -48,10 +59,14 @@
 .editing-content {
     display: flex;
     width: 100%;
+    form {
+            width: 100%;
+        }
     .tabs {
         display: flex;
         flex-direction: column;
-        width: 30%;
+        width: 265px;
+        white-space: nowrap;
         padding: 70px 30px;
         .tab__link {
             color: #2F2929;
@@ -77,12 +92,13 @@
         flex-direction: column;
             .area_section {
                 display: flex;
-                width: 300px;
+                width: 100%;
                 flex-direction: column;
                 align-items: flex-start;
                 margin: 15px;
                 .text-input {
                     position: relative;
+                    max-width: 300px;
                     width: 100%;
                     height: 40px;
                     border-radius: 10px;
@@ -168,7 +184,8 @@
     display: flex;
     align-items: center;
     height: 40px;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     padding-left: 15px;
     border-radius: 10px;
     border: 2px solid rgba(26, 26, 26, 0.30);
@@ -231,7 +248,8 @@ input[type=radio] {
 .input-nickname {
     display: flex;
     align-items: center;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     height: 40px;
     border-radius: 10px;
     border: 2px solid rgba(26, 26, 26, 0.30);
@@ -245,4 +263,61 @@ input[type=radio] {
         padding-left: 2px !important;
         height: 36px !important;
     }
+}
+@media screen and (max-width: 860px) {
+    .none {
+        display: none;
+    }
+    .editing-content {
+        flex-direction: column;
+        align-items: center;
+        .tabs {
+            padding: 0 !important;
+            padding-top: 15px !important;
+            flex-direction: row !important;
+            width: auto !important;
+            a {
+                &#tab__link-secure{
+                    margin-left: 15px;
+                }
+            }
+        }
+        .areas {
+            align-items: center;
+            width: 100% !important;
+        }
+    }
+}
+@media screen and (max-width: 678px) {
+    .page__editing {
+        width: 100% !important;
+    }
+}
+@media screen and (max-width: 500px) {
+    .editing-header {
+        span {
+            font-size: calcFluidFontSize(12, 22, 320, 500) !important;
+        }
+        .btn_back {
+            a {
+                font-size: calcFluidFontSize(12, 22, 320, 500) !important;
+                svg {
+                    width: calcFluidFontSize(16, 30, 320, 500) !important;
+                }
+            }
+
+        }
+
+
+    }
+    .tab__link {
+                font-size: calcFluidFontSize(10, 16, 320, 500) !important;
+    }
+    .areas {
+        padding: 15px 0 !important;
+    }
+    .area_section {
+        margin: 10px 0 !important;
+    }
+
 }

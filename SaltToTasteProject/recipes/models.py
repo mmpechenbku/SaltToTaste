@@ -26,9 +26,9 @@ class Recipe(models.Model):
 
         def detail(self):
             return self.get_queryset() \
-                 .prefetch_related('comments', 'ingredients', 'saving', 'steps')
-                # .select_related('author')\
-                # .prefetch_related('comments', 'recipe_comments_author', 'ingredients', 'saving')
+                .prefetch_related('comments', 'ingredients', 'saving', 'steps')
+            # .select_related('author')\
+            # .prefetch_related('comments', 'recipe_comments_author', 'ingredients', 'saving')
 
         def popular(self):
             return self.get_queryset() \
@@ -141,6 +141,11 @@ class SaveRecipe(models.Model):
 
 
 class Selection(models.Model):
+    class SelectionManager(models.Manager):
+        def popular(self):
+            return self.get_queryset() \
+                .annotate(save_count=Count('saving_selection')) \
+                .order_by('-save_count')
 
     ACCESS_OPTIONS = (
         ('public', 'Общедоступный'),
@@ -153,12 +158,33 @@ class Selection(models.Model):
     user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE)
     access = models.CharField(choices=ACCESS_OPTIONS, default='private', verbose_name='Доступ', max_length=10)
 
+    objects = SelectionManager()
+
     def __str__(self):
         return f'{self.user.username} - {self.title}'
+
+    def get_sum_save(self):
+        return self.saving_selection.count()
 
     class Meta:
         verbose_name = 'Подборка'
         verbose_name_plural = 'Подборки'
+
+
+class SaveSelection(models.Model):
+    selection = models.ForeignKey(to=Selection, verbose_name='Подборка', on_delete=models.CASCADE, related_name='saving_selection')
+    user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True, null=True)
+    time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
+
+    class Meta:
+        unique_together = ('selection', 'user')
+        ordering = ('-time_create',)
+        indexes = [models.Index(fields=['-time_create'])]
+        verbose_name = 'Сохраненная подборка'
+        verbose_name_plural = 'Сохраненные подборки'
+
+    def __str__(self):
+        return f'{self.user.username} - {self.selection.title}'
 
 
 class CommentRecipe(MPTTModel):

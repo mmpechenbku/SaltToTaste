@@ -4,7 +4,7 @@ from django.db.models import Prefetch, Count
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView
-from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe, RecipeStep, IngredientQuantity, Selection, LikeComment
+from .models import Recipe, Ingredient, SaveRecipe, CommentRecipe, RecipeStep, IngredientQuantity, Selection, LikeComment, SaveSelection
 from django.contrib.auth.decorators import login_required
 
 from django.http import JsonResponse
@@ -20,7 +20,7 @@ from .paginator import paginator
 # Create your views here.
 
 def index(request):
-    recipes = Recipe.objects.all()
+    recipes = Recipe.objects.popular()
     saves = None
     if request.user.is_authenticated:
         saves = SaveRecipe.objects.filter(user=request.user).values_list('recipe', flat=True)
@@ -75,6 +75,15 @@ class CollectionDetailView(DetailView):
 
 @login_required
 def selections(request):
+    selections = Selection.objects.popular()
+
+    data = {
+        'selections': selections,
+    }
+    return render(request, 'collections/collections.html', data)
+
+@login_required
+def favorites(request):
     user = request.user
     selections = Selection.objects.filter(user=user)
     favorites = SaveRecipe.objects.filter(user=user)
@@ -265,6 +274,31 @@ class SaveRecipeCreateView(View):
                 return JsonResponse({'status': 'deleted', 'save_sum': save.recipe.get_sum_save})
 
             return JsonResponse({'status': 'created', 'save_sum': save.recipe.get_sum_save})
+
+
+class SaveSelectionCreateView(View):
+    model = SaveSelection
+
+    def post(self, request, *args, **kwargs):
+        selection_id = request.POST.get('selection_id')
+        user = request.user if request.user.is_authenticated else None
+        if user:
+            save, created = self.model.objects.get_or_create(
+                selection_id=selection_id,
+                user=user
+            )
+            # count = str(save.recipe.get_sum_save)
+            # print('count', count)
+            # print('save', save)
+            # print('recipe', save.recipe)
+            if not created:
+                save.delete()
+                # print(save.recipe.get_sum_save())
+                # return JsonResponse({'status': 'deleted', 'save_sum': save.recipe.get_sum_save})
+                return JsonResponse({'status': 'deleted'})
+
+            # return JsonResponse({'status': 'created', 'save_sum': save.recipe.get_sum_save})
+            return JsonResponse({'status': 'created'})
 
 
 class CommentCreateView(LoginRequiredMixin, CreateView):

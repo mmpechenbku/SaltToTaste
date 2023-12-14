@@ -226,7 +226,7 @@ class EditProfileView(View):
         user.nickname = nickname
         user.email = email
         user.gender = gender
-        user.birth_date = birth_date
+        user.date_of_birth = birth_date
         if avatar:
             user.avatar = avatar
         user.save()
